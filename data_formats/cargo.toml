@@ -1,5 +1,10 @@
 [workspace]
-members = ["crates/kreuzberg", "crates/ffi", "packages/python", "packages/typescript"]
+members = [
+  "crates/kreuzberg",
+  "crates/ffi",
+  "packages/python",
+  "packages/typescript",
+]
 resolver = "2"
 
 [workspace.package]
