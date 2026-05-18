@@ -24,10 +24,7 @@ classifiers = [
   "Topic :: Text Processing",
   "Topic :: Utilities",
 ]
-dependencies = [
-  "typing-extensions>=4.0.0; python_version < '3.11'",
-  "pydantic>=2.0.0",
-]
+dependencies = ["typing-extensions>=4.0.0; python_version < '3.11'", "pydantic>=2.0.0"]
 
 [project.optional-dependencies]
 dev = [

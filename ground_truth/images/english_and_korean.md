@@ -1,4 +1,5 @@
 # RULES AND INSTRUCTIONS
+
 1. Template for day 1 (korean) , for day 2 (English) for day 3 both English and korean.
 2. **Use all your accounts.** use different emails to send. Its better to have many email accounts.
 
