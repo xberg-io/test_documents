@@ -1,0 +1,112 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 900 >>
+stream
+BT
+/F1 16 Tf
+100 700 Td
+(Monthly Sales Trend 2024) Tj
+ET
+BT
+/F1 12 Tf
+50 650 Td
+(Sales) Tj
+ET
+BT
+/F1 12 Tf
+500 30 Td
+(Month) Tj
+ET
+BT
+/F1 10 Tf
+100 100 Td
+(Jan) Tj
+ET
+/F1 10 Tf
+150 100 Td
+(Feb) Tj
+ET
+/F1 10 Tf
+200 100 Td
+(Mar) Tj
+ET
+/F1 10 Tf
+250 100 Td
+(Apr) Tj
+ET
+/F1 10 Tf
+300 100 Td
+(May) Tj
+ET
+/F1 10 Tf
+350 100 Td
+(Jun) Tj
+ET
+BT
+/F1 10 Tf
+105 160 Td
+(15) Tj
+ET
+/F1 10 Tf
+155 190 Td
+(22) Tj
+ET
+/F1 10 Tf
+205 220 Td
+(28) Tj
+ET
+/F1 10 Tf
+255 210 Td
+(25) Tj
+ET
+/F1 10 Tf
+305 270 Td
+(35) Tj
+ET
+/F1 10 Tf
+355 300 Td
+(40) Tj
+ET
+0.2 0.5 0.7 rg
+2 w
+110 160 m
+160 190 l
+210 220 l
+260 210 l
+310 270 l
+360 300 l
+s
+0.2 0.5 0.7 rg
+110 160 3 0 360 arc
+160 190 3 0 360 arc
+210 220 3 0 360 arc
+260 210 3 0 360 arc
+310 270 3 0 360 arc
+360 300 3 0 360 arc
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000229 00000 n 
+0000001180 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1259
+%%EOF

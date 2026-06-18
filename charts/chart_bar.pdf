@@ -1,0 +1,92 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 800 >>
+stream
+BT
+/F1 16 Tf
+100 700 Td
+(Quarterly Revenue Performance) Tj
+ET
+BT
+/F1 12 Tf
+50 650 Td
+(Revenue) Tj
+ET
+BT
+/F1 12 Tf
+500 30 Td
+(Quarter) Tj
+ET
+BT
+/F1 10 Tf
+100 100 Td
+(Q1) Tj
+ET
+/F1 10 Tf
+180 100 Td
+(Q2) Tj
+ET
+/F1 10 Tf
+260 100 Td
+(Q3) Tj
+ET
+/F1 10 Tf
+340 100 Td
+(Q4) Tj
+ET
+BT
+/F1 10 Tf
+105 160 Td
+(25) Tj
+ET
+/F1 10 Tf
+185 210 Td
+(40) Tj
+ET
+/F1 10 Tf
+265 180 Td
+(35) Tj
+ET
+/F1 10 Tf
+345 230 Td
+(50) Tj
+ET
+0.9 0.1 0.1 rg
+110 120 30 50 re
+f
+0.3 0.8 0.8 rg
+190 120 30 80 re
+f
+0.2 0.7 0.8 rg
+270 120 30 70 re
+f
+1 0.6 0.5 rg
+350 120 30 100 re
+f
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000229 00000 n 
+0000001080 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1159
+%%EOF
