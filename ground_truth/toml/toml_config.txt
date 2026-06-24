@@ -140,7 +140,7 @@ response_time_p99_threshold = 5000
 [security]
 enable_authentication = true
 auth_method = "oauth2"
-oauth2_provider = "https://auth.kreuzberg.dev"
+oauth2_provider = "https://auth.xberg.io"
 client_id = "${OAUTH2_CLIENT_ID}"
 client_secret = "${OAUTH2_CLIENT_SECRET}"
 jwt_algorithm = "RS256"
@@ -149,7 +149,7 @@ rate_limit_enabled = true
 rate_limit_requests_per_second = 1000
 
 [[security.cors]]
-allowed_origins = ["https://app.kreuzberg.dev", "https://dashboard.kreuzberg.dev"]
+allowed_origins = ["https://app.xberg.io", "https://dashboard.xberg.io"]
 allowed_methods = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
 allowed_headers = ["Content-Type", "Authorization", "X-Request-ID"]
 expose_headers = ["X-Total-Count", "X-Page-Number"]
