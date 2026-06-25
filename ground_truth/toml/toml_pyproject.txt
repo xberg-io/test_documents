@@ -3,12 +3,12 @@ requires = ["maturin>=1.0,<2.0"]
 build-backend = "maturin"
 
 [project]
-name = "kreuzberg"
+name = "xberg"
 version = "4.2.10"
 description = "Document extraction and intelligence library for Python"
 readme = "README.md"
 license = { text = "MIT OR Apache-2.0" }
-authors = [{ name = "Kreuzberg Contributors", email = "hello@kreuzberg.dev" }]
+authors = [{ name = "Xberg Contributors", email = "hello@kreuzberg.dev" }]
 requires-python = ">=3.10"
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -39,22 +39,22 @@ dev = [
 docs = ["sphinx>=6.0", "sphinx-rtd-theme>=1.2.0", "myst-parser>=1.0.0"]
 
 [project.urls]
-Documentation = "https://kreuzberg.readthedocs.io"
-Repository = "https://github.com/kreuzberg/kreuzberg"
-Issues = "https://github.com/kreuzberg/kreuzberg/issues"
-Changelog = "https://github.com/kreuzberg/kreuzberg/releases"
+Documentation = "https://xberg.readthedocs.io"
+Repository = "https://github.com/xberg/xberg"
+Issues = "https://github.com/xberg/xberg/issues"
+Changelog = "https://github.com/xberg/xberg/releases"
 
 [tool.maturin]
 python-source = "packages/python"
 manifest-path = "Cargo.toml"
-module-name = "kreuzberg._rust"
+module-name = "xberg._rust"
 features = ["pyo3/extension-module"]
 
 [tool.pytest.ini_options]
 minversion = "7.0"
 testpaths = ["tests"]
 python_files = "test_*.py"
-addopts = "-v --cov=kreuzberg --cov-report=term-missing"
+addopts = "-v --cov=xberg --cov-report=term-missing"
 markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
     "integration: marks tests as integration tests",
@@ -80,7 +80,7 @@ select = ["E", "F", "W", "C", "I", "B", "UP", "ARG", "RUF"]
 ignore = ["E501"]
 
 [tool.ruff.isort]
-known-first-party = ["kreuzberg"]
+known-first-party = ["xberg"]
 
 [tool.black]
 line-length = 120
@@ -88,7 +88,7 @@ target-version = ["py310"]
 include = '\.pyi?$'
 
 [tool.coverage.run]
-source = ["kreuzberg"]
+source = ["xberg"]
 branch = true
 parallel = true
 

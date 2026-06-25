@@ -48,8 +48,8 @@
 
 @manual{entry_manual_reference,
   author = {Javier Torres},
-  title = {Kreuzberg Reference Manual},
-  organization = {Kreuzberg Labs},
+  title = {Xberg Reference Manual},
+  organization = {Xberg Labs},
   year = {2005}
 }
 

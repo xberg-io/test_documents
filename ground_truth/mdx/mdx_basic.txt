@@ -6,7 +6,7 @@ description: A sample MDX document for testing extraction
 keywords:
   - mdx
   - testing
-  - kreuzberg
+  - xberg
 ---
 
 import { Chart } from './components/Chart'

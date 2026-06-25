@@ -10,7 +10,7 @@ author:
   This is a test document designed to verify pandoc metadata extraction.
   It contains multiple paragraphs in the abstract.
 
-## And even includes line breaks. keywords: [testing, pandoc, metadata, extraction] lang: en-US subject: Document Processing institute: Kreuzberg Testing Labs
+## And even includes line breaks. keywords: [testing, pandoc, metadata, extraction] lang: en-US subject: Document Processing institute: Xberg Testing Labs
 
 # Introduction
 

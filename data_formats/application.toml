@@ -1,8 +1,8 @@
-# Kreuzberg Application Configuration
+# Xberg Application Configuration
 # This file demonstrates complex TOML structures with nested tables, arrays, and various data types
 
 [application]
-name = "Kreuzberg Document Processing Service"
+name = "Xberg Document Processing Service"
 version = "4.2.10"
 environment = "production"
 debug = false
@@ -13,7 +13,7 @@ startup_timeout = 30
 maintainer = "Platform Engineering"
 created_date = 2025-02-05
 last_updated = 2025-02-04
-repository = "https://github.com/kreuzberg/kreuzberg"
+repository = "https://github.com/xberg/xberg"
 
 [server]
 host = "0.0.0.0"
@@ -34,15 +34,15 @@ compression_types = ["gzip", "deflate", "br"]
 engine = "postgresql"
 host = "db.internal"
 port = 5432
-name = "kreuzberg_prod"
-user = "kreuzberg_service"
+name = "xberg_prod"
+user = "xberg_service"
 password = "${DB_PASSWORD}"
 pool_size = 50
 max_overflow = 10
 connection_timeout = 10
 query_timeout = 300
 ssl_mode = "require"
-application_name = "kreuzberg"
+application_name = "xberg"
 
 [database.replication]
 enabled = true
@@ -107,7 +107,7 @@ timeout = 90
 features = ["content", "metadata", "revision_history"]
 
 [plugins]
-directory = "/opt/kreuzberg/plugins"
+directory = "/opt/xberg/plugins"
 auto_load = true
 enable_sandboxing = true
 
@@ -144,7 +144,7 @@ oauth2_provider = "https://auth.xberg.io"
 client_id = "${OAUTH2_CLIENT_ID}"
 client_secret = "${OAUTH2_CLIENT_SECRET}"
 jwt_algorithm = "RS256"
-jwt_audience = "kreuzberg-api"
+jwt_audience = "xberg-api"
 rate_limit_enabled = true
 rate_limit_requests_per_second = 1000
 
@@ -158,7 +158,7 @@ allow_credentials = true
 
 [storage]
 backend = "s3"
-bucket = "kreuzberg-documents"
+bucket = "xberg-documents"
 region = "us-east-1"
 access_key_id = "${AWS_ACCESS_KEY_ID}"
 secret_access_key = "${AWS_SECRET_ACCESS_KEY}"
@@ -175,14 +175,14 @@ delete_after_archive_days = 365
 format = "json"
 level = "info"
 outputs = ["stdout", "file"]
-file_path = "/var/log/kreuzberg/app.log"
+file_path = "/var/log/xberg/app.log"
 max_file_size = 104857600
 max_backups = 10
 max_age_days = 30
 
 [[logging.fields]]
 name = "service"
-value = "kreuzberg"
+value = "xberg"
 
 [[logging.fields]]
 name = "environment"
@@ -191,6 +191,6 @@ value = "production"
 [telemetry]
 enabled = true
 otlp_endpoint = "http://otel-collector.internal:4317"
-service_name = "kreuzberg"
+service_name = "xberg"
 service_version = "4.2.10"
 sample_rate = 0.1

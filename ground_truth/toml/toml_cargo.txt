@@ -1,10 +1,10 @@
 [workspace]
-members = ["crates/kreuzberg", "crates/ffi", "packages/python", "packages/typescript"]
+members = ["crates/xberg", "crates/ffi", "packages/python", "packages/typescript"]
 resolver = "2"
 
 [workspace.package]
 version = "4.2.10"
-authors = ["Kreuzberg Contributors"]
+authors = ["Xberg Contributors"]
 edition = "2024"
 license = "MIT OR Apache-2.0"
 
@@ -24,15 +24,15 @@ encoding_rs = "0.8"
 lazy_static = "1.4"
 
 [package]
-name = "kreuzberg"
+name = "xberg"
 version.workspace = true
 authors.workspace = true
 edition.workspace = true
 license.workspace = true
 description = "High-performance document extraction and intelligence library"
-documentation = "https://docs.rs/kreuzberg"
+documentation = "https://docs.rs/xberg"
 homepage = "https://xberg.io"
-repository = "https://github.com/kreuzberg/kreuzberg"
+repository = "https://github.com/xberg/xberg"
 readme = "README.md"
 
 [profile.release]
@@ -81,6 +81,6 @@ name = "basic_extraction"
 path = "examples/basic_extraction.rs"
 
 [lib]
-name = "kreuzberg"
+name = "xberg"
 path = "src/lib.rs"
 crate-type = ["rlib"]
