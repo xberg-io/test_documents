@@ -297,6 +297,10 @@
       "sha256": "8bd2f7f94402a1429bf04d53de13ed93a2983da2e4183288bd59097cdbd4c0e2",
       "size": 20104
     },
+    "images/chinese.jpg": {
+      "sha256": "7d8f231016c6a35da879b7d79b39c45b694aef962ae30f64063d981e618fbf7f",
+      "size": 59898
+    },
     "images/complex_document.png": {
       "sha256": "e80abc54fbb7c1974ceaf1d91259a2156a545cfcf3de647024aad06ba434f84a",
       "size": 28485
@@ -329,6 +333,10 @@
       "sha256": "c300405986f1a12bb714a1eb035179ff3c9b280ae93dba9ba2beb75e5094ce16",
       "size": 148932
     },
+    "images/cyrillic.png": {
+      "sha256": "cdb5e98b2adf801327d3a47879aafd7abf5bc12d726bf147ce6f0133a24d1033",
+      "size": 7970
+    },
     "images/doclaynet_page_01.jpg": {
       "sha256": "cd74a2f31169a464ef883150ac70be2dd614ac7718ec0e233446794b9f819629",
       "size": 289059
@@ -336,6 +344,10 @@
     "images/doclaynet_page_02.jpg": {
       "sha256": "0c76bd1ee2cea37f3a2c15f4b0a2fb2208fa3caca58c8f93f139c63ebc5af11a",
       "size": 219650
+    },
+    "images/english.png": {
+      "sha256": "f9f8c82b6b15ac6c9367c7939129395d6c45a882a2dadde33aaa810da4d450d5",
+      "size": 1740957
     },
     "images/english_and_korean.png": {
       "sha256": "d4286aded62c52b4f25a5a73111e25a30ad87bc757d84efd9e06f707e866fd2f",
@@ -345,6 +357,10 @@
       "sha256": "8a9d04b92d0de5836c59ede8ae421235488e4031e893e07b1fe7e4b78f6a9901",
       "size": 32764
     },
+    "images/example.png": {
+      "sha256": "249336d9aeae0cd6ee61d480787db260cf3ee163ec16766a71c5d97bbba20796",
+      "size": 488641
+    },
     "images/financial_table_1.png": {
       "sha256": "85f4634183039c7289e7b387f77ac5d47a55af4975b9fa626f428f8b53d9bd94",
       "size": 212317
@@ -353,13 +369,29 @@
       "sha256": "8a9d04b92d0de5836c59ede8ae421235488e4031e893e07b1fe7e4b78f6a9901",
       "size": 32764
     },
+    "images/french.jpg": {
+      "sha256": "549784c349af8a87d53e2fec897d03aa800ed73a64bb9d8de60485cdd71d1e98",
+      "size": 168376
+    },
     "images/invoice_image.png": {
       "sha256": "9aaea6583434eff8bf70b9fb26325951f4439431956ff30033be9a347456b8cc",
       "size": 10411
     },
+    "images/japanese.jpg": {
+      "sha256": "a636f5b3b497aba2f28862cdaadbeb0d0e542604cb0141670f8e0af66a639021",
+      "size": 42159
+    },
     "images/jpn_vert.jpeg": {
       "sha256": "afefe464ce50da90d62c49f1737ca724ebc1616ee489063dd1d870cd741a20c7",
       "size": 35012
+    },
+    "images/kannada.png": {
+      "sha256": "e3617663349e7612de498c48226a46eca6b589c6e53f54c749aa3ccba11a8925",
+      "size": 14417
+    },
+    "images/korean.png": {
+      "sha256": "702c3dcc04ac968ea023aee6466d201fe98ec313b84c68de85e1a5e70888998e",
+      "size": 225531
     },
     "images/layout_parser_ocr.jpg": {
       "sha256": "83b589c5b841b5794ea6c852b444395f41425a51724b5d74fd8d8e2f7d724a2d",
@@ -424,6 +456,10 @@
     "images/simple_table.png": {
       "sha256": "c9840b62965e30024f6cbf1fe32d74887aa66c04bd28161ecb4a43bb6600d4a7",
       "size": 10381
+    },
+    "images/telugu.png": {
+      "sha256": "e483db7373e0595ad9df25c1930b2068c73fdbfd62654e7907d214e83e21da81",
+      "size": 16373
     },
     "images/test.avif": {
       "sha256": "7f3d10e8050a8485cd6d420677935c960f5449151e3310e015cdae764ba7e933",
