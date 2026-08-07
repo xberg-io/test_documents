@@ -1,0 +1,54 @@
+OAuth2 (Client)
+An Elixir OAuth 2.0 Client Library.
+Install
+Configure a serializer
+This library can be configured to handle encoding and decoding requests and
+responses automatically based on the and/or headers.
+If you need to handle various MIME types, you can simply register serializers like so:
+The modules are expected to export and .
+Please see the documentation for OAuth2.Serializer
+for more details.
+Configure a http client
+The http client library used is tesla, the default adapter is
+Httpc, since it comes out of the box with every Erlang instance but you can easily change it to something
+better.
+You can configure another adaptor like this:
+You can also add your own tesla middleware:
+Debug mode
+Sometimes it's handy to see what's coming back from the response when getting
+a token. You can configure OAuth2 to output the response like so:
+Usage
+Current implemented strategies:
+- Authorization Code
+- Password
+- Client Credentials
+Authorization Code Flow (AuthCode Strategy)
+Client Credentials Flow
+Getting an initial access token:
+Refreshing an access token:
+Write Your Own Strategy
+Here's an example strategy for GitHub:
+Here's how you'd use the example GitHub strategy:
+Generate the authorize URL and redirect the client for authorization.
+Capture the in your callback route on your server and use it to obtain an access token.
+Use the access token to access desired resources.
+Examples
+- Authenticate with Github (OAuth2/Phoenix)
+License
+The MIT License (MIT)
+Copyright (c) 2015 Sonny Scroggin
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

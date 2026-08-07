@@ -1,0 +1,55 @@
+Fast End-to-End Trainable Guided Filter
+[Project] [Paper] [arXiv] [Demo] [Home]
+Official implementation of Fast End-to-End Trainable Guided Filter.
+Faster, Better and Lighter for pixel-wise image prediction.
+Overview
+DeepGuidedFilter is the author's implementation of:
+Fast End-to-End Trainable Guided Filter
+Huikai Wu, Shuai Zheng, Junge Zhang, Kaiqi Huang
+CVPR 2018
+With our method, FCNs can run 10-100 times faster w/o performance drop.
+Contact: Hui-Kai Wu (huikaiwu@icloud.com)
+Get Started
+Prepare Environment [Python =3.6]
+1. Download source code from GitHub.
+2. Install dependencies.
+3. (Optional) Install dependencies for MonoDepth.
+Ready to GO !
+Image Processing
+See Here or for more details.
+Semantic Segmentation with Deeplab-Resnet
+1. Enter the directory.
+2. Download the pretrained model [Google Drive BaiduYunPan].
+3. Run it now !
+Note:
+1. Result is in .
+2. Run for more details.
+Saliency Detection with DSS
+1. Enter the directory.
+2. Download the pretrained model [Google Drive BaiduYunPan].
+3. Try it now !
+Note:
+1. Result is in .
+2. See Here or for more details.
+Monocular Depth Estimation
+1. Enter the directory.
+2. Download and Unzip Pretrained Model [Google Drive BaiduYunPan]
+2. Run on an Image
+Note:
+1. Result is in .
+2. See Here or for more details.
+Guided Filtering Layer
+Install Released Version
+PyTorch Version
+Tensorflow Version
+Usage
+PyTorch Version
+Tensorflow Version
+Training from scratch
+Prepare Training Environment
+Start to Train
+Image Processing
+Semantic Segmentation with Deeplab-Resnet
+Saliency Detection with DSS
+Monocular Depth Estimation
+Citation

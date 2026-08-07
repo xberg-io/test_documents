@@ -1,0 +1,37 @@
+# Quarterly Operations Report — Q3 2026
+
+## Executive Summary
+
+The operations division closed the third quarter ahead of its throughput
+targets while holding infrastructure spend flat. Order fulfillment
+latency fell for the fourth consecutive quarter, and the new regional
+warehouse in Leipzig reached full staffing two weeks ahead of schedule.
+
+## Key Achievements
+
+- Reduced median order-to-ship time from 41 hours to 29 hours.
+- Onboarded 18 new logistics partners across three regions.
+- Cut per-shipment packaging cost by 12 percent through material
+  changes.
+- Deployed automated cycle counting in two of five warehouses.
+
+## Regional Performance
+
+| Region  | Orders Shipped | On-Time Rate | Returns |
+|---------|----------------|--------------|---------|
+| North   | 48210          | 97.4%        | 1.8%    |
+| South   | 39185          | 95.1%        | 2.3%    |
+| Central | 52440          | 98.2%        | 1.4%    |
+| Coastal | 27960          | 94.7%        | 2.9%    |
+
+## Risks and Mitigations
+
+Carrier capacity remains the primary risk heading into the peak season.
+The team has pre-booked reserve capacity with two secondary carriers and
+expanded the pickup window to smooth demand spikes.
+
+## Outlook
+
+We expect Q4 volume to rise roughly 22 percent over Q3 driven by
+seasonal demand. Staffing plans and overtime budgets are already
+approved to absorb the increase without degrading service levels.

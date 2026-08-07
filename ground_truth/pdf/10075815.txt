@@ -1,0 +1,104 @@
+clue/graph-composer
+Graph visualization for your project's and its dependencies:
+Table of contents
+Usage
+graph-composer show
+graph-composer export
+Install
+As a phar (recommended)
+Installation using Composer
+Development
+Tests
+License
+Usage
+Once clue/graph-composer is installed, you can use it via command line like this.
+graph-composer show
+The command creates a dependency graph for the given project path and opens
+the default desktop image viewer for you:
+It accepts an optional argument which is the path to your project directory or composer.json file
+(defaults to checking the current directory for a composer.json file).
+You may optionally pass an option to set
+the image type (defaults to ).
+graph-composer export
+The command works very much like the command, but instead of opening your
+default image viewer, it will write the resulting graph to STDOUT or into an image file:
+It accepts an optional argument which is the path to your project directory or composer.json file
+(defaults to checking the current directory for a composer.json file).
+It accepts an additional optional argument which is the path to write the resulting image to.
+Its file extension
+also sets the image format (unless you also explicitly pass the option). Example call:
+If this argument is not given, it defaults to writing to STDOUT, which may
+be useful for scripting purposes:
+You may optionally pass an option to set
+the image type (defaults to ).
+Install
+You can grab a copy of clue/graph-composer in either of the following ways.
+This project aims to run on any platform and thus does not require any PHP
+extensions and supports running on legacy PHP 5.3 through current PHP 8+.
+It's highly recommended to use the latest supported PHP version for this project.
+The graph drawing feature is powered by the excellent GraphViz
+software. This means you'll have to install GraphViz ( executable).
+The Graphviz homepage includes complete
+installation instructions for most common platforms, users of Debian/Ubuntu-based
+distributions may simply invoke:
+As a phar (recommended)
+Once you have PHP and GraphViz installed, you can simply download a pre-packaged
+and ready-to-use version of this project as a Phar to any directory.
+You can simply download the latest file from our
+releases page.
+The latest release can
+always be downloaded like this:
+That's it already. Once downloaded, you can verify everything works by running this:
+If you prefer a global (system-wide) installation without having to type the extension
+each time, you may simply invoke:
+You can verify everything works by running:
+There's no separate procedure, simply download the latest release again
+and overwrite the existing phar.
+Installation using Composer
+Alternatively, you can also install clue/graph-composer as part of your development dependencies.
+You will likely want to use the section to exclude clue/graph-composer in your production environment.
+This method also requires PHP 5.3+, GraphViz and, of course, Composer.
+You can either modify your manually or run the following command to include the latest tagged release:
+Now you should be able to invoke the following command in your project root:
+Alternatively, you can install this globally for your user by running:
+Now, assuming you have in your path, you can invoke the following command:
+Note: You should only invoke and rely on the main graph-composer bin file.
+Installing this project as a non-dev dependency in order to use its
+source code as a library is not supported.
+To update to the latest release, just run .
+If you installed it globally via composer you can run instead.
+Development
+clue/graph-composer is an open-source project and encourages everybody to
+participate in its development.
+You're interested in checking out how clue/graph-composer works under the hood and/or want
+to contribute to the development of clue/graph-composer?
+Then this section is for you!
+The recommended way to install clue/graph-composer is to clone (or download) this repository
+and use Composer to download its dependencies.
+Therefore you'll need PHP, Composer, GraphViz, git and curl installed.
+For example, on a recent Ubuntu/debian system, simply run:
+You can now verify everything works by running clue/graph-composer like this:
+If you want to distribute clue/graph-composer as a single standalone release file, you may
+compile the project into a single file like this:
+Note that compiling will temporarily install a copy of this project to the
+local directory and install all non-development dependencies
+for distribution. This should only take a second or two if you've previously
+installed its dependencies already.
+The build script optionally accepts the version number ( env) and
+an output file name or will otherwise try to look up the last release tag,
+such as .
+You can now verify the resulting file works by running it
+like this:
+To update your development version to the latest version, just run this:
+Made some changes to your local development version?
+Make sure to let the world know! :shipit:
+We welcome PRs and would love to hear from you!
+Happy hacking!
+Tests
+To run the test suite, you first need to clone this repo and then install all
+dependencies through Composer:
+To run the test suite, go to the project root and run:
+License
+This project is released under the permissive MIT license.
+Did you know that I offer custom development services and issuing invoices for
+sponsorships of releases and for contributions? Contact me (@clue) for details.

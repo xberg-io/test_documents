@@ -1,0 +1,190 @@
+
+7	Ruimtelijke interpolatie van neerslaggegevens: 
+dagelijkse neerslag als functie van hoogte
+
+
+7.1	Inleiding
+
+Neerslag vormt een belangrijke component van de bodemwaterbalans. Neerslag wordt doorgaans op een beperkt aantal punten gemeten. Maar wat zeggen deze puntgegevens over de hoeveelheid neerslag in een afzonderlijke pixel? Het doel van dit hoofdstuk is om voor deze situatie de meest optimale methode te bepalen om de puntgegevens over het onderzoeksgebied te interpoleren. In het eerste deel van dit hoofdstuk zullen enkele gangbare methoden hiervoor kort worden besproken. Hierna wordt een interpolatiemethode beschreven die op de neerslaggegevens van het onderzochte gebied is toegepast. Vervolgens komt de validatie van deze methode aan bod, gevolgd door een kritische beschouwing van de gebruikte methodiek en validatieresultaten. 
+
+
+7.2	Interpolatie van neerslaggegevens
+
+Voor de ruimtelijke interpolatie van neerslaggegevens bestaat een groot aantal technieken. De meest gangbare technieken zijn (Chow et al, 1988):
+
+●	Rekenkundig gemiddelde. Hierbij wordt de neerslag voor het hele gebied benaderd door het gemiddelde van alle gemeten waarden. Deze methode kan goede resultaten opleveren wanneer de regenmeters uniform over het gebied verspreid staan. Verder mogen de gemeten waarden van elk van de afzonderlijke regenmeters niet al te sterk van het gemiddelde afwijken.
+●	Thiessen netwerk. De Thiessen methode gaat er van uit dat de neerslag op een bepaald punt het best benaderd wordt door de gemeten neerslag van het dichtstbijzijnde station. Wanneer deze methode wordt toegepast leidt dit tot een netwerk van Thiessen polygonen, waarbij elke polygoon is gekoppeld aan een bepaald station. De opbouw van dit polygonennetwerk is volledig afhankelijk van de manier waarop de stations over het gebied zijn verdeeld. Tussen de polygonen treden abrupte, discontinuë overgangen op.  Figuur 7.1a  laat een Thiessen netwerk zien van de totale hoeveelheid neerslag in het La Peyne gebied in de maanden mei, juni en juli ‘96.
+●	Inverse-afstands interpolatie. Bij deze techniek wordt de neerslag op een bepaald punt berekend als een gewogen gemiddelde van twee of meer gemeten waarden. Aan elke gemeten waarde wordt hierbij een gewicht toegekend dat omgekeerd proportioneel is aan de afstand tussen het station waarvan de gemeten neerslag afkomstig is en het te interpoleren punt. In tegensteling tot een Thiessen netwerk levert een inverse-afstands interpolatie geleidelijke overgangen op. Een voorbeeld van een inverse-afstands interpolatie is te zien in figuur 7.1 b.   
+●	optimale interpolatie: kriging. In het kort kan kriging omschreven worden als een meer geavanceerde variant van een inverse-afstandsinterpolatie. Bij kriging wordt de ruimtelijke correlatiestructuur van de punt(neerslag)gegevens gebruikt om optimale waarden voor de interpolatiegewichten te berekenen (Burrough,1986). In tegenstelling tot alle hiervoor besproken technieken is het met kriging mogelijk om voor elk punt een schatting te maken van de interpolatiefout. Een belangrijke beperking van deze methode is dat er erg veel datapunten (in dit geval stations) voor nodig zijn.
+ 
+Geen van de zojuist besproken interpolatietechnieken houdt expliciet rekening met de invloed van hoogteligging op de neerslagverdeling. In veel reliëfrijke gebieden bestaat echter een significant verband tussen hoogteligging en neerslaghoeveelheid (zie bijvoorbeeld Rissons (1995) over het La Peyne gebied). Er bestaan echter varianten op de eerder genoemde technieken die dit wel doen. Vaak gaat het hierbij om de interpolatie van jaar- of maandgemiddelde waarden. Zo gebruiken Michaud et al (1995) regressietechnieken om maandelijkse neerslagtotalen in het zuidwesten van de VS te voorspellen als functie van lengtegraad, breedtegraad en hoogte. Verder hebben verschillende auteurs gebruik gemaakt van geostatistische technieken als universal kriging (kriging bij de aanwezigheid van een trend) en co-kriging (met de hoogte als hulpvariabele) (Michaud et al, 1995).  In de literatuur is opvallend weinig te vinden over het gebruik van dit soort technieken bij kleinere tijdstappen (bijvoorbeeld dagen). Een mogelijke oorzaak hiervan is wellicht, dat de variatie van de neerslag met de hoogte vaak pas over langere tijdsperioden duidelijk wordt. Bij een waterbalanssimulatie die een periode van maanden of langer beslaat is het toch zinvol om de hoogte-neerslag relatie ook voor de daggegevens te gebruiken: het negeren van deze relatie leidt weliswaar tot vrij geringe afwijkingen op dagbasis, maar deze afwijkingen accumuleren over de gesimuleerde periode.   
+
+In de volgende paragraaf wordt een eenvoudige interpolatiemethode voor dagelijkse neerslaggegevens besproken, die speciaal is toegespitst op de situatie in het la Peyne stroom­gebied: de methode gaat uit uit van een -over langere termijn bezien- lineair verband tussen neerslag en hoogte en de aanwezigheid van een beperkt aantal meteostations..
+
+   
+7.3	Neerslag en hoogte: een eenvoudige empirische interpolatiemethode
+
+Wanneer de neerslag op de hoogte zi  (P(zi)) bekend is  kan de neerslag op een (willekeurige) hoogte Z -uitgaande van een lineair verband tussen neerslag en hoogte- geschat worden uit:
+
+
+Hierin is β de  neerslaggradiënt (eenheid: mm/m hoogteverschil wanneer P(z) in mm en zi in m gegeven zijn).
+
+De variabele P(zi) stelt hierbij de gemeten neerslag op station i voor. Wanneer er gegevens van meerdere stations bekend zijn, kan als beste schatter een gemiddelde waarde worden genomen. Wanneer er neerslaggegevens van n stations beschikbaar zijn wordt de vergelijking:
+
+
+Figuur 7.1c geeft de resultaten van een dergelijke interpolatie weer. De vergelijking kan nog verder worden uitgebreid door voor elk punt in het gebied het dichtstbij­zijnde station het zwaarst te laten meewegen: 
+
+
+Hierin is bi een weegfactor. Deze wordt als volgt berekend: 
+
+
+
+Hierin is (voor elk punt in het gebied) ri de afstand van dit punt tot het meteostation i. Bij de berekening van P(z) worden de meetwaarden van het dichtstbijzijnde meteostation dus het zwaarst meegewogen. De factor 0.01 is een 'veiligheidsfactor' die mogelijke delingen door nul voorkomt. In figuur 2 is de procedure nog eens grafisch weergegeven. Figuur 7.1d laat de interpolatieresultaten zien. 
+
+
+7.4	Berekening van de neerslaggradiënt
+
+7.4.1		Inleiding
+Uit analyse van neerslaggegevens uit de periode van 1983 tot 1991 blijkt dat de jaartotale hoeveelheid neerslag in het onderzochte gebied gemiddeld met zo'n 45 mm per 100 meter toeneemt (Rissons, 1995). Dit getal zegt op zichzelf niets over de neerslagverdeling op een afzonderlijke dag, omdat de absolute waarde van de neerslaggradiënt schaalafhankelijk is. Dit schaalprobleem kan worden opgelost door de neerslaggradiënt uit te drukken als een proportie van de gemiddelde jaarneerslag van alle stations. Volgens Daly et al (1994) is de op deze manier genormaliseerde neerslaggradiënt relatief stabiel -zowel in de tijd als in de ruimte. Uit deze genormaliseerde waarde kunnen vervolgens eenvoudig absolute waarden worden teruggerekend. 
+
+
+
+7.4.2		Werkwijze
+Voor de berekening van de genormaliseerde neerslaggradiënt is gebruik gemaakt van jaargemiddelde neerslaggegevens uit de periode van 1983 tot 1991 (Rissons, 1995). Dit is de enige aaneengesloten periode waarvoor gegevens uit 5 verschillende stations beschikbaar zijn. Deze waarden zijn genormaliseerd met behulp van de volgende vergelijking:
+met: 
+Ps,i:	genormaliseerde gemiddelde jaarneerslag voor station i (dimensieloos)
+Pj,i:	gemiddelde jaarneerslag voor station i
+Pj,n:	gemiddelde van gemiddelde jaarneerslagwaarden van alle stations 
+
+Hierbij moet opgemerkt worden dat voor Pj,n hier het gemiddelde is genomen van de gemiddelde jaarneerslagen van de stations Pézenas, Servian, Gabian en Pézènes-les-Mines: dit zijn de stations waarvan -voor de periode waarin het veldwerk is uitgevoerd- dagelijkse neerslaggegevens beschikbaar zijn. (Wanneer de gemiddelde jaarneerslag van Vailhan meegenomen wordt bij de berekening van Pj,n is het lastiger om de genormaliseerde neerslaggradiënt terug te rekenen naar absolute waarden). 
+
+Op de genormaliseerde gemiddelde jaarneerslagwaarden is een regressieanalyse uitgevoerd, waarbij de hoogteligging van de weerstations als onafhankelijke variabele is genomen. De resultaten hiervan zijn gegeven in onderstaande tabel.
+
+Tabel 7.1	Regressie hoogte  - genormaliseerde gemiddelde neerslagsom
+n=5
+p=0,034
+R2=0,82
+R2adj=0,76
+x-coëfficiënt=0,000648 (β')
+standaardfout x-coëfficiënt=0,000175
+
+
+De in de tabel gegeven x-coëfficiënt is de genormaliseerde neerslaggradiënt β' (eenheid: m-1). Uit deze genormaliseerde waarde kan nu voor elke dag (of week, maand, jaar...) een absolute waarde (β) worden afgeleid. Hiervoor moet de genormaliseerde waarde worden vermenigvuldigd met de gemiddelde neerslag van de vier stations. Tabel 7.2 geeft hiervan -ter illustratie- twee voorbeelden.
+
+Tabel 7.2 	Berekening absolute neerslaggradiënt
+Voorbeeld 1	Gemiddelde jaarlijkse neerslaggradiënt over periode 1983-1991 
+
+Pézenas
+Servian
+Gabian
+Pzns-ls-Mns
+gemiddeld
+Pj
+673
+630
+681
+811
+699
+Absolute neerslaggradiënt: β = β' × Pj,gem = 0,000648 × 699 = 0,45 mm/m
+Voorbeeld 2	Neerslaggradiënt op 7-5 1996
+
+Pézenas	
+Servian
+Gabian
+Pzns-ls-Mns
+gemiddeld
+P
+13
+12,9
+14,8
+19
+14,9
+Absolute neerslaggradiënt: β = β' × Pgem = 0,000648 × 14,9 = 0,0097 mm/m
+
+
+7.5	Validatie van de methode
+
+7.5.1		Inleiding
+De zojuist besproken methode is gevalideerd aan de hand van de beschikbare neerslaggegevens van mei, juni en juli '96. Hiertoe zijn telkens de gegevens van 3 stations gebruikt om de neerslag op het vierde station te schatten. Hierbij moet worden opgemerkt dat de berekening van β in dit geval iets anders verloopt, omdat β nu telkens moet worden berekend op basis van gemiddelde neerslagwaarden van drie stations in plaats van vier (ook de waarde van β' is aangepast, omdat deze is genormaliseerd op lange-termijn  gemiddelde waarden van alle vier de stations -de gecorrigeerde waarden wijken echter niet veel van de oorspronkelijke af). 
+
+De validatie is voor vier verschillende situaties uitgevoerd. Allereerst is een validatie uitgevoerd met het volledige model (I). Om de bijdrage van  β' aan de interpolatie-resultaten na te gaan is deze vervolgens op nul gesteld (II). Hierna zijn de neerslagwaarden op elk station ook nog eens geschat als ongewogen gemiddelden van de drie overige stations (III). Tenslotte is een situatie doorgerekend waarbij de neerslag enkel van de ongewogen gemiddelde neerslag en de neerslaggradiënt afhankelijk is gesteld (IV). 
+
+7.5.2		Resultaten
+De resultaten van de validatie zijn gegeven in tabel 7.3. In de tabel zijn de interpolatie-resultaten telkens gekarakteriseerd aan de hand van de RMS-fout (wortel van het gemiddelde van de som van de gekwadrateerde fouten) en de 'Nash efficiency coefficient' (Kirkby et al, 1989):
+
+
+ 
+Hierin is E de 'efficiency coefficient'[1], P de gemeten neerslag, P- de gemiddelde gemeten neerslag en P' de voorspelde neerslag. Bij de resultaten moeten twee dingen opgemerkt worden. Allereerst zijn in de analyse alleen gegevens gebruikt van dagen waarop ook daadwerkelijk neerslag is gevallen. Een tweede punt is dat de neerslaggegevens van 27 juli niet in de analyse zijn meegenomen: op deze dag viel in Gabian een lokale, zeer hevige bui (56 mm) terwijl op de andere stations heel weinig neerslag viel. De invloed van deze enkele uitbijter op de resultaten is dermate groot dat deze niet in de analyse is meegenomen. 
+
+[1] E wordt op vrijwel dezelfde manier berekend als de determinatiecoëfficiënt (R2) bij regressie; bij een 'gewone' R2  waarde zouden voor P' de waarden van P' op de regressielijn worden gebruikt. Hierdoor is de 'gewone' determinatiecoëfficiënt -in tegenstelling tot E- niet gevoelig voor systematische afwijkingen in de modeluitkomsten. E is dus in principe dus een betere maat om de interpolatieresultaten te beoordelen dan R2.
+
+
+Tabel 7.3	Validatie van de neerslaginterpolatie
+Station
+Gabian
+Pézenas
+P-ls-Mns
+Servian
+gemiddeld
+Model I. Interpolatie met inverse-afstandsfunctie en neerslaggradiënt
+RMS-fout
+1,65
+1,68
+3,50
+2,46
+2,32
+E 
+0,88
+0,82
+0,74
+0,78
+0,81
+Model II. Interpolatie met inverse-afstandsfunctie 
+RMS-fout
+1,76
+1,60
+4,08
+2,46
+2,48
+E 
+0,87
+0,84
+0,64
+0,78
+0,78
+Model III. Interpolatie met rekenkundig gemiddelde 
+RMS-fout
+1,61
+1,44
+3,69
+2,60
+2,33
+E 
+0,89
+0,87
+0,71
+0,76
+0,80
+Model IV. Interpolatie met rekenkundig gemiddelde en neerslaggradiënt
+RMS-fout
+1,55
+1,54
+3,18
+2,55
+2,21
+E 
+0,90
+0,85
+0,78
+0,76
+0,82
+
+
+
+7.6	Discussie en conclusies
+
+Uit tabel 7.3 blijkt dat de RMS-fouten en E-waarden van de vier interpolatiestrategieën niet veel van elkaar afwijken. Gemiddeld heeft model IV de laagste RMS-fout en de hoogste E-waarde. Opvallend is dat model I (met inverse distance functie) iets minder goed presteert dan model IV. Over het geheel genomen zijn de verschillen echter verwaarloosbaar. Alle vier de modellen leveren relatief grote RMS-fouten op voor station Pézènes-les-Mines. Dit heeft waarschijnlijk te maken met de grote hoogteverschillen tussen Pézènes-les-Mines en elk van de overige stations. Over het geheel genomen zijn de verschillen tussen de uitkomsten van de drie methoden niet groot. 
+
+Op grond van deze resultaten doet de vraag zich voor in hoeverre het gebruik van model I een bijdrage levert aan een betere kwaliteit van de invoergegevens van het bodemwaterbalansmodel. Met de beschikbare gegevens is deze vraag moeilijk te beantwoorden. Vooral  het verschil met model IV is minimaal. Een voordeel van model I is dat met dit model voor de lokatie van elk meteostation vrijwel exact de op dat station gemeten neerslag wordt gemodelleerd, maar dat zegt nog niets over de prestaties tussen de meteostations.  Wanneer de gemeten neerslaghoeveelheden in Pézènes-les-Mines representatief zijn voor het hooggelegen noordelijke gebied, zou model I voor dit gebied in theorie betere resultaten moeten geven dan model IV. Zonder extra metingen kunnen hierover echter geen harde uitspraken worden gedaan. Op grond van de hier gepresenteerde resultaten is er geen duidelijke reden om één van de besproken methoden boven de ander te verkiezen. Het gebruik van daggemiddelde neerslagwaarden van alle stations (de meest eenvoudige ‘interpolatie’) is in dit geval misschien toch nog de beste keus.
+
+De in dit hoofdstuk besproken interpolatiemethode zou wellicht nog verbeterd kunnen worden door de relatie tussen neerslag en gemiddelde hoogte te onderzoeken. Verschillende  auteurs, onder wie Daly et al (1994) rapporteren gevallen waarin neerslaghoeveelheden veel sterker gecorreleerd zijn met de gemiddelde hoogte dan met de werkelijke stationshoogte. Dit wordt veroorzaakt door factoren als expositie en topografische ligging (dal, hoogste punt helling, etc). Voor het La Peyne gebied geldt dat van het merendeel van de gebruikte stations de ligging niet exact bekend is. Verder is het met het be­schikbare aantal meteostations niet mogelijk om de invloed van een factor als helling-expositie aan te tonen. Daarom zal hier in dit rapport verder niet op ingegaan worden. 

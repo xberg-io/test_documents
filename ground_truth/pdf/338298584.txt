@@ -1,0 +1,137 @@
+This is an experimental tree-based writing interface for GPT-3. The code is actively being developed and thus
+unstable and poorly documented.
+Features
+Read mode
+Linear story view
+Tree nav bar
+Edit mode
+Tree view
+Explore tree visually with mouse
+Expand and collapse nodes
+Change tree topology
+Edit nodes in place
+Navigation
+Hotkeys
+Bookmarks
+Chapters
+'Visited' state
+Generation
+Generate N children with GPT-3
+Modify generation settings
+Change hidden memory on a node-by-node basis
+File I/O
+Open/save trees as JSON files
+Work with trees in multiple tabs
+Combine trees
+Demo
+ooo what features! wow so cool
+Block multiverse mode
+Read this for a conceptual explanation of block multiverse interface and demo video
+How to use in loom
+1. Click button on bottom bar. This will open the block multiverse interface in the right sidebar (drag to resize).
+2. Write initial prompt in the main textbox.
+3. [Optional] Write ground truth continuation in the gray entry box at the bottom of the block multiverse interface. Blocks in ground truth trajectory will be colored black.
+4. Set model and params in top bar.
+5. Click to propagate plot the block multiverse
+6. Click on any of the blocks to zoom ("renormalize") to that block
+7. Click again to plot future block multiverse starting from a renormalized frame
+8. Click to reset zoom level to initial position
+9. Click to clear the block multiverse plot. Do this before generating a new block multiverse.
+Hotkeys
+Alt hotkeys correspond to Command on Mac
+File
+Open: ,
+Import JSON as subtree:
+Save: ,
+Dialogs
+Change chapter:
+Preferences:
+Generation Settings:
+Visualization Settings:
+Multimedia dialog:
+Tree Info:
+Node Metadata:
+Run Code:
+Mode / display
+Toggle edit / save edits: ,
+Toggle story textbox editable:
+Toggle visualize: ,
+Toggle bottom pane:
+Toggle side pane:
+Toggle show children:
+Hoist:
+Unhoist:
+Navigate
+Click to go to node:
+Next: , ,
+Prev: ,
+Go to child: ,
+Go to next sibling: ,
+Go to parent: ,
+Go to previous Sibling: ,
+Return to root: ,
+Walk: ,
+Go to checkpoint:
+Save checkpoint:
+Go to next bookmark: ,
+Go to prev bookmark: ,
+Search ancestry:
+Search tree:
+Click to split node:
+Goto node by id:
+Organization
+Toggle bookmark: ,
+Toggle archive node:
+Generation and memory
+Generate: ,
+Inline generate:
+Add memory:
+View current AI memory:
+View node memory:
+Edit topology
+Delete: ,
+Merge with Parent:
+Merge with children:
+Move node up:
+Move node down:
+Change parent:
+New root child:
+New Child: , ,
+New Parent:
+New Sibling:
+Edit text
+Toggle edit / save edits:
+Save edits as new sibling:
+Click to edit history:
+Click to select token:
+Next counterfactual token:
+Previous counterfactual token:
+Apply counterfactual changes:
+Enter text:
+Escape textbox:
+Prepend newline: ,
+Prepend space:
+Collapse / expand
+Collapse all except subtree:
+Collapse node:
+Collapse subtree:
+Expand children:
+Expand subtree:
+View
+Center view: ,
+Reset zoom:
+Instructions
+Python
+0. Make sure you have tkinter installed
+1. Setup your python env (should be = 3.9.13)
+1. Install requirements
+2. [Optional] Set environmental variables for , , (you can also use the settings options)
+3. Run main.py
+4. Load a json tree
+5. Read :)
+Docker
+(Only tested on Linux.)
+0. [Optional] Edit the Makefile with your API keys (you can also use the settings options)
+1. Run the make targets
+2. Load a json tree
+3. Read :)

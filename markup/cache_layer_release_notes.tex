@@ -1,0 +1,136 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\usepackage{caption}
+\captionsetup[table]{skip=6pt}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{Cache Layer 4.2 Release
+Notes}\label{cache-layer-4.2-release-notes}
+
+Version 4.2 focuses on eviction correctness and observability. This
+release is \textbf{backward compatible} with 4.1 configuration files,
+but the default eviction policy has changed --- read the migration note
+below.
+
+\subsection{Highlights}\label{highlights}
+
+\begin{itemize}
+\tightlist
+\item
+  Adaptive replacement replaces plain LRU as the default policy.
+\item
+  Per-key TTLs are now honored to millisecond precision.
+\item
+  A new \texttt{cache.stats()} call exposes hit rate without a debug
+  build.
+\end{itemize}
+
+\subsection{Behavior Changes}\label{behavior-changes}
+
+The eviction default moved from \texttt{lru} to \texttt{arc}. ARC keeps
+both a recency and a frequency list, so a single large scan no longer
+flushes hot keys. To keep the old behavior, set
+\texttt{policy\ =\ "lru"} explicitly.
+
+\subsection{Metrics}\label{metrics}
+
+The following counters are emitted on every flush interval:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Metric & Type & Meaning \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{cache\_hits} & counter & Lookups served from memory \\
+\texttt{cache\_misses} & counter & Lookups that fell through \\
+\texttt{evicted\_entries} & counter & Keys removed under pressure \\
+\texttt{resident\_bytes} & gauge & Current heap held by the cache \\
+\end{longtable}
+}
+
+\subsection{Migration}\label{migration}
+
+Upgrading is a \emph{drop-in} replacement for most users:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Bump the dependency to \texttt{4.2} and rebuild.
+\item
+  If you relied on strict LRU ordering, pin \texttt{policy\ =\ "lru"}.
+\item
+  Delete any custom \texttt{warmup\_hook} --- warmup is now automatic.
+\end{enumerate}
+
+Call \texttt{cache.compact()} once after startup to reclaim fragmented
+slabs left by the previous version.
+
+\end{document}

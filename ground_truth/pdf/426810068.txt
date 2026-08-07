@@ -1,0 +1,23 @@
+Windows 2000 on Docker
+A Docker image for Windows 2000 Advanced Server with SP4.
+Start an instance
+The instance can be accessed from:
+RDP ( ), user , password .
+VNC ( ), without password.
+noVNC ( ), http://127.0.0.1:6080/vnc.html
+Additionally the contents of the directory in the container will be exposed on the drive via SMB.
+Environment variables
+Number of cores the VM is permitted to use ( by default).
+Amount of memory the VM is permitted to use ( by default).
+VM keyboard layout ( by default).
+Start QEMU in KVM mode ( by default).
+The option is required for this variable to take effect.
+Why?
+"Your scientists were so preoccupied with whether or not they could, that they didn't stop to think if they should."
+Dr. Ian Malcolm
+Disclaimer
+This project is not affiliated with and has not been approved by Microsoft.
+The Windows 2000 Advanced Server disk image used in this demonstration has been obtained from WinWorld
+and it is published for digital preservation and demonstration purposes only.
+License
+See the license file.

@@ -1,0 +1,258 @@
+fasthttp
+Fast HTTP implementation for Go.
+fasthttp might not be for you!
+fasthttp was designed for some high performance edge cases. Unless your server/client needs to handle thousands of small to medium requests per second and needs a consistent low millisecond response time fasthttp might not be for you. For most cases is much better as it's easier to use and can handle more cases. For most cases you won't even notice the performance difference.
+General info and links
+Currently fasthttp is successfully used by VertaMedia
+in a production serving up to 200K rps from more than 1.5M concurrent keep-alive
+connections per physical server.
+TechEmpower Benchmark round 19 results
+Server Benchmarks
+Client Benchmarks
+Install
+Documentation
+Examples from docs
+Code examples
+Awesome fasthttp tools
+Switching from net/http to fasthttp
+Fasthttp best practices
+Tricks with byte buffers
+Related projects
+FAQ
+HTTP server performance comparison with net/http
+In short, fasthttp server is up to 10 times faster than net/http.
+Below are benchmark results.
+GOMAXPROCS=1
+net/http server:
+fasthttp server:
+GOMAXPROCS=4
+net/http server:
+fasthttp server:
+HTTP client comparison with net/http
+In short, fasthttp client is up to 10 times faster than net/http.
+Below are benchmark results.
+GOMAXPROCS=1
+net/http client:
+fasthttp client:
+GOMAXPROCS=4
+net/http client:
+fasthttp client:
+Install
+Switching from net/http to fasthttp
+Unfortunately, fasthttp doesn't provide API identical to net/http.
+See the FAQ for details.
+There is net/http - fasthttp handler converter,
+but it is better to write fasthttp request handlers by hand in order to use
+all of the fasthttp advantages (especially high performance :) ).
+Important points:
+Fasthttp works with RequestHandler functions
+instead of objects implementing Handler interface.
+Fortunately, it is easy to pass bound struct methods to fasthttp:
+The RequestHandler
+accepts only one argument - RequestCtx.
+It contains all the functionality required for http request processing
+and response writing. Below is an example of a simple request handler conversion
+from net/http to fasthttp.
+Fasthttp allows setting response headers and writing response body
+in an arbitrary order. There is no 'headers first, then body' restriction
+like in net/http. The following code is valid for fasthttp:
+Fasthttp doesn't provide ServeMux,
+but there are more powerful third-party routers and web frameworks
+with fasthttp support:
+fasthttp-routing
+router
+lu
+atreugo
+Fiber
+Gearbox
+Net/http code with simple ServeMux is trivially converted to fasthttp code:
+Because creating a new channel for every request is just too expensive, so the channel returned by RequestCtx.Done() is only closed when the server is shutting down.
+net/http - fasthttp conversion table:
+All the pseudocode below assumes w, r and ctx have these types:
+r.Body - ctx.PostBody()
+r.URL.Path - ctx.Path()
+r.URL - ctx.URI()
+r.Method - ctx.Method()
+r.Header - ctx.Request.Header
+r.Header.Get() - ctx.Request.Header.Peek()
+r.Host - ctx.Host()
+r.Form - ctx.QueryArgs() +
+ctx.PostArgs()
+r.PostForm - ctx.PostArgs()
+r.FormValue() - ctx.FormValue()
+r.FormFile() - ctx.FormFile()
+r.MultipartForm - ctx.MultipartForm()
+r.RemoteAddr - ctx.RemoteAddr()
+r.RequestURI - ctx.RequestURI()
+r.TLS - ctx.IsTLS()
+r.Cookie() - ctx.Request.Header.Cookie()
+r.Referer() - ctx.Referer()
+r.UserAgent() - ctx.UserAgent()
+w.Header() - ctx.Response.Header
+w.Header().Set() - ctx.Response.Header.Set()
+w.Header().Set("Content-Type") - ctx.SetContentType()
+w.Header().Set("Set-Cookie") - ctx.Response.Header.SetCookie()
+w.Write() - ctx.Write(),
+ctx.SetBody(),
+ctx.SetBodyStream(),
+ctx.SetBodyStreamWriter()
+w.WriteHeader() - ctx.SetStatusCode()
+w.(http.Hijacker).Hijack() - ctx.Hijack()
+http.Error() - ctx.Error()
+http.FileServer() - fasthttp.FSHandler(),
+fasthttp.FS
+http.ServeFile() - fasthttp.ServeFile()
+http.Redirect() - ctx.Redirect()
+http.NotFound() - ctx.NotFound()
+http.StripPrefix() - fasthttp.PathRewriteFunc
+VERY IMPORTANT! Fasthttp disallows holding references
+to RequestCtx or to its'
+members after returning from RequestHandler.
+Otherwise data races are inevitable.
+Carefully inspect all the net/http request handlers converted to fasthttp whether
+they retain references to RequestCtx or to its' members after returning.
+RequestCtx provides the following band aids for this case:
+Wrap RequestHandler into TimeoutHandler.
+Call TimeoutError
+before returning from RequestHandler if there are references to RequestCtx or to its' members.
+See the example
+for more details.
+Use this brilliant tool - race detector -
+for detecting and eliminating data races in your program. If you detected
+data race related to fasthttp in your program, then there is high probability
+you forgot calling TimeoutError
+before returning from RequestHandler.
+Blind switching from net/http to fasthttp won't give you performance boost.
+While fasthttp is optimized for speed, its' performance may be easily saturated
+by slow RequestHandler.
+So profile and optimize your
+code after switching to fasthttp. For instance, use quicktemplate
+instead of html/template.
+See also fasthttputil,
+fasthttpadaptor and
+expvarhandler.
+Performance optimization tips for multi-core systems
+Use reuseport listener.
+Run a separate server instance per CPU core with GOMAXPROCS=1.
+Pin each server instance to a separate CPU core using taskset.
+Ensure the interrupts of multiqueue network card are evenly distributed between CPU cores.
+See this article for details.
+Use the latest version of Go as each version contains performance improvements.
+Fasthttp best practices
+Do not allocate objects and buffers - just reuse them as much
+as possible. Fasthttp API design encourages this.
+sync.Pool is your best friend.
+Profile your program
+in production.
+usually gives better
+insights for optimization opportunities than .
+Write tests and benchmarks for hot paths.
+Avoid conversion between and , since this may result in memory
+allocation+copy. Fasthttp API provides functions for both and -
+use these functions instead of converting manually between and .
+There are some exceptions - see this wiki page
+for more details.
+Verify your tests and production code under
+race detector on a regular basis.
+Prefer quicktemplate instead of
+html/template in your webserver.
+Tricks with buffers
+The following tricks are used by fasthttp. Use them in your code too.
+Standard Go functions accept nil buffers
+So throw away nil checks for buffers from you code. For example,
+becomes
+String may be appended to buffer with
+buffer may be extended to its' capacity.
+All fasthttp functions accept nil buffer
+String and buffers may converted without memory allocations
+Warning:
+This is an unsafe way, the result string and buffer share the same bytes.
+Please make sure not to modify the bytes in the buffer if the string still survives!
+Related projects
+fasthttp - various useful
+helpers for projects based on fasthttp.
+fasthttp-routing - fast and
+powerful routing package for fasthttp servers.
+http2 - HTTP/2 implementation for fasthttp.
+router - a high
+performance fasthttp request router that scales well.
+fastws - Bloatless WebSocket package made for fasthttp
+to handle Read/Write operations concurrently.
+gramework - a web framework made by one of fasthttp maintainers
+lu - a high performance
+go middleware web framework which is based on fasthttp.
+websocket - Gorilla-based
+websocket implementation for fasthttp.
+websocket - Event-based high-performance WebSocket library for zero-allocation
+websocket servers and clients.
+fasthttpsession - a fast and powerful session package for fasthttp servers.
+atreugo - High performance and extensible micro web framework with zero memory allocations in hot paths.
+kratgo - Simple, lightweight and ultra-fast HTTP Cache to speed up your websites.
+kit-plugins - go-kit transport implementation for fasthttp.
+Fiber - An Expressjs inspired web framework running on Fasthttp
+Gearbox - :gear: gearbox is a web framework written in Go with a focus on high performance and memory optimization
+http2curl - A tool to convert fasthttp requests to curl command line
+FAQ
+Why creating yet another http package instead of optimizing net/http?
+Because net/http API limits many optimization opportunities.
+For example:
+net/http Request object lifetime isn't limited by request handler execution
+time. So the server must create a new request object per each request instead
+of reusing existing objects like fasthttp does.
+net/http headers are stored in a . So the server
+must parse all the headers, convert them from to and put
+them into the map before calling user-provided request handler.
+This all requires unnecessary memory allocations avoided by fasthttp.
+net/http client API requires creating a new response object per each request.
+Why fasthttp API is incompatible with net/http?
+Because net/http API limits many optimization opportunities. See the answer
+above for more details. Also certain net/http API parts are suboptimal
+for use:
+Compare net/http connection hijacking
+to fasthttp connection hijacking.
+Compare net/http Request.Body reading
+to fasthttp request body reading.
+Why fasthttp doesn't support HTTP/2.0 and WebSockets?
+HTTP/2.0 support is in progress. WebSockets has been done already.
+Third parties also may use RequestCtx.Hijack
+for implementing these goodies.
+Are there known net/http advantages comparing to fasthttp?
+Yes:
+net/http supports HTTP/2.0 starting from go1.6.
+net/http API is stable, while fasthttp API constantly evolves.
+net/http handles more HTTP corner cases.
+net/http can stream both request and response bodies
+net/http can handle bigger bodies as it doesn't read the whole body into memory
+net/http should contain less bugs, since it is used and tested by much
+wider audience.
+Why fasthttp API prefers returning instead of ?
+Because to conversion isn't free - it requires memory
+allocation and copy. Feel free wrapping returned result into
+if you prefer working with strings instead of byte slices.
+But be aware that this has non-zero overhead.
+Which GO versions are supported by fasthttp?
+Go 1.18.x. Older versions won't be supported.
+Please provide real benchmark data and server information
+See this issue.
+Are there plans to add request routing to fasthttp?
+There are no plans to add request routing into fasthttp.
+Use third-party routers and web frameworks with fasthttp support:
+fasthttp-routing
+router
+gramework
+lu
+atreugo
+Fiber
+Gearbox
+See also this issue for more info.
+I detected data race in fasthttp!
+Cool! File a bug. But before
+doing this check the following in your code:
+Make sure there are no references to RequestCtx
+or to its' members after returning from RequestHandler.
+Make sure you call TimeoutError
+before returning from RequestHandler
+if there are references to RequestCtx
+or to its' members, which may be accessed by other goroutines.
+I didn't find an answer for my question here
+Try exploring these questions.

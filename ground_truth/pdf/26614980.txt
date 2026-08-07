@@ -1,0 +1,9 @@
+Prophet is a Python microframework for financial markets. Prophet strives to let the programmer focus on modeling financial strategies, portfolio management, and analyzing backtests. It achieves this by having few functions to learn to hit the ground running, yet being flexible enough to accomodate sophistication.
+Prophet is Python 2 and 3 compatible. See the documentation for more details.
+Join the mailing list here or join by email. See the development board to see what's currently in the works.
+Installation
+Quickstart
+Contribute
+Run the following to your development environment setup:
+Credits
+Prophet wouldn't be possible without the wonderful pandas library and is inspired by QSTK and Zipline. The trading calendar util in Prophet is from Zipline which is under the Apache 2.0 License.

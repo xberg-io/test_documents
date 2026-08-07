@@ -1,0 +1,13 @@
+trial condition mean stddev p_value significant
+1 control 42.18 3.71 0.842 no
+2 low_dose 45.63 4.02 0.058 no
+3 mid_dose 51.27 3.94 0.011 yes
+4 high_dose 58.90 5.13 0.001 yes
+5 control 41.75 3.55 0.910 no
+6 low_dose 46.11 4.20 0.047 yes
+7 mid_dose 52.04 4.08 0.008 yes
+8 high_dose 60.32 5.44 0.0004 yes
+9 control 43.02 3.68 0.788 no
+10 low_dose 44.89 3.97 0.072 no
+11 mid_dose 50.66 3.81 0.014 yes
+12 high_dose 59.47 5.29 0.0007 yes

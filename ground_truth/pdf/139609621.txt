@@ -1,0 +1,60 @@
+Image Super-Resolution Using Very Deep Residual Channel Attention Networks
+This repository is for RCAN introduced in the following paper
+Yulun Zhang, Kunpeng Li, Kai Li, Lichen Wang, Bineng Zhong, and Yun Fu, "Image Super-Resolution Using Very Deep Residual Channel Attention Networks", ECCV 2018, [arXiv]
+The code is built on EDSR (PyTorch) and tested on Ubuntu 14.04/16.04 environment (Python3.6, PyTorch0.4.0, CUDA8.0, cuDNN5.1) with Titan X/1080Ti/Xp GPUs. RCAN model has also been merged into EDSR (PyTorch).
+Visual results reproducing the PSNR/SSIM values in the paper are availble at GoogleDrive.
+For BI degradation model, scales=2,3,4,8: ResultsECCV2018RCANBIX2X3X4X8
+Contents
+1. Introduction
+2. Train
+3. Test
+4. Results
+5. Citation
+6. Acknowledgements
+Introduction
+Convolutional neural network (CNN) depth is of crucial importance for image super-resolution (SR). However, we observe that deeper networks for image SR are more difficult to train. The low-resolution inputs and features contain abundant low-frequency information, which is treated equally across channels, hence hindering the representational ability of CNNs. To solve these problems, we propose the very deep residual channel attention networks (RCAN). Specifically, we propose a residual in residual (RIR) structure to form very deep network, which consists of several residual groups with long skip connections. Each residual group contains some residual blocks with short skip connections. Meanwhile, RIR allows abundant low-frequency information to be bypassed through multiple skip connections, making the main network focus on learning high-frequency information. Furthermore, we propose a channel attention mechanism to adaptively rescale channel-wise features by considering interdependencies among channels. Extensive experiments show that our RCAN achieves better accuracy and visual improvements against state-of-the-art methods.
+Channel attention (CA) architecture.
+Residual channel attention block (RCAB) architecture.
+The architecture of our proposed residual channel attention network (RCAN).
+Train
+Prepare training data
+1. Download DIV2K training data (800 training + 100 validtion images) from DIV2K dataset or SNUCVLab.
+2. Specify '--dirdata' based on the HR and LR images path. In option.py, '--ext' is set as 'sepreset', which first convert .png to .npy. If all the training images (.png) are converted to .npy files, then set '--ext sep' to skip converting files.
+For more informaiton, please refer to EDSR(PyTorch).
+Begin to train
+1. (optional) Download models for our paper and place them in '/RCANTrainCode/experiment/model'.
+All the models (BIX2/3/4/8, BDX3) can be downloaded from Dropbox, BaiduYun, or GoogleDrive.
+2. Cd to 'RCANTrainCode/code', run the following scripts to train models.
+You can use scripts in file 'TrainRCANscripts' to train models for our paper.
+Test
+Quick start
+1. Download models for our paper and place them in '/RCANTestCode/model'.
+All the models (BIX2/3/4/8, BDX3) can be downloaded from Dropbox, BaiduYun, or GoogleDrive.
+2. Cd to '/RCANTestCode/code', run the following scripts.
+You can use scripts in file 'TestRCANscripts' to produce results for our paper.
+The whole test pipeline
+1. Prepare test data.
+Place the original test sets (e.g., Set5, other test sets are available from GoogleDrive or Baidu) in 'OriginalTestData'.
+Run 'PrepareTestDataHRLR.m' in Matlab to generate HR/LR images with different degradation models.
+2. Conduct image SR.
+See Quick start
+3. Evaluate the results.
+Run 'EvaluatePSNRSSIM.m' to obtain PSNR/SSIM values for paper.
+Results
+Quantitative Results
+Quantitative results with BI degradation model. Best and second best results are highlighted and underlined
+For more results, please refer to our main papar and supplementary file.
+Visual Results
+Visual results with Bicubic (BI) degradation (4×) on “img 074” from Urban100
+Visual comparison for 4× SR with BI model
+Visual comparison for 8× SR with BI model
+Visual comparison for 3× SR with BD model
+Visual comparison for 4× SR with BI model on Set14 and B100 datasets.
+The best results are highlighted. SRResNet, SRResNet VGG22, SRGAN MSE, SR-
+GAN VGG22, and SRGAN VGG54 are proposed in [CVPR2017SRGAN], ENet E and ENet PAT are
+proposed in [ICCV2017EnhanceNet]. These comparisons mainly show the eﬀectiveness of our proposed
+RCAN against GAN based methods
+Citation
+If you find the code helpful in your resarch or work, please cite the following papers.
+Acknowledgements
+This code is built on EDSR (PyTorch). We thank the authors for sharing their codes of EDSR Torch version and PyTorch version.

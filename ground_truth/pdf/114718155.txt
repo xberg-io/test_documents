@@ -1,0 +1,34 @@
+Installation:
+Usage:
+If no options are used, a user interface will show up instead
+Examples:
+- Install Tela theme on 2k display device:
+- Install Tela theme into /boot/grub/themes:
+- Uninstall Tela theme:
+Issues / tweaks:
+Correcting display resolution:
+- On the grub screen, press to enter the command line
+- Enter or to check available resolutions
+- Open , and edit to match your resolution
+- Finally, run to update your grub config
+Setting a custom background:
+- Make sure you have installed, or at least something that provides
+- Find the resolution of your display, and make sure your background matches the resolution
+- 1920x1080 1080p
+- 2560x1080 ultrawide
+- 2560x1440 2k
+- 3440x1440 ultrawide2k
+- 3840x2160 4k
+- Place your custom background inside the root of the project, and name it
+- Run the installer like normal, but with -s and -t and -i
+- Make sure to replace with your resolution and with the theme
+Contributing:
+- If you made changes to icons, or added a new one:
+- Delete the existing icon, if there is one
+- Run
+- Create a pull request from your branch or fork
+- If any issues occur, report then to the issue page
+Preview:
+Documents
+Grub2 theme reference
+Grub2 theme tutorial

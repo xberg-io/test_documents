@@ -1,0 +1,66 @@
+<!-- README.md is generated from README.Rmd. Please edit that file --
+tidylog
+![CRAN
+Version](https://CRAN.R-project.org/package=tidylog)
+![Coverage
+status](https://codecov.io/github/elbersb/tidylog?branch=master)
+The goal of tidylog is to provide feedback about dplyr and tidyr
+operations. It provides simple wrapper functions for almost all dplyr
+and tidyr functions, such as , , , ,
+and .
+Example
+Load after and/or :
+Tidylog will give you feedback, for instance when filtering a data frame
+or adding a new variable:
+Tidylog reports detailed information for joins:
+In this case, we see that 1,556 rows from the dataset do not
+have weather information.
+Tidylog can be especially helpful in longer pipes:
+Here, it might have been accidental that the last command had
+no effect.
+Installation
+Download from CRAN:
+Or install the development version:
+Benchmarks
+Tidylog will add a small overhead to each function call. This can be
+relevant for very large datasets and especially for joins. If you want
+to switch off tidylog for a single long-running command, simply prefix
+or , such as in . See this
+vignette
+for more information.
+More examples
+filter, distinct, drop\na
+mutate, transmute, replace\na, fill
+joins
+For joins, tidylog provides more detailed information. For any join,
+tidylog will show the number of rows that are only present in x (the
+first dataframe), only present in y (the second dataframe), and rows
+that have been matched. Numbers in parentheses indicate that these rows
+are not included in the result. Tidylog will also indicate whether any
+rows were duplicated (which is often unintentional):
+More examples:
+Because tidylog needs to perform two additional joins behind the scenes
+to report this information, the overhead will be larger than for the
+other tidylog functions (especially with large datasets).
+select, relocate, rename
+summarize
+tally, count, add\tally, add\count
+pivot\longer, pivot\wider
+Tidylog also supports and .
+Turning logging off, registering additional loggers
+To turn off the output for just a particular function call, you can
+simply call the dplyr and tidyr functions directly, e.g.
+or .
+To turn off the output more permanently, set the global option
+to an empty list:
+This option can also be used to register additional loggers. The option
+expects a list of functions. By default (when
+is set to NULL), tidylog will use the
+function to display the output, but if you prefer a more colorful
+output, simply overwrite the option:
+To print the output both to the screen and to a file, you could use:
+Namespace conflicts
+Tidylog redefines several of the functions exported by dplyr and tidyr,
+so it should be loaded last, otherwise there will be no output. A more
+explicit way to resolve namespace conflicts is to use the
+conflicted package:

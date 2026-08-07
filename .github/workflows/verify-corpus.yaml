@@ -1,0 +1,51 @@
+name: Verify Corpus
+
+# ~keep This repo cannot publish from CI: the corpus binaries are not in git, so a checkout contains
+# nothing to upload. Publishing is a local maintainer action (`python3 scripts/publish_corpus.py
+# --bucket xberg-test-documents`) that commits a refreshed corpus.lock.json. What CI can do — and
+# what actually protects consumers — is prove that every object the lock file pins is still
+# fetchable from the public bucket. That needs no credentials at all.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-corpus-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  manifest:
+    name: Manifest resolves from the bucket
+    runs-on: ubuntu-latest
+    env:
+      BUCKET_NAME: xberg-test-documents
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Verify every pinned object is present with the pinned size
+        run: python3 scripts/verify_corpus.py --bucket "$BUCKET_NAME"
+
+      - name: Verify a sample downloads and hashes correctly
+        run: python3 scripts/verify_corpus.py --bucket "$BUCKET_NAME" --sample 20
+
+  tests:
+    name: Publisher unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run tests
+        run: python3 -m unittest discover -s scripts -v

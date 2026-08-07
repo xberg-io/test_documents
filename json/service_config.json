@@ -1,0 +1,78 @@
+{
+  "version": "2.4.0",
+  "environment": "production",
+  "services": {
+    "api_gateway": {
+      "enabled": true,
+      "settings": {
+        "listen": {
+          "host": "0.0.0.0",
+          "port": 8443,
+          "tls": {
+            "enabled": true,
+            "min_version": "1.3",
+            "ciphers": ["TLS_AES_256_GCM_SHA384", "TLS_CHACHA20_POLY1305_SHA256"]
+          }
+        },
+        "rate_limit": {
+          "requests_per_minute": 6000,
+          "burst": 200,
+          "strategy": "sliding_window"
+        },
+        "cors": {
+          "allowed_origins": ["https://app.example.com", "https://admin.example.com"],
+          "allow_credentials": true
+        }
+      }
+    },
+    "auth_service": {
+      "enabled": true,
+      "settings": {
+        "token": {
+          "issuer": "https://auth.example.com",
+          "access_ttl_seconds": 900,
+          "refresh_ttl_seconds": 1209600,
+          "algorithms": ["RS256"]
+        },
+        "password_policy": {
+          "min_length": 12,
+          "require_symbols": true,
+          "history": 5
+        },
+        "mfa": {
+          "enabled": true,
+          "methods": ["totp", "webauthn"],
+          "grace_period_days": 7
+        }
+      }
+    },
+    "cache": {
+      "enabled": true,
+      "settings": {
+        "backend": "redis",
+        "cluster": {
+          "nodes": [
+            {"host": "cache-0.internal", "port": 6379},
+            {"host": "cache-1.internal", "port": 6379},
+            {"host": "cache-2.internal", "port": 6379}
+          ],
+          "replication_factor": 2
+        },
+        "eviction": {
+          "policy": "allkeys-lru",
+          "max_memory_mb": 4096
+        }
+      }
+    }
+  },
+  "observability": {
+    "tracing": {
+      "enabled": true,
+      "sampler": {"type": "ratio", "value": 0.05}
+    },
+    "metrics": {
+      "exporter": "prometheus",
+      "interval_seconds": 15
+    }
+  }
+}

@@ -1,0 +1,34 @@
+UNIT: UNsupervised Image-to-image Translation Networks
+New implementation available at imaginaire repository
+We have a reimplementation of the UNIT method that is more performant. It is avaiable at Imaginaire
+License
+Copyright (C) 2018 NVIDIA Corporation. All rights reserved.
+Licensed under the CC BY-NC-SA 4.0 license (https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode).
+Code usage
+- Please check out our tutorial.
+- For multimodal (or many-to-many) image translation, please check out our new work on MUNIT.
+What's new.
+- 05-02-2018: We now adapt MUNIT code structure. For reproducing experiment results in the NIPS paper, please check out version02 branch.
+- 12-21-2017: Release pre-trained synthia-to-cityscape image translation model. See USAGE.md for usage examples.
+- 12-14-2017: Added multi-scale discriminators described in the pix2pixHD paper. To use it simply make the name of the discriminator COCOMsDis.
+Paper
+Ming-Yu Liu, Thomas Breuel, Jan Kautz, "Unsupervised Image-to-Image Translation Networks" NIPS 2017 Spotlight, arXiv:1703.00848 2017
+Two Minute Paper Summary
+(We thank the Two Minute Papers channel for summarizing our work.)
+The Shared Latent Space Assumption
+Result Videos
+More image results are available in the Google Photo Album.
+Left: input. Right: neural network generated. Resolution: 640x480
+Left: input. Right: neural network generated. Resolution: 640x480
+- Snowy2Summery-01
+- Snowy2Summery-02
+- Day2Night-01
+- Day2Night-02
+- Translation Between 5 dog breeds
+- Translation Between 6 cat species
+Street Scene Image Translation
+From the first row to the fourth row, we show example results on day to night, sunny to rainy, summery to snowy, and real to synthetic image translation (two directions).
+For each image pair, left is the input image; right is the machine generated image.
+Dog Breed Image Translation
+Cat Species Image Translation
+Attribute-based Face Image Translation

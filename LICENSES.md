@@ -1,0 +1,47 @@
+# Licensing
+
+`test_documents` is part of **xberg** (<https://github.com/xberg-io/xberg>), which is **MIT-licensed,
+public, non-commercial open-source**. Kreuzberg, Inc.'s commercial product lives in a separate repo.
+
+## What the MIT license covers
+
+The repository's MIT `LICENSE` covers **our own work**: the corpus tooling
+(`tools/benchmark-harness/scripts/*`), the `corpus_manifest.json`, this file, `ATTRIBUTIONS.md`, and
+`README.md`. It does **not** relicense third-party dataset content. Each source document and its
+upstream ground truth **retain their own upstream license** (see the table below and
+`ATTRIBUTIONS.md`). Our GFM-normalized ground truth is a derivative work carried under its source's
+license.
+
+## Redistribution policy
+
+Datasets are handled by license class:
+
+- **vendor** — permissively licensed (MIT / Apache-2.0 / CC-BY / CC0 / US public-domain). Source PDFs
+  and ground truth are **committed** into this repo, with attribution in `ATTRIBUTIONS.md`.
+- **reference** — non-commercial (CC-BY-NC), ShareAlike (CC-BY-SA / -NC-SA), or research-only terms.
+  These are **not committed**. `build_corpus.py` fetches them to local staging on demand; they are
+  used only for **non-commercial benchmarking** of this open-source library and are **never
+  redistributed** here. Their manifest entries carry the source URL + license for provenance.
+
+This keeps the public MIT repo free of content it cannot redistribute, while still letting the
+non-commercial benchmark use non-commercial data.
+
+## Sources
+
+| dataset | license | policy |
+|---|---|---|
+| [lazyc/READoc](https://huggingface.co/datasets/lazyc/READoc) | MIT | per-doc |
+| [llamaindex/ParseBench](https://huggingface.co/datasets/llamaindex/ParseBench) | Apache-2.0 | reference |
+| [bsmock/FinTabNet.c](https://huggingface.co/datasets/bsmock/FinTabNet.c) | CDLA-Permissive-2.0 | vendor |
+| [federalregister.gov](https://www.federalregister.gov) | US-PD (17 U.S.C. §105) | vendor |
+| [apache/tika](https://github.com/apache/tika) (WordPerfect) | Apache-2.0 | vendor |
+| [LibreOffice/core](https://github.com/LibreOffice/core) (writerperfect) | MPL-2.0 | vendor |
+| [ross-spencer/opf-format-corpus](https://github.com/ross-spencer/opf-format-corpus) | CC0 | vendor |
+| [ImageMagick/ImageMagick](https://github.com/ImageMagick/ImageMagick) | ImageMagick (Apache-2.0-derivative) | vendor |
+| [ndl-lab/pdmocrdataset-part1](https://github.com/ndl-lab/pdmocrdataset-part1) | Public Domain Mark 1.0 | vendor |
+| [naver-clova-ix/cord-v2](https://huggingface.co/datasets/naver-clova-ix/cord-v2) | CC-BY-4.0 | vendor |
+| [TextOCR](https://textvqa.org/textocr/) | CC-BY-4.0 | vendor |
+| [ds4sd/DocLayNet](https://huggingface.co/datasets/ds4sd/DocLayNet-v1.1) | CDLA-Permissive-1.0 | vendor |
+| [google-research-datasets/hiertext](https://github.com/google-research-datasets/hiertext) | CC-BY-SA-4.0 | reference (ShareAlike — not committed) |
+
+Vendored sources: 6. Reference-only sources: 1. WordPerfect corpus provenance: `wordperfect/PROVENANCE.md`.

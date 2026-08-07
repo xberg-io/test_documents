@@ -1,0 +1,13 @@
+region,product,revenue,units,date
+North America,"Aurora Laptop, 14-inch",1284500.50,412,2025-01-15
+North America,Nimbus Docking Station,342100.00,1180,2025-01-31
+EMEA,"Aurora Laptop, 16-inch",987640.75,298,2025-02-10
+EMEA,"Vertex Monitor, 27-inch",455320.20,760,2025-02-28
+APAC,Nimbus Docking Station,298750.00,990,2025-03-05
+APAC,"Aurora Laptop, 14-inch",1102300.40,355,2025-03-18
+LATAM,"Vertex Monitor, 24-inch",187420.90,512,2025-03-22
+North America,"Pulse Keyboard, Mechanical",76540.25,2140,2025-04-02
+EMEA,"Pulse Keyboard, Mechanical",68210.10,1905,2025-04-14
+APAC,"Vertex Monitor, 27-inch",512890.60,845,2025-04-27
+LATAM,"Aurora Laptop, 16-inch",624180.30,188,2025-05-06
+North America,Nimbus Docking Station,401250.00,1372,2025-05-19

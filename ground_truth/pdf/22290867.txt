@@ -1,0 +1,77 @@
+AMQP
+Simple Elixir wrapper for the Erlang RabbitMQ client.
+The API is based on Langohr, a Clojure client for RabbitMQ.
+Upgrading guides
+To upgrade from the old version, please read our upgrade guides:
+0.x to 1.x
+1.x to 2.x
+2.x to 3.x
+Usage
+Add AMQP as a dependency in your file.
+Elixir will start automatically with this if you use Elixir 1.6+.
+If that's not the case (use to check), try
+adding to or in your . Or
+call at the start.
+After you are done, run in your shell to fetch and compile AMQP.
+Start an interactive Elixir shell with .
+Setup a consumer GenServer
+Configuration
+Connections and channels
+You can define a connection and channel in your config and AMQP will
+automatically...
+Open the connection and channel at the start of the application
+Automatically try to reconnect if they are disconnected
+You can access the connection/channel via .
+When a channel is down and reconnected, you have to make sure your consumer
+subscribes to a channel again.
+See the documentation for and
+for more details.
+Types of arguments and headers
+The parameter in , ,
+and the parameter in are a list of
+tuples in the form , where is a binary containing
+the argument/header name, is an atom describing the AMQP field type and
+a term compatible with the AMQP field type.
+The valid AMQP field types are:
+Valid argument names in include:
+"x-expires"
+"x-message-ttl"
+"x-dead-letter-routing-key"
+"x-dead-letter-exchange"
+"x-max-length"
+"x-max-length-bytes"
+Valid argument names in include:
+"x-priority"
+"x-cancel-on-ha-failover"
+Valid argument names in include:
+"alternate-exchange"
+Troubleshooting / FAQ
+Consumer stops receiving messages
+It usually happens when your code doesn't send acknowledgement(ack, nack or
+reject) after receiving a message.
+If you use GenServer for your consumer, try storing the number of messages the
+server is currently processing to the GenServer state.
+If the number equals , those messages were left without
+acknowledgements and that's why the consumer has stopped receiving more
+messages.
+Also review the following points:
+- when an exception was raised how it would be handled
+- when :exit signal was thrown how it would be handled
+- when a message processing took long time what could happen
+Also make sure that the consumer monitors the channel pid. When the channel is
+gone, you have to reopen it and subscribe to a new channel again.
+The version compatibility
+Check out this article to find out the compatibility with Elixir, OTP and RabbitMQ.
+Heartbeats
+In case the connection is dropped automatically, consider enabling heartbeats.
+You can set option when you open a connection.
+For more details, read this article
+Does the library support AMQP 1.0?
+Currently the library doesn't support AMQP 1.0 and there is no plan to do so at
+the moment. Our main aim here (at least for now) is to provide a thin wrapper
+around amqpclient for Elixir
+programmers.
+Copyright and License
+Copyright (c) 2014 Paulo Almeida
+This library is MIT licensed. See the
+LICENSE for details.

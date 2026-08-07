@@ -1,0 +1,208 @@
+UPDATED
+So, I've begun to make some updated ctf stuff. The first big part, deals with heap ctf challs, and can be found here:
+https://github.com/guyinatuxedo/Shogun
+Nightmare
+Nightmare is an intro to binary exploitation / reverse engineering course based around ctf challenges. I call it that because it's a lot of people's nightmare to get hit by weaponized 0 days, which these skills directly translate into doing that type of work (plus it's a really cool song).
+What makes Nightmare different?
+It's true there are a lot of resources out there to learn binary exploitation / reverse engineering skills, so what makes this different?
+I have found that resources that have many of these things to be few and far between. As a result it can make learning these skills difficult since you don't really know what to learn, or how to learn it. This is essentially my attempt to help fix some of those problems.
+Static Site
+If you want, there is a static github pages site which people say looks better: https://guyinatuxedo.github.io/
+Github
+A copy of all of the challenges listed, can be found on the github: https://github.com/guyinatuxedo/nightmare
+Special Thanks
+Special thanks to these people:
+Discord
+If you get stuck on something for hours on end and google can't answer your question, try asking in the discord (or if you just feel like talking about cool security things). Here is a link to it
+Also if you notice any typos or mistakes, feel free to mention it in the Discord. With how much content is here, there is bound to be at least one.
+Index
+Here is the index for all of the content in this course. Feel free to go through the whole thing, or only parts of it (don't let me tell you how to live your life). For the order that you do the challenges in a module, I would recommend starting with the first.
+Intro Departure
+0.) Intro to the Project
+1.) Intro to Assembly
+- Intro to assembly
+- Sample assembly reverse challs
+2.) Intro to Tooling
+- gdb-gef
+- pwntools
+- ghidra
+3.) Beginner RE
+- pico18strings
+- helithumperre
+- csaw18tourofx86pt1
+- csaw19beleaf
+Stack pt 0 Stack Tendencies
+4.) Buffer Overflow of Variables
+- Csaw18/boi
+- TokyoWesterns17/justdoit
+- Tamu19pwn1
+5.) Buffer Overflow Call Function
+- Csaw18getit
+- Tu17vulnchat
+- Csaw16warmup
+5.1) aslr/pie intro
+- quick aslr/pie explanation
+6.) Buffer Overflow Call Shellcode
+- Tamu19pwn3
+- Csaw17pilot
+- Tu18shelleasy
+6.1) nx intro
+- nx explanation
+7.) ROP Chain Statically compiled
+- dcquals19speedrun1
+- bkp16simplecalc
+- dcquals16feedme
+7.1) stack canary intro
+- stack canary introduction
+7.2) relro intro
+- relro introduction
+8.) ROP Dynamically Compiled
+- csaw17svc
+- fb19overfloat
+- hs19storytime
+- csaw19babyboi
+- utc19shellme
+General pt 0 Stardust Challenges
+9.) Bad Seed
+- h3time
+- hsctf19tuxtalkshow
+- sunshinectf17prepared
+10.) Format strings
+- backdoor17bbpwn
+- twesterns16greeting
+- picoecho
+- watevr19betstar
+11.) Index Array
+- dcquals16xkcd
+- sawmpctf19dreamheaps
+- sunshinectf2017alternativesolution
+12.) Z3
+- tokyowesterns17revrevrev
+- tuctffuture
+- hsctf19abyte
+13.) Angr
+- securityfestfairlight
+- plaid19icancount
+- defcamp15r100
+Stack pt 1 Return to Stack, truly a perfect game
+14.) Ret2system
+- asis17marymorton
+- hxp18poorcanary
+- tuguestbook
+15.) Partial Overwrite
+- Tu17vulnchat2
+- Tamu19pwn2
+- hacklu15stackstuff
+16.) SROP
+- backdoorctffunsignals
+- inctf17stupiddrop
+- swamp19syscaller
+- csaw19smallboi
+17.) Stack Pivot / Partial Overwrite
+- defconquals19speedrun4
+- insomnihack18onewrite
+- xctf16b0verfl0w
+18.) Ret2Csu / Ret2dl
+- ropemporiumret2csu
+- 0ctf 2018 babystack
+General pt 1 Armstrong challenges
+19.) Shellcoding pt 1
+- defconquals19s3
+- Csaw18shellpointcode
+- defconquals19s6
+20.) Patching/Jumping
+- dcquals18elfcrumble
+- plaid19plaidpartplanningIII
+- csaw16gametime
+21.) .NET Reversing
+- csaw13dotnet
+- csaw13bikinibonanza
+- whitehat18re06
+22.) Movfuscation
+- sawmpctf19future
+- asis18qualsbabyc
+- othermovfuscated
+23.) Custom Architectures
+- h3challenge0
+- h3challenge1
+- h3challenge2
+- h3challenge3
+Heap Pt 0 rip Angel Beats
+24.) Basic Heap overflow
+- protostarheap1
+- protostarheap0
+- protostarheap2
+25.) Intro to heap exploitation / binning
+- explanation
+26.) Heap Grooming
+- explanation
+- swamp19heapgolf
+- picoareyouroot
+27.) Edit Freed Chunk (pure explanation)
+- Use After Free
+- Double Free
+- Null Byte Heap Consolidation
+28.) Fastbin Attack
+- explanation
+- 0ctf18babyheap
+- csaw17auir
+29.) tcache
+- explanation
+- dcquals19babyheap
+- plaid19cpp
+30.) unlink
+- explanation
+- hitcon14stkof
+- zctf16note
+31.) Unsorted Bin Attack
+- explanation
+- hitconmagicheap
+- 0ctf16zer0storage
+32.) Large Bin Attack
+- largebin0explanation
+- largebin1explanation
+33.) Custom Malloc
+- csawquals17minesweeper
+- csawquals18AliensVSSamurai
+- csawquals19traveller
+General Pt 2 Generic Isekai 367
+34.) Qemu / Emulated Targets
+- csaw18tourofx86pt2
+- csaw15hackingtime
+- csaw17realism
+35.) Integer Exploitation
+- puzzle
+- intoverflowpost
+- signedunsignedintexpl
+36.) Obfuscated Reversing
+- csaw15wyvern
+- csaw17prophecy
+- bkp16unholy
+37.) FS Exploitation
+- swamp19badfile
+38.) Grab Bag
+- csaw18doubletrouble
+- hackim19shop
+- unitvarsexpl
+- csaw19gibberish
+Heap pt 1 heap x heap
+39.) House of Spirit
+- explanation
+- hacklu14oreo
+40.) House of Lore
+- explanation
+41.) House of Force
+- explanation
+- bkp16cookbook
+42.) House of Einherjar
+- explanation
+43.) House of Orange
+- explanation
+44.) More tcache
+- csaw19poppingCaps0
+- csaw19poppingCaps1
+45.) Automatic Exploit Generation
+- csaw20rop
+Ending Documentation
+- References
+- What's next

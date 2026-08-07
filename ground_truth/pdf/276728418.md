@@ -1,0 +1,41 @@
+#  InferSharp
+
+**InferSharp** (also referred to as Infer#) is an interprocedural and scalable static code analyzer for C#. Via the capabilities of Facebook's Infer, this tool detects race conditions, null pointer dereferences and resource leaks. It also performs taint flow tracking to detect critical security vulnerabilities like SQL injections. Read more about our approach in the Wiki page.
+
+In addition to implementing the C# frontend, we contributed our language-agnostic serialization layer (Commit #1361) to facebook/infer, which opens up opportunities for additional language support in the future.
+
+The latest version is . Please refer to the release page for more information on the changes.
+
+## Public Announcements
+- .NET DevBlogs - v1.4, v1.2, v1.0
+- .NET Conf 2022
+- Facebook Engineering Blog
+- .NET Community Standup
+- Visual Studio Toolbox - YouTube, Channel9
+
+## Get Started
+
+- VS Extension
+- VSCode Extension
+- Windows Subsystem for Linux
+- GitHub Action
+- Azure Pipelines
+- Docker
+
+## Build from Source
+Use this Dockerfile to build images and binaries from source. It builds the latest code from`microsoft/infersharp:main` +`facebook/infer:main` by default.
+
+## Troubleshooting
+Please refer to the troubleshooting guide.
+
+## Contributing
+
+We welcome contributions. Please follow this guideline.
+
+## Trademarks
+
+This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft trademarks or logos is subject to and must follow Microsoft's Trademark & Brand Guidelines. Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship. Any use of third-party trademarks or logos are subject to those third-party's policies.
+
+## Security Reporting Instructions
+
+**Please do not report security vulnerabilities through public GitHub issues.** Instead, please follow this guideline.

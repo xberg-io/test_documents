@@ -1,0 +1,27 @@
+CTC Word Beam Search Decoding Algorithm
+Update 2024: Support Python versions 3.11 and 3.12
+Update 2021: Python package is the default way of installation
+Update 2020: installable Python package
+Connectionist Temporal Classification (CTC) decoder with dictionary and Language Model (LM).
+Installation
+Go to the root level of the repository
+Execute
+Go to and execute to check if installation worked
+Usage
+The following toy example shows how to use word beam search.
+The hypothetical model (e.g. a text recognition model) is able to recognize 3 different characters:
+"a", "b" and " " (whitespace).
+Words in that toy example can contain the characters "a" and "b" (but not " " which is the word separator).
+The language model is trained from a text corpus which contains only two words: "a" and "ba".
+In this code snippet an instance of word beam search is created,
+and a TxBx(C+1) shaped numpy array is decoded:
+The decoder returns a list with a decoded label string for each batch element.
+To finally get the character strings, map each label to its corresponding character:
+tests/testwordbeamsearch.py WordBeamSearch WordBeamSearch.compute extras/prototype/ extras/tf/
+Citation
+Please cite the following paper if you are using word beam search in your research work.
+References
+Word Beam Search: A CTC Decoding Algorithm
+Beam Search Decoding in CTC-trained Neural Networks
+Scheidl - Handwritten Text Recognition in Historical Documents
+Scheidl - Word Beam Search: A Connectionist Temporal Classification Decoding Algorithm

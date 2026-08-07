@@ -1,0 +1,77 @@
+3D ResNets for Action Recognition
+Update (2020/4/13)
+We published a paper on arXiv.
+Hirokatsu Kataoka, Tenga Wakamiya, Kensho Hara, and Yutaka Satoh,
+"Would Mega-scale Datasets Further Enhance Spatiotemporal 3D CNNs",
+arXiv preprint, arXiv:2004.04968, 2020.
+We uploaded the pretrained models described in this paper including ResNet-50 pretrained on the combined dataset with Kinetics-700 and Moments in Time.
+Update (2020/4/10)
+We significantly updated our scripts. If you want to use older versions to reproduce our CVPR2018 paper, you should use the scripts in the CVPR2018 branch.
+This update includes as follows:
+Refactoring whole project
+Supporting the newer PyTorch versions
+Supporting distributed training
+Supporting training and testing on the Moments in Time dataset.
+Adding R(2+1)D models
+Uploading 3D ResNet models trained on the Kinetics-700, Moments in Time, and STAIR-Actions datasets
+Summary
+This is the PyTorch code for the following papers:
+Hirokatsu Kataoka, Tenga Wakamiya, Kensho Hara, and Yutaka Satoh,
+"Would Mega-scale Datasets Further Enhance Spatiotemporal 3D CNNs",
+arXiv preprint, arXiv:2004.04968, 2020.
+Kensho Hara, Hirokatsu Kataoka, and Yutaka Satoh,
+"Towards Good Practice for Action Recognition with Spatiotemporal 3D Convolutions",
+Proceedings of the International Conference on Pattern Recognition, pp. 2516-2521, 2018.
+Kensho Hara, Hirokatsu Kataoka, and Yutaka Satoh,
+"Can Spatiotemporal 3D CNNs Retrace the History of 2D CNNs and ImageNet?",
+Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pp. 6546-6555, 2018.
+Kensho Hara, Hirokatsu Kataoka, and Yutaka Satoh,
+"Learning Spatio-Temporal Features with 3D Residual Networks for Action Recognition",
+Proceedings of the ICCV Workshop on Action, Gesture, and Emotion Recognition, 2017.
+This code includes training, fine-tuning and testing on Kinetics, Moments in Time, ActivityNet, UCF-101, and HMDB-51.
+Citation
+If you use this code or pre-trained models, please cite the following:
+Pre-trained models
+Pre-trained models are available here.
+All models are trained on Kinetics-700 (K), Moments in Time (M), STAIR-Actions (S), or merged datasets of them (KM, KS, MS, KMS).
+If you want to finetune the models on your dataset, you should specify the following options.
+Old pretrained models are still available here.
+However, some modifications are required to use the old pretrained models in the current scripts.
+Requirements
+PyTorch (ver. 0.4+ required)
+FFmpeg, FFprobe
+Python 3
+Preparation
+ActivityNet
+Download videos using the official crawler.
+Convert from avi to jpg files using
+Add fps infomartion into the json file
+Kinetics
+Download videos using the official crawler.
+Locate test set in .
+Convert from avi to jpg files using
+Generate annotation file in json format similar to ActivityNet using
+The CSV files (kinetics{train, val, test}.csv) are included in the crawler.
+UCF-101
+Download videos and train/test splits here.
+Convert from avi to jpg files using
+Generate annotation file in json format similar to ActivityNet using
+includes classInd.txt, trainlist0{1, 2, 3}.txt, testlist0{1, 2, 3}.txt
+HMDB-51
+Download videos and train/test splits here.
+Convert from avi to jpg files using
+Generate annotation file in json format similar to ActivityNet using
+includes brushhairtestsplit1.txt, ...
+Running the code
+Assume the structure of data directories is the following:
+Confirm all options.
+Train ResNets-50 on the Kinetics-700 dataset (700 classes) with 4 CPU threads (for data loading).
+Batch size is 128.
+Save models at every 5 epochs.
+All GPUs is used for the training.
+If you want a part of GPUs, use .
+Continue Training from epoch 101. (/data/results/save100.pth is loaded.)
+Calculate top-5 class probabilities of each video using a trained model (/data/results/save200.pth.)
+Note that should be small because actual batch size is calculated by .
+Evaluate top-1 video accuracy of a recognition result (/data/results/val.json).
+Fine-tune fc layers of a pretrained model (/data/models/resnet-50-kinetics.pth) on UCF-101.

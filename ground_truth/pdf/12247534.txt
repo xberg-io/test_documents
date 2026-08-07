@@ -1,0 +1,107 @@
+photon
+photon is an open source geocoder built for OpenStreetMap data. It is based on elasticsearch - an efficient, powerful and highly scalable search platform.
+photon was started by komoot and provides search-as-you-type and multilingual support. Find our public API and demo on photon.komoot.io. Until October 2020 the API was available under photon.komoot.de. Please update your apps accordingly.
+Contribution
+All code contributions and bug reports are welcome!
+For questions please send an email to our mailing list.
+Feel free to test and participate!
+Licence
+photon software is open source and licensed under Apache License, Version 2.0
+Features
+- high performance
+- highly scalability
+- search-as-you-type
+- multilingual search
+- location bias
+- typo tolerance
+- filter by osm tag and value
+- filter by bounding box
+- reverse geocode a coordinate to an address
+- OSM data import (built upon Nominatim) inclusive continuous updates
+Installation
+photon requires Java, at least version 11.
+Download the search index (72G GB compressed, 159GB uncompressed as of 2023-10-26, worldwide coverage, languages: English, German, French and local name). The search index is updated weekly and thankfully provided by GraphHopper with the support of lonvia.
+Now get the latest version of photon from the releases.
+Make sure you have bzip2 or pbzip2 installed and execute one of these two commands in your shell. This will download, uncompress and extract the huge database in one step:
+Building
+photon uses gradle for building. To build the package
+from source make sure you have a JDK installed. Then run:
+This will build and test photon. The final jar cn be found in .
+Usage
+Start photon with the following command:
+Use the option to point to the parent directory of if that directory is not in the default location . Before you can send requests to photon, ElasticSearch needs to load some data into memory so be patient for a few seconds.
+Check the URL to see if photon is running without problems. You may want to use our leaflet plugin to see the results on a map.
+To enable CORS (cross-site requests), use to allow any origin or with a specific origin as the argument. By default, CORS support is disabled.
+Discover more of photon's featurse with its usage . The available options are as follows:
+Customized Search Data
+If you need search data in other languages or restricted to a country you will need to create your search data by your own.
+Once you have your Nominatim database ready, you can import the data to photon.
+If you haven't already set a password for your Nominatim database user, do it now (change user name and password as you like, below):
+Import the data to photon:
+The import of worldwide data set will take some hours/days, SSD/NVME disks are recommended to accelerate Nominatim queries.
+Updating from OSM via Nominatim
+To update an existing Photon database from Nominatim, first prepare the
+Nominatim database with the appropriate triggers:
+This script must be run with a user that has the right to create tables,
+functions and triggers.
+'update-user' is the PostgreSQL user that will be used when updating the
+Photon database. The user needs read rights on the database. The necessary
+update rights will be granted during initialisation.
+Now you can run updates on Nominatim using the usual methods as described
+in the documentation.
+To bring the Photon database up-to-date, stop the Nominatim updates and
+then run the Photon update process:
+You can also run the photon process with the update API enabled:
+Then you can trigger updates like this:
+This will only start the updates. To check if the updates have finished,
+use the status API:
+It returns a single JSON string when updates are in progress or
+when another update round can be started.
+For your convenience, this repository contains a script to continuously update
+both Nominatim and Photon using Photon's update API. Make sure you have
+Photon started with and then run:
+where is the project directory of your Nominatim installation.
+Search API
+Search
+Search with Location Bias
+There are two optional parameters to influence the location bias. 'zoom'
+describes the radius around the center to focus on. This is a number that
+should correspond roughly to the map zoom parameter of a corresponding map.
+The default is .
+The describes how much the prominence of a result should
+still be taken into account. Sensible values go from 0.0 (ignore prominence
+almost completely) to 1.0 (prominence has approximately the same influence).
+The default is 0.2.
+Reverse geocode a coordinate
+Adapt Number of Results
+Adjust Language
+Filter results by bounding box
+Expected format is minLon,minLat,maxLon,maxLat.
+Filter results by tags and values
+Note: the filter only works on principal OSM tags and not all OSM tag/value combinations can be searched. The actual list depends on the import style used for the Nominatim database (e.g. settings/import-full.style). All tag/value combinations with a property 'main' are included in the photon database.
+If one or many query parameters named are present, photon will attempt to filter results by those tags. In general, here is the expected format (syntax) for the value of osmtag request parameters.
+1. Include places with tag:
+2. Exclude places with tag:
+3. Include places with tag key:
+4. Include places with tag value:
+5. Exclude places with tag key:
+6. Exclude places with tag value:
+For example, to search for all places named with tag of , one should construct url as follows:
+Or, just by they key
+You can also use this feature for reverse geocoding. Want to see the 5 pharmacies closest to a location ?
+Filter results by layer
+List of available layers:
+- house
+- street
+- locality
+- district
+- city
+- county
+- state
+- country
+Example above will return both cities and localities.
+Results as GeoJSON
+Related Projects
+- photon's search configuration was developed with a specific test framework. It is written in Python and hosted separately.
+- R package to access photon's public API with R
+- PHP Geocoder provider to access photon's public API with PHP using the GeoCoder Package

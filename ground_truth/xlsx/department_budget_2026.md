@@ -1,0 +1,14 @@
+## department_budget_2026
+
+| Department | Category | Budgeted | Actual | Variance |
+| --- | --- | --- | --- | --- |
+| Engineering | Salaries | 1240000 | 1198500 | 41500 |
+| Engineering | Cloud Infrastructure | 382000 | 415200 | -33200 |
+| Marketing | Advertising | 290000 | 271400 | 18600 |
+| Marketing | Events | 145000 | 158900 | -13900 |
+| Sales | Travel | 98000 | 86300 | 11700 |
+| Sales | Commissions | 410000 | 433700 | -23700 |
+| Operations | Logistics | 265000 | 251800 | 13200 |
+| Operations | Facilities | 178000 | 176450 | 1550 |
+| Support | Tooling | 64000 | 59200 | 4800 |
+| Finance | Audit and Compliance | 52000 | 55600 | -3600 |

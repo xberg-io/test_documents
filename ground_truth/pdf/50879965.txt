@@ -1,0 +1,197 @@
+Awesome Nifi
+Table of Contents
+- Learning NiFi
+- Blogs and Presentations
+- Blogs
+- Specific Topics
+- Slides
+- Videos
+- Mailing List Best Of
+- Templates and Examples
+- Processors and Bundles
+- Deployment
+- Data Flow Deployment
+- Administration
+- Configuration Management
+- Packages
+- Dockerfiles
+- Kubernetes
+- Vagrantfiles
+- Misc
+- License
+Learning NiFi
+xmlking/nifi-examples - Apache NiFi example flows
+simonellistonball/masterclass-hdf - Various NiFi labs and class
+seanorama/masterclass - Platform setup for nifi masterclass and other Hadoop workshops
+aperepel/nifi-workshop - A complete custom processor project, for your reference
+pcgrenier/nifi-examples - Apache Nifi Examples by http://www.nifi.rocks
+bbende/nifi-example-bundles - Example processor bundles for Apache NiFi
+abajwa-hw/nifi-network-processor - Sample custom Nifi processor to process tcpdump
+bbende/nifi-streaming-examples - Collection of examples integrating NiFi with stream process frameworks
+DhruvKumar/stocks-dashboard-lab - This lab teaches you how to create a realtime dashboard of stock prices
+Getting Started With Apache NiFi and Hortonworks HDF
+Blogs and Presentations
+Blogs
+Apache NiFi Blog
+Bryan Bende (Apache NiFi PMC)
+Fun with Apache NiFi (Apache NiFi PMC)
+Andy LoPresto (Apache NiFi PMC)
+Koji Kawamura (Apache NiFi PMC)
+Pierre Villard (Apache NiFI PMC)
+nifi.rocks
+Richard's Tech Notes
+Dataflow Developer
+Specific Topics
+Monitoring An S3 Bucket in Apache NiFi
+IoT streaming with MQTT and Apache NiFi
+Building Data Pipelines for Solr with Apache NiFi
+Using Apache Nifi to Stream Live Twitter Feeds to Hadoop
+Creating a Limited Failure Loop in NiFi
+Update NiFi Flow On-the-fly via API
+ExecuteScript Processor Hello, World!
+Replacing Flow File Content with the ExecuteScript Processor
+Using Modules with the ExecuteScript Processor
+3 Considerations for Apache NiFi in Financial Services
+Custom Processors for Apache NiFi
+Collecting Logs with Apache NiFi
+Best practices for setting up a high performance NiFi installation
+Using Apache NiFi to read children's books
+What is Apache NiFi?
+Optimizing Performance of Apache NiFi's Network Listening Processors
+Running NiFi on Raspberry Pi. Best Practices.
+Examples integrating NiFi with stream process frameworks
+Use NiFi to Lessen the Friction of Moving Data
+Streaming analytics with SAS Event Stream Processing and Apache Nifi
+Using the Apache Ranger Authorizer
+Overview of X.509 SSL Security on NiFi
+Configuring Apache NiFi SSL Authentication
+Apache NiFi tls-toolkit multi-node standalone in Docker
+Mongo to Mongo Data Moves with NiFi
+Integrating Apache NiFi and Apache Kafka
+Using Apache NiFi to ingest SNMP tables into Avro
+Clojure on Apache NiFi
+Flow-Based Programming for Trading Systems
+Stream data into Hive ORC on CDH 5.8.3 with Nifi
+Creating An Email Bot in Apache NiFi
+Routing Logs through Apache NiFi to Phoenix
+Ingesting Remote Camera Images from RPI via Apache NiFi
+Slides
+Data Distribution Patterns with Apache NiFi
+Integrating NiFi and Flink
+Data ingestion and distribution with apache NiFi
+Drone Data Flowing Through Apache NiFi
+Real-Time Twitter Sentiment Analysis and Image Recognition with Apache NiFi
+Apache NiFi Overview
+Videos
+NiFi Crash Course (by Andy LoPresto, Hortonworks) - Very good overview of NiFi, good speaker, with live session in which a data flow is built
+OSCON 2015 : Beyond messaging - Enterprise Dataflow with Apache NiFi
+Hortonworks DataFlow powered by Apache NiFi
+How to navigate and build a dataflow in Apache Nifi
+IoT-Processor for ApacheNiFi in action. Visualization of Tweets about presidential candidates. AWSIoT RaspberryPi
+Mailing List Best Of
+Re: Persistence of intermediary data in NiFi ?
+Re: Need help understanding backpressure
+Templates and Examples
+hortonworks-gallery/nifi-templates - A collection of templates for use with Apache NiFi
+bikash/nifiIoT - Data Tracking using Apache NiFi in IoT, IoE
+BatchIQ/nifi-executescript-samples - Sample scripts for use with Apache NiFi's ExecuteScript processor
+ijokarumawak/nifi-deploy-process-group - Deploy ProcessGroup into your LIVE NiFi data-flow
+tbilou/flickr-nifi - Using Nifi to easily fetch all photo data from Flickr
+Processors and Bundles
+xmlking/nifi-scripting - NiFi Dynamic Script Executors
+SwingDev/nifi-file-from-template-processor - Apache NiFi processor to create a new file from a Jinja template
+fsauer65/NiFi-Extensions - This repository contains the source for a json-json transformation processor for apache NiFi
+qiansl127/nifi-spark-bundle - Customized Spark processor on NiFi
+richards-tech/RTNiFiStreamProcessors - IoT MQTT sensor stream capture for Apache NiFi
+MDL/nifi-rabbitmq-bundle - NiFi Rabbit MQ bundle
+xmlking/nifi-websocket - Apache NiFi WebSocket Listener
+ryanleary/nifi-redis - NiFi Processors for pulling from Redis
+jdye64/nifi-gpiorest - NiFi processor example for controlling REST based GPIO device like a Raspberry PI
+aperepel/nifi-mqtt-bundle - A generic support for NiFi interfacing with MQTT brokers
+jfrazee/nifi-kinesis - Kinesis processor for Apache NiFi
+joaohf/nifi-radius - Apache NiFi process to Radius logs
+jdye64/nifi-openalpr - NiFi integration for OpenALPR
+qntfy/nifi-redis - NiFi Processors for handling data in Redis
+jahhulbert-ccri/geomesa-nifi - NiFi GeoMesa ingest processor
+markap14/nifi-nosql-bundle - NiFi NoSQL processors (MongoDB, Accumulo)
+simonellistonball/nifi-OpenCV - Open CV based processors for NiFi
+simonellistonball/nifi-AccumuloGraph - NiFi processors for AccumuloGraph
+helicopterman22/nifi\amqpprocessors - A set of processors for sending and retrieving messages from an AMQP broker
+bbukacek/nifi-hadoop-libraries-bundle - NiFi Hadoop Library for MapR
+apiri/nifi-delegated-authorization-bundle - A sample implementation of NiFi extensions working in concert to provide a delegated authorization approach in handling data on a per event basis
+uwegeercken/nifiprocessors - Includes an Apache Velocity template processor
+acesir/nifi-ConvertJSONtoCSV-bundle - Convert multi nested JSON files into denormalized, flattened out version of the CSV
+acesir/nifi-ParseCSV-bundle - CSV parsing with masking, encryption and tokenization
+withersdb/ALTER-nifi-putgeowave - A NiFi processor that writes data to GeoWave
+jdye64/nifi-addons - Additional convenience processors not found in core Apache NiFi (OpenCV, Salesforce, Sphinx, Tesseract)
+apsaltis/nifi-soap - NiFi SOAP processor
+jfrazee/nifi-provenance-reporting-bundle - NiFi provenance reporting tasks
+KayLerch/apache-nifi-voiceops-skill - An Alexa skill which can be used to voice-control an Apache NiFi dataflow
+imaifactory/nifi-processors - Includes processors for converting from regex named groups and LTSV to JSON
+selim-namsi/NifiGroKProcessor - Grok processor
+DhruvKumar/nifi-grok-processor-bundle - NiFi processor which can parse using Grok like expressions
+DoxoLogic/nifi-generate-content - Apache nifi processor for creating a new FlowFile content based on property value
+weaverplatform/weaver-nifi - Processor implementations for the Apache NiFi platform for connecting to the Weaver Platform
+kineticadb/kinetica-connector-nifi - GPUdb NiFi Connector
+aperepel/nifi-csv-bundle - CSV processors
+minyk/nifi-headlessbrowser-processor - Returns the page source in its current state to FlowFile, including any DOM updates that occurred after page load
+PromonLogicalis/nifi-spoofing-bundle - NiFi bundle for IP spoofing
+mmiklavc/scalable-ocr - Scalable OCR with Apache NiFi and Tesseract
+openenergi/nifi-azure-datalake - A processor to store NiFi flowfiles in Azure Data Lake
+simonellistonball/PiWiNiFi - A NiFi demo for collecting wifi data from conferences
+simonellistonball/nifi-ml-bundle - A bundle for basic scoring machine learning models in NiFi (PMML).
+simonellistonball/nifi-audio-bundle - Various audio related processors for NiFi
+pinkdevelops/nifi-googlegeocode-bundle - FlowFile enrichment using google geocode service
+jonathantelfer/nifi-neo4j - Bundle to add data into Neo4J graph databases
+compose-ex/nifi-compose-bundle - Mongo streaming and RocksDB processors
+sysunite/sysunite-nifi - Generic Sysunite processors
+BatchIQ/nifi-file-identity-provider-bundle - Identity Provider for Apache NiFi, allowing username/password authentication backed by a local file store
+mrcsparker/nifi-edireader-bundle - Apache NIFI processor that converts EDI ASC X12 and EDIFACT documents into XML
+mrcsparker/nifi-r-bundle - R Processor for NIFI
+pagefault3228/nifi-processor-CheckDiskUsage - NiFi processor that can monitor flowfile and content repository usage and enable back pressure when limits exceeded
+pagefault3228/nifi-reportingtask-NagiosNRDPReporter - NiFi Reporting Task that reports NiFi metrics to Nagios via NRDP
+pinkdevelops/nifi-accumulo-service - Apache NiFi Controller Service for connecting to Apache Accumulo 1.7.0
+mring33621/nats-messaging-for-nifi - NATS messaging processors for Apache Nifi
+aashar/NiFi4Trading - NiFi Bundle for FIX Protocol
+tspannhw/linkextractorprocessor - Extracts links from HTML pages
+Deployment
+Webservice client API
+hermannpencole/nifi-swagger-client - Client swagger for nifi with OAuth2 security
+Data Flow Deployment
+aperepel/nifi-api-deploy - Demonstrates NiFi template deployment and configuration via a REST API
+Glympse/terraform-provider-nifi - Terraform plugin allowing to automate NiFi flow deployment and management.
+hermannpencole/nifi-config - Nifi : deploy and configure Template
+Administration
+abajwa-hw/ambari-nifi-service - Ambari service to deploy/manage NiFi on HDP
+prateek/nifi-parcel - Apache NiFi service for Cloudera Manager
+Configuration Management
+data-wranglers/nifi - Chef cookbook for Nifi install
+45fifteen/charm-nifi - juju charm for nifi
+trevor-vaughan/pupmod-simp-nifi - Puppet Module for managing Apache NiFi
+Packages
+thmaung/nifi-builder - Builds Apache NiFi RPM using rake and mock
+Dockerfiles
+(official) apache/nifi
+apiri/dockerfile-apache-nifi
+mkobit/docker-nifi
+aperepel/docker-nifi
+ijokarumawak/docker-compose-nifi-cluster
+Kubernetes
+cetic/helm-nifi - Helm Chart to deploy Apache Nifi on a Kubernetes cluster
+Vagrantfiles
+minyk/nifi-sandbox
+Misc
+mattyb149/nifi-client - A NiFi client library for JVM languages
+sponiro/gradle-nar-plugin - A gradle plugin to create nar files for Apache nifi
+SebastianCarroll/nifi-api - A ruby wrapper for the nifi rest api
+jfrazee/nifi-processor-bundle-scala.g8 - A giter8 template for generating a new Scala NiFi processor bundle
+jdye64/go-nifi - Golang implementation of NiFi Site-to-Site protocol
+SebastianCarroll/nifi-api - A ruby wrapper for the nifi rest api
+mattyb149/nifi-script-tester - A project to create a stub/mock environment for testing ExecuteScript processors
+bbende/apache-ranger-vagrant - Deploys Apache Ranger in a Vagrant VM
+big-solutions/clj-nifi-bundle - A Boot template for clj-nifi projects
+big-solutions/clj-nifi - A Clojure library/DSL for Apache NiFi processors
+tspannhw/rpi-sensehat-mqtt-nifi - Python Scripts for working with MQTT
+tspannhw/rpi-picamera-mqtt-nifi - Python Scripts for working with MQTT + Cameras
+License
+Copyright (c) 2016-2020 Joey Frazee. awesome-nifi is licensed under the Apache License 2.0.

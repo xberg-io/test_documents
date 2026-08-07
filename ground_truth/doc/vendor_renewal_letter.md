@@ -1,0 +1,31 @@
+# Meridian Supply Company
+
+August 4, 2026
+
+Ms. Karen Whitfield Director of Procurement Northgate Manufacturing 1200
+Foundry Road Cleveland, Ohio 44115
+
+Dear Ms. Whitfield,
+
+Thank you for the opportunity to supply industrial fasteners to
+Northgate Manufacturing over the past year. I am writing to confirm the
+renewal of our supply agreement for the 2027 calendar year and to
+summarize the updated terms.
+
+Under the renewed agreement, unit pricing on your top five order
+categories will remain fixed through June, after which we will review
+market conditions jointly. We are also pleased to extend net-45 payment
+terms in recognition of your consistent order volume and prompt
+settlement history.
+
+To formalize the renewal, please review the enclosed terms and return a
+signed copy by September 1. Our account team remains available to walk
+through any line items or adjust delivery schedules to match your
+production calendar.
+
+We value the partnership between our companies and look forward to
+another productive year of working together.
+
+Sincerely,
+
+Daniel Ortega Vice President of Sales Meridian Supply Company

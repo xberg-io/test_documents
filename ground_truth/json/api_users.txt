@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1001,
+    "name": "Amara Okonkwo",
+    "email": "amara.okonkwo@example.com",
+    "roles": ["admin", "billing"],
+    "active": true,
+    "created_at": "2024-11-03T09:14:22Z"
+  },
+  {
+    "id": 1002,
+    "name": "Liang Wei",
+    "email": "liang.wei@example.com",
+    "roles": ["editor"],
+    "active": true,
+    "created_at": "2025-01-17T14:02:51Z"
+  },
+  {
+    "id": 1003,
+    "name": "Sofia Marchetti",
+    "email": "sofia.marchetti@example.com",
+    "roles": ["viewer", "auditor"],
+    "active": false,
+    "created_at": "2024-07-29T18:45:10Z"
+  },
+  {
+    "id": 1004,
+    "name": "Dmitri Volkov",
+    "email": "dmitri.volkov@example.com",
+    "roles": ["editor", "billing", "support"],
+    "active": true,
+    "created_at": "2025-03-08T07:33:44Z"
+  },
+  {
+    "id": 1005,
+    "name": "Fatima Al-Rashid",
+    "email": "fatima.alrashid@example.com",
+    "roles": ["admin"],
+    "active": true,
+    "created_at": "2023-12-12T21:19:05Z"
+  },
+  {
+    "id": 1006,
+    "name": "James O'Brien",
+    "email": "james.obrien@example.com",
+    "roles": ["viewer"],
+    "active": false,
+    "created_at": "2024-05-04T11:27:38Z"
+  },
+  {
+    "id": 1007,
+    "name": "Yuki Tanaka",
+    "email": "yuki.tanaka@example.com",
+    "roles": ["support", "viewer"],
+    "active": true,
+    "created_at": "2025-02-21T16:08:59Z"
+  },
+  {
+    "id": 1008,
+    "name": "Priya Nair",
+    "email": "priya.nair@example.com",
+    "roles": ["editor", "auditor"],
+    "active": true,
+    "created_at": "2024-09-16T03:52:17Z"
+  }
+]

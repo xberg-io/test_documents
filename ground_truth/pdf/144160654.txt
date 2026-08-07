@@ -1,0 +1,130 @@
+Unsupervised Machine Translation
+This repository contains the original implementation of the unsupervised PBSMT and NMT models presented in
+Phrase-Based & Neural Unsupervised Machine Translation (EMNLP 2018).
+Note: for the NMT approach, we recommend you have a look at Cross-lingual Language Model Pretraining and the associated GitHub repository https://github.com/facebookresearch/XLM which contains a better model and a more efficient implementation of unsupervised machine translation.
+The NMT implementation supports:
+- Three machine translation architectures (seq2seq, biLSTM + attention, Transformer)
+- Ability to share an arbitrary number of parameters across models / languages
+- Denoising auto-encoder training
+- Parallel data training
+- Back-parallel data training
+- On-the-fly multithreaded generation of back-parallel data
+As well as other features not used in the original paper (and left for future work):
+- Arbitrary number of languages during training
+- Language model pre-training / co-training with shared parameters
+- Adversarial training
+The PBSMT implementation supports:
+- Unsupervised phrase-table generation scripts
+- Automated Moses training
+Dependencies
+Python 3
+NumPy
+PyTorch (currently tested on version 0.5)
+Moses (clean and tokenize text / train PBSMT model)
+fastBPE (generate and apply BPE codes)
+fastText (generate embeddings)
+MUSE (generate cross-lingual embeddings)
+For the NMT implementation, the script will take care of installing everything (except PyTorch). The same script is also provided for English-German: . The NMT implementation only requires Moses preprocessing scripts, which does not require to install Moses.
+The PBSMT implementation will require a working implementation of Moses, which you will have to install by yourself. Compiling Moses is not always straightforward, a good alternative is to download the binary executables.
+Unsupervised NMT
+Download / preprocess data
+The first thing to do to run the NMT model is to download and preprocess data. To do so, just run:
+The script will successively:
+- Install tools
++ Download Moses scripts
++ Download and compile fastBPE
++ Download and compile fastText
+- Download and prepare monolingual data
++ Download / extract / tokenize monolingual data
++ Generate and apply BPE codes on monolingual data
++ Extract training vocabulary
++ Binarize monolingual data
+- Download and prepare parallel data (for evaluation)
++ Download / extract / tokenize parallel data
++ Apply BPE codes on parallel data with training vocabulary
++ Binarize parallel data
+- Train cross-lingual embeddings
+contains a few parameters defined at the beginning of the file:
+- number of monolingual sentences for each language (default 10000000)
+- number of BPE codes (default 60000)
+- number of threads in data preprocessing (default 48)
+- number of fastText epochs (default 10)
+Adding more monolingual data will improve the performance, but will take longer to preprocess and train (10 million sentences is what was used in the paper for NMT). The script should output a data summary that contains the location of all files required to start experiments:
+Note that there are several ways to train cross-lingual embeddings:
+- Train monolingual embeddings separately for each language, and align them with MUSE (please refer to the original paper for more details).
+- Concatenate the source and target monolingual corpora in a single file, and train embeddings with fastText on that generated file (this is what is implemented in the script).
+The second method works better when the source and target languages are similar and share a lot of common words (such as French and English). However, when the overlap between the source and target vocabulary is too small, the alignment will be very poor and you should opt for the first method using MUSE to generate your cross-lingual embeddings.
+Train the NMT model
+Given binarized monolingual training data, parallel evaluation data, and pretrained cross-lingual embeddings, you can train the model using the following command:
+Some parameters must respect a particular format:
+- langs
++ A list of languages, sorted by language ID.
++ for "English and French"
++ for "German, English, Spanish and French"
+- monodataset
++ A dictionary that maps a language to train, validation and test files.
++ Validation and test files are optional (usually we only need them for training).
++
+- paradataset
++ A dictionary that maps a language pair to train, validation and test files.
++ Training file is optional (in unsupervised MT we only use parallel data for evaluation).
++ to indicate the validation and test paths.
+- monodirections
++ A list of languages on which we want to train the denoising auto-encoder.
++ to train the auto-encoder both on English and French.
+- paradirections
++ A list of tuples on which we want to train the MT system in a standard supervised way.
++ will train the model in both the and directions.
++ Requires to provide the model with parallel data.
+- pivodirections
++ A list of triplets on which we want to perform back-translation.
++ will train the model on the and directions.
++ will train the model on the and directions (assuming that is the unknown language, and that English-German parallel data is provided).
+Other parameters:
+- indicates that 30 CPU threads will be generating back-translation data on the fly, using the current model parameters
+- indicates that models on CPU threads will be synchronized every 1000 training steps
+- means that the coefficient associated to the back-translation loss is fixed to a constant of 1
+- means that the coefficient associated to the denoising auto-encoder loss is initially set to 1, will linearly decrease to 0.1 over the first 100000 steps, then to 0 over the following 200000 steps, and will finally be equal to 0 during the remaining of the experiment (i.e. we train with back-translation only)
+Putting all this together, the training command becomes:
+On newstest2014 en-fr, the above command should give above 23.0 BLEU after 25 epochs (i.e. after one day of training on a V100).
+Unsupervised PBSMT
+Running the PBSMT approach requires to have a working version of Moses. On some systems Moses is not very straightforward to compile, and it is sometimes much simpler to download the binaries directly.
+Once you have a working version of Moses, edit the variable inside the script to indicate the location of Moses directory. Then, simply run:
+The script will successively:
+- Install tools
++ Check Moses files
++ Download MUSE and download evaluation files
+- Download pretrained word embeddings
+- Download and prepare monolingual data
++ Download / extract / tokenize monolingual data
++ Learn truecasers and apply them on monolingual data
++ Learn and binarize language models for Moses decoding
+- Download and prepare parallel data (for evaluation):
++ Download / extract / tokenize parallel data
++ Truecase parallel data
+- Run MUSE to generate cross-lingual embeddings
+- Generate an unsupervised phrase-table using MUSE alignments
+- Run Moses
++ Create Moses configuration file
++ Run Moses on test sentences
++ Detruecase translations
+- Evaluate translations
+contains a few parameters defined at the beginning of the file:
+- folder containing Moses installation
+- number of monolingual sentences for each language (default 10000000)
+- number of threads in data preprocessing (default 48)
+- source language (default English)
+- target language (default French)
+The script should return something like this:
+If you use 50M instead of 10M sentences in your language model, you should get . Using a bigger language model, as well as phrases instead of words, will improve the results even further.
+References
+Please cite [1] and [2] if you found the resources in this repository useful.
+1] G. Lample, M. Ott, A. Conneau, L. Denoyer, MA. Ranzato [Phrase-Based & Neural Unsupervised Machine Translation
+Phrase-Based \& Neural Unsupervised Machine Translation
+Unsupervised Machine Translation With Monolingual Data Only
+2] G. Lample, A. Conneau, L. Denoyer, MA. Ranzato [Unsupervised Machine Translation With Monolingual Data Only
+Word Translation Without Parallel Data
+3] A. Conneau\, G. Lample\, L. Denoyer, MA. Ranzato, H. Jégou, [Word Translation Without Parallel Data
+\ Equal contribution. Order has been determined with a coin flip.
+License
+See the LICENSE file for more details.

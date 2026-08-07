@@ -1,0 +1,119 @@
+SAT.js
+- Classes
+- Collision Tests
+- Examples
+About
+SAT.js is a simple JavaScript library for performing collision detection (and projection-based collision response) of simple 2D shapes. It uses the Separating Axis Theorem (hence the name)
+It supports detecting collisions between:
+- Circles (using Voronoi Regions.)
+- Convex Polygons (and simple Axis-Aligned Boxes, which are of course, convex polygons.)
+It also supports checking whether a point is inside a circle or polygon.
+It's released under the MIT license.
+Current version: .
+Nicely compresses with the Google Closure Compiler in Advanced mode to about 6KB (2KB gzipped)
+To use it in node.js, you can run and then use it with
+Classes
+SAT.js contains the following JavaScript classes:
+SAT.Vector (aliased as SAT.V)
+This is a simple 2D vector/point class. It is created by calling:
+It has the following properties:
+- - The x-coordinate of the Vector.
+- - The y-coordinate of the Vector.
+It contains the following methods:
+- - Copy the value of another Vector to this one.
+- - Return a new vector with the same coordinates as this one.
+- - Change this vector to be perpendicular to what it was before.
+- - Rotate this vector counter-clockwise by the specified number of radians.
+- - Reverse this Vector.
+- - Make the Vector unit-lengthed.
+- - Add another Vector to this one.
+- - Subtract another Vector from this one.
+- - Scale this Vector in the X and Y directions.
+- - Project this Vector onto another one.
+- - Project this Vector onto a unit Vector.
+- - Reflect this Vector on an arbitrary axis Vector.
+- - Reflect this Vector on an arbitrary axis unit Vector.
+- - Get the dot product of this Vector and another.
+- - Get the length squared of this Vector.
+- - Get the length of this Vector
+SAT.Circle
+This is a simple circle with a center position and a radius. It is created by calling:
+It has the following properties:
+- - A Vector representing the center of the circle.
+- - The radius of the circle
+- - Offset of center of circle from .
+It has the following methods:
+- - Set the current offset
+- - Compute the axis-aligned bounding box. Returns a new Polygon every time it is called.
+- - Compute the axis-aligned bounding box. Returns a new Box every time it is called.
+SAT.Polygon
+This is a convex polygon, whose points are specified in a counter-clockwise fashion. It is created by calling:
+Note: The points are counter-clockwise with respect to the coordinate system. If you directly draw the points on a screen that has the origin at the top-left corner it will appear visually that the points are being specified clockwise. This is just because of the inversion of the Y-axis when being displayed.
+You can create a line segment by creating a that contains only 2 points.
+Any identical consecutive points will be combined. (this can happen if you convert a with zero width or height into a )
+It has the following properties:
+- - The position of the polygon (all points are relative to this).
+- - Array of vectors representing the original points of the polygon.
+- - Angle to rotate the polgon (affects )
+- - Translation to apply to the polygon before the rotation (affects )
+- - (Calculated) The collision polygon - effectively with and applied.
+- - (Calculated) Array of Vectors representing the edges of the calculated polygon
+- - (Calculated) Array of Vectors representing the edge normals of the calculated polygon (perpendiculars)
+You should not manually change any of the properties except - use the , , and methods to ensure that the calculated properties are updated correctly.
+It has the following methods:
+- - Set the original points
+- - Set the current rotation angle (in radians)
+- - Set the current offset
+- - Rotate the original points of this polygon counter-clockwise (around its local coordinate system) by the specified number of radians. The rotation will be applied on top of this rotation.
+- - Translate the original points of this polygon (relative to the local coordinate system) by the specified amounts. The translation will be applied on top of this translation.
+- - Compute the axis-aligned bounding box. Returns a new Polygon every time it is called. Is performed based on the .
+- - Compute the axis-aligned bounding box. Returns a new Box every time it is called. Is performed based on the .
+- - Compute the Centroid of the polygon. Is performed based on the .
+SAT.Box
+This is a simple Box with a position, width, and height. It is created by calling:
+It has the following properties:
+- - The bottom-left coordinate of the box (i.e the smallest value and the smallest value).
+- - The width of the box.
+- - The height of the box.
+It has the following methods:
+- - Returns a new Polygon whose edges are the edges of the box.
+SAT.Response
+This is the object representing the result of a collision between two objects. It just has a simple constructor.
+It has the following properties:
+- - The first object in the collision.
+- - The second object in the collison.
+- - Magnitude of the overlap on the shortest colliding axis.
+- - The shortest colliding axis (unit-vector)
+- - The overlap vector (i.e. ). If this vector is subtracted from the position of , and will no longer be colliding.
+- - Whether the first object is completely inside the second.
+- - Whether the second object is completely inside the first.
+It has the following methods:
+- - Clear the response so that it is ready to be reused for another collision test.
+Note: The ed value for a has what may seem to be strange looking values:
+These just make calculating the response simpler in the collision tests. If the collision test functions return the values that are in the response should not be examined, and should be called before using it for another collision test.
+Collision Tests
+SAT.js contains the following collision tests:
+Checks whether a given point is inside the specified circle.
+Checks whether a given point is inside a specified convex polygon.
+Tests for a collision between two s, , and . If a response is to be calculated in the event of collision, pass in a ed object.
+Returns if the circles collide, otherwise.
+If it returns you should not use any values that are in the (if one is passed in)
+Tests for a collision between a and a . If a response is to be calculated in the event of a collision, pass in a ed object.
+Returns if there is a collision, otherwise.
+If it returns you should not use any values that are in the (if one is passed in)
+The same thing as , but in the other direction.
+Returns if there is a collision, otherwise.
+If it returns you should not use any values that are in the (if one is passed in)
+Note: This is slightly slower than as it just calls that and reverses the result
+Tests whether two polygons and collide. If a response is to be calculated in the event of collision, pass in a ed object.
+Returns if there is a collision, otherwise.
+If it returns you should not use any values that are in the (if one is passed in)
+Note: If you want to detect a collision between es, use the method
+Examples
+Test two circles
+Test a circle and a polygon
+Test two polygons
+No collision between two Boxes
+Hit testing a circle and polygon
+Tests
+To run the tests from your console:

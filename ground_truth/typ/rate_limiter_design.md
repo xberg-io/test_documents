@@ -1,0 +1,50 @@
+# Rate Limiter Design Document
+
+This document describes the design of the edge rate limiter. The goal is
+to protect upstream services from bursts while keeping *legitimate*
+traffic smooth. We favor a token bucket over a fixed window because it
+tolerates short bursts without a hard cliff at the window boundary.
+
+## Goals and Non-Goals
+
+- **Goal:** enforce a per-client request budget with sub-millisecond
+  overhead.
+- **Goal:** degrade gracefully when the shared counter store is
+  unreachable.
+- **Non-goal:** perfect global accuracy across every edge node.
+- **Non-goal:** billing-grade accounting — that lives in a separate
+  ledger.
+
+## Algorithm
+
+Each client key owns a bucket that refills at a steady rate. A request
+costs one token; if the bucket is empty the request is rejected with
+`429`. The bucket state is a pair `(tokens, last_refill)` updated lazily
+on each hit, so idle clients cost nothing.
+
+## Parameters
+
+| Parameter   | Meaning                              | Typical |
+|-------------|--------------------------------------|---------|
+| `rate`      | Tokens added per second              | `50`    |
+| `burst`     | Maximum tokens the bucket can hold   | `100`   |
+| `key_ttl`   | Idle time before a bucket is dropped | `600s`  |
+| `fail_open` | Allow traffic if the store is down   | `true`  |
+
+## Failure Modes
+
+When the counter store times out, the limiter consults `fail_open`. With
+`fail_open = true` it admits the request and logs a *degraded* event;
+this trades strict enforcement for availability. Set it to `false` only
+for endpoints where over-admission is worse than a brief outage.
+
+## Rollout Plan
+
+We ship behind a flag and ramp gradually:
+
+1.  Enable in **shadow mode** — evaluate the decision but never reject.
+2.  Compare shadow rejections against real traffic for one week.
+3.  Flip to enforcing for internal clients, then external ones.
+
+Shadow mode is the safety net: it proves the parameters before a single
+real user ever sees a `429`.

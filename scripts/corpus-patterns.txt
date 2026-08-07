@@ -1,0 +1,64 @@
+# Which working-tree files are corpus binaries: published to the GCS bucket, pinned by
+# corpus.lock.json, and never committed to git. Lifted verbatim from the .gitattributes LFS
+# filter list when the corpus moved off Git LFS, so the publish set did not change in that move.
+#
+# Semantics match gitattributes/gitignore: a pattern with no '/' matches a basename at any depth,
+# a pattern containing '/' matches a path relative to the repo root. Blank lines and '#' comments
+# are ignored. scripts/publish_corpus.py reads this file, and .gitignore must stay in sync with it
+# (scripts/test_publish_corpus.py asserts that).
+*.pdf
+*.docx
+*.doc
+*.odt
+*.rtf
+*.msg
+*.pst
+*.xlsx
+*.xls
+*.xlsm
+*.xlsb
+*.xlam
+*.xla
+*.ods
+*.pptx
+*.ppt
+*.pptm
+*.ppsx
+*.odp
+*.key
+*.epub
+*.fb2
+*.pages
+*.numbers
+*.hwp
+*.hwpx
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.webp
+*.tiff
+*.tif
+*.heif
+*.heic
+*.avif
+*.jp2
+*.jpx
+*.jpm
+*.j2k
+*.j2c
+*.mj2
+*.ppm
+*.pnm
+*.pgm
+*.pbm
+*.wav
+*.mp3
+*.zip
+*.tar
+*.tgz
+*.gz
+*.7z
+*.dbf
+ground_truth/structured/parsebench/*.jsonl

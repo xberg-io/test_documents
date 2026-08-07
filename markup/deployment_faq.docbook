@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article>
+<article
+  xmlns="http://docbook.org/ns/docbook" version="5.0"
+  xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <info>
+    <title></title>
+  </info>
+  <section xml:id="deployment-faq">
+    <title>Deployment FAQ</title>
+    <para>
+      Common questions about rolling the service into production. If
+      your question is not answered here, check the runbook before
+      paging an on-call engineer.
+    </para>
+    <section xml:id="rollout">
+      <title>Rollout</title>
+      <para>
+        <emphasis role="strong">How do I promote a build to
+        production?</emphasis> Tag the release and let the pipeline gate
+        it. A promotion is <emphasis>never</emphasis> a manual copy —
+        the <literal>promote</literal> job verifies the artifact
+        checksum first.
+      </para>
+      <para>
+        <emphasis role="strong">Can I skip the staging
+        environment?</emphasis> No. Staging runs the same smoke suite as
+        production and catches roughly a third of config regressions
+        before they reach users.
+      </para>
+    </section>
+    <section xml:id="configuration">
+      <title>Configuration</title>
+      <para>
+        Configuration precedence, from highest to lowest, is:
+      </para>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Command-line flags passed to the process.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Environment variables prefixed with <literal>APP_</literal>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Values in the mounted <literal>config.toml</literal>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Built-in defaults compiled into the binary.
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        A missing required key fails startup
+        <emphasis role="strong">fast</emphasis> rather than serving with
+        a bad default.
+      </para>
+    </section>
+    <section xml:id="resource-limits">
+      <title>Resource Limits</title>
+      <para>
+        The container ships with conservative defaults you should tune
+        per tier:
+      </para>
+      <informaltable>
+        <tgroup cols="3">
+          <colspec align="left" />
+          <colspec align="left" />
+          <colspec align="left" />
+          <thead>
+            <row>
+              <entry>
+                Setting
+              </entry>
+              <entry>
+                Default
+              </entry>
+              <entry>
+                When to raise it
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <literal>max_connections</literal>
+              </entry>
+              <entry>
+                <literal>256</literal>
+              </entry>
+              <entry>
+                Sustained connection saturation
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>worker_threads</literal>
+              </entry>
+              <entry>
+                <literal>4</literal>
+              </entry>
+              <entry>
+                CPU-bound request handlers
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>heap_limit_mb</literal>
+              </entry>
+              <entry>
+                <literal>512</literal>
+              </entry>
+              <entry>
+                Frequent out-of-memory restarts
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </section>
+    <section xml:id="rollback">
+      <title>Rollback</title>
+      <para>
+        If a deploy misbehaves, roll back before debugging:
+      </para>
+      <orderedlist numeration="arabic" spacing="compact">
+        <listitem>
+          <para>
+            Run <literal>deployctl rollback --to previous</literal> to
+            restore the last good build.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Confirm health checks are green on every replica.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Only then open the logs and investigate the failed build
+            offline.
+          </para>
+        </listitem>
+      </orderedlist>
+      <para>
+        Rolling back is <emphasis>cheap and reversible</emphasis>;
+        debugging a live incident is not.
+      </para>
+    </section>
+  </section>
+</article>
