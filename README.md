@@ -19,8 +19,18 @@ In CI, use the shared action, which fetches only what a job needs and caches on 
       pdf/fake_memo.pdf
 ```
 
-Locally, or anywhere else, read `corpus.lock.json` and fetch over plain HTTPS — the bucket is
-world-readable, so no credentials or SDK are involved:
+Locally, materialise the files into their paths with the same manifest and the same anonymous
+HTTPS. Several consumers reference fixtures through `include_bytes!`, so the bytes must be on disk
+before `cargo build` runs:
+
+```text
+python3 scripts/fetch_corpus.py                      # everything, ~578 MiB
+python3 scripts/fetch_corpus.py --include 'pdf/**'   # just the PDFs
+```
+
+Files already present with the right hash are skipped, so re-running is cheap. Anything else can
+read `corpus.lock.json` and fetch over plain HTTPS directly — the bucket is world-readable, so no
+credentials or SDK are involved:
 
 ```text
 https://storage.googleapis.com/xberg-test-documents/objects/<sha256>

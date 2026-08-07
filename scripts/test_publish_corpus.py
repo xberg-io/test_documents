@@ -7,6 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from fetch_corpus import fetch_one, matches_any
 from publish_corpus import (
     EXTRA_ROOT_FILES,
     OBJECTS_PREFIX,
@@ -355,6 +356,37 @@ class WriteProbeTests(unittest.TestCase):
                 verify_write_access(StaleReadBackend(Path(bucket_name)))
 
         self.assertIn("read back as", str(caught.exception))
+
+
+class FetchTests(unittest.TestCase):
+    """The local counterpart of the CI fetch action; consumers include_bytes! these files."""
+
+    def test_should_leave_a_file_alone_when_it_already_hashes_correctly(self) -> None:
+        with tempfile.TemporaryDirectory() as name:
+            root = Path(name)
+            (root / "pdf").mkdir()
+            target = root / "pdf/memo.pdf"
+            target.write_bytes(b"already here")
+            digest = sha256_of(target)
+
+            # ~keep A bucket name that cannot resolve: if the skip path is broken this raises
+            # rather than silently re-downloading, which is what we actually want to detect.
+            failure = fetch_one("bucket.invalid", root, "pdf/memo.pdf", digest)
+
+            self.assertIsNone(failure)
+            self.assertEqual(target.read_bytes(), b"already here")
+
+    def test_should_report_a_failure_when_the_object_cannot_be_downloaded(self) -> None:
+        with tempfile.TemporaryDirectory() as name:
+            failure = fetch_one("bucket.invalid", Path(name), "pdf/missing.pdf", "0" * 64)
+
+            self.assertIsNotNone(failure)
+            self.assertIn("pdf/missing.pdf", failure)
+
+    def test_should_treat_a_double_star_glob_as_everything_beneath_a_directory(self) -> None:
+        self.assertTrue(matches_any("pdf/nested/memo.pdf", ["pdf/**"]))
+        self.assertTrue(matches_any("pdf/memo.pdf", ["pdf/**"]))
+        self.assertFalse(matches_any("images/logo.png", ["pdf/**"]))
 
 
 if __name__ == "__main__":
