@@ -1,0 +1,13 @@
+graph graphviz_network {
+  layout=neato;
+  node [shape=ellipse style=filled fillcolor="#cccccc"];
+  gw [label="Gateway" fillcolor="#8dd3c7"];
+  s1 [label="Switch A" fillcolor="#ffffb3"];
+  s2 [label="Switch B" fillcolor="#ffffb3"];
+  h1 [label="Host 1"];
+  h2 [label="Host 2"];
+  gw -- s1;
+  gw -- s2;
+  s1 -- h1;
+  s2 -- h2;
+}

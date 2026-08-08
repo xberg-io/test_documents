@@ -1,0 +1,14 @@
+digraph org_chart {
+  "Jane Smith\nChief Executive Officer" [shape=box fillcolor="#2c3e50"];
+  "Bob Chen\nChief Technology Officer" [shape=box fillcolor="#2980b9"];
+  "Maria Garcia\nChief Financial Officer" [shape=box fillcolor="#27ae60"];
+  "Alex Johnson\nChief Operating Officer" [shape=box fillcolor="#8e44ad"];
+  "Engineering" [shape=box fillcolor="#3498db"];
+  "Product" [shape=box fillcolor="#3498db"];
+  "Finance" [shape=box fillcolor="#2ecc71"];
+  "Sales" [shape=box fillcolor="#9b59b6"];
+  "Operations" [shape=box fillcolor="#9b59b6"];
+  "Jane Smith\nChief Executive Officer" -> "Bob Chen\nChief Technology Officer";
+  "Jane Smith\nChief Executive Officer" -> "Maria Garcia\nChief Financial Officer";
+  "Jane Smith\nChief Executive Officer" -> "Alex Johnson\nChief Operating Officer";
+}

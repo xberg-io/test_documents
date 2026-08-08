@@ -1,0 +1,9 @@
+digraph nested_transforms {
+  "Ingest" [shape=box fillcolor="#4e79a7"];
+  "Transform" [shape=box fillcolor="#f28e2b"];
+  "Publish" [shape=box fillcolor="#59a14f"];
+  "Quarantine" [shape=box fillcolor="#e15759" style=dashed];
+  "Ingest" -> "Transform";
+  "Transform" -> "Publish";
+  "Transform" -> "Quarantine" [label="on error" style=dashed];
+}

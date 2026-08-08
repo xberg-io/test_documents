@@ -1,0 +1,10 @@
+digraph graphviz_states {
+  "idle" [shape=ellipse fillcolor="#b3de69"];
+  "running" [shape=ellipse fillcolor="#b3de69"];
+  "paused" [shape=ellipse fillcolor="#b3de69"];
+  "done" [shape=ellipse fillcolor="#fb8072"];
+  "idle" -> "running" [label="start"];
+  "running" -> "paused" [label="pause"];
+  "paused" -> "running" [label="resume"];
+  "running" -> "done" [label="finish"];
+}

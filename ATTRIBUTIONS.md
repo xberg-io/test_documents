@@ -133,3 +133,10 @@ Vendored WordPerfect-family test files. Per-file provenance (upstream path, revi
 - **License:** CDLA-Permissive-1.0
 - **Used here:** 2 financial-report pages (`images/doclaynet_page_01..02.jpg`) from the `test` split (`NASDAQ_ATRI_2003.pdf` p24, `NYSE_MGM_2004.pdf` p49).
 - **Modifications:** authoritative PDF text cells linearized in reading order (top-to-bottom, then left-to-right). No OCR and no model used; text is DocLayNet's verbatim PDF-layer cell text.
+
+## Diagram fixtures (this repository)
+
+- **Source:** authored here, not derived from any third-party dataset.
+- **License:** same as this repository.
+- **Used here:** `diagrams/*.svg` plus their `diagrams/src/*.dot` sources and `ground_truth/dot/*.dot`.
+- **Modifications:** four SVGs are rendered from the committed `.dot` sources with Graphviz 15.1.1 (`dot`/`neato`), which is EPL-1.0 licensed; its output is not a derivative of the tool. `nested_transforms.svg` is hand-written. Ground truth is the source graph restated by node label, so it is independent of any recogniser's numbering.

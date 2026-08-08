@@ -1,0 +1,10 @@
+digraph graphviz_bidirectional {
+  rankdir=LR;
+  node [shape=box style=filled fillcolor="#fdb462"];
+  api [label="API"];
+  db  [label="Database"];
+  cache [label="Cache"];
+  api -> db [dir=both];
+  api -> cache;
+  cache -> db [dir=back];
+}
