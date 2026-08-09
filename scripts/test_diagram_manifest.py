@@ -99,6 +99,20 @@ class GroundTruthAgreementTest(unittest.TestCase):
                 # reason in the manifest is what says which one this is.
                 self.assertEqual("", (ROOT / fixture["ground_truth"]).read_text(encoding="utf-8"))
 
+    def test_should_write_a_comment_that_cannot_be_misread_as_a_node_or_an_edge(self) -> None:
+        # Consumers parse these files line by line and do not all strip `//` comments -- the
+        # scorer on xberg#1410 does not, and a prose comment mentioning `a -> b` was read as a
+        # real edge, which is how graphviz_large came to report one more edge than it draws.
+        # Cheaper to keep the comments free of DOT syntax than to rely on every reader.
+        for fixture in FIXTURES:
+            for graph in fixture["graphs"]:
+                path = ROOT / graph["ground_truth"]
+                for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+                    comment = line.partition("//")[2]
+                    with self.subTest(f"{graph['ground_truth']}:{number}"):
+                        for token in ("->", "--", "["):
+                            self.assertNotIn(token, comment)
+
 
 class GeometryVariantTest(unittest.TestCase):
     """A geometry-only variant must not state the answer anywhere a parser can reach it."""
@@ -162,7 +176,9 @@ class GeometryVariantTest(unittest.TestCase):
             for graph in fixture["graphs"]:
                 text = COMMENT.sub("", (ROOT / graph["ground_truth"]).read_text(encoding="utf-8"))
                 for label in GT_NODE.findall(text):
-                    for word in label.split(" | ")[0].split():
+                    # A multi-line label is one node but several <text> elements, so each line
+                    # is looked for on its own.
+                    for word in label.replace("\\n", " ").split():
                         with self.subTest(fixture=fixture["path"], word=word):
                             self.assertIn(word, body)
 

@@ -1,10 +1,11 @@
 digraph graphviz_record {
   // One record is one node. Its fields are separated by rules drawn inside the single
-  // outline, so the node key is the field texts joined with " | " in drawing order --
-  // splitting a record into one node per field is the failure this fixture looks for.
-  "Customer | id | name" [shape=record fillcolor="#fbb4ae"];
-  "Order | id | customer_id | total" [shape=record fillcolor="#fbb4ae"];
-  "Item | order_id | sku" [shape=record fillcolor="#fbb4ae"];
-  "Customer | id | name" -> "Order | id | customer_id | total";
-  "Order | id | customer_id | total" -> "Item | order_id | sku";
+  // outline, so the node key is the field texts as one multi-line label, the same
+  // convention org_chart.dot uses. Splitting a record into one node per field is the
+  // failure this fixture looks for.
+  "Customer\nid\nname" [shape=record fillcolor="#fbb4ae"];
+  "Order\nid\ncustomer_id\ntotal" [shape=record fillcolor="#fbb4ae"];
+  "Item\norder_id\nsku" [shape=record fillcolor="#fbb4ae"];
+  "Customer\nid\nname" -> "Order\nid\ncustomer_id\ntotal";
+  "Order\nid\ncustomer_id\ntotal" -> "Item\norder_id\nsku";
 }

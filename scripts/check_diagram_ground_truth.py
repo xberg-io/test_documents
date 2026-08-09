@@ -12,8 +12,8 @@ Two things the raw `-Tplain` output does not say, and this accounts for:
 *   `dir=back` draws the arrowhead at the tail, so the edge reads the other way round. A
     recogniser working from geometry sees only where the arrowhead is, so the ground truth
     records the drawn direction and the declaration order is discarded.
-*   A record node's label carries port names and field separators. One record is one node, so
-    its key is the field texts joined with " | ".
+*   A record node's label carries port names and field separators. One record is one node,
+    so its key is the field texts as one multi-line label.
 
 Needs Graphviz on PATH, which is a fixture-regeneration dependency rather than a CI one -- it
 reports that it skipped instead of failing when Graphviz is absent.
@@ -56,10 +56,10 @@ GT_EDGE = re.compile(r'"([^"]+)"\s*-[->]\s*"([^"]+)"')
 
 
 def joined_record_fields(label: str) -> str:
-    """One record is one node, so its key is the field texts joined with " | "."""
+    """One record is one node, so its key is its field texts as one multi-line label."""
     if "<" not in label:
         return label
-    return " | ".join(PORT.sub("", field).strip() for field in label.split("|"))
+    return "\\n".join(PORT.sub("", field).strip() for field in label.split("|"))
 
 
 def reversed_edges(source: Path) -> set[tuple[str, str]]:

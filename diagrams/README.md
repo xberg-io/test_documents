@@ -106,11 +106,14 @@ Positives, by producer:
   a pie chart's leader dot — has no key and is not a node, and an edge joining one is not an edge.
 - **Containers are not nodes.** Cluster rectangles, swimlane bands and lane headers are absent from
   the ground truth however closed their outlines look.
-- **One record is one node.** Its key is the field texts joined with `" | "`, because splitting a
-  record into one node per field is the failure that fixture exists to catch.
+- **One record is one node.** Its key is the field texts as one multi-line label, the same way
+  `org_chart.dot` keys a two-line box, because splitting a record into one node per field is the
+  failure that fixture exists to catch.
 - **Direction as drawn.** `dir=back` puts the arrowhead at the tail, so the ground truth records
   what the drawing shows, not the order the source declared.
 - **Undirected stays undirected** — `graph` and `--`, never restated as a `digraph`.
+- **Comments carry no DOT syntax.** Not every consumer strips `//`, so a comment mentioning
+  `a -> b` gets scored as an edge. `test_diagram_manifest.py` enforces this.
 
 ## Negatives
 

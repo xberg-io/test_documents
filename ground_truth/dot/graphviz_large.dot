@@ -1,8 +1,8 @@
 digraph graphviz_large {
   // 128 nodes, 141 edges. Generated from the same rule as diagrams/src/graphviz_large.dot:
-  // a complete binary tree over N0..N127 plus a dashed shortcut N_i -> N_i+16 for every i
-  // divisible by 8. Keyed by label, which for this fixture is the node id with the prefix
-  // capitalised.
+  // a complete binary tree over N0..N127, plus a dashed shortcut from N_i to the node
+  // sixteen along for every i divisible by 8. Keyed by label, which for this fixture is
+  // the node id with the prefix capitalised.
   "N0" [shape=box fillcolor="#d9d9d9"];
   "N1" [shape=box fillcolor="#d9d9d9"];
   "N2" [shape=box fillcolor="#d9d9d9"];

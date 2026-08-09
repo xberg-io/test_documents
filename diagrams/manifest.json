@@ -161,7 +161,7 @@
       "producer": {"tool": "graphviz", "version": "15.1.1", "command": "dot -Tsvg"},
       "source": "diagrams/src/graphviz_record.dot",
       "license": "authored-here",
-      "notes": "One record is one node drawn as a single outline divided by internal rules, and edges terminate on a named port rather than the shape. Splitting a record into one node per field is the failure this looks for, so the node key is the field texts joined with \" | \".",
+      "notes": "One record is one node drawn as a single outline divided by internal rules, and edges terminate on a named port rather than the shape. Splitting a record into one node per field is the failure this looks for, so the node key is the field texts as one multi-line label.",
       "exercises": ["shape:record", "node:internal-rules", "edge:port-anchored"],
       "graphs": [
         {
