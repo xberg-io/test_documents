@@ -1,0 +1,9 @@
+digraph flowchart {
+  "Requirements" [shape=box fillcolor="#4a90d9"];
+  "Design" [shape=box fillcolor="#50b848"];
+  "Implementation" [shape=box fillcolor="#f5a623"];
+  "Testing" [shape=box fillcolor="#d0021b"];
+  "Requirements" -> "Design";
+  "Design" -> "Implementation";
+  "Implementation" -> "Testing";
+}

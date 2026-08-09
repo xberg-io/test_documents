@@ -1,0 +1,252 @@
+{
+  "schema": 1,
+  "comment": [
+    "Diagram fixtures for node/edge recovery (xberg-io/xberg#579). Each entry says what the",
+    "fixture is, where it came from, why it is in the set, and what the correct answer is.",
+    "",
+    "`class` is the recovery mode the fixture measures, and it decides how it should be scored:",
+    "  A -- the file states its graph outright (connector endpoints, model ids, source/target",
+    "       attributes, or diagram source text). Recovery is lossless, so a correct",
+    "       implementation scores exactly 1.0. Anything less is a bug, not a tuning problem.",
+    "  B -- the file carries geometry only. The graph has to be inferred from shapes, strokes",
+    "       and text positions, so scoring is precision/recall against a threshold.",
+    "",
+    "`states_graph_in_metadata` marks a Class-B file that also happens to name its own graph.",
+    "`dot -Tsvg` writes one <title> per node holding the node id and one per edge holding",
+    "`src->dst`, so a Graphviz SVG contains the complete edge list as text -- and xberg's SVG",
+    "extractor already reads <title>. Such a fixture cannot measure geometry recovery, because",
+    "a recogniser can score perfectly without reading a single coordinate. Every Graphviz",
+    "fixture therefore ships twice: as emitted, and with the element titles removed",
+    "(`scripts/strip_svg_titles.py`). Reading the titles when they are there is correct",
+    "behaviour -- it is just a different capability, and the two are measured apart."
+  ],
+  "fixtures": [
+    {
+      "path": "diagrams/svg/graphviz_flow.svg",
+      "class": "B",
+      "states_graph_in_metadata": true,
+      "geometry_only_variant": "diagrams/svg/graphviz_flow_geometry.svg",
+      "producer": {"tool": "graphviz", "version": "15.1.1", "command": "dot -Tsvg"},
+      "source": "diagrams/src/graphviz_flow.dot",
+      "license": "authored-here",
+      "exercises": [
+        "shape:box", "shape:diamond", "shape:ellipse", "arrowhead:normal",
+        "edge-label", "edge:dashed", "transform:root-translate-negative"
+      ],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/graphviz_flow.dot",
+          "directed": true, "nodes": 4, "edges": 4, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/svg/graphviz_flow_geometry.svg",
+      "class": "B",
+      "states_graph_in_metadata": false,
+      "derived_from": "diagrams/svg/graphviz_flow.svg",
+      "producer": {"tool": "graphviz", "version": "15.1.1", "command": "dot -Tsvg | strip_svg_titles.py"},
+      "source": "diagrams/src/graphviz_flow.dot",
+      "license": "authored-here",
+      "exercises": [
+        "shape:box", "shape:diamond", "shape:ellipse", "arrowhead:normal",
+        "edge-label", "edge:dashed", "transform:root-translate-negative", "geometry-only"
+      ],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/graphviz_flow.dot",
+          "directed": true, "nodes": 4, "edges": 4, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/svg/graphviz_states.svg",
+      "class": "B",
+      "states_graph_in_metadata": true,
+      "geometry_only_variant": "diagrams/svg/graphviz_states_geometry.svg",
+      "producer": {"tool": "graphviz", "version": "15.1.1", "command": "dot -Tsvg"},
+      "source": "diagrams/src/graphviz_states.dot",
+      "license": "authored-here",
+      "exercises": ["shape:doublecircle", "edges:antiparallel-pair", "edge-label"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/graphviz_states.dot",
+          "directed": true, "nodes": 4, "edges": 4, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/svg/graphviz_states_geometry.svg",
+      "class": "B",
+      "states_graph_in_metadata": false,
+      "derived_from": "diagrams/svg/graphviz_states.svg",
+      "producer": {"tool": "graphviz", "version": "15.1.1", "command": "dot -Tsvg | strip_svg_titles.py"},
+      "source": "diagrams/src/graphviz_states.dot",
+      "license": "authored-here",
+      "exercises": ["shape:doublecircle", "edges:antiparallel-pair", "edge-label", "geometry-only"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/graphviz_states.dot",
+          "directed": true, "nodes": 4, "edges": 4, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/svg/graphviz_network.svg",
+      "class": "B",
+      "states_graph_in_metadata": true,
+      "geometry_only_variant": "diagrams/svg/graphviz_network_geometry.svg",
+      "producer": {"tool": "graphviz", "version": "15.1.1", "command": "neato -Tsvg"},
+      "source": "diagrams/src/graphviz_network.dot",
+      "license": "authored-here",
+      "exercises": ["edges:undirected", "arrowhead:none", "layout:neato"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/graphviz_network.dot",
+          "directed": false, "nodes": 5, "edges": 4, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/svg/graphviz_network_geometry.svg",
+      "class": "B",
+      "states_graph_in_metadata": false,
+      "derived_from": "diagrams/svg/graphviz_network.svg",
+      "producer": {"tool": "graphviz", "version": "15.1.1", "command": "neato -Tsvg | strip_svg_titles.py"},
+      "source": "diagrams/src/graphviz_network.dot",
+      "license": "authored-here",
+      "exercises": ["edges:undirected", "arrowhead:none", "layout:neato", "geometry-only"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/graphviz_network.dot",
+          "directed": false, "nodes": 5, "edges": 4, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/svg/graphviz_bidirectional.svg",
+      "class": "B",
+      "states_graph_in_metadata": true,
+      "geometry_only_variant": "diagrams/svg/graphviz_bidirectional_geometry.svg",
+      "producer": {"tool": "graphviz", "version": "15.1.1", "command": "dot -Tsvg"},
+      "source": "diagrams/src/graphviz_bidirectional.dot",
+      "license": "authored-here",
+      "exercises": ["edge:dir-both", "edge:dir-back", "rankdir:LR"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/graphviz_bidirectional.dot",
+          "directed": true, "nodes": 3, "edges": 3, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/svg/graphviz_bidirectional_geometry.svg",
+      "class": "B",
+      "states_graph_in_metadata": false,
+      "derived_from": "diagrams/svg/graphviz_bidirectional.svg",
+      "producer": {"tool": "graphviz", "version": "15.1.1", "command": "dot -Tsvg | strip_svg_titles.py"},
+      "source": "diagrams/src/graphviz_bidirectional.dot",
+      "license": "authored-here",
+      "exercises": ["edge:dir-both", "edge:dir-back", "rankdir:LR", "geometry-only"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/graphviz_bidirectional.dot",
+          "directed": true, "nodes": 3, "edges": 3, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/svg/nested_transforms.svg",
+      "class": "B",
+      "states_graph_in_metadata": false,
+      "producer": {"tool": "hand-authored", "version": null, "command": null},
+      "source": null,
+      "license": "authored-here",
+      "exercises": [
+        "transform:nested-groups", "transform:scale", "viewbox-viewport-mismatch",
+        "node:dashed-border", "edge:dashed", "edge-label"
+      ],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/nested_transforms.dot",
+          "directed": true, "nodes": 4, "edges": 3, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "xml/org_chart.svg",
+      "class": "B",
+      "states_graph_in_metadata": false,
+      "producer": {"tool": "hand-authored", "version": null, "command": null},
+      "source": null,
+      "license": "authored-here",
+      "exercises": ["label:multi-line", "nodes:isolated", "annotations-outside-shapes"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/org_chart.dot",
+          "directed": true, "nodes": 9, "edges": 3, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "xml/flowchart.svg",
+      "class": "B",
+      "states_graph_in_metadata": false,
+      "producer": {"tool": "hand-authored", "version": null, "command": null},
+      "source": null,
+      "license": "authored-here",
+      "exercises": ["arrowhead:marker-end", "annotations-outside-shapes"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/flowchart.dot",
+          "directed": true, "nodes": 4, "edges": 3, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "xml/data_dashboard.svg",
+      "class": "B",
+      "negative": true,
+      "reason": "bar chart: closed outlines and straight strokes, but the strokes are axes and gridlines, not connectors",
+      "license": "authored-here",
+      "ground_truth": "ground_truth/dot/data_dashboard.dot",
+      "graphs": []
+    },
+    {
+      "path": "xml/simple_svg.svg",
+      "class": "B",
+      "negative": true,
+      "reason": "two unconnected shapes and one label; there is no graph to recover",
+      "license": "authored-here",
+      "ground_truth": "ground_truth/dot/simple_svg.dot",
+      "graphs": []
+    },
+    {
+      "path": "images/5_level_paging_and_5_level_ept_intel_revision_1_1_may_2017.svg",
+      "class": "B",
+      "negative": true,
+      "reason": [
+        "Despite the filename this is an inferno flame graph, not a paging diagram: 77 nested",
+        "<rect> elements, 81 <text> labels, 76 <g> wrappers, a CSS <style> block, an ECMAScript",
+        "<script>, and a gradient <defs>. Adjacency here is stack containment, not connection,",
+        "and there is not one connector in the file. It is the hardest negative in the corpus",
+        "and it was already shipping -- the only thing missing was the assertion that recovery",
+        "returns nothing."
+      ],
+      "license": "see ATTRIBUTIONS.md",
+      "ground_truth": "ground_truth/dot/5_level_paging_and_5_level_ept_intel_revision_1_1_may_2017.dot",
+      "graphs": []
+    }
+  ]
+}

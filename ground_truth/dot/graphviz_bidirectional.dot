@@ -1,0 +1,8 @@
+digraph graphviz_bidirectional {
+  "API" [shape=box fillcolor="#fdb462"];
+  "Database" [shape=box fillcolor="#fdb462"];
+  "Cache" [shape=box fillcolor="#fdb462"];
+  "API" -> "Database" [dir=both];
+  "API" -> "Cache";
+  "Database" -> "Cache";
+}

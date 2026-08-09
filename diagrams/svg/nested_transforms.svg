@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Hand-authored. Every shape and label sits under a chain of `transform`
+  attributes, and the viewBox is half the viewport, so nothing lands at the
+  coordinate it is written at. A recogniser that reads coordinates literally
+  puts every label outside its box.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 320 240">
+  <title>Nested Transforms</title>
+  <desc>Three-stage pipeline drawn inside translated, scaled and rotated groups</desc>
+
+  <g transform="translate(20,15)">
+    <g transform="scale(1.25)">
+
+      <g transform="translate(0,0)">
+        <rect x="10" y="10" width="90" height="40" rx="4" fill="#4e79a7" stroke="#2f4b6e" stroke-width="2"/>
+        <text x="55" y="35" text-anchor="middle" fill="#ffffff" font-family="Helvetica" font-size="12">Ingest</text>
+      </g>
+
+      <g transform="translate(0,70)">
+        <rect x="10" y="10" width="90" height="40" rx="4" fill="#f28e2b" stroke="#9c5a15" stroke-width="2"/>
+        <text x="55" y="35" text-anchor="middle" fill="#ffffff" font-family="Helvetica" font-size="12">Transform</text>
+      </g>
+
+      <g transform="translate(0,140)">
+        <rect x="10" y="10" width="90" height="40" rx="4" fill="#59a14f" stroke="#356030" stroke-width="2"/>
+        <text x="55" y="35" text-anchor="middle" fill="#ffffff" font-family="Helvetica" font-size="12">Publish</text>
+      </g>
+
+      <line x1="55" y1="50" x2="55" y2="80" stroke="#555555" stroke-width="2"/>
+      <line x1="55" y1="120" x2="55" y2="150" stroke="#555555" stroke-width="2"/>
+
+      <g transform="translate(140,0)">
+        <rect x="10" y="80" width="90" height="40" rx="4" fill="#e15759" stroke="#8c3335" stroke-width="2" stroke-dasharray="6 3"/>
+        <text x="55" y="105" text-anchor="middle" fill="#ffffff" font-family="Helvetica" font-size="12">Quarantine</text>
+      </g>
+
+      <line x1="100" y1="100" x2="150" y2="100" stroke="#e15759" stroke-width="2" stroke-dasharray="6 3"/>
+      <text x="125" y="94" text-anchor="middle" fill="#8c3335" font-family="Helvetica" font-size="9">on error</text>
+
+    </g>
+  </g>
+</svg>

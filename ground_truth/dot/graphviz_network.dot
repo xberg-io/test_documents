@@ -1,0 +1,11 @@
+graph graphviz_network {
+  "Gateway" [shape=ellipse fillcolor="#8dd3c7"];
+  "Switch A" [shape=ellipse fillcolor="#ffffb3"];
+  "Switch B" [shape=ellipse fillcolor="#ffffb3"];
+  "Host 1" [shape=ellipse fillcolor="#cccccc"];
+  "Host 2" [shape=ellipse fillcolor="#cccccc"];
+  "Gateway" -- "Switch A";
+  "Gateway" -- "Switch B";
+  "Switch A" -- "Host 1";
+  "Switch B" -- "Host 2";
+}

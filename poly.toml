@@ -18,6 +18,7 @@ exclude = [
   "csv/**",
   "data_formats/**",
   "dbf/**",
+  "diagrams/**",
   "doc/**",
   "docbook/**",
   "docx/**",

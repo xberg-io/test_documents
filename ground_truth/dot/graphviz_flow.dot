@@ -1,0 +1,10 @@
+digraph graphviz_flow {
+  "Start" [shape=box fillcolor="#a6cee3"];
+  "Validate" [shape=diamond fillcolor="#b2df8a"];
+  "Process" [shape=box fillcolor="#fb9a99"];
+  "Done" [shape=ellipse fillcolor="#fdbf6f"];
+  "Start" -> "Validate";
+  "Validate" -> "Process" [label="ok"];
+  "Validate" -> "Done" [label="skip" style=dashed];
+  "Process" -> "Done";
+}

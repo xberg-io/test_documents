@@ -1,0 +1,11 @@
+digraph graphviz_flow {
+  rankdir=TB;
+  a [label="Start" shape=box style=filled fillcolor="#a6cee3"];
+  b [label="Validate" shape=diamond style=filled fillcolor="#b2df8a"];
+  c [label="Process" shape=box style=filled fillcolor="#fb9a99"];
+  d [label="Done" shape=ellipse style=filled fillcolor="#fdbf6f"];
+  a -> b;
+  b -> c [label="ok"];
+  b -> d [label="skip" style=dashed];
+  c -> d;
+}

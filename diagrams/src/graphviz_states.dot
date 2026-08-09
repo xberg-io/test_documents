@@ -1,0 +1,9 @@
+digraph graphviz_states {
+  rankdir=LR;
+  node [shape=circle style=filled fillcolor="#b3de69"];
+  idle -> running [label="start"];
+  running -> paused [label="pause"];
+  paused -> running [label="resume"];
+  running -> done [label="finish"];
+  done [shape=doublecircle fillcolor="#fb8072"];
+}

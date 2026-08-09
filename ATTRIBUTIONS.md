@@ -133,3 +133,10 @@ Vendored WordPerfect-family test files. Per-file provenance (upstream path, revi
 - **License:** CDLA-Permissive-1.0
 - **Used here:** 2 financial-report pages (`images/doclaynet_page_01..02.jpg`) from the `test` split (`NASDAQ_ATRI_2003.pdf` p24, `NYSE_MGM_2004.pdf` p49).
 - **Modifications:** authoritative PDF text cells linearized in reading order (top-to-bottom, then left-to-right). No OCR and no model used; text is DocLayNet's verbatim PDF-layer cell text.
+
+## Diagram fixtures (this repository)
+
+- **Source:** authored here, not derived from any third-party dataset. Contributed by Parman Mohammadalizadeh (@MannXo) in xberg-io/test_documents#1.
+- **License:** same as this repository.
+- **Used here:** `diagrams/svg/*.svg` plus their `diagrams/src/*.dot` sources, `diagrams/manifest.json`, and `ground_truth/dot/*.dot`.
+- **Modifications:** four SVGs are rendered from the committed `.dot` sources with Graphviz 15.1.1 (`dot`/`neato`), which is EPL-1.0 licensed; its output is not a derivative of the tool. Each of those four also ships as a `*_geometry.svg` variant with the per-element `<title>` tags removed by `scripts/strip_svg_titles.py`, because `dot -Tsvg` writes the node ids and the full edge list back into its own output as metadata, and a fixture that names its own answer cannot measure geometry recovery. `nested_transforms.svg` is hand-written. Ground truth is the source graph restated by node label, so it is independent of any recogniser's numbering.
