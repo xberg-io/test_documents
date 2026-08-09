@@ -1,0 +1,13 @@
+digraph graphviz_clusters {
+  // "Ingest" and "Storage" are cluster containers, not nodes, and are absent here
+  // on purpose: reporting either of them is a false positive.
+  "Receive" [shape=box fillcolor="#a6cee3"];
+  "Parse" [shape=box fillcolor="#a6cee3"];
+  "Index" [shape=box fillcolor="#fdbf6f"];
+  "Archive" [shape=box fillcolor="#fdbf6f"];
+  "Emit" [shape=ellipse fillcolor="#b2df8a"];
+  "Receive" -> "Parse";
+  "Parse" -> "Index";
+  "Parse" -> "Archive";
+  "Index" -> "Emit";
+}

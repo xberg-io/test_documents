@@ -1,0 +1,20 @@
+digraph graphviz_selfloop {
+  layout=neato;
+  overlap=false;
+  node [shape=circle style=filled fillcolor="#bebada"];
+
+  retry [label="Retry" pos="0,2!"];
+  work  [label="Work"  pos="3,2!"];
+  left  [label="Left"  pos="0,0!"];
+  right [label="Right" pos="3,0!"];
+
+  retry -> retry [label="backoff"];
+  work -> work;
+  retry -> work;
+
+  // These two cross in the middle of the drawing and share no endpoint at either
+  // end. A recogniser that joins strokes where they intersect invents a node in
+  // the centre, an edge, or both.
+  left -> work;
+  retry -> right;
+}

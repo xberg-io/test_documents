@@ -1,0 +1,11 @@
+digraph graphviz_record {
+  rankdir=LR;
+  node [shape=record style=filled fillcolor="#fbb4ae"];
+
+  customer [label="<hd> Customer | <f0> id | <f1> name"];
+  order    [label="<hd> Order | <f0> id | <f1> customer_id | <f2> total"];
+  item     [label="<hd> Item | <f0> order_id | <f1> sku"];
+
+  customer:f0 -> order:f1;
+  order:f0 -> item:f0;
+}

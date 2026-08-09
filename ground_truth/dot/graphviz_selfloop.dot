@@ -1,0 +1,11 @@
+digraph graphviz_selfloop {
+  "Retry" [shape=circle fillcolor="#bebada"];
+  "Work" [shape=circle fillcolor="#bebada"];
+  "Left" [shape=circle fillcolor="#bebada"];
+  "Right" [shape=circle fillcolor="#bebada"];
+  "Retry" -> "Retry" [label="backoff"];
+  "Work" -> "Work";
+  "Retry" -> "Work";
+  "Left" -> "Work";
+  "Retry" -> "Right";
+}

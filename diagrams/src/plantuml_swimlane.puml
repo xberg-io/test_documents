@@ -1,0 +1,16 @@
+@startuml plantuml_swimlane
+' Swimlanes: the lane is a labelled band spanning the drawing, and it is not a node. A
+' recogniser that treats every closed region as a node invents three of them here.
+|Author|
+start
+:Draft article;
+|Editor|
+:Review draft;
+|Legal|
+:Clear rights;
+|Editor|
+:Schedule slot;
+|Author|
+:Publish;
+stop
+@enduml

@@ -1,0 +1,28 @@
+digraph graphviz_clusters {
+  rankdir=TB;
+  node [shape=box style=filled fillcolor="#a6cee3"];
+
+  subgraph cluster_ingest {
+    label="Ingest";
+    style=filled;
+    fillcolor="#eef6fb";
+    recv [label="Receive"];
+    parse [label="Parse"];
+    recv -> parse;
+  }
+
+  subgraph cluster_store {
+    label="Storage";
+    style=filled;
+    fillcolor="#fdf3e7";
+    node [fillcolor="#fdbf6f"];
+    index [label="Index"];
+    archive [label="Archive"];
+  }
+
+  emit [label="Emit" shape=ellipse fillcolor="#b2df8a"];
+
+  parse -> index;
+  parse -> archive;
+  index -> emit;
+}

@@ -1,0 +1,9 @@
+digraph libreoffice_connectors {
+  "Intake" [shape=box];
+  "Review" [shape=box];
+  "Approve" [shape=box];
+  "Publish" [shape=box];
+  "Intake" -> "Review";
+  "Review" -> "Approve";
+  "Approve" -> "Publish";
+}

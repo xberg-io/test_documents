@@ -1,0 +1,13 @@
+digraph graphviz_cjk {
+  // Stroke-only nodes: no fill anywhere in the drawing. Labels are Japanese, Korean,
+  // Hebrew and Arabic, so nothing here survives a Latin-1 round trip.
+  "受注処理" [shape=box];
+  "검증" [shape=box];
+  "אימות" [shape=box];
+  "اعتماد" [shape=box];
+  "完成" [shape=box];
+  "受注処理" -> "검증" [label="次"];
+  "검증" -> "אימות";
+  "אימות" -> "اعتماد";
+  "اعتماد" -> "完成" [label="סיום"];
+}

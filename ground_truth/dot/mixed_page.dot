@@ -1,0 +1,9 @@
+digraph mixed_page {
+  // The page also carries a heading, two paragraphs and a four-row ruled table. None of that
+  // is here: the ground truth is the figure at the foot of the page and nothing else.
+  "Build" [shape=box];
+  "Sign-off" [shape=box];
+  "Ship" [shape=box];
+  "Build" -> "Sign-off";
+  "Sign-off" -> "Ship";
+}

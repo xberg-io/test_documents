@@ -1,0 +1,12 @@
+digraph graphviz_ortho {
+  "Client" [shape=box fillcolor="#ccebc5"];
+  "Balancer" [shape=box fillcolor="#ccebc5"];
+  "Web 1" [shape=box fillcolor="#ccebc5"];
+  "Web 2" [shape=box fillcolor="#ccebc5"];
+  "Database" [shape=box fillcolor="#ccebc5"];
+  "Client" -> "Balancer";
+  "Balancer" -> "Web 1";
+  "Balancer" -> "Web 2";
+  "Web 1" -> "Database";
+  "Web 2" -> "Database";
+}

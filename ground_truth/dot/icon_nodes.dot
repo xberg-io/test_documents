@@ -1,0 +1,11 @@
+digraph icon_nodes {
+  // Each node is an icon glyph with its caption underneath and no bounding outline, so the
+  // label sits outside every closed region in the drawing.
+  "Browser" [shape=none];
+  "Queue" [shape=none];
+  "Worker" [shape=none];
+  "Bucket" [shape=none];
+  "Browser" -> "Queue";
+  "Queue" -> "Worker";
+  "Worker" -> "Bucket";
+}

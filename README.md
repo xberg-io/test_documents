@@ -63,7 +63,7 @@ matches a basename at any depth. Every line in it is mirrored in `.gitignore`, a
 
 **Git-tracked**: everything else — all ground truth, and the text-format fixtures
 (`.svg .xml .html .md .rst .org .tex .typ .json .yaml .csv .tsv .eml .opml .ipynb .wp .wpd .wpg
-.dot` and friends).
+.dot .mmd .puml .fodg` and friends).
 
 The split is by *format*, not by size: a fixture whose bytes a human can read in a diff belongs in
 git, because that is where review happens.
@@ -121,7 +121,9 @@ for pure-OCR fixtures they are byte-identical by design.
 Two kinds are not plain text:
 
 - `ground_truth/dot/<stem>.dot` — the node/edge graph a diagram fixture draws, as Graphviz DOT keyed
-  by node label. Indexed by `diagrams/manifest.json`. See `diagrams/README.md`.
+  by node label. Indexed by `diagrams/manifest.json`, which also carries provenance, the recovery
+  class, and the page/bbox of each graph within its document. An empty file means the fixture is a
+  negative control, and the manifest says why. See `diagrams/README.md`.
 - `ground_truth/structured/` — field- and formula-level extraction targets, with their own manifest.
 
 Two files index the rest:
@@ -190,3 +192,11 @@ python3 -m unittest discover -s scripts -v                                  # to
 
 CI (`.github/workflows/verify-corpus.yaml`) runs exactly these on every push and pull request. It
 needs no credentials: it proves the manifest is still fetchable rather than trying to publish.
+
+The unittest suite also covers the corpus itself where the corpus can contradict its own answer
+key — `scripts/test_diagram_manifest.py` checks `diagrams/manifest.json` against the files and the
+ground truth on disk. One further check needs a renderer and so is not part of CI:
+
+```sh
+python3 scripts/check_diagram_ground_truth.py   # needs graphviz; skips cleanly without it
+```

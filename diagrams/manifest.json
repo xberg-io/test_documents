@@ -12,13 +12,19 @@
     "       and text positions, so scoring is precision/recall against a threshold.",
     "",
     "`states_graph_in_metadata` marks a Class-B file that also happens to name its own graph.",
-    "`dot -Tsvg` writes one <title> per node holding the node id and one per edge holding",
-    "`src->dst`, so a Graphviz SVG contains the complete edge list as text -- and xberg's SVG",
-    "extractor already reads <title>. Such a fixture cannot measure geometry recovery, because",
-    "a recogniser can score perfectly without reading a single coordinate. Every Graphviz",
-    "fixture therefore ships twice: as emitted, and with the element titles removed",
-    "(`scripts/strip_svg_titles.py`). Reading the titles when they are there is correct",
-    "behaviour -- it is just a different capability, and the two are measured apart."
+    "Every producer does it somewhere: Graphviz writes one <title> per node holding the node id",
+    "and one per edge holding `src->dst`, and repeats both in XML comments; Mermaid names both",
+    "endpoints in `id=\"L_start_auth_0\"`; PlantUML in `id=\"Read config-to-Open input\"`. Such a",
+    "file cannot measure geometry recovery, because a recogniser can score perfectly without",
+    "reading a single coordinate -- and xberg's SVG extractor already reads <title>. Those",
+    "fixtures therefore ship twice, and `geometry_only_variant` names the second copy, produced",
+    "by `scripts/strip_svg_graph_metadata.py`. The two share one ground truth: same answer,",
+    "arrived at a harder way. Reading the metadata when it is there is correct behaviour -- it",
+    "is just a different capability, and the two are measured apart.",
+    "",
+    "Ground truth is keyed by node label, so an unlabelled decoration -- PlantUML's start and",
+    "stop markers, an arrowhead, a leader dot -- has no key and is not a node. Cluster, swimlane",
+    "and lane containers are not nodes either, however closed their outlines look."
   ],
   "fixtures": [
     {
@@ -32,26 +38,6 @@
       "exercises": [
         "shape:box", "shape:diamond", "shape:ellipse", "arrowhead:normal",
         "edge-label", "edge:dashed", "transform:root-translate-negative"
-      ],
-      "graphs": [
-        {
-          "id": "g0",
-          "ground_truth": "ground_truth/dot/graphviz_flow.dot",
-          "directed": true, "nodes": 4, "edges": 4, "page": null, "bbox": null
-        }
-      ]
-    },
-    {
-      "path": "diagrams/svg/graphviz_flow_geometry.svg",
-      "class": "B",
-      "states_graph_in_metadata": false,
-      "derived_from": "diagrams/svg/graphviz_flow.svg",
-      "producer": {"tool": "graphviz", "version": "15.1.1", "command": "dot -Tsvg | strip_svg_titles.py"},
-      "source": "diagrams/src/graphviz_flow.dot",
-      "license": "authored-here",
-      "exercises": [
-        "shape:box", "shape:diamond", "shape:ellipse", "arrowhead:normal",
-        "edge-label", "edge:dashed", "transform:root-translate-negative", "geometry-only"
       ],
       "graphs": [
         {
@@ -79,23 +65,6 @@
       ]
     },
     {
-      "path": "diagrams/svg/graphviz_states_geometry.svg",
-      "class": "B",
-      "states_graph_in_metadata": false,
-      "derived_from": "diagrams/svg/graphviz_states.svg",
-      "producer": {"tool": "graphviz", "version": "15.1.1", "command": "dot -Tsvg | strip_svg_titles.py"},
-      "source": "diagrams/src/graphviz_states.dot",
-      "license": "authored-here",
-      "exercises": ["shape:doublecircle", "edges:antiparallel-pair", "edge-label", "geometry-only"],
-      "graphs": [
-        {
-          "id": "g0",
-          "ground_truth": "ground_truth/dot/graphviz_states.dot",
-          "directed": true, "nodes": 4, "edges": 4, "page": null, "bbox": null
-        }
-      ]
-    },
-    {
       "path": "diagrams/svg/graphviz_network.svg",
       "class": "B",
       "states_graph_in_metadata": true,
@@ -113,23 +82,6 @@
       ]
     },
     {
-      "path": "diagrams/svg/graphviz_network_geometry.svg",
-      "class": "B",
-      "states_graph_in_metadata": false,
-      "derived_from": "diagrams/svg/graphviz_network.svg",
-      "producer": {"tool": "graphviz", "version": "15.1.1", "command": "neato -Tsvg | strip_svg_titles.py"},
-      "source": "diagrams/src/graphviz_network.dot",
-      "license": "authored-here",
-      "exercises": ["edges:undirected", "arrowhead:none", "layout:neato", "geometry-only"],
-      "graphs": [
-        {
-          "id": "g0",
-          "ground_truth": "ground_truth/dot/graphviz_network.dot",
-          "directed": false, "nodes": 5, "edges": 4, "page": null, "bbox": null
-        }
-      ]
-    },
-    {
       "path": "diagrams/svg/graphviz_bidirectional.svg",
       "class": "B",
       "states_graph_in_metadata": true,
@@ -137,6 +89,7 @@
       "producer": {"tool": "graphviz", "version": "15.1.1", "command": "dot -Tsvg"},
       "source": "diagrams/src/graphviz_bidirectional.dot",
       "license": "authored-here",
+      "notes": "dir=back draws the arrowhead at the tail, so the ground truth records the drawn direction, not the declaration order.",
       "exercises": ["edge:dir-both", "edge:dir-back", "rankdir:LR"],
       "graphs": [
         {
@@ -147,19 +100,206 @@
       ]
     },
     {
-      "path": "diagrams/svg/graphviz_bidirectional_geometry.svg",
+      "path": "diagrams/svg/graphviz_clusters.svg",
       "class": "B",
-      "states_graph_in_metadata": false,
-      "derived_from": "diagrams/svg/graphviz_bidirectional.svg",
-      "producer": {"tool": "graphviz", "version": "15.1.1", "command": "dot -Tsvg | strip_svg_titles.py"},
-      "source": "diagrams/src/graphviz_bidirectional.dot",
+      "states_graph_in_metadata": true,
+      "geometry_only_variant": "diagrams/svg/graphviz_clusters_geometry.svg",
+      "producer": {"tool": "graphviz", "version": "15.1.1", "command": "dot -Tsvg"},
+      "source": "diagrams/src/graphviz_clusters.dot",
       "license": "authored-here",
-      "exercises": ["edge:dir-both", "edge:dir-back", "rankdir:LR", "geometry-only"],
+      "notes": "The two cluster rectangles are containers, not nodes. Reporting either is a false positive, and the stripped variant removes the <title> that would have given the game away.",
+      "exercises": ["container:cluster", "container:nested-fill", "edge:crosses-container-boundary"],
       "graphs": [
         {
           "id": "g0",
-          "ground_truth": "ground_truth/dot/graphviz_bidirectional.dot",
-          "directed": true, "nodes": 3, "edges": 3, "page": null, "bbox": null
+          "ground_truth": "ground_truth/dot/graphviz_clusters.dot",
+          "directed": true, "nodes": 5, "edges": 4, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/svg/graphviz_selfloop.svg",
+      "class": "B",
+      "states_graph_in_metadata": true,
+      "geometry_only_variant": "diagrams/svg/graphviz_selfloop_geometry.svg",
+      "producer": {"tool": "graphviz", "version": "15.1.1", "command": "neato -Tsvg"},
+      "source": "diagrams/src/graphviz_selfloop.dot",
+      "license": "authored-here",
+      "notes": "Two edges cross in the middle of the drawing and share no endpoint at either end. A recogniser that joins strokes where they intersect invents a node there, an edge, or both.",
+      "exercises": ["edge:self-loop", "edge:self-loop-labelled", "edges:crossing-unconnected", "layout:fixed-positions"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/graphviz_selfloop.dot",
+          "directed": true, "nodes": 4, "edges": 5, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/svg/graphviz_ortho.svg",
+      "class": "B",
+      "states_graph_in_metadata": true,
+      "geometry_only_variant": "diagrams/svg/graphviz_ortho_geometry.svg",
+      "producer": {"tool": "graphviz", "version": "15.1.1", "command": "dot -Tsvg"},
+      "source": "diagrams/src/graphviz_ortho.dot",
+      "license": "authored-here",
+      "notes": "Orthogonal elbow routing is the default in every non-Graphviz diagram tool, and an elbow leg can run alongside an unrelated node before turning.",
+      "exercises": ["edge:orthogonal-elbow", "edges:converging-on-one-node"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/graphviz_ortho.dot",
+          "directed": true, "nodes": 5, "edges": 5, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/svg/graphviz_record.svg",
+      "class": "B",
+      "states_graph_in_metadata": true,
+      "geometry_only_variant": "diagrams/svg/graphviz_record_geometry.svg",
+      "producer": {"tool": "graphviz", "version": "15.1.1", "command": "dot -Tsvg"},
+      "source": "diagrams/src/graphviz_record.dot",
+      "license": "authored-here",
+      "notes": "One record is one node drawn as a single outline divided by internal rules, and edges terminate on a named port rather than the shape. Splitting a record into one node per field is the failure this looks for, so the node key is the field texts joined with \" | \".",
+      "exercises": ["shape:record", "node:internal-rules", "edge:port-anchored"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/graphviz_record.dot",
+          "directed": true, "nodes": 3, "edges": 2, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/svg/graphviz_cjk.svg",
+      "class": "B",
+      "states_graph_in_metadata": true,
+      "geometry_only_variant": "diagrams/svg/graphviz_cjk_geometry.svg",
+      "producer": {"tool": "graphviz", "version": "15.1.1", "command": "dot -Tsvg"},
+      "source": "diagrams/src/graphviz_cjk.dot",
+      "license": "authored-here",
+      "notes": "No node in this drawing has a fill, so a recogniser keying on filled regions finds nothing. Labels are Japanese, Korean, Hebrew and Arabic.",
+      "exercises": ["node:stroke-only", "label:cjk", "label:rtl", "edge-label:non-latin"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/graphviz_cjk.dot",
+          "directed": true, "nodes": 5, "edges": 4, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/svg/graphviz_large.svg",
+      "class": "B",
+      "states_graph_in_metadata": true,
+      "geometry_only_variant": "diagrams/svg/graphviz_large_geometry.svg",
+      "producer": {"tool": "graphviz", "version": "15.1.1", "command": "dot -Tsvg"},
+      "source": "diagrams/src/graphviz_large.dot",
+      "license": "authored-here",
+      "notes": "128 nodes and 141 edges, for the perf and memory profiling the review on xberg#1410 asked for. Regenerable from one rule: a complete binary tree over N0..N127 plus a dashed shortcut N_i -> N_i+16 for every i divisible by 8.",
+      "exercises": ["scale:128-nodes", "scale:141-edges", "edges:long-range-shortcuts"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/graphviz_large.dot",
+          "directed": true, "nodes": 128, "edges": 141, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/svg/mermaid_flow.svg",
+      "class": "B",
+      "states_graph_in_metadata": true,
+      "geometry_only_variant": "diagrams/svg/mermaid_flow_geometry.svg",
+      "producer": {"tool": "@mermaid-js/mermaid-cli", "version": "11.16.0", "command": "mmdc -i mermaid_flow.mmd -o mermaid_flow.svg -b transparent"},
+      "source": "diagrams/src/mermaid_flow.mmd",
+      "license": "authored-here",
+      "notes": "Mermaid's idioms are nothing like Graphviz's: a 4.4 KB CSS <style> block, ten <marker> defs, HTML labels in a <foreignObject>, and every edge label drawn on an opaque background rect (class=\"labelBkg\") that looks exactly like a small node. It names both endpoints of every edge in id=\"L_start_auth_0\" and repeats it in data-id.",
+      "exercises": [
+        "producer:mermaid", "label:foreignobject-html", "arrowhead:marker-def",
+        "edge-label:opaque-background-box", "style:css-classes", "shape:stadium", "shape:diamond"
+      ],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/mermaid_flow.dot",
+          "directed": true, "nodes": 6, "edges": 6, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/svg/plantuml_activity.svg",
+      "class": "B",
+      "states_graph_in_metadata": true,
+      "geometry_only_variant": "diagrams/svg/plantuml_activity_geometry.svg",
+      "producer": {"tool": "plantuml", "version": "1.2026.0", "command": "java -jar plantuml.jar -tsvg"},
+      "source": "diagrams/src/plantuml_activity.puml",
+      "license": "authored-here",
+      "notes": "PlantUML states each edge twice over: id=\"Read config-to-Open input\" and an XML comment <!--link Read config to Open input-->. The (*) start and end are unlabelled markers, so they are not nodes and the two edges joining them are not edges. PlantUML itself is GPL; its SVG output is not a derivative of it.",
+      "exercises": ["producer:plantuml", "shape:rounded-activity", "node:unlabelled-terminal", "arrowhead:polygon"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/plantuml_activity.dot",
+          "directed": true, "nodes": 5, "edges": 4, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/svg/plantuml_swimlane.svg",
+      "class": "B",
+      "states_graph_in_metadata": false,
+      "producer": {"tool": "plantuml", "version": "1.2026.0", "command": "java -jar plantuml.jar -tsvg"},
+      "source": "diagrams/src/plantuml_swimlane.puml",
+      "license": "authored-here",
+      "notes": "Swimlanes: three labelled bands spanning the drawing, each holding activities that belong to it. A band is not a node. This SVG carries no id, no class and no comment anywhere, so it is honest by construction and needs no stripped variant.",
+      "exercises": ["producer:plantuml", "container:swimlane", "container:lane-header-label", "node:unlabelled-terminal"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/plantuml_swimlane.dot",
+          "directed": true, "nodes": 5, "edges": 4, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/svg/libreoffice_connectors.svg",
+      "class": "B",
+      "states_graph_in_metadata": false,
+      "producer": {"tool": "LibreOffice Draw", "version": "26.2.5.2", "command": "soffice --headless --convert-to svg"},
+      "source": "diagrams/src/libreoffice_connectors.fodg",
+      "license": "authored-here",
+      "notes": "The one dialect that states nothing: shapes are numbered id1..id9, and the classes give a shape's type (com.sun.star.drawing.ConnectorShape) without naming what it connects. Knowing a stroke is some connector still leaves the whole task. Glued connectors also start and end a few units short of the shape outline, so endpoints have to be matched by proximity.",
+      "exercises": [
+        "producer:libreoffice", "shape:custom-shape-enhanced-geometry", "shape:round-rectangle",
+        "connector:glued-with-gap", "text:tspan-with-textlength", "font:embedded"
+      ],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/libreoffice_connectors.dot",
+          "directed": true, "nodes": 4, "edges": 3, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/src/libreoffice_connectors.fodg",
+      "class": "A",
+      "states_graph_in_metadata": true,
+      "producer": {"tool": "hand-authored", "version": null, "command": null},
+      "source": null,
+      "license": "authored-here",
+      "notes": "The same drawing as an ODF source, and the first Class A fixture in the corpus. Every draw:connector names its endpoints outright with draw:start-shape and draw:end-shape against the draw:id of a shape, so recovery is a lookup and must be exact. Rendering this file is what produced diagrams/svg/libreoffice_connectors.svg, so one ground truth covers both the stated graph and the inferred one.",
+      "exercises": [
+        "format:odf-flat-drawing", "connector:draw-start-shape", "connector:draw-end-shape",
+        "connector:glue-point-index", "shape:draw-custom-shape"
+      ],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/libreoffice_connectors.dot",
+          "directed": true, "nodes": 4, "edges": 3, "page": null, "bbox": null
         }
       ]
     },
@@ -179,6 +319,41 @@
           "id": "g0",
           "ground_truth": "ground_truth/dot/nested_transforms.dot",
           "directed": true, "nodes": 4, "edges": 3, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/svg/icon_nodes.svg",
+      "class": "B",
+      "states_graph_in_metadata": false,
+      "producer": {"tool": "hand-authored", "version": null, "command": null},
+      "source": null,
+      "license": "authored-here",
+      "notes": "The AWS/Azure architecture house style: a node is an icon glyph with its caption underneath and no bounding outline at all, so every label sits outside every closed region and no node has a border to find.",
+      "exercises": ["node:icon-glyph-no-outline", "label:below-shape", "arrowhead:marker-end", "node:multi-subpath-glyph"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/icon_nodes.dot",
+          "directed": true, "nodes": 4, "edges": 3, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/svg/mixed_page.svg",
+      "class": "B",
+      "states_graph_in_metadata": false,
+      "producer": {"tool": "hand-authored", "version": null, "command": null},
+      "source": null,
+      "license": "authored-here",
+      "notes": "Every other fixture is entirely a diagram or entirely not one. This page is both: a heading, two paragraphs, a four-row ruled table, and one three-node figure at the foot. Recovery has to be selective within the page rather than deciding once per file, and the table must contribute nothing. bbox is the figure's extent in the SVG user space.",
+      "exercises": ["page:prose-and-table-and-diagram", "negative-in-positive:ruled-table", "figure:caption"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/mixed_page.dot",
+          "directed": true, "nodes": 3, "edges": 2,
+          "page": 1, "bbox": [52, 340, 488, 392]
         }
       ]
     },
@@ -213,6 +388,33 @@
           "directed": true, "nodes": 4, "edges": 3, "page": null, "bbox": null
         }
       ]
+    },
+    {
+      "path": "diagrams/svg/negative_ruled_table.svg",
+      "class": "B",
+      "negative": true,
+      "reason": "A table drawn as ruling lines has the same signature as a diagram: closed rectangular regions with text inside them, joined by straight strokes running from the edge of one region to the next. This is the most dangerous negative in the set, because whatever rejects it also has to not break table detection.",
+      "license": "authored-here",
+      "ground_truth": "ground_truth/dot/negative_ruled_table.dot",
+      "graphs": []
+    },
+    {
+      "path": "diagrams/svg/negative_pie_chart.svg",
+      "class": "B",
+      "negative": true,
+      "reason": "Each label sits in its own rounded box joined to its slice by a two-segment leader line ending in a dot, which is exactly the shape of a labelled node wired up by an elbow connector. The leader lines connect nothing and the slices are not nodes.",
+      "license": "authored-here",
+      "ground_truth": "ground_truth/dot/negative_pie_chart.dot",
+      "graphs": []
+    },
+    {
+      "path": "diagrams/svg/negative_form.svg",
+      "class": "B",
+      "negative": true,
+      "reason": "A printed form: captions beside empty boxes, section rules, a row of checkboxes, a signature line. Every ingredient of a diagram is present and there is no graph, and the rules in particular run right up to the boxes, which is what an edge looks like.",
+      "license": "authored-here",
+      "ground_truth": "ground_truth/dot/negative_form.dot",
+      "graphs": []
     },
     {
       "path": "xml/data_dashboard.svg",

@@ -1,0 +1,14 @@
+digraph mermaid_flow {
+  "Receive request" [shape=box];
+  "Authenticated?" [shape=diamond];
+  "Check quota" [shape=box];
+  "Return 401" [shape=box];
+  "Run handler" [shape=box];
+  "Return 200" [shape=box];
+  "Receive request" -> "Authenticated?";
+  "Authenticated?" -> "Check quota" [label="yes"];
+  "Authenticated?" -> "Return 401" [label="no"];
+  "Check quota" -> "Run handler";
+  "Run handler" -> "Return 200";
+  "Return 401" -> "Return 200";
+}

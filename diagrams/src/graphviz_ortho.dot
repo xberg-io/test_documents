@@ -1,0 +1,19 @@
+digraph graphviz_ortho {
+  splines=ortho;
+  rankdir=TB;
+  nodesep=0.8;
+  ranksep=0.8;
+  node [shape=box style=filled fillcolor="#ccebc5"];
+
+  client [label="Client"];
+  lb [label="Balancer"];
+  web1 [label="Web 1"];
+  web2 [label="Web 2"];
+  db [label="Database"];
+
+  client -> lb;
+  lb -> web1;
+  lb -> web2;
+  web1 -> db;
+  web2 -> db;
+}

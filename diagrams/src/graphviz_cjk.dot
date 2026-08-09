@@ -1,0 +1,17 @@
+digraph graphviz_cjk {
+  rankdir=LR;
+  // Stroke-only nodes: no fill at all, so a recogniser keying on filled regions
+  // sees nothing. Labels are CJK, Hebrew and Arabic, none of which are Latin-1.
+  node [shape=box];
+
+  jp [label="受注処理"];
+  kr [label="검증"];
+  he [label="אימות"];
+  ar [label="اعتماد"];
+  zh [label="完成"];
+
+  jp -> kr [label="次"];
+  kr -> he;
+  he -> ar;
+  ar -> zh [label="סיום"];
+}

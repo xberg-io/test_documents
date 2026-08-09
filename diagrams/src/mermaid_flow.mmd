@@ -1,0 +1,7 @@
+flowchart TD
+    start([Receive request]) --> auth{Authenticated?}
+    auth -->|yes| quota[Check quota]
+    auth -->|no| reject[Return 401]
+    quota --> handler[Run handler]
+    handler --> respond([Return 200])
+    reject --> respond

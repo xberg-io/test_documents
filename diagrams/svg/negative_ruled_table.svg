@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Hand-authored negative control. A table drawn as ruling lines has the same signature as a
+     node/edge diagram: closed rectangular regions with text inside them, joined by straight
+     strokes that run from the edge of one region to the edge of the next. Nothing here is a
+     graph, and recovering anything from it is a false positive. This is the single most
+     dangerous negative in the set, because it also has to not collide with table detection. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="230" viewBox="0 0 520 230">
+  <title>Quarterly revenue by region</title>
+  <rect x="0" y="0" width="520" height="230" fill="white"/>
+  <text x="20" y="26" font-family="Helvetica, sans-serif" font-size="15" font-weight="bold">Quarterly revenue by region</text>
+
+  <g stroke="#333333" stroke-width="1" fill="none">
+    <rect x="20" y="44" width="480" height="160"/>
+    <line x1="20" y1="76" x2="500" y2="76"/>
+    <line x1="20" y1="108" x2="500" y2="108"/>
+    <line x1="20" y1="140" x2="500" y2="140"/>
+    <line x1="20" y1="172" x2="500" y2="172"/>
+    <line x1="180" y1="44" x2="180" y2="204"/>
+    <line x1="286" y1="44" x2="286" y2="204"/>
+    <line x1="393" y1="44" x2="393" y2="204"/>
+  </g>
+
+  <g font-family="Helvetica, sans-serif" font-size="13" fill="#111111">
+    <g font-weight="bold">
+      <text x="32" y="65">Region</text>
+      <text x="192" y="65">Q1</text>
+      <text x="298" y="65">Q2</text>
+      <text x="405" y="65">Q3</text>
+    </g>
+    <text x="32" y="97">North</text>
+    <text x="192" y="97">1,204</text>
+    <text x="298" y="97">1,388</text>
+    <text x="405" y="97">1,502</text>
+
+    <text x="32" y="129">South</text>
+    <text x="192" y="129">942</text>
+    <text x="298" y="129">1,011</text>
+    <text x="405" y="129">1,140</text>
+
+    <text x="32" y="161">East</text>
+    <text x="192" y="161">1,655</text>
+    <text x="298" y="161">1,702</text>
+    <text x="405" y="161">1,690</text>
+
+    <text x="32" y="193">West</text>
+    <text x="192" y="193">803</text>
+    <text x="298" y="193">877</text>
+    <text x="405" y="193">934</text>
+  </g>
+</svg>

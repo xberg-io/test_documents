@@ -1,0 +1,12 @@
+@startuml plantuml_activity
+skinparam monochrome false
+skinparam shadowing false
+
+(*) --> "Read config"
+"Read config" --> "Open input"
+"Open input" --> "Detect format"
+"Detect format" --> "Extract text"
+"Extract text" --> "Render markdown"
+"Render markdown" --> (*)
+
+@enduml
