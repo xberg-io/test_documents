@@ -3,39 +3,39 @@
  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg width="185pt" height="309pt"
  viewBox="0.00 0.00 185.00 309.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g class="graph" transform="scale(1 1) rotate(0) translate(4 305.03)">
+<g transform="scale(1 1) rotate(0) translate(4 305.03)">
 <title>graphviz_network</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-305.03 180.78,-305.03 180.78,4 -4,4"/>
-<g class="node">
+<g>
 <ellipse fill="#8dd3c7" stroke="black" cx="69.14" cy="-142.65" rx="43.67" ry="18"/>
 <text xml:space="preserve" text-anchor="middle" x="69.14" y="-137.6" font-family="Times,serif" font-size="14.00">Gateway</text>
 </g>
-<g class="node">
+<g>
 <ellipse fill="#ffffb3" stroke="black" cx="53.04" cy="-213.12" rx="45.21" ry="18"/>
 <text xml:space="preserve" text-anchor="middle" x="53.04" y="-208.07" font-family="Times,serif" font-size="14.00">Switch A</text>
 </g>
-<g class="edge">
+<g>
 <path fill="none" stroke="black" d="M65,-160.8C62.61,-171.24 59.62,-184.32 57.23,-194.79"/>
 </g>
-<g class="node">
+<g>
 <ellipse fill="#ffffb3" stroke="black" cx="99.2" cy="-76.82" rx="45.21" ry="18"/>
 <text xml:space="preserve" text-anchor="middle" x="99.2" y="-71.77" font-family="Times,serif" font-size="14.00">Switch B</text>
 </g>
-<g class="edge">
+<g>
 <path fill="none" stroke="black" d="M77.36,-124.66C81.6,-115.37 86.76,-104.07 91,-94.78"/>
 </g>
-<g class="node">
+<g>
 <ellipse fill="#cccccc" stroke="black" cx="35.49" cy="-283.03" rx="35.49" ry="18"/>
 <text xml:space="preserve" text-anchor="middle" x="35.49" y="-277.98" font-family="Times,serif" font-size="14.00">Host 1</text>
 </g>
-<g class="edge">
+<g>
 <path fill="none" stroke="black" d="M48.43,-231.49C45.83,-241.85 42.59,-254.73 40.01,-265.03"/>
 </g>
-<g class="node">
+<g>
 <ellipse fill="#cccccc" stroke="black" cx="141.3" cy="-18" rx="35.49" ry="18"/>
 <text xml:space="preserve" text-anchor="middle" x="141.3" y="-12.95" font-family="Times,serif" font-size="14.00">Host 2</text>
 </g>
-<g class="edge">
+<g>
 <path fill="none" stroke="black" d="M111.83,-59.17C117.26,-51.59 123.57,-42.76 128.97,-35.23"/>
 </g>
 </g>

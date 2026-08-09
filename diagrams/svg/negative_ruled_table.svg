@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Hand-authored negative control. A table drawn as ruling lines has the same signature as a
-     node/edge diagram: closed rectangular regions with text inside them, joined by straight
-     strokes that run from the edge of one region to the edge of the next. Nothing here is a
-     graph, and recovering anything from it is a false positive. This is the single most
-     dangerous negative in the set, because it also has to not collide with table detection. -->
 <svg xmlns="http://www.w3.org/2000/svg" width="520" height="230" viewBox="0 0 520 230">
   <title>Quarterly revenue by region</title>
   <rect x="0" y="0" width="520" height="230" fill="white"/>

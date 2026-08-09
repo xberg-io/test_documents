@@ -33,17 +33,22 @@ way:
 <g id="edge1" class="edge"><title>a&#45;&gt;b</title><path d="M63,-234.8C63,-227.2 63,-208.2"/></g>
 <!-- a&#45;&gt;b -->
 
-<!-- mermaid: both endpoints, twice -->
-<path id="L_start_auth_0" data-id="L_start_auth_0" class="flowchart-link" d="..."/>
+<!-- mermaid: both endpoints twice over, then every waypoint as base64 JSON -->
+<path id="L_start_auth_0" data-id="L_start_auth_0" data-points="W3sieCI6..." class="flowchart-link"/>
 
-<!-- plantuml: both endpoints, twice -->
-<g id="Read config-to-Open input" class="link">
+<!-- plantuml: both endpoints four times over -->
+<g id="Read config-to-Open input" class="link" data-entity-1="ent0002" data-entity-2="ent0003">
 <!--link Read config to Open input-->
+<?plantuml-src _pSf...?>   <!-- and the entire source, raw-deflated -->
 ```
 
 That is the complete edge list, verbatim, in the file — and xberg's SVG extractor already collects
-`<title>` (`SVG_TEXT_ELEMENTS` in `extraction/xml.rs`). A recogniser that reads it scores 4/4 nodes
-and 4/4 edges on every Graphviz fixture without inspecting a single coordinate.
+`<title>` (`SVG_TEXT_ELEMENTS` in `extraction/xml.rs`). A recogniser that reads it scores full marks
+on every Graphviz fixture without inspecting a single coordinate.
+
+The last of those is the one worth dwelling on. A `<?plantuml-src?>` processing instruction is not
+readable prose and does not show up in a grep for node names, but it decodes to the complete source
+— comments included. A file can look clean and still be handing over the whole answer.
 
 Reading it is not cheating: when a file states its graph, using it is the correct and exact thing
 to do — that is what Class A *is*. It is simply a different capability from inferring a graph from
@@ -55,20 +60,41 @@ python3 scripts/strip_svg_graph_metadata.py \
   diagrams/svg/graphviz_flow.svg diagrams/svg/graphviz_flow_geometry.svg
 ```
 
-The stripper works on two producer-agnostic rules rather than a list of the dialects seen so far:
-drop `<title>` inside an element group, and drop every identifier the document itself never refers
-to. What stays is anything giving an element's *type* without naming its endpoints — `class="node"`,
-`class="com.sun.star.drawing.ConnectorShape"` — because knowing a stroke is some connector still
-leaves you the whole job of working out what it connects. XML comments go entirely; provenance
-belongs in `manifest.json`, which is where a reader should be looking for it.
+The stripper works on five producer-agnostic rules rather than a list of the dialects seen so far.
+Drop `<title>` inside an element group. Drop every XML comment. Drop every processing instruction
+except the XML declaration. And then the three that share one test — drop every identifier, every
+`data-*` attribute and every `class` token that nothing in the document itself refers to. That test
+is the whole design: an attribute no `url(#...)`, no `href="#..."` and no stylesheet selector points
+at cannot affect a single pixel, so removing it is provably safe, and the only reason it is in the
+file is to say which element this is. Which is the answer.
+
+The last rule replaced an earlier one that kept `class` outright, on the reasoning that a class
+gives an element's *type* without naming its endpoints. That holds for one class read in isolation
+and collapses across a file. `graphviz_clusters.svg` carries 5 `class="node"`, 4 `class="edge"` and
+2 `class="cluster"` against a ground truth of exactly 5 nodes, 4 edges and 2 clusters, and each
+`<g class="node">` wraps that node's own shape *and* its own label — so node recall, node extent and
+label association are all lookups, and `class="cluster"` hands over the is-this-a-node judgement
+that the cluster fixture exists to pose. Type per element, applied to every element, is the graph's
+partition.
+
+What survives is whatever the document actually uses. Mermaid's stylesheet selects on
+`[data-look="neo"]`, `.flowchart-link` and `.labelBkg`, so those stay — load-bearing exactly as
+`url(#...)` makes an id load-bearing. Graphviz ships no `<style>` at all, so nothing of its
+vocabulary survives. Provenance goes with the comments; it belongs in `manifest.json`, which is
+where a reader should be looking for it.
 
 The `*_geometry.svg` variants share the ground truth of their originals: same answer, arrived at a
 harder way, and identical to the pixel — the stripped file renders to a byte-identical PNG.
 `manifest.json` marks which fixtures need one with `states_graph_in_metadata`.
 
-Two producers need no variant. LibreOffice numbers its shapes `id1`..`id9` and says only what kind
-of shape each one is; PlantUML's swimlane output carries no id, no class and no comment at all.
-Both are honest by construction.
+Every producer in the set needs a variant. Two were once believed not to, and both beliefs were
+wrong in the same way — the answer was in a place nobody had looked.
+
+PlantUML's swimlane output carries no id, no class and no comment anywhere, and shipped without a
+variant on that basis. The graph was in a `<?plantuml-src?>` processing instruction the whole time.
+LibreOffice numbers its shapes `id1`..`id9` and was said to give only each shape's kind — but it
+tags exactly 4 groups `...CustomShape` and exactly 3 `...ConnectorShape`, against a ground truth of
+exactly 4 nodes and 3 edges. Both now ship stripped, and rules 4 and 5 are those two lessons.
 
 ## What each fixture exercises
 
@@ -76,7 +102,7 @@ Positives, by producer:
 
 | file | producer | n/e | exercises |
 |---|---|---|---|
-| `svg/graphviz_flow.svg` | Graphviz | 4/4 | box, diamond and ellipse nodes; arrowheads; edge labels; a dashed edge; root `translate` with negative coordinates |
+| `svg/graphviz_flow.svg` | Graphviz | 4/4 | box, diamond and ellipse nodes; arrowheads; edge labels; a dashed edge; a root `translate` that shifts every coordinate in the file |
 | `svg/graphviz_states.svg` | Graphviz | 4/4 | `doublecircle` — one node drawn as two concentric outlines; a pair of antiparallel edges |
 | `svg/graphviz_network.svg` | Graphviz | 5/4 | undirected `--` edges, so no arrowhead anywhere; `neato` layout |
 | `svg/graphviz_bidirectional.svg` | Graphviz | 3/3 | `dir=both` and `dir=back` — the arrowhead at the tail, so the edge reads the other way round |
@@ -94,14 +120,82 @@ Positives, by producer:
 | `svg/nested_transforms.svg` | hand-authored | 4/3 | nested `translate`/`scale` groups plus a viewBox that differs from the viewport, so nothing sits at the coordinate it is written at |
 | `svg/icon_nodes.svg` | hand-authored | 4/3 | the AWS/Azure house style: a node is an icon glyph with its caption underneath and no outline at all |
 | `svg/mixed_page.svg` | hand-authored | 3/2 | a whole page — heading, prose, a ruled table, and one figure. Recovery has to be selective *within* the page |
-| `xml/org_chart.svg` | hand-authored | 9/3 | multi-line labels, six isolated nodes |
+| `svg/two_diagrams.svg` | hand-authored | 3/2 + 4/3 | **two** graphs on one page, sharing no node and no edge, separated only by whitespace and a caption |
+| `xml/org_chart.svg` | hand-authored | 9/3 | multi-line labels, six isolated nodes, `marker-end` arrowheads |
 | `xml/flowchart.svg` | hand-authored | 4/3 | `marker-end` arrowheads, annotations outside every shape |
 
-`src/` holds every source — `.dot`, `.mmd`, `.puml`, `.fodg` — so all of the above is regenerable.
+`src/` holds every source — `.dot`, `.mmd`, `.puml`, `.fodg`, `.html` — so all of the above is
+regenerable.
+
+## Vector PDF
+
+PDF is where recovery is hardest, and the reason is structural: a page holds path operators and
+positioned glyphs and nothing else. No element ids, no `<title>`, no `class`. Everything the
+[metadata problem](#the-metadata-problem) is about is destroyed by the container itself, so these
+files need no `_geometry` variant — they are geometry-only by construction, and they are the
+strictest Class B measurement in the set.
+
+Seven of them redraw a graph that also ships as SVG, against the same ground truth. Scoring the pair
+apart separates what an implementation knows about graphs from what it knows about SVG.
+
+| file | writer | drawn from | n/e | exercises |
+|---|---|---|---|---|
+| `pdf/cairo_graphviz_flow.pdf` | cairo | `src/graphviz_flow.dot` | 4/4 | the SVG fixture's graph in a different container |
+| `pdf/cairo_graphviz_ortho.pdf` | cairo | `src/graphviz_ortho.dot` | 5/5 | elbows as bare `m`/`l` runs with no element boundary to group them |
+| `pdf/cairo_graphviz_large.pdf` | cairo | `src/graphviz_large.dot` | 128/141 | scale, where cost is content-stream parsing rather than graph size |
+| `pdf/cairo_two_diagrams.pdf` | cairo | `svg/two_diagrams.svg` | 3/2 + 4/3 | two graphs on one page |
+| `pdf/skia_mermaid_flow.pdf` | Skia | `svg/mermaid_flow.svg` | 6/6 | the drawing that scored 0/6 as SVG, so the PDF says whether that was the dialect or the geometry |
+| `pdf/skia_mixed_page.pdf` | Skia | `svg/mixed_page.svg` | 3/2 | prose, a ruled table and one figure, in the container where xberg already runs table detection |
+| `pdf/skia_multipage_report.pdf` | Skia | `src/multipage_report.html` | 5/5 | **four pages, diagram on page 3.** Pages 1, 2 and 4 must yield nothing |
+| `pdf/libreoffice_connectors.pdf` | LibreOffice | `src/libreoffice_connectors.fodg` | 4/3 | the same drawing whose `.fodg` source is Class A and scores exactly 1.0 |
+
+Mermaid is the one producer that cannot go through cairo: it puts every label in a
+`<foreignObject>` of HTML, which librsvg does not render at all, so a cairo copy would have a graph
+and no text in it. Chrome renders it, which is also why Chrome is here as a second writer.
+
+### Determinism
+
+Every producer stamps a creation timestamp into the PDF `Info` dictionary, so two runs of the same
+command never agree byte for byte. Each fixture is therefore rebuilt from its pages alone:
+
+```sh
+qpdf --empty --deterministic-id --pages raw.pdf 1-z -- diagrams/pdf/<name>.pdf
+```
+
+That drops the `Info` dictionary and derives the file id from the content instead of the clock.
+`scripts/build_diagram_pdfs.py` runs both halves, and `--check` rebuilds and compares, so the
+command recorded in `manifest.json` is a claim that can be tested rather than a note about what
+someone once ran. The check is machine-local — PDFs embed subsetted fonts, so a machine with
+different font files produces different bytes; reproducing across machines is what the
+content-addressed bucket and `corpus.lock.json` are for.
+
+PDFs are corpus binaries: they are **not** in git. `python3 scripts/fetch_corpus.py` brings them
+down, and `corpus.lock.json` pins each one by sha256.
+
+### Embedded fonts
+
+A PDF carries subsetted outlines of whatever fonts the renderer reached for, so publishing one
+redistributes font data. Each family here was checked against the OS/2 `fsType` bit of the system
+font it came from — where a font states its own embedding terms. Helvetica and Liberation Sans
+report 0 (installable), Times New Roman and Trebuchet MS report 8 (editable); all four permit it.
+`build_diagram_pdfs.py` holds that allowlist and fails a build that reaches outside it. The check
+reads the built PDF with `mutool`; where `mutool` is absent it warns and passes rather than
+silently vouching for fonts it never looked at.
+
+That check is why there is no CJK PDF. macOS's Songti reports `fsType` 2 — restricted, embedding
+forbidden without the owner's permission — so `graphviz_cjk` ships as SVG only. Rendering it needs
+an open-licensed CJK face (Noto Sans CJK) installed; macOS has none, and LibreOffice bundles Noto
+for Arabic and Hebrew but not for CJK.
 
 ## Ground-truth conventions
 
 - **Keyed by node label.** A recogniser's own numbering never enters into it.
+- **Shape as drawn, not as declared.** `shape=` records the outline the file actually draws, to the
+  nearest thing DOT can say: a Graphviz `circle` stays `circle` and not the `ellipse` element it is
+  emitted as, a Mermaid stadium and a PlantUML activity are `box style=rounded`, a `doublecircle` is
+  one node with two concentric outlines rather than two nodes. Where DOT has no equivalent the
+  nearest shape is used and the difference belongs in the fixture's manifest note. This rule exists
+  because its absence is how `graphviz_states` came to claim four ellipses it never drew.
 - **Only labelled nodes.** An unlabelled decoration — PlantUML's start/stop markers, an arrowhead,
   a pie chart's leader dot — has no key and is not a node, and an edge joining one is not an edge.
 - **Containers are not nodes.** Cluster rectangles, swimlane bands and lane headers are absent from
@@ -114,10 +208,17 @@ Positives, by producer:
 - **Undirected stays undirected** — `graph` and `--`, never restated as a `digraph`.
 - **Comments carry no DOT syntax.** Not every consumer strips `//`, so a comment mentioning
   `a -> b` gets scored as an edge. `test_diagram_manifest.py` enforces this.
+- **One file, many graphs.** A document holding more than one graph gets `<stem>.g0.dot`,
+  `<stem>.g1.dot`, and it is `manifest.json` that says so — the file layout is not load-bearing.
+- **Where it is, not just what it is.** `page` is 1-based and `bbox` is `[x0, y0, x1, y1]` across
+  the graph's node outlines, in SVG user space or in points from the top-left of the PDF page.
+  Both run y downwards; PDF user space runs y upwards, so raw PDF coordinates need flipping. It is
+  recorded only where the page holds more than the graph, because that is the only time it tells a
+  right answer apart from one that is right by accident.
 
 ## Negatives
 
-Six fixtures have `"negative": true`, an empty ground-truth file and a stated `reason` in the
+Eight fixtures have `"negative": true`, an empty ground-truth file and a stated `reason` in the
 manifest. Recovering anything from them is a false positive, and that is worth a test of its own.
 The empty file plus the reason is what keeps "not a diagram" and "not yet annotated" from being the
 same bytes.
@@ -139,9 +240,16 @@ same bytes.
   ECMAScript `<script>` and a gradient `<defs>`. Adjacency is stack containment, not connection, and
   there is not one connector in the file. It was already shipping; the only thing missing was the
   assertion that recovery returns nothing.
+- `pdf/skia_negative_ruled_table.pdf` — the ruled table in the container where it does the most
+  damage. A PDF table is ruling strokes and positioned glyphs with nothing to say it is a table,
+  which is the same evidence a box-and-connector recogniser reads.
+- `pdf/cairo_negative_pie_chart.pdf` — the pie chart in PDF, so the false positive it already
+  produces as SVG can be measured in both containers rather than argued about in one.
 
-`svg/mixed_page.svg` is the seventh case and the awkward one: a negative and a positive in the same
-file, so the answer cannot be decided per file.
+Two more cases are the awkward ones, where the answer cannot be decided per file:
+`svg/mixed_page.svg` and `pdf/skia_mixed_page.pdf` hold a negative and a positive on the same page,
+and `pdf/skia_multipage_report.pdf` holds three pages that must yield nothing and one that must
+yield a graph.
 
 ## Regenerate
 
@@ -167,11 +275,13 @@ soffice --headless --convert-to svg --outdir diagrams/svg diagrams/src/libreoffi
 
 for f in graphviz_flow graphviz_states graphviz_bidirectional graphviz_network \
          graphviz_clusters graphviz_ortho graphviz_record graphviz_cjk graphviz_large \
-         graphviz_selfloop mermaid_flow plantuml_activity; do
+         graphviz_selfloop mermaid_flow plantuml_activity plantuml_swimlane \
+         libreoffice_connectors; do
   python3 scripts/strip_svg_graph_metadata.py \
     "diagrams/svg/$f.svg" "diagrams/svg/${f}_geometry.svg"
 done
 
+python3 scripts/build_diagram_pdfs.py           # needs qpdf, and Chrome for the skia_* fixtures
 python3 scripts/check_diagram_ground_truth.py   # ground truth still matches what was drawn
 python3 -m unittest discover -s scripts         # manifest still matches the files
 ```
@@ -180,20 +290,26 @@ Output is stable for a given tool version; a different version may lay a graph o
 which changes coordinates but not the graph — and the ground truth is written in terms of the
 graph. The four Graphviz fixtures added before this set regenerate byte-identically under 15.1.1.
 
-`nested_transforms.svg`, `icon_nodes.svg`, `mixed_page.svg` and the three `negative_*.svg` are
-hand-authored and are not regenerated.
+`nested_transforms.svg`, `icon_nodes.svg`, `mixed_page.svg`, `two_diagrams.svg` and the three
+`negative_*.svg` are hand-authored and are not regenerated.
 
 ## Checks
 
-`scripts/test_diagram_manifest.py` runs in CI with no renderer installed and asserts that every
-indexed path exists, that the node and edge counts in the manifest match the ground truth, that an
-undirected graph is written as one, that every negative has an empty ground truth and a reason, and
-that each `*_geometry.svg` is byte-for-byte what stripping its parent produces — which is the only
-check that does not depend on knowing how a given producer encodes its answer.
+`scripts/test_diagram_manifest.py` runs in CI with no renderer installed. It asserts that every
+committed fixture exists and every corpus binary is pinned in `corpus.lock.json` — the right
+question for a file that is deliberately not in git is whether a consumer who fetches the corpus
+gets it. It also asserts that the node and edge counts in the manifest match the ground truth, that
+an undirected graph is written as one, that every negative has an empty ground truth and a reason,
+that every ground-truth label appears as text in the drawing it answers for, that every PDF the
+manifest indexes has a build recipe and vice versa, and that each `*_geometry.svg` is byte-for-byte
+what stripping its parent produces — the only check that does not depend on knowing how a given
+producer encodes its answer.
 
-`scripts/check_diagram_ground_truth.py` needs Graphviz and re-derives each graph from its `.dot`
-source with `dot -Tplain`, diffing it against the hand-written ground truth. It reports a skip
-rather than failing when Graphviz is absent.
+Two checks need tools and so are not in CI. `scripts/check_diagram_ground_truth.py` needs Graphviz
+and re-derives each graph from its `.dot` source with `dot -Tplain`, diffing it against the
+hand-written ground truth; `scripts/build_diagram_pdfs.py --check` needs qpdf and the renderers and
+proves each committed PDF is still what its recorded command produces. Both report a skip or a
+clear failure rather than pretending, and the Graphviz one exits 0 when Graphviz is absent.
 
 ## Why generated rather than hand-drawn
 
@@ -210,9 +326,17 @@ so the corpus measures recovery rather than freezing whatever the code currently
 
 ## Not yet here
 
-Vector PDF, PowerPoint and SmartArt connectors, DOCX canvas and VML, XLSX drawings, and the
-diagram-native formats (`.drawio`, `.excalidraw`, `.bpmn`, `.vsdx`, `.graphml`) are all still
-missing, as is draw.io's SVG dialect with its embedded `mxGraphModel`, and Excalidraw's, where one
-logical stroke becomes many wobbly subpaths. So is a multi-page document with the diagram on page
-N, which is what the `page` and `bbox` slots in the manifest exist for. See the plan on
-xberg-io/xberg#1410.
+PowerPoint and SmartArt connectors, DOCX canvas and VML, XLSX drawings, and the diagram-native
+formats (`.drawio`, `.excalidraw`, `.bpmn`, `.vsdx`, `.graphml`) are all still missing — every one
+of them Class A, where the file states its graph and a correct implementation has to score exactly
+1.0. So is draw.io's SVG dialect with its embedded `mxGraphModel`, and Excalidraw's, where one
+logical stroke becomes many wobbly subpaths.
+
+Two Class B gaps are deliberate rather than pending. Nothing here is real-world third-party work;
+every fixture is authored in this repo, which keeps licensing simple but means no fixture has the
+messiness of a diagram someone actually drew. And there is no fixture whose labels are outlined
+into curves — the Illustrator and matplotlib export where the graph is fully recoverable and not
+one label is — because the ground-truth format is keyed by label and cannot express "these five
+nodes, names unknowable". That is a scoring-model question first and a fixture second.
+
+See the plan on xberg-io/xberg#1410.

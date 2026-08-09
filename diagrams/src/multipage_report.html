@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Change management report</title>
+<!-- Source for diagrams/pdf/skia_multipage_report.pdf. -->
+<style>
+  @page { size: letter; margin: 20mm; }
+  body { font-family: Helvetica, Arial, sans-serif; color: #111; font-size: 11pt; line-height: 1.5; }
+  section { page-break-after: always; }
+  section:last-child { page-break-after: auto; }
+  h1 { font-size: 18pt; margin: 0 0 12pt; }
+  h2 { font-size: 13pt; margin: 0 0 8pt; }
+  table { border-collapse: collapse; width: 100%; font-size: 10pt; }
+  th, td { border: 1px solid #333; padding: 6pt 8pt; text-align: left; }
+  figcaption { font-size: 9pt; color: #555; margin-top: 6pt; }
+  figure { margin: 16pt 0 0; }
+</style>
+</head>
+<body>
+
+<section>
+  <h1>Change management report</h1>
+  <p>This report covers the review period and records how change requests were handled. It is
+  written for readers who need the outcome rather than the detail, so the substance is in the
+  table on the next page and in the figure that follows it.</p>
+  <p>Requests arrive from three sources: the on-call rota, the quarterly planning cycle, and
+  direct customer escalations. All three enter the same queue and are ranked by impact before
+  anyone is assigned to them.</p>
+  <p>The period saw fewer emergency changes than the one before it, which the team attributes to
+  the longer soak time now required before a release is promoted.</p>
+</section>
+
+<section>
+  <h2>Requests by category</h2>
+  <p>Counts are taken at the end of the period and exclude anything still open.</p>
+  <table>
+    <thead>
+      <tr><th>Category</th><th>Raised</th><th>Completed</th><th>Median days</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Standard</td><td>184</td><td>179</td><td>4</td></tr>
+      <tr><td>Normal</td><td>62</td><td>58</td><td>11</td></tr>
+      <tr><td>Emergency</td><td>9</td><td>9</td><td>1</td></tr>
+      <tr><td>Deferred</td><td>7</td><td>0</td><td>n/a</td></tr>
+    </tbody>
+  </table>
+  <p>Deferred requests are carried into the next period and are not counted as completed here.</p>
+</section>
+
+<section>
+  <h2>How a request moves</h2>
+  <p>Requests are handled the same way whichever source they arrived from. The route below was
+  unchanged over the review period.</p>
+  <figure>
+    <svg xmlns="http://www.w3.org/2000/svg" width="460" height="300" viewBox="0 0 460 300">
+      <defs>
+        <marker id="tip" viewBox="0 0 10 10" refX="9" refY="5"
+                markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#333333"/>
+        </marker>
+      </defs>
+      <g fill="#eef3ea" stroke="#4a6b35" stroke-width="1.4">
+        <rect x="170" y="10" width="120" height="40" rx="6"/>
+        <rect x="170" y="85" width="120" height="40" rx="6"/>
+        <rect x="30" y="160" width="120" height="40" rx="6"/>
+        <rect x="310" y="160" width="120" height="40" rx="6"/>
+        <rect x="170" y="240" width="120" height="40" rx="6"/>
+      </g>
+      <g font-family="Helvetica, sans-serif" font-size="13" fill="#111111" text-anchor="middle">
+        <text x="230" y="35">Submit</text>
+        <text x="230" y="110">Triage</text>
+        <text x="90" y="185">Approve</text>
+        <text x="370" y="185">Reject</text>
+        <text x="230" y="265">Archive</text>
+      </g>
+      <g stroke="#333333" stroke-width="1.4" fill="none" marker-end="url(#tip)">
+        <path d="M 230 50 L 230 81"/>
+        <path d="M 230 125 L 230 145 L 90 145 L 90 156"/>
+        <path d="M 230 125 L 230 145 L 370 145 L 370 156"/>
+        <path d="M 90 200 L 90 225 L 200 225 L 200 236"/>
+        <path d="M 370 200 L 370 225 L 260 225 L 260 236"/>
+      </g>
+    </svg>
+    <figcaption>Figure 1. The lifecycle of a change request.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>Conclusion</h2>
+  <p>No process change is proposed for the next period. The queue is keeping pace with intake and
+  the deferred backlog is small enough to clear inside one cycle.</p>
+  <p>Reporting for the next period will use the same four categories, so the counts above stay
+  comparable across cycles.</p>
+</section>
+
+</body>
+</html>

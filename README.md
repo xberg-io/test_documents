@@ -122,8 +122,10 @@ Two kinds are not plain text:
 
 - `ground_truth/dot/<stem>.dot` — the node/edge graph a diagram fixture draws, as Graphviz DOT keyed
   by node label. Indexed by `diagrams/manifest.json`, which also carries provenance, the recovery
-  class, and the page/bbox of each graph within its document. An empty file means the fixture is a
-  negative control, and the manifest says why. See `diagrams/README.md`.
+  class, and the page/bbox of each graph within its document. A document holding more than one
+  graph gets `<stem>.g0.dot`, `<stem>.g1.dot`, named by the manifest rather than by convention. An
+  empty file means the fixture is a negative control, and the manifest says why. See
+  `diagrams/README.md`.
 - `ground_truth/structured/` — field- and formula-level extraction targets, with their own manifest.
 
 Two files index the rest:
@@ -194,9 +196,11 @@ CI (`.github/workflows/verify-corpus.yaml`) runs exactly these on every push and
 needs no credentials: it proves the manifest is still fetchable rather than trying to publish.
 
 The unittest suite also covers the corpus itself where the corpus can contradict its own answer
-key — `scripts/test_diagram_manifest.py` checks `diagrams/manifest.json` against the files and the
-ground truth on disk. One further check needs a renderer and so is not part of CI:
+key — `scripts/test_diagram_manifest.py` checks `diagrams/manifest.json` against the files, against
+`corpus.lock.json` for the fixtures that are corpus binaries, and against the ground truth on disk.
+Two further checks need renderers and so are not part of CI:
 
 ```sh
 python3 scripts/check_diagram_ground_truth.py   # needs graphviz; skips cleanly without it
+python3 scripts/build_diagram_pdfs.py --check   # needs qpdf, graphviz, librsvg, Chrome, LibreOffice
 ```

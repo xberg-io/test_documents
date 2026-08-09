@@ -1,0 +1,15 @@
+digraph multipage_report {
+  // Page 3 of four. Pages 1 and 4 are prose and page 2 is a ruled table; none of them holds a
+  // node or an edge, and an answer that reports a graph for any of them is a false positive on
+  // a page rather than on a file.
+  "Submit" [shape=box];
+  "Triage" [shape=box];
+  "Approve" [shape=box];
+  "Reject" [shape=box];
+  "Archive" [shape=box];
+  "Submit" -> "Triage";
+  "Triage" -> "Approve";
+  "Triage" -> "Reject";
+  "Approve" -> "Archive";
+  "Reject" -> "Archive";
+}

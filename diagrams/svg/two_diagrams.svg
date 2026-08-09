@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="260" viewBox="0 0 640 260">
+  <title>Two independent figures</title>
+  <defs>
+    <marker id="tip" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#333333"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="640" height="260" fill="white"/>
+
+  <g fill="#e8eef7" stroke="#33518a" stroke-width="1.4">
+    <rect x="28" y="40" width="104" height="44" rx="6"/>
+    <rect x="28" y="112" width="104" height="44" rx="6"/>
+    <rect x="28" y="184" width="104" height="44" rx="6"/>
+  </g>
+  <g font-family="Helvetica, sans-serif" font-size="13" fill="#111111" text-anchor="middle">
+    <text x="80" y="67">Draft</text>
+    <text x="80" y="139">Review</text>
+    <text x="80" y="211">Publish</text>
+  </g>
+  <g stroke="#333333" stroke-width="1.4" marker-end="url(#tip)">
+    <line x1="80" y1="84" x2="80" y2="108"/>
+    <line x1="80" y1="156" x2="80" y2="180"/>
+  </g>
+
+  <g fill="#fdf1e3" stroke="#a2621b" stroke-width="1.4">
+    <rect x="356" y="40" width="104" height="44" rx="6"/>
+    <rect x="248" y="160" width="104" height="44" rx="6"/>
+    <rect x="356" y="160" width="104" height="44" rx="6"/>
+    <rect x="464" y="160" width="104" height="44" rx="6"/>
+  </g>
+  <g font-family="Helvetica, sans-serif" font-size="13" fill="#111111" text-anchor="middle">
+    <text x="408" y="67">Order</text>
+    <text x="300" y="187">Pick</text>
+    <text x="408" y="187">Pack</text>
+    <text x="516" y="187">Ship</text>
+  </g>
+  <g stroke="#333333" stroke-width="1.4" marker-end="url(#tip)" fill="none">
+    <path d="M 408 84 L 408 120 L 300 120 L 300 156"/>
+    <path d="M 408 84 L 408 156"/>
+    <path d="M 408 84 L 408 120 L 516 120 L 516 156"/>
+  </g>
+
+  <g font-family="Helvetica, sans-serif" font-size="11" fill="#555555">
+    <text x="28" y="250">Figure 1. Editorial states.</text>
+    <text x="248" y="250">Figure 2. Fulfilment steps.</text>
+  </g>
+</svg>

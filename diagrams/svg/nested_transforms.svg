@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Hand-authored. Every shape and label sits under a chain of `transform`
-  attributes, and the viewBox is half the viewport, so nothing lands at the
-  coordinate it is written at. A recogniser that reads coordinates literally
-  puts every label outside its box.
--->
-<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 320 240">
+<svg xmlns="http://www.w3.org/2000/svg" width="648" height="512" viewBox="0 0 324 256">
   <title>Nested Transforms</title>
-  <desc>Three-stage pipeline drawn inside translated, scaled and rotated groups</desc>
+  <desc>Pipeline stages drawn inside nested translated and scaled groups</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#555555"/>
+    </marker>
+    <marker id="arrow-error" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#e15759"/>
+    </marker>
+  </defs>
 
   <g transform="translate(20,15)">
     <g transform="scale(1.25)">
@@ -27,15 +32,15 @@
         <text x="55" y="35" text-anchor="middle" fill="#ffffff" font-family="Helvetica" font-size="12">Publish</text>
       </g>
 
-      <line x1="55" y1="50" x2="55" y2="80" stroke="#555555" stroke-width="2"/>
-      <line x1="55" y1="120" x2="55" y2="150" stroke="#555555" stroke-width="2"/>
+      <line x1="55" y1="50" x2="55" y2="80" stroke="#555555" stroke-width="2" marker-end="url(#arrow)"/>
+      <line x1="55" y1="120" x2="55" y2="150" stroke="#555555" stroke-width="2" marker-end="url(#arrow)"/>
 
       <g transform="translate(140,0)">
         <rect x="10" y="80" width="90" height="40" rx="4" fill="#e15759" stroke="#8c3335" stroke-width="2" stroke-dasharray="6 3"/>
         <text x="55" y="105" text-anchor="middle" fill="#ffffff" font-family="Helvetica" font-size="12">Quarantine</text>
       </g>
 
-      <line x1="100" y1="100" x2="150" y2="100" stroke="#e15759" stroke-width="2" stroke-dasharray="6 3"/>
+      <line x1="100" y1="100" x2="150" y2="100" stroke="#e15759" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#arrow-error)"/>
       <text x="125" y="94" text-anchor="middle" fill="#8c3335" font-family="Helvetica" font-size="9">on error</text>
 
     </g>

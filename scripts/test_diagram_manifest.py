@@ -5,8 +5,13 @@ disk is worse than no answer key: it makes a scorer report numbers nobody can ac
 run in CI, need no Graphviz, and cover the two ways it has already gone wrong once -- a
 fixture path that does not exist, and a geometry-only variant that still states its answer.
 
-The Graphviz sources are cross-checked against what Graphviz actually drew separately, by
-`scripts/check_diagram_ground_truth.py`, which needs the renderer.
+Some fixtures are corpus binaries and so are absent from a fresh checkout. For those the question
+is not whether the file is on disk but whether `corpus.lock.json` pins it, because that is what
+decides whether a consumer who fetches the corpus gets it.
+
+Two cross-checks need tools and live elsewhere: `scripts/check_diagram_ground_truth.py` re-derives
+the Graphviz graphs with the renderer, and `scripts/build_diagram_pdfs.py --check` rebuilds the
+PDFs and compares the bytes.
 """
 
 from __future__ import annotations
@@ -16,11 +21,21 @@ import re
 import unittest
 from pathlib import Path
 
+from build_diagram_pdfs import RECIPES
+from publish_corpus import load_patterns, matches_corpus_pattern
 from strip_svg_graph_metadata import referenced_ids, strip
 
 ROOT = Path(__file__).resolve().parent.parent
 MANIFEST = json.loads((ROOT / "diagrams" / "manifest.json").read_text(encoding="utf-8"))
 FIXTURES = MANIFEST["fixtures"]
+PATTERNS = load_patterns(ROOT)
+PINNED = json.loads((ROOT / "corpus.lock.json").read_text(encoding="utf-8"))["objects"]
+
+
+def is_bucket_managed(path: str) -> bool:
+    """A corpus binary is absent from a fresh checkout, so it is pinned rather than committed."""
+    return matches_corpus_pattern(path, PATTERNS)
+
 
 COMMENT = re.compile(r"//.*")
 GT_NODE = re.compile(r'^\s*"([^"]+)"\s*\[', re.M)
@@ -34,10 +49,25 @@ def ground_truths(fixture: dict) -> list[Path]:
 
 
 class FixtureFilesTest(unittest.TestCase):
-    def test_should_index_a_file_that_exists(self) -> None:
+    def test_should_index_a_committed_file_that_exists(self) -> None:
         for fixture in FIXTURES:
+            if is_bucket_managed(fixture["path"]):
+                continue
             with self.subTest(fixture["path"]):
                 self.assertTrue((ROOT / fixture["path"]).is_file())
+
+    def test_should_index_a_corpus_binary_that_the_lock_file_pins(self) -> None:
+        # The PDFs are not in git, so CI checks out a tree without them and "does the file exist"
+        # is the wrong question. The one that matters is whether a consumer who fetches the corpus
+        # gets them, and that is decided by corpus.lock.json.
+        for fixture in FIXTURES:
+            if not is_bucket_managed(fixture["path"]):
+                continue
+            with self.subTest(fixture["path"]):
+                self.assertTrue(
+                    fixture["path"] in PINNED,
+                    f"{fixture['path']} is not in corpus.lock.json; publish it before pushing",
+                )
 
     def test_should_point_at_a_ground_truth_that_exists(self) -> None:
         for fixture in FIXTURES:
@@ -64,6 +94,20 @@ class FixtureFilesTest(unittest.TestCase):
         indexed |= {f["geometry_only_variant"] for f in FIXTURES if f.get("geometry_only_variant")}
         on_disk = {str(path.relative_to(ROOT)) for path in (ROOT / "diagrams" / "svg").glob("*.svg")}
         self.assertEqual(set(), on_disk - indexed, "fixture on disk that the manifest does not index")
+
+    def test_should_build_every_pdf_it_indexes_and_index_every_pdf_it_builds(self) -> None:
+        # A PDF cannot be reviewed by reading it, so the only thing standing between the manifest
+        # and a file nobody can account for is the recipe that produced it.
+        indexed = {f["path"] for f in FIXTURES if f["path"].startswith("diagrams/pdf/")}
+        self.assertEqual(indexed, set(RECIPES))
+
+    def test_should_build_every_pdf_from_a_source_the_manifest_agrees_with(self) -> None:
+        for fixture in FIXTURES:
+            source, _renderer = RECIPES.get(fixture["path"], (None, None))
+            if source is None:
+                continue
+            with self.subTest(fixture["path"]):
+                self.assertEqual(fixture["source"], source)
 
 
 class GroundTruthAgreementTest(unittest.TestCase):
@@ -98,6 +142,22 @@ class GroundTruthAgreementTest(unittest.TestCase):
                 # The empty file keeps "not a diagram" and "not yet annotated" apart: the
                 # reason in the manifest is what says which one this is.
                 self.assertEqual("", (ROOT / fixture["ground_truth"]).read_text(encoding="utf-8"))
+
+    def test_should_name_every_ground_truth_node_in_the_drawing_it_answers_for(self) -> None:
+        # The Graphviz fixtures get their ground truth re-derived from source by
+        # scripts/check_diagram_ground_truth.py. The hand-authored ones have no source to derive
+        # from, so this is what stands between them and a label that was mistyped into the answer
+        # key -- an answer nothing in the file can ever produce, and a permanent lost point.
+        for fixture in FIXTURES:
+            if is_bucket_managed(fixture["path"]) or not fixture["path"].endswith(".svg"):
+                continue
+            body = (ROOT / fixture["path"]).read_text(encoding="utf-8")
+            for graph in fixture["graphs"]:
+                text = COMMENT.sub("", (ROOT / graph["ground_truth"]).read_text(encoding="utf-8"))
+                for label in GT_NODE.findall(text):
+                    for word in label.replace("\\n", " ").split():
+                        with self.subTest(fixture=fixture["path"], word=word):
+                            self.assertIn(word, body)
 
     def test_should_write_a_comment_that_cannot_be_misread_as_a_node_or_an_edge(self) -> None:
         # Consumers parse these files line by line and do not all strip `//` comments -- the

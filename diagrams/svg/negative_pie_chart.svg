@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Hand-authored negative control. Every label sits in its own rounded box and is joined to
-     its slice by a two-segment leader line ending in a dot. That is exactly the shape of a
-     labelled node wired to something by an elbow connector, and it is the trap: the leader
-     lines connect nothing, and the slices are not nodes. -->
 <svg xmlns="http://www.w3.org/2000/svg" width="460" height="300" viewBox="0 0 460 300">
   <title>Storage used by file type</title>
   <rect x="0" y="0" width="460" height="300" fill="white"/>
@@ -17,7 +13,7 @@
 
   <g stroke="#777777" stroke-width="1" fill="none">
     <polyline points="196,120 232,95 300,95"/>
-    <polyline points="76,131 44,125 300,125"/>
+    <polyline points="76,131 44,60 300,60"/>
     <polyline points="243,215 268,237 300,237"/>
     <polyline points="96,232 72,267 300,267"/>
   </g>
@@ -31,8 +27,8 @@
   <g font-family="Helvetica, sans-serif" font-size="12" fill="#111111">
     <rect x="300" y="82" width="140" height="26" rx="4" fill="#eef6fb" stroke="#a6cee3"/>
     <text x="310" y="99">PDF — 34%</text>
-    <rect x="300" y="112" width="140" height="26" rx="4" fill="#fdf3e7" stroke="#fdbf6f"/>
-    <text x="310" y="129">Everything else — 16%</text>
+    <rect x="300" y="47" width="140" height="26" rx="4" fill="#fdf3e7" stroke="#fdbf6f"/>
+    <text x="310" y="64">Everything else — 16%</text>
     <rect x="300" y="224" width="140" height="26" rx="4" fill="#eaf6e4" stroke="#b2df8a"/>
     <text x="310" y="241">Images — 28%</text>
     <rect x="300" y="254" width="140" height="26" rx="4" fill="#fdeeee" stroke="#fb9a99"/>

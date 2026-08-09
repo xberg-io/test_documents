@@ -12,9 +12,14 @@
     "       and text positions, so scoring is precision/recall against a threshold.",
     "",
     "`states_graph_in_metadata` marks a Class-B file that also happens to name its own graph.",
-    "Every producer does it somewhere: Graphviz writes one <title> per node holding the node id",
-    "and one per edge holding `src->dst`, and repeats both in XML comments; Mermaid names both",
-    "endpoints in `id=\"L_start_auth_0\"`; PlantUML in `id=\"Read config-to-Open input\"`. Such a",
+    "Every producer does it somewhere, and rarely only once: Graphviz writes one <title> per node",
+    "holding the node id and one per edge holding `src->dst`, and repeats both in XML comments;",
+    "Mermaid names both endpoints in `id=\"L_start_auth_0\"`, again in `data-id`, and gives the",
+    "edge's waypoints outright in `data-points` as base64 JSON; PlantUML names them in",
+    "`id=\"Read config-to-Open input\"`, again in a comment, again as a `data-entity-1`/",
+    "`data-entity-2` adjacency pair, and then embeds its entire deflated source in a",
+    "`<?plantuml-src?>` processing instruction -- which is why a file can look clean in plain",
+    "text and still hand over the whole answer to anyone who decodes it. Such a",
     "file cannot measure geometry recovery, because a recogniser can score perfectly without",
     "reading a single coordinate -- and xberg's SVG extractor already reads <title>. Those",
     "fixtures therefore ship twice, and `geometry_only_variant` names the second copy, produced",
@@ -24,7 +29,36 @@
     "",
     "Ground truth is keyed by node label, so an unlabelled decoration -- PlantUML's start and",
     "stop markers, an arrowhead, a leader dot -- has no key and is not a node. Cluster, swimlane",
-    "and lane containers are not nodes either, however closed their outlines look."
+    "and lane containers are not nodes either, however closed their outlines look.",
+    "",
+    "The PDF fixtures under `diagrams/pdf/` need no `geometry_only_variant`, and the reason is",
+    "worth stating: the container strips the metadata by itself. A PDF page holds path operators",
+    "and positioned glyphs and nothing else -- no element ids, no <title>, no class attribute --",
+    "so every one of them is geometry-only by construction. They are the strictest Class-B",
+    "measurement in the set, and the ones that share a ground truth with an SVG fixture separate",
+    "what an implementation knows about graphs from what it knows about SVG.",
+    "",
+    "Every PDF is written by its producer and then rebuilt with `qpdf --empty --deterministic-id",
+    "--pages <raw> 1-z --`, which drops the `Info` dictionary the producer stamps the clock into",
+    "and derives the file id from the content. Without that no two runs of the same command agree",
+    "byte for byte. `scripts/build_diagram_pdfs.py` runs both halves, and its `--check` mode",
+    "rebuilds and compares, so `producer.command` stays a claim that can be tested rather than a",
+    "note about what someone once ran. PDFs embed subsetted fonts, so that check is machine-local;",
+    "reproducing across machines is what `corpus.lock.json` is for.",
+    "",
+    "A PDF embeds subsetted outlines of whatever fonts the renderer reached for, and this corpus is",
+    "public, so the embedding permission of those fonts is ours to check. Every family in the set was",
+    "verified through the OS/2 fsType bit of the system font it came from, and",
+    "`scripts/build_diagram_pdfs.py` fails a build that reaches for anything not on that allowlist.",
+    "It is why there is no CJK PDF: macOS's Songti reports fsType 2, restricted, which forbids",
+    "embedding without the owner's permission, so `graphviz_cjk` ships as SVG only until an",
+    "open-licensed CJK face is available to render it.",
+    "",
+    "`page` is 1-based. `bbox` is [x0, y0, x1, y1] in the container's own units -- SVG user space,",
+    "or points from the top-left of the PDF page -- measured across the graph's node outlines. Both",
+    "run y downwards; PDF user space runs y upwards, so a consumer reading raw PDF coordinates has",
+    "to flip. It is recorded only where the page holds more than the graph, because that is the",
+    "only time it distinguishes an answer that is right from one that is right by accident."
   ],
   "fixtures": [
     {
@@ -37,7 +71,7 @@
       "license": "authored-here",
       "exercises": [
         "shape:box", "shape:diamond", "shape:ellipse", "arrowhead:normal",
-        "edge-label", "edge:dashed", "transform:root-translate-negative"
+        "edge-label", "edge:dashed", "transform:root-translate"
       ],
       "graphs": [
         {
@@ -215,7 +249,7 @@
       "producer": {"tool": "@mermaid-js/mermaid-cli", "version": "11.16.0", "command": "mmdc -i mermaid_flow.mmd -o mermaid_flow.svg -b transparent"},
       "source": "diagrams/src/mermaid_flow.mmd",
       "license": "authored-here",
-      "notes": "Mermaid's idioms are nothing like Graphviz's: a 4.4 KB CSS <style> block, ten <marker> defs, HTML labels in a <foreignObject>, and every edge label drawn on an opaque background rect (class=\"labelBkg\") that looks exactly like a small node. It names both endpoints of every edge in id=\"L_start_auth_0\" and repeats it in data-id.",
+      "notes": "Mermaid's idioms are nothing like Graphviz's: a 4.4 KB CSS <style> block, ten <marker> defs, HTML labels in a <foreignObject>, and every edge label drawn on an opaque background rect (class=\"labelBkg\") that looks exactly like a small node. It names both endpoints of every edge in id=\"L_start_auth_0\", repeats it in data-id, and gives that edge's exact waypoint list a third time in data-points as base64 JSON.",
       "exercises": [
         "producer:mermaid", "label:foreignobject-html", "arrowhead:marker-def",
         "edge-label:opaque-background-box", "style:css-classes", "shape:stadium", "shape:diamond"
@@ -236,7 +270,7 @@
       "producer": {"tool": "plantuml", "version": "1.2026.0", "command": "java -jar plantuml.jar -tsvg"},
       "source": "diagrams/src/plantuml_activity.puml",
       "license": "authored-here",
-      "notes": "PlantUML states each edge twice over: id=\"Read config-to-Open input\" and an XML comment <!--link Read config to Open input-->. The (*) start and end are unlabelled markers, so they are not nodes and the two edges joining them are not edges. PlantUML itself is GPL; its SVG output is not a derivative of it.",
+      "notes": "PlantUML states each edge four times over: id=\"Read config-to-Open input\", an XML comment <!--link Read config to Open input-->, a data-entity-1/data-entity-2 pair that is an adjacency list in its own right, and a <?plantuml-src?> processing instruction carrying the entire deflated source. The (*) start and end are unlabelled markers, so they are not nodes and the two edges joining them are not edges. PlantUML itself is GPL; its SVG output is not a derivative of it.",
       "exercises": ["producer:plantuml", "shape:rounded-activity", "node:unlabelled-terminal", "arrowhead:polygon"],
       "graphs": [
         {
@@ -249,11 +283,12 @@
     {
       "path": "diagrams/svg/plantuml_swimlane.svg",
       "class": "B",
-      "states_graph_in_metadata": false,
+      "states_graph_in_metadata": true,
+      "geometry_only_variant": "diagrams/svg/plantuml_swimlane_geometry.svg",
       "producer": {"tool": "plantuml", "version": "1.2026.0", "command": "java -jar plantuml.jar -tsvg"},
       "source": "diagrams/src/plantuml_swimlane.puml",
       "license": "authored-here",
-      "notes": "Swimlanes: three labelled bands spanning the drawing, each holding activities that belong to it. A band is not a node. This SVG carries no id, no class and no comment anywhere, so it is honest by construction and needs no stripped variant.",
+      "notes": "Swimlanes: three labelled bands spanning the drawing, each holding activities that belong to it. A band is not a node. This file states nothing in plain text -- no id, no class, no comment -- but it carries a <?plantuml-src?> processing instruction whose payload is the whole .puml source, raw-deflated and 6-bit encoded, comments and all. Decoding it hands over every node, every edge, and the lane each activity sits in, so the stripped variant is what measures anything here.",
       "exercises": ["producer:plantuml", "container:swimlane", "container:lane-header-label", "node:unlabelled-terminal"],
       "graphs": [
         {
@@ -266,11 +301,12 @@
     {
       "path": "diagrams/svg/libreoffice_connectors.svg",
       "class": "B",
-      "states_graph_in_metadata": false,
+      "states_graph_in_metadata": true,
+      "geometry_only_variant": "diagrams/svg/libreoffice_connectors_geometry.svg",
       "producer": {"tool": "LibreOffice Draw", "version": "26.2.5.2", "command": "soffice --headless --convert-to svg"},
       "source": "diagrams/src/libreoffice_connectors.fodg",
       "license": "authored-here",
-      "notes": "The one dialect that states nothing: shapes are numbered id1..id9, and the classes give a shape's type (com.sun.star.drawing.ConnectorShape) without naming what it connects. Knowing a stroke is some connector still leaves the whole task. Glued connectors also start and end a few units short of the shape outline, so endpoints have to be matched by proximity.",
+      "notes": "This was long held up as the one dialect that states nothing, on the grounds that its classes give a shape's type (com.sun.star.drawing.ConnectorShape) without naming what it connects. That was wrong, and the counting shows it: the file carries exactly 4 <g class=\"...CustomShape\"> and 3 <g class=\"...ConnectorShape\">, against a ground truth of exactly 4 nodes and 3 edges. Type per element, applied to every element, is the node/edge partition -- which is most of the answer, however little any one class says on its own. It ships with a stripped variant now. What remains genuinely hard is that glued connectors start and end a few units short of the shape outline, so endpoints match only by proximity.",
       "exercises": [
         "producer:libreoffice", "shape:custom-shape-enhanced-geometry", "shape:round-rectangle",
         "connector:glued-with-gap", "text:tspan-with-textlength", "font:embedded"
@@ -310,9 +346,10 @@
       "producer": {"tool": "hand-authored", "version": null, "command": null},
       "source": null,
       "license": "authored-here",
+      "notes": "Every shape and label sits under a chain of transform attributes, and the viewBox is half the viewport, so nothing lands at the coordinate it is written at. A recogniser that reads coordinates literally puts every label outside its box.",
       "exercises": [
         "transform:nested-groups", "transform:scale", "viewbox-viewport-mismatch",
-        "node:dashed-border", "edge:dashed", "edge-label"
+        "node:dashed-border", "edge:dashed", "edge-label", "arrowhead:marker-end"
       ],
       "graphs": [
         {
@@ -346,7 +383,7 @@
       "producer": {"tool": "hand-authored", "version": null, "command": null},
       "source": null,
       "license": "authored-here",
-      "notes": "Every other fixture is entirely a diagram or entirely not one. This page is both: a heading, two paragraphs, a four-row ruled table, and one three-node figure at the foot. Recovery has to be selective within the page rather than deciding once per file, and the table must contribute nothing. bbox is the figure's extent in the SVG user space.",
+      "notes": "Every other fixture is entirely a diagram or entirely not one. This page is both: a heading, two paragraphs, a four-row ruled table, and one figure at the foot. Recovery has to be selective within the page rather than deciding once per file, and the table must contribute nothing. The table's task column reads Compile/Approval/Release, chosen to share no label with the figure's Build/Sign-off/Ship, so returning the table's cells as nodes scores zero instead of scoring full marks by accident. bbox is the figure's extent in the SVG user space.",
       "exercises": ["page:prose-and-table-and-diagram", "negative-in-positive:ruled-table", "figure:caption"],
       "graphs": [
         {
@@ -358,13 +395,183 @@
       ]
     },
     {
+      "path": "diagrams/svg/two_diagrams.svg",
+      "class": "B",
+      "states_graph_in_metadata": false,
+      "producer": {"tool": "hand-authored", "version": null, "command": null},
+      "source": null,
+      "license": "authored-here",
+      "notes": "Two graphs on one page, sharing no node and no edge. `ground_truth/dot/<stem>.dot` cannot express that, so this is the fixture that makes the manifest's `graphs` array carry its weight: the two answers live in `<stem>.g0.dot` and `<stem>.g1.dot` and it is the manifest, not the file layout, that says so. Nothing in the markup separates the figures -- only whitespace and a caption do -- so a recogniser has to segment the page rather than return one graph of seven nodes.",
+      "exercises": ["document:two-graphs", "figure:caption", "edges:shared-elbow-trunk"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/two_diagrams.g0.dot",
+          "directed": true, "nodes": 3, "edges": 2,
+          "page": 1, "bbox": [28, 40, 132, 228]
+        },
+        {
+          "id": "g1",
+          "ground_truth": "ground_truth/dot/two_diagrams.g1.dot",
+          "directed": true, "nodes": 4, "edges": 3,
+          "page": 1, "bbox": [248, 40, 568, 204]
+        }
+      ]
+    },
+    {
+      "path": "diagrams/pdf/cairo_graphviz_flow.pdf",
+      "class": "B",
+      "states_graph_in_metadata": false,
+      "producer": {"tool": "graphviz", "version": "15.1.1", "command": "dot -Tpdf"},
+      "source": "diagrams/src/graphviz_flow.dot",
+      "license": "authored-here",
+      "notes": "The same graph as diagrams/svg/graphviz_flow.svg, drawn by the same layout engine into a different container. Scoring the pair apart separates what the recogniser knows about graphs from what it knows about SVG.",
+      "exercises": ["container:pdf", "pdf-writer:cairo", "shape:box", "shape:diamond", "shape:ellipse", "edge-label", "edge:dashed"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/graphviz_flow.dot",
+          "directed": true, "nodes": 4, "edges": 4, "page": 1, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/pdf/cairo_graphviz_ortho.pdf",
+      "class": "B",
+      "states_graph_in_metadata": false,
+      "producer": {"tool": "graphviz", "version": "15.1.1", "command": "dot -Tpdf"},
+      "source": "diagrams/src/graphviz_ortho.dot",
+      "license": "authored-here",
+      "notes": "Orthogonal routing as PDF path operators. An elbow that was one <path> with an explicit `d` in SVG arrives here as a run of `m`/`l` operators with no element boundary around them, so the segments of one edge have to be rejoined from geometry alone.",
+      "exercises": ["container:pdf", "pdf-writer:cairo", "edge:orthogonal-elbow"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/graphviz_ortho.dot",
+          "directed": true, "nodes": 5, "edges": 5, "page": 1, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/pdf/cairo_graphviz_large.pdf",
+      "class": "B",
+      "states_graph_in_metadata": false,
+      "producer": {"tool": "graphviz", "version": "15.1.1", "command": "dot -Tpdf"},
+      "source": "diagrams/src/graphviz_large.dot",
+      "license": "authored-here",
+      "notes": "128 nodes and 141 edges, for the throughput and memory profiling the review on xberg#1410 asked for. The PDF copy matters separately from the SVG one because the cost of recovery here is dominated by content-stream parsing, not by graph size.",
+      "exercises": ["container:pdf", "pdf-writer:cairo", "scale:128-nodes", "edge:long-dashed-shortcut"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/graphviz_large.dot",
+          "directed": true, "nodes": 128, "edges": 141, "page": 1, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/pdf/cairo_two_diagrams.pdf",
+      "class": "B",
+      "states_graph_in_metadata": false,
+      "producer": {"tool": "librsvg", "version": "2.62.3", "command": "rsvg-convert -f pdf"},
+      "source": "diagrams/svg/two_diagrams.svg",
+      "license": "authored-here",
+      "notes": "Two graphs on one PDF page. Both bboxes are in points from the top-left of the page.",
+      "exercises": ["container:pdf", "pdf-writer:cairo", "document:two-graphs"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/two_diagrams.g0.dot",
+          "directed": true, "nodes": 3, "edges": 2,
+          "page": 1, "bbox": [21, 30, 99, 171]
+        },
+        {
+          "id": "g1",
+          "ground_truth": "ground_truth/dot/two_diagrams.g1.dot",
+          "directed": true, "nodes": 4, "edges": 3,
+          "page": 1, "bbox": [186, 30, 426, 153]
+        }
+      ]
+    },
+    {
+      "path": "diagrams/pdf/skia_mermaid_flow.pdf",
+      "class": "B",
+      "states_graph_in_metadata": false,
+      "producer": {"tool": "chrome", "version": "151.0.0.0", "command": "chrome --headless --no-pdf-header-footer --print-to-pdf"},
+      "source": "diagrams/svg/mermaid_flow.svg",
+      "license": "authored-here",
+      "notes": "Mermaid's drawing through Skia rather than cairo, and the one producer whose SVG cannot be converted by librsvg at all: mermaid puts every label in a <foreignObject> of HTML, which librsvg does not render, so a cairo copy of this file would have no text in it. It is also the fixture that scored zero nodes and zero edges against the SVG implementation, so the PDF copy says whether that was the dialect or the geometry.",
+      "exercises": ["container:pdf", "pdf-writer:skia", "label:foreign-object-html", "edge-label"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/mermaid_flow.dot",
+          "directed": true, "nodes": 6, "edges": 6, "page": 1, "bbox": null
+        }
+      ]
+    },
+    {
+      "path": "diagrams/pdf/skia_mixed_page.pdf",
+      "class": "B",
+      "states_graph_in_metadata": false,
+      "producer": {"tool": "chrome", "version": "151.0.0.0", "command": "chrome --headless --no-pdf-header-footer --print-to-pdf"},
+      "source": "diagrams/svg/mixed_page.svg",
+      "license": "authored-here",
+      "notes": "Prose, a ruled table and one figure on a single PDF page -- the container where xberg already runs table detection, so the two have to coexist rather than one winning. bbox is the figure's extent in points from the top-left of the page.",
+      "exercises": ["container:pdf", "pdf-writer:skia", "page:prose-and-table-and-diagram", "negative-in-positive:ruled-table"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/mixed_page.dot",
+          "directed": true, "nodes": 3, "edges": 2,
+          "page": 1, "bbox": [66.75, 282.75, 393.75, 321.75]
+        }
+      ]
+    },
+    {
+      "path": "diagrams/pdf/skia_multipage_report.pdf",
+      "class": "B",
+      "states_graph_in_metadata": false,
+      "producer": {"tool": "chrome", "version": "151.0.0.0", "command": "chrome --headless --no-pdf-header-footer --print-to-pdf"},
+      "source": "diagrams/src/multipage_report.html",
+      "license": "authored-here",
+      "notes": "Four printed pages with the diagram on page 3: page 1 and page 4 are prose, page 2 is a ruled table. This is the fixture the page-reference half of xberg#579 needs, and the only one where an answer can be right about the graph and wrong about where it is. Pages 1, 2 and 4 must yield nothing.",
+      "exercises": ["container:pdf", "pdf-writer:skia", "page:multi-page", "page:diagram-on-page-3", "negative-page:prose", "negative-page:ruled-table"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/multipage_report.dot",
+          "directed": true, "nodes": 5, "edges": 5,
+          "page": 3, "bbox": [85.5, 144, 385.5, 346.5]
+        }
+      ]
+    },
+    {
+      "path": "diagrams/pdf/libreoffice_connectors.pdf",
+      "class": "B",
+      "states_graph_in_metadata": false,
+      "producer": {"tool": "libreoffice", "version": "26.2.5.2", "command": "soffice --headless --convert-to pdf"},
+      "source": "diagrams/src/libreoffice_connectors.fodg",
+      "license": "authored-here",
+      "notes": "The third PDF writer, and the drawing that spans both classes: the .fodg source names each connector's endpoints outright and scores exactly 1.0, this PDF keeps only the strokes. Same graph, same layout, one container that answers the question and one that does not.",
+      "exercises": ["container:pdf", "pdf-writer:libreoffice", "connector:glued-in-source"],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/libreoffice_connectors.dot",
+          "directed": true, "nodes": 4, "edges": 3, "page": 1, "bbox": null
+        }
+      ]
+    },
+    {
       "path": "xml/org_chart.svg",
       "class": "B",
       "states_graph_in_metadata": false,
       "producer": {"tool": "hand-authored", "version": null, "command": null},
       "source": null,
       "license": "authored-here",
-      "exercises": ["label:multi-line", "nodes:isolated", "annotations-outside-shapes"],
+      "notes": "Nine boxes and only three edges, so six nodes are isolated -- a recogniser that reports only the connected component silently loses two thirds of the graph. Each box carries a name and a role on separate lines, which is one node with a two-line label rather than two nodes.",
+      "exercises": ["label:multi-line", "nodes:isolated", "annotations-outside-shapes", "arrowhead:marker-end"],
       "graphs": [
         {
           "id": "g0",
@@ -417,6 +624,28 @@
       "graphs": []
     },
     {
+      "path": "diagrams/pdf/skia_negative_ruled_table.pdf",
+      "class": "B",
+      "negative": true,
+      "reason": "The ruled table in the container where it does the most damage. A PDF table is drawn as ruling strokes and positioned glyphs with nothing to say it is a table, which is the same evidence a connector-and-box recogniser reads. Whatever rejects this must also leave xberg's existing PDF table detection intact.",
+      "license": "authored-here",
+      "producer": {"tool": "chrome", "version": "151.0.0.0", "command": "chrome --headless --no-pdf-header-footer --print-to-pdf"},
+      "source": "diagrams/svg/negative_ruled_table.svg",
+      "ground_truth": "ground_truth/dot/negative_ruled_table.dot",
+      "graphs": []
+    },
+    {
+      "path": "diagrams/pdf/cairo_negative_pie_chart.pdf",
+      "class": "B",
+      "negative": true,
+      "reason": "The pie chart that the SVG implementation already reports as a five-node, four-edge graph. Carried into PDF so the false positive can be measured in both containers rather than argued about in one.",
+      "license": "authored-here",
+      "producer": {"tool": "librsvg", "version": "2.62.3", "command": "rsvg-convert -f pdf"},
+      "source": "diagrams/svg/negative_pie_chart.svg",
+      "ground_truth": "ground_truth/dot/negative_pie_chart.dot",
+      "graphs": []
+    },
+    {
       "path": "xml/data_dashboard.svg",
       "class": "B",
       "negative": true,
@@ -438,14 +667,7 @@
       "path": "images/5_level_paging_and_5_level_ept_intel_revision_1_1_may_2017.svg",
       "class": "B",
       "negative": true,
-      "reason": [
-        "Despite the filename this is an inferno flame graph, not a paging diagram: 77 nested",
-        "<rect> elements, 81 <text> labels, 76 <g> wrappers, a CSS <style> block, an ECMAScript",
-        "<script>, and a gradient <defs>. Adjacency here is stack containment, not connection,",
-        "and there is not one connector in the file. It is the hardest negative in the corpus",
-        "and it was already shipping -- the only thing missing was the assertion that recovery",
-        "returns nothing."
-      ],
+      "reason": "Despite the filename this is an inferno flame graph, not a paging diagram: 77 nested <rect> elements, 81 <text> labels, 76 <g> wrappers, a CSS <style> block, an ECMAScript <script>, and a gradient <defs>. Adjacency here is stack containment, not connection, and there is not one connector in the file. It is the hardest negative in the corpus and it was already shipping -- the only thing missing was the assertion that recovery returns nothing.",
       "license": "see ATTRIBUTIONS.md",
       "ground_truth": "ground_truth/dot/5_level_paging_and_5_level_ept_intel_revision_1_1_may_2017.dot",
       "graphs": []

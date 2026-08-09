@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Flat ODF drawing, hand-authored. It is the source for diagrams/svg/libreoffice_connectors.svg
-     and, in its own right, a Class A fixture: every draw:connector names its endpoints outright
-     with draw:start-shape and draw:end-shape, so recovering the graph from ODF is a lookup, not
-     an inference. Rendering it through LibreOffice then yields a Class B fixture in the
-     LibreOffice SVG dialect, where those same endpoints survive only as geometry. -->
 <office:document
     xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
     xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0"

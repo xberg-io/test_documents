@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Hand-authored positive. Architecture diagrams in the AWS/Azure house style draw a node as an
-     icon with a caption underneath and no bounding outline at all, so a recogniser keying on
-     closed regions finds four icon glyphs and no nodes, or four nodes in the wrong places. The
-     arrows are ordinary marker-terminated lines; only the nodes are unusual. -->
 <svg xmlns="http://www.w3.org/2000/svg" width="620" height="200" viewBox="0 0 620 200">
   <title>Ingest pipeline</title>
   <defs>
@@ -13,7 +9,6 @@
   </defs>
   <rect x="0" y="0" width="620" height="200" fill="white"/>
 
-  <!-- Browser: a glyph, not an outline. -->
   <g transform="translate(40,60)" fill="#4c78a8">
     <path d="M0,6 h56 v36 h-56 z M0,6 h56 v8 h-56 z" fill-rule="evenodd"/>
     <circle cx="6" cy="10" r="2" fill="white"/>
@@ -21,20 +16,17 @@
   </g>
   <text x="68" y="128" text-anchor="middle" font-family="Helvetica, sans-serif" font-size="12">Browser</text>
 
-  <!-- Queue -->
   <g transform="translate(210,60)" fill="#f58518">
     <path d="M0,12 h20 v24 h-20 z M22,12 h20 v24 h-20 z M44,12 h20 v24 h-20 z"/>
   </g>
   <text x="242" y="128" text-anchor="middle" font-family="Helvetica, sans-serif" font-size="12">Queue</text>
 
-  <!-- Worker -->
   <g transform="translate(380,58)" fill="#54a24b">
     <path d="M24,0 l7,6 h10 v10 l7,7 -7,7 v10 h-10 l-7,6 -7,-6 h-10 v-10 l-7,-7 7,-7 v-10 h10 z"/>
     <circle cx="24" cy="23" r="6" fill="white"/>
   </g>
   <text x="404" y="128" text-anchor="middle" font-family="Helvetica, sans-serif" font-size="12">Worker</text>
 
-  <!-- Bucket -->
   <g transform="translate(534,58)" fill="#b279a2">
     <path d="M4,10 h48 l-7,38 h-34 z"/>
     <ellipse cx="28" cy="10" rx="24" ry="7"/>

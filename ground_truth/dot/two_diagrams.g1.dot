@@ -1,0 +1,11 @@
+digraph two_diagrams_g1 {
+  // The right-hand figure only. Its three edges leave the same box and separate at a shared
+  // elbow, so the fan has to survive being drawn as one trunk with three branches.
+  "Order" [shape=box];
+  "Pick" [shape=box];
+  "Pack" [shape=box];
+  "Ship" [shape=box];
+  "Order" -> "Pick";
+  "Order" -> "Pack";
+  "Order" -> "Ship";
+}

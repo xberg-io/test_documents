@@ -2,11 +2,11 @@ digraph plantuml_activity {
   // PlantUML draws the (*) start and end as unlabelled markers. Ground truth in this corpus
   // is keyed by label, so an unlabelled marker has no key and is not a node, and the two
   // edges joining them are not edges either. See diagrams/README.md.
-  "Read config" [shape=box];
-  "Open input" [shape=box];
-  "Detect format" [shape=box];
-  "Extract text" [shape=box];
-  "Render markdown" [shape=box];
+  "Read config" [shape=box style=rounded];
+  "Open input" [shape=box style=rounded];
+  "Detect format" [shape=box style=rounded];
+  "Extract text" [shape=box style=rounded];
+  "Render markdown" [shape=box style=rounded];
   "Read config" -> "Open input";
   "Open input" -> "Detect format";
   "Detect format" -> "Extract text";

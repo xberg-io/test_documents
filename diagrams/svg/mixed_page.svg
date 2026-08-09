@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Hand-authored positive with company. One page holding a heading, two paragraphs of prose, a
-     ruled table and, at the bottom, a single three-node diagram. Every other fixture in this set
-     is entirely a diagram or entirely not one; this one is both, so recovery has to be selective
-     within a page rather than deciding once per file. The ground truth is the bottom diagram
-     alone, and the table's cells and rules must contribute nothing. -->
 <svg xmlns="http://www.w3.org/2000/svg" width="540" height="520" viewBox="0 0 540 520">
   <title>Release checklist</title>
   <defs>
@@ -16,9 +11,9 @@
 
   <text x="32" y="42" font-family="Helvetica, sans-serif" font-size="17" font-weight="bold">Release checklist</text>
   <g font-family="Helvetica, sans-serif" font-size="12" fill="#222222">
-    <text x="32" y="70">Every release goes through the same three stages. The table below records</text>
-    <text x="32" y="88">who signs off on each one, and the diagram at the foot of the page shows the</text>
-    <text x="32" y="106">order they run in.</text>
+    <text x="32" y="70">Three tasks have to be completed before a release goes out. The table below</text>
+    <text x="32" y="88">records who owns each one, and the diagram at the foot of the page shows the</text>
+    <text x="32" y="106">stages a release moves through.</text>
   </g>
 
   <g stroke="#333333" stroke-width="1" fill="none">
@@ -31,23 +26,23 @@
   </g>
   <g font-family="Helvetica, sans-serif" font-size="12" fill="#111111">
     <g font-weight="bold">
-      <text x="44" y="151">Stage</text>
+      <text x="44" y="151">Task</text>
       <text x="232" y="151">Owner</text>
       <text x="380" y="151">Deadline</text>
     </g>
-    <text x="44" y="183">Build</text>
+    <text x="44" y="183">Compile</text>
     <text x="232" y="183">Release engineer</text>
     <text x="380" y="183">Monday</text>
-    <text x="44" y="215">Sign-off</text>
+    <text x="44" y="215">Approval</text>
     <text x="232" y="215">Product lead</text>
     <text x="380" y="215">Wednesday</text>
-    <text x="44" y="247">Ship</text>
+    <text x="44" y="247">Release</text>
     <text x="232" y="247">On-call</text>
     <text x="380" y="247">Thursday</text>
   </g>
 
   <g font-family="Helvetica, sans-serif" font-size="12" fill="#222222">
-    <text x="32" y="298">A stage may only start once the one before it has been signed off:</text>
+    <text x="32" y="298">A stage may only start once the one before it has been cleared:</text>
   </g>
 
   <g fill="#e8eef7" stroke="#33518a" stroke-width="1.4">

@@ -2,11 +2,11 @@ digraph plantuml_swimlane {
   // "Author", "Editor" and "Legal" are swimlane headers labelling a band that spans the whole
   // drawing. A band is not a node; reporting one is a false positive. The unlabelled start and
   // stop markers are out of scope for label-keyed ground truth, as in plantuml_activity.
-  "Draft article" [shape=box];
-  "Review draft" [shape=box];
-  "Clear rights" [shape=box];
-  "Schedule slot" [shape=box];
-  "Publish" [shape=box];
+  "Draft article" [shape=box style=rounded];
+  "Review draft" [shape=box style=rounded];
+  "Clear rights" [shape=box style=rounded];
+  "Schedule slot" [shape=box style=rounded];
+  "Publish" [shape=box style=rounded];
   "Draft article" -> "Review draft";
   "Review draft" -> "Clear rights";
   "Clear rights" -> "Schedule slot";

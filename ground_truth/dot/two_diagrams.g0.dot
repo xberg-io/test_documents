@@ -1,0 +1,10 @@
+digraph two_diagrams_g0 {
+  // The left-hand figure only. The four boxes on the right belong to g1 and share no edge with
+  // these, so an answer that returns one graph of seven nodes is wrong even though it found
+  // every node and every edge on the page.
+  "Draft" [shape=box];
+  "Review" [shape=box];
+  "Publish" [shape=box];
+  "Draft" -> "Review";
+  "Review" -> "Publish";
+}
