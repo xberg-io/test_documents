@@ -22,6 +22,7 @@ import unittest
 from pathlib import Path
 
 from build_diagram_pdfs import RECIPES
+from build_diagram_rasters import RECIPES as RASTER_RECIPES
 from publish_corpus import load_patterns, matches_corpus_pattern
 from strip_svg_graph_metadata import referenced_ids, strip
 
@@ -108,6 +109,35 @@ class FixtureFilesTest(unittest.TestCase):
                 continue
             with self.subTest(fixture["path"]):
                 self.assertEqual(fixture["source"], source)
+
+    def test_should_build_every_raster_it_indexes_and_index_every_raster_it_builds(self) -> None:
+        # Same argument as the PDFs. A PNG cannot be reviewed by reading it, so the recipe is the
+        # only thing standing between the manifest and a file nobody can account for.
+        indexed = {f["path"] for f in FIXTURES if f["path"].startswith("diagrams/png/")}
+        self.assertEqual(indexed, set(RASTER_RECIPES))
+
+    def test_should_build_every_raster_from_a_source_the_manifest_agrees_with(self) -> None:
+        for fixture in FIXTURES:
+            source, _renderer = RASTER_RECIPES.get(fixture["path"], (None, None))
+            if source is None:
+                continue
+            with self.subTest(fixture["path"]):
+                self.assertEqual(fixture["source"], source)
+
+    def test_should_render_mermaid_through_an_engine_that_draws_foreignobject(self) -> None:
+        # librsvg does not render <foreignObject>, so a cairo copy of a Mermaid drawing has the
+        # whole graph in it and none of its labels. That failure is silent: the file is valid, the
+        # shapes are right, and only the text is missing. Naming the engine in the path is what
+        # makes it reviewable, so the two have to agree.
+        for path in RASTER_RECIPES:
+            source = ROOT / RASTER_RECIPES[path][0]
+            if "foreignObject" not in source.read_text(encoding="utf-8", errors="replace"):
+                continue
+            with self.subTest(path):
+                self.assertTrue(
+                    Path(path).name.startswith("skia_"),
+                    f"{path} is drawn from a <foreignObject> source and cannot go through cairo",
+                )
 
 
 class GroundTruthAgreementTest(unittest.TestCase):

@@ -187,6 +187,60 @@ forbidden without the owner's permission — so `graphviz_cjk` ships as SVG only
 an open-licensed CJK face (Noto Sans CJK) installed; macOS has none, and LibreOffice bundles Noto
 for Arabic and Hebrew but not for CJK.
 
+## Raster
+
+Raster is where nothing is left. Vector PDF still holds path operators and positioned glyphs;
+a PNG holds pixels, so the shapes and the text both have to be recovered from the image before
+a graph can be inferred at all. Ten of these redraw a graph that also ships as SVG, against the
+same ground truth, so the three containers can be scored apart.
+
+| file | engine | drawn from | n/e | exercises |
+|---|---|---|---|---|
+| `png/cairo_graphviz_flow.png` | cairo | `svg/graphviz_flow.svg` | 4/4 | the baseline graph with nothing left to read but pixels |
+| `png/cairo_graphviz_ortho.png` | cairo | `svg/graphviz_ortho.svg` | 5/5 | an elbow as a run of dark pixels, with not even a path operator to group it |
+| `png/cairo_graphviz_cjk.png` | cairo | `svg/graphviz_cjk.svg` | 5/4 | **CJK, Hebrew and Arabic, which cannot ship as PDF** |
+| `png/cairo_graphviz_large.png` | cairo | `svg/graphviz_large.svg` | 128/141 | 10566x2230, larger than most detector input windows, so tiling is forced |
+| `png/cairo_graphviz_selfloop.png` | cairo | `svg/graphviz_selfloop.svg` | 4/5 | self-loops and crossing unconnected edges, where tracing strokes joins what the drawing keeps apart |
+| `png/cairo_plantuml_swimlane.png` | cairo | `svg/plantuml_swimlane.svg` | 5/4 | large closed regions that are not nodes |
+| `png/cairo_two_diagrams.png` | cairo | `svg/two_diagrams.svg` | 3/2 + 4/3 | two graphs in one image, so recovery must partition before it reports |
+| `png/cairo_mixed_page.png` | cairo | `svg/mixed_page.svg` | 3/2 | prose, a ruled table and one figure, where the table is the false positive |
+| `png/cairo_icon_nodes.png` | cairo | `svg/icon_nodes.svg` | 4/3 | icon glyphs with captions underneath and no outline anywhere, which SVG recovery scores 0/4 on |
+| `png/skia_mermaid_flow.png` | Skia | `svg/mermaid_flow.svg` | 6/6 | HTML labels, which cairo does not draw |
+| `png/cairo_negative_pie_chart.png` | cairo | `svg/negative_pie_chart.svg` | none | a chart is what a pixel recogniser is most likely to call a graph |
+| `png/skia_negative_ruled_table.png` | Skia | `svg/negative_ruled_table.svg` | none | so is a ruled table |
+
+The engine is in the filename because the engine, not the source, decides the pixels. Mermaid
+cannot go through cairo for the same reason it cannot in [the PDF set](#vector-pdf): librsvg does
+not render `<foreignObject>`, so a cairo copy carries the whole drawing and none of its labels.
+That failure is silent, since the file is valid and only the text is missing, so
+`test_diagram_manifest.py` asserts that any fixture drawn from a `<foreignObject>` source is built
+by Skia.
+
+Everything is drawn at 2x. A caption set around 12px sits near the floor of what OCR reads
+reliably at 1:1, and a benchmark should not be measuring a resampling artefact.
+
+### Determinism
+
+Neither engine writes a `tIME` chunk or anything else derived from the clock, so unlike the PDFs
+there is no normalisation step: two runs agree byte for byte on their own.
+
+```sh
+python3 scripts/build_diagram_rasters.py           # build
+python3 scripts/build_diagram_rasters.py --check   # rebuild and compare, changing nothing
+```
+
+The `--check` claim is bounded the same way the PDF one is. It proves the committed PNG is still
+what the recorded command produces *here*; rasterising text needs fonts, so the same command on a
+machine with different font files draws different pixels. Reproducing across machines is what the
+content-addressed bucket and `corpus.lock.json` are for.
+
+No font is redistributed. A PNG holds an image of text rather than the outlines that drew it, so
+the `fsType` question the [PDF builder](#embedded-fonts) has to answer does not arise here. That is
+why `graphviz_cjk` ships as raster while it cannot ship as PDF.
+
+PNGs are corpus binaries: they are **not** in git. `python3 scripts/fetch_corpus.py` brings them
+down, and `corpus.lock.json` pins each one by sha256.
+
 ## Ground-truth conventions
 
 - **Keyed by node label.** A recogniser's own numbering never enters into it.
@@ -282,6 +336,7 @@ for f in graphviz_flow graphviz_states graphviz_bidirectional graphviz_network \
 done
 
 python3 scripts/build_diagram_pdfs.py           # needs qpdf, and Chrome for the skia_* fixtures
+python3 scripts/build_diagram_rasters.py        # raster fixtures, needs rsvg-convert and Chrome
 python3 scripts/check_diagram_ground_truth.py   # ground truth still matches what was drawn
 python3 -m unittest discover -s scripts         # manifest still matches the files
 ```
@@ -305,7 +360,10 @@ manifest indexes has a build recipe and vice versa, and that each `*_geometry.sv
 what stripping its parent produces — the only check that does not depend on knowing how a given
 producer encodes its answer.
 
-Two checks need tools and so are not in CI. `scripts/check_diagram_ground_truth.py` needs Graphviz
+Two checks need tools and so are not in CI. `scripts/build_diagram_rasters.py --check` needs rsvg-convert and Chrome and rebuilds each PNG,
+comparing bytes against the published file.
+
+`scripts/check_diagram_ground_truth.py` needs Graphviz
 and re-derives each graph from its `.dot` source with `dot -Tplain`, diffing it against the
 hand-written ground truth; `scripts/build_diagram_pdfs.py --check` needs qpdf and the renderers and
 proves each committed PDF is still what its recorded command produces. Both report a skip or a
