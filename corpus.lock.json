@@ -69,6 +69,46 @@
       "sha256": "d959d96bb9b1d0d7a3cf0f248d64ed44a38da46bc03d8ae5e82c92ca2ad4e48b",
       "size": 87623
     },
+    "diagrams/pdf/cairo_graphviz_flow.pdf": {
+      "sha256": "1e59250a50f597577be0d43f8597a1d9f2da65eb6464915b74300a7a57409a4a",
+      "size": 17697
+    },
+    "diagrams/pdf/cairo_graphviz_large.pdf": {
+      "sha256": "737c5a2d53ac5c62373b79c5df730363802ee296a5380373cb23bad56e7fa910",
+      "size": 20252
+    },
+    "diagrams/pdf/cairo_graphviz_ortho.pdf": {
+      "sha256": "3c598a42451d5a1bb9b93689e45b815bb0cc541657f5edf2559c2754505ffa43",
+      "size": 17165
+    },
+    "diagrams/pdf/cairo_negative_pie_chart.pdf": {
+      "sha256": "5636a2a02c424bf709cfe6408cc5a7836c4aeb6d1eae8f5bcd5053990e7e894b",
+      "size": 18531
+    },
+    "diagrams/pdf/cairo_two_diagrams.pdf": {
+      "sha256": "84d1452c0b9a165ec122e4a2f233fc9b2b10a4e8ddca2726df8ac5127a9af754",
+      "size": 18853
+    },
+    "diagrams/pdf/libreoffice_connectors.pdf": {
+      "sha256": "8e1ad92ba5ffb7140327fbc7df15098140c80f5c46cb04a1c818e5a277bd35bf",
+      "size": 9495
+    },
+    "diagrams/pdf/skia_mermaid_flow.pdf": {
+      "sha256": "5b531153a3d550db1538680b722ad2d0ccbcdb88142010b69d5dc191ebd05901",
+      "size": 31356
+    },
+    "diagrams/pdf/skia_mixed_page.pdf": {
+      "sha256": "38d9dce35c67b7d6113e4036b8f68256bc2c1abd63f3ac2423a81d0e35f9aca0",
+      "size": 37759
+    },
+    "diagrams/pdf/skia_multipage_report.pdf": {
+      "sha256": "803405c1a127fda23ce5571d938ea1ad72e3a02ad396f70a6ee4601b96e2da17",
+      "size": 63963
+    },
+    "diagrams/pdf/skia_negative_ruled_table.pdf": {
+      "sha256": "587e8f123a02607980f96285f877571a9b7254ebab16ce50e5d282917a517b32",
+      "size": 20326
+    },
     "doc/unit_test_lists.doc": {
       "sha256": "fdc498588ed691e016fca96065af8da06cf7fed0fe349294bee76a5f2e98a932",
       "size": 16384
