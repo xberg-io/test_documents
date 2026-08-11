@@ -377,6 +377,26 @@
       ]
     },
     {
+      "path": "diagrams/svg/icon_glyph_parts.svg",
+      "class": "B",
+      "states_graph_in_metadata": false,
+      "producer": {"tool": "hand-authored", "version": null, "command": null},
+      "source": null,
+      "license": "authored-here",
+      "notes": "The same outline-free icon house style as icon_nodes.svg, but each glyph is drawn as several separate sibling elements that overlap rather than as one path with several subpaths, so the recovered node extent has to be the union of its parts. A recogniser that treats every element as its own candidate returns eight nodes; one that keeps only the largest element per glyph loses the cap. Every glyph is topped by a part that reaches above the body, and Archive's ellipse is wider than the path beneath it, so neither part's box is the union in either axis on its own.",
+      "exercises": [
+        "node:multi-element-glyph", "node:icon-glyph-no-outline", "label:below-shape",
+        "arrowhead:marker-end"
+      ],
+      "graphs": [
+        {
+          "id": "g0",
+          "ground_truth": "ground_truth/dot/icon_glyph_parts.dot",
+          "directed": true, "nodes": 4, "edges": 3, "page": null, "bbox": null
+        }
+      ]
+    },
+    {
       "path": "diagrams/svg/mixed_page.svg",
       "class": "B",
       "states_graph_in_metadata": false,

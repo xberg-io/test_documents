@@ -115,6 +115,7 @@
   "dot_graphviz_record": "test_documents/ground_truth/dot/graphviz_record.dot",
   "dot_graphviz_selfloop": "test_documents/ground_truth/dot/graphviz_selfloop.dot",
   "dot_graphviz_states": "test_documents/ground_truth/dot/graphviz_states.dot",
+  "dot_icon_glyph_parts": "test_documents/ground_truth/dot/icon_glyph_parts.dot",
   "dot_icon_nodes": "test_documents/ground_truth/dot/icon_nodes.dot",
   "dot_libreoffice_connectors": "test_documents/ground_truth/dot/libreoffice_connectors.dot",
   "dot_mermaid_flow": "test_documents/ground_truth/dot/mermaid_flow.dot",

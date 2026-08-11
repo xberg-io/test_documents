@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="180" viewBox="0 0 640 180">
+  <title>Content delivery path</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#444444"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="640" height="180" fill="white"/>
+
+  <g transform="translate(48,58)" fill="#4c78a8">
+    <rect x="0" y="14" width="56" height="38"/>
+    <path d="M0,18 L28,0 L56,18 Z"/>
+  </g>
+  <text x="76" y="132" text-anchor="middle" font-family="Helvetica, sans-serif" font-size="12">Gateway</text>
+
+  <g transform="translate(200,58)" fill="#f58518">
+    <rect x="0" y="12" width="52" height="40"/>
+    <ellipse cx="26" cy="12" rx="26" ry="10"/>
+  </g>
+  <text x="226" y="132" text-anchor="middle" font-family="Helvetica, sans-serif" font-size="12">Cache</text>
+
+  <g transform="translate(360,58)" fill="#54a24b">
+    <path d="M4,20 L28,4 L52,20 L52,44 L28,52 L4,44 Z"/>
+    <rect x="16" y="0" width="24" height="16"/>
+  </g>
+  <text x="388" y="132" text-anchor="middle" font-family="Helvetica, sans-serif" font-size="12">Router</text>
+
+  <g transform="translate(520,58)" fill="#b279a2">
+    <path d="M6,16 L54,16 L48,52 L12,52 Z"/>
+    <ellipse cx="30" cy="16" rx="30" ry="9"/>
+  </g>
+  <text x="550" y="132" text-anchor="middle" font-family="Helvetica, sans-serif" font-size="12">Archive</text>
+
+  <g stroke="#444444" stroke-width="1.6" marker-end="url(#arrow)">
+    <line x1="114" y1="86" x2="190" y2="86"/>
+    <line x1="262" y1="86" x2="354" y2="86"/>
+    <line x1="422" y1="86" x2="510" y2="86"/>
+  </g>
+</svg>

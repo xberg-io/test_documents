@@ -119,6 +119,7 @@ Positives, by producer:
 | `src/libreoffice_connectors.fodg` | hand-authored | 4/3 | **Class A** — `draw:start-shape`/`draw:end-shape` name the endpoints outright |
 | `svg/nested_transforms.svg` | hand-authored | 4/3 | nested `translate`/`scale` groups plus a viewBox that differs from the viewport, so nothing sits at the coordinate it is written at |
 | `svg/icon_nodes.svg` | hand-authored | 4/3 | the AWS/Azure house style: a node is an icon glyph with its caption underneath and no outline at all |
+| `svg/icon_glyph_parts.svg` | hand-authored | 4/3 | the same style where each glyph is **several separate overlapping elements**, so a node's extent is the union of its parts and the part on top reaches above the body |
 | `svg/mixed_page.svg` | hand-authored | 3/2 | a whole page — heading, prose, a ruled table, and one figure. Recovery has to be selective *within* the page |
 | `svg/two_diagrams.svg` | hand-authored | 3/2 + 4/3 | **two** graphs on one page, sharing no node and no edge, separated only by whitespace and a caption |
 | `xml/org_chart.svg` | hand-authored | 9/3 | multi-line labels, six isolated nodes, `marker-end` arrowheads |
@@ -290,8 +291,8 @@ Output is stable for a given tool version; a different version may lay a graph o
 which changes coordinates but not the graph — and the ground truth is written in terms of the
 graph. The four Graphviz fixtures added before this set regenerate byte-identically under 15.1.1.
 
-`nested_transforms.svg`, `icon_nodes.svg`, `mixed_page.svg`, `two_diagrams.svg` and the three
-`negative_*.svg` are hand-authored and are not regenerated.
+`nested_transforms.svg`, `icon_nodes.svg`, `icon_glyph_parts.svg`, `mixed_page.svg`,
+`two_diagrams.svg` and the three `negative_*.svg` are hand-authored and are not regenerated.
 
 ## Checks
 

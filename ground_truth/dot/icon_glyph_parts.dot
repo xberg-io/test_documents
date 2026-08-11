@@ -1,0 +1,13 @@
+digraph icon_glyph_parts {
+  // Each node is an icon glyph assembled from two separate, overlapping SVG elements, a path
+  // plus a rect or an ellipse, so a node's extent is the union of its parts rather than the box
+  // of any one of them. Every glyph is capped by a part that reaches above the body it sits on,
+  // and no node has an outline; the caption underneath is the only text.
+  "Gateway" [shape=none];
+  "Cache" [shape=none];
+  "Router" [shape=none];
+  "Archive" [shape=none];
+  "Gateway" -> "Cache";
+  "Cache" -> "Router";
+  "Router" -> "Archive";
+}
