@@ -1,0 +1,825 @@
+# -*- mode: org; -*-
+#+INCLUDE: theme/style.org
+#+STARTUP: content 
+#+DESCRIPTION: org-mode features and summary 
+#+KEYWORDS: org-mode emacs summary literate programming documentation 
+#+TITLE: Org-mode 
+
+* Org-Mode
+** Overview
+
+Org-Mode is a mode built-in to Emacs that allows to store structured
+data, information in text format - org-mode markdown that can be
+exported to html, pdf, latex, markdown, github flavoured markdown
+and more file formats.
+
+Features:
+
+  - Everything stored in text format: The most portable format.
+  - Todo List.
+  - It can be used as a personal Wiki.
+  - Table editing, formating, built-in spreadsheet.
+  - Tags, Headlines
+  - Literate programming, Run code blocks, Create Interactive and
+    reproducible software documentation.
+  - Display and export Latex Formulas
+  - Display Pictures
+  - Many link formats
+    - Link to files, web, IRC, Usenet News groups
+    - Link to shell commands
+    - Links to trigger Emacs Functions
+  - Usefulness
+    - Authoring
+    - Write Software documentation with embedded snippets
+    - Literate Programming
+    - Reproducible Research
+    - Wiki
+    - Markdown
+
+Example: this document is now written in org-mode and the exported to
+html and github flavoured markdown.
+
+file:images/document_in_org_mode1.png
+
+It also supports inline code blocks that can be evaluated and the
+result printed in the document or displayed in the minibuffer.
+
+file:images/document_in_org_mode2.png
+
+** Key bindings and commands for org-mode              :mode:org:key:binding:
+*** Useful Commands 
+
+| Command                       | Description                         |
+|-------------------------------+-------------------------------------|
+|                               |                                     |
+| *Display*                     |                                     |
+| M-x org-toggle-inline-images  | Toggle images display               |
+| M-x org-toggle-latex-fragment | Toggle latex formulas display       |
+| M-x org-toggle-link-display   | Toggle hyperlink display            |
+|                               |                                     |
+| *Export*                      |                                     |
+| M-x org-html-export-to-html   | Export buffer to html file.         |
+| M-x org-latex-export-to-pdf   | Export buffer to pdf file.          |
+|                               |                                     |
+| *Search*                      |                                     |
+| heml-occur                    | Useful quick search and navigation. |
+| helm-org-in-buffer-headings   | Filter org-mode files by headlines. |
+|                               |                                     |
+*** Hyperlink
+
+| Key binding | Description               |
+|-------------+---------------------------|
+| C-c C-l     | Insert hyperlink at point |
+| C-c C-o     | Open hyperlink at point   |
+|             |                           |
+
+*** Move within headlines
+
+| Key Binding  | Description                                        |
+|--------------+----------------------------------------------------|
+| M - <return> | Insert headline at same level as the previous one. |
+| C-c C-p      | Move to previous headline                          |
+| C-c C-n      | Move to next headline                              |
+| C-c C-u      | Move to higher headline                            |
+| M-[up]       | Move headline, list row or table row up            |
+| M-[down]     | Move headline, list item or table row down         |
+| M-[left]     | Demote  list item or headline                      |
+| M-[right]    | Promote list item or headline                      |
+
+*** Buffer Subtree
+
+| Key Binding | Description                                   |
+|-------------+-----------------------------------------------|
+| shift-tab   | Fold / Unfold headlines                       |
+| C-x n s     | Narrow the buffer subtree to current headline |
+| C-c n w     | Widen the view back                           |
+|             |                                               |
+
+*** Table
+
+| Key Binding | Description                 |
+|-------------+-----------------------------|
+| C-c-!       | Convert region into a table |
+|             |                             |
+
+*** Hyperlinks
+
+| Key Binding | Description         |
+|-------------+---------------------|
+| C-c-C-o     | Open a link         |
+| C-c-C-l     | Insert/ Edit a link |
+|             |                     |  
+
+** Markdown Summary 
+*** Text Formatting
+
+| Example          | Code               |
+|------------------+--------------------|
+| *bold*           | =*bold*=           |
+| /italics/        | =/italics/=        |
+| */very strong/*  | =*/very strong/*=  |
+| _underline_      | =_underline_=      |
+| ~verbatim~       | =~verbatim~=       |
+| +strike through+ | =+strike through+= |
+| =inline code=    | ==inline code==    |
+|                  |                    |
+
+*** Hyperlinks 
+
+
+| Description                     | Formatting                    | Output                      |
+|---------------------------------+-------------------------------+-----------------------------|
+| Link to a file                  | =file:/etc/fstab=             | file:/etc/fstab             |
+| Link to a web page              | =http://www.httpbing.org/get= | http://www.httpbing.org/get |
+| Email                           | =mailto:dummy@gmail.com=      | mailto:dummy@gmail.com      |
+| Usenet Link                     | =news:comp.emacs=             | news:comp.emacs             |
+| Info - Documentation            | =info:gcc=                    | info:gcc                    |
+| Shell Command                   | =shell:uname%20-a=            | shell:uname%20-a            |
+| Elisp code                      | =elisp:(info%20"gcc")=        | [[elisp:(info%20"gcc")]]        |
+| Doi - Digital object identifier | =doi:10.1000/182=             | doi:10.1000/182             |
+|                                 |                               |                             |
+
+Hyperlinks from org-contrib:
+
+| Description     | Example    |                    |
+|-----------------+------------+--------------------|
+| Link to manpage | =man:sed=  | (require 'org-man) |
+
+*** Code Blocks 
+**** Summary 
+
+| Description        | Shortcut | Code                                |
+|--------------------+----------+-------------------------------------|
+| Soource code block | <s       | =#+BEGIN_SRC ... #+END_SRC=         |
+| Example            | <e       | =#+BEGIN_EXAMPLE ... #+END_EXAMPLE= |
+| Quote              | <q       | =#+BEGIN_QUOTE ... #+END_QUOTE=     |
+| Verse              | <v       | =#+BEGIN_VERSE ... #+END_VERSE=     |
+| Center             | <c       | =#+BEGIN_CENTER ... #+END_CENTER=   |
+| Latex              | <l       | =#+BEGIN_LaTeX ... #+END_LaTeX=     |
+| Html               | <h       | =#+BEGIN_HTML ... #+END_HTML=       |
+| Ascii              | <a       | =#+BEGIN_ASCII ... #+END_ASCII=     |
+|                    |          | 
+
+**** Quote Block 
+
+Literal:
+
+#+BEGIN_SRC org
+,#+BEGIN_QUOTE
+This block encloses text that you want to appear as a quotation.
+,#+END_QUOTE
+#+END_SRC
+
+Output:
+
+#+BEGIN_QUOTE
+This block encloses text that you want to appear as a quotation.
+#+END_QUOTE
+
+**** Text Position 
+***** Center 
+
+Output:
+
+#+begin_center
+This text is  
+centered!
+#+end_center
+
+Literal:
+
+#+BEGIN_SRC org
+,#+begin_center
+This text is  
+centered!
+,#+end_center
+#+END_SRC
+
+***** Left 
+
+Output:
+
+#+begin_left
+This text is \\
+aligned to the left!
+#+end_left
+
+Literal:
+
+
+#+BEGIN_SRC org 
+,#+begin_left
+This text is \\
+aligned to the left!
+,#+end_left
+#+END_SRC
+
+***** Right 
+
+Output:
+
+#+begin_right
+This text is 
+aligned to the right!
+#+end_right
+
+Literal:
+
+#+BEGIN_SRC org 
+,#+begin_right
+This text is 
+aligned to the right!
+,#+end_right
+#+END_SRC
+
+**** Latex Code Block 
+
+*Example1*
+
+#+BEGIN_SRC tex
+\begin{equation}
+\begin{align}
+\mbox{Union: }  A\cup B = \{x\mid x\in A \mbox{ or } x\in B\} \newline
+\mbox{Concatenation: } A\circ B  = \{xy\mid x\in A \mbox{ and } y\in B\} \\
+\mbox{Star: } A^\star  = \{x_1x_2\ldots x_k \mid  k\geq 0 \mbox{ and each } x_i\in A\} \\
+\end{align}
+\end{equation}
+#+END_SRC
+
+Output:
+
+\begin{equation}
+\begin{align}
+\mbox{Union: }  A\cup B = \{x\mid x\in A \mbox{ or } x\in B\} \newline
+\mbox{Concatenation: } A\circ B  = \{xy\mid x\in A \mbox{ and } y\in B\} \\
+\mbox{Star: } A^\star  = \{x_1x_2\ldots x_k \mid  k\geq 0 \mbox{ and each } x_i\in A\} \\
+\end{align}
+\end{equation}
+
+*Example2*
+
+#+BEGIN_LaTex
+\begin{eqnarray}
+x^2 + \left(\frac{y}{z}\right)^4 = 0
+\end{eqnarray}
+#+END_LaTeX
+** Literate Programming Recipes 
+
+See: [[file:Org-mode-recipes.org][file:Org-mode-recipes.org]]
+
+** Resources 
+*** References
+
+Manual:
+
+    * [[http://orgmode.org/org.html][The Org Manual orgmode.org]]
+    * [[https://www.gnu.org/software/emacs/manual/html_node/org/][Org Mode Manual]]
+    * [[http://orgmode.org/worg/org-glossary.html][Org Glossary: An Explanation of Basic Org-Mode Concepts]]
+
+    * Editing
+      * http://orgmode.org/manual/Structure-editing.html
+
+
+Examples:
+
+    * [[http://home.fnal.gov/~neilsen/notebook/orgExamples/org-examples.html#sec-5][Emacs org-mode examples and cookbook]]
+
+Many examples about literate programming in Org-mode with Python, R,
+java and C. Shows integration of org-mode tables and Python, R ... and
+code blocks.
+
+    * http://gitwiki.org/Tests/org-mode.org
+    * [[https://chopmode.wordpress.com/2011/01/30/my-org-mode-journey-chapter-1/][My Org-mode journey – Chapter 1 | chop-mode]]
+
+
+Reference Cards and Cheat Sheets:
+
+    * [[http://orgmode.org/orgguide.pdf][The Compact Org-Mode Guide]]
+    * [[https://www.gnu.org/software/emacs/refcards/pdf/orgcard.pdf][Org-Mode Reference Card]]
+
+    * [[https://gist.github.com/wdkrnls/1990839][Markup Cheat sheet for Org-mode]]
+
+Books:
+
+    *  [[http://doc.norang.ca/org-mode.html][Org Mode - Organize Your Life In Plain Text!]]
+
+Hacking and Tweaking:
+
+   * [[http://endlessparentheses.com/embedding-youtube-videos-with-org-mode-links.html][Embedding Youtube videos with org-mode links]]
+   * [[http://stackoverflow.com/questions/17435995/paste-an-image-on-clipboard-to-emacs-org-mode-file-without-saving-it][Paste an image on clipboard to Emacs Org mode file without saving it]]
+
+   * [[http://orgmode.org/worg/org-faq.html][Org-mode Frequently Asked Questions]]
+
+   * [[http://oremacs.com/2015/01/07/org-protocol-1/][My org-protocol setup, part 1.]]
+
+   * [[http://stackoverflow.com/questions/22072773/batch-export-of-org-mode-files-from-the-command-line][Batch export of org-mode files from the command line]]
+
+   * [[http://thomasf.github.io/solarized-css/test/org-hacks.html#sec-1-5][Org ad hoc code, quick hacks and workarounds]]
+
+
+
+Cases:
+
+    * [[http://kitchingroup.cheme.cmu.edu/blog/2014/08/08/What-we-are-using-org-mode-for/][What we are using org-mode for]]
+    * [[http://juanreyero.com/article/emacs/org-teams.html][Org-mode tricks for team management]]
+
+Literate Programming:
+
+   * [[http://www.howardism.org/Technical/Emacs/literate-devops.html][Literate DevOps - www.howardism.org]]
+   * [[http://stackoverflow.com/questions/18598870/emacs-org-mode-executing-simple-python-code][Emacs Org Mode: Executing simple python code]]
+   * [[http://blogs.neuwirth.priv.at/software/2012/03/28/r-and-emacs-with-org-mode/][R and Emacs with org mode]]
+   * [[https://github.com/erikriverson/org-mode-R-tutorial/blob/master/org-mode-R-tutorial.org][Org-mode and R: An Introduction Introduction]]
+   * [[http://orgmode.org/worg/org-contrib/babel/intro.html][Babel: Introduction]]
+   * [[http://orgmode.org/manual/Results-of-evaluation.html][Results of evaluation / Org-Mode Manual]]
+
+Non Categorized:
+
+   * [[http://www.totherme.org/configs/org-stuff.html][Gareth's Org-Mode Config]]
+
+*** Videos
+**** Tutorials
+
+*Org Mode in Depth - by Rick Dillon*
+
+   - [[https://www.youtube.com/watch?v=nsGYet02bEk][Hack Emacs - Org Mode In Depth: Managing Structure - YouTube]]
+
+Description: "Part of the Org Mode In Depth series. In this episode, we
+examine methods for exploiting the structure of an Org Mode file to
+focus on specific subtrees, control visibility by folding and
+unfolding headlines, navigate among headlines efficiently and
+reorganize headlines my moving and/or promoting and demoting them."
+
+   - [[https://www.youtube.com/watch?v=fTJVLJd_gz0][Org Mode In Depth: Tables - YouTube]]
+
+Description: "Actually recorded a few months back, I never got around
+to uploading this. I give a brief demo of some of the functionality
+Org Mode tables offer, and an explanation of some of the commands that
+enable it."
+
+   - [[https://www.youtube.com/watch?v=VTh_Xgt69-E][Hack Emacs - Org Mode in Depth: Markup and Links - YouTube]]
+
+Description: "Part of the Org Mode in Depth series. In this episode, I
+examine ways of marking up text in Org Mode, as well as various link
+types that connect Org headlines and files, as well as links that can
+execute code."
+
+ *NOn-Programmer's Emacs: Studying in Emacs pt 3: Annotation with Orgmode by Tory S. Anderson*
+
+   - [[https://www.youtube.com/watch?v%3Dnkv8PpxrL3k][Non-Programmer's Emacs: Studying in Emacs pt 3: Annotation with Orgmode]]
+   -
+   -
+
+**** Presentations
+
+      * [[(info "(emacs) Misc Help")][Emacs Org-Mode - A system for note-taking and project planning]] -  Talk given by Carsten Dominik.
+
+      * [[https://www.youtube.com/watch?v=lsYdK0C2RvQ][Embedding Code Snippets In Org Mode]]
+
+      * [[https://www.youtube.com/watch?v=VIuOwIBL-ZU][Emacs Tutorial - Overview of Init Files Using Org-Mode and Use-Package (Part 1 of 2)]]
+
+      * [[https://www.youtube.com/watch?v=fgizHHd7nOo][Org mode is awesome]]
+
+      * [[https://www.youtube.com/watch?v=oJTwQvgfgMM][Emacs Org-mode - a system for note-taking and project planning]]
+
+      * [[https://youtu.be/6W82EdwQhxU][Hack-Emacs an Overview of Org-Mode]]
+
+      * [[https://www.youtube.com/watch?v=cRUCiF2MwP4][Teaching with Emacs+org-mode - YouTube]]
+* Org-mode Elisp Snippets and Org-mode API
+** Org-mode API documentation 
+
+To access org-mode API documentation inside Emacs, copy the code below
+to the scratch buffer, then place the cursor at the end of any of
+those s-expressions and type C-x C-e or type M-x eval-last-sexp.
+
+#+BEGIN_SRC elisp 
+(info "(org)Library of Babel") 
+
+(info "(org)Previewing LaTeX fragments")
+
+(info "(org)Exporting code blocks") 
+
+(info "(org)The export dispatcher") 
+
+(info "(org)noweb") 
+#+END_SRC
+** Code Block Templates
+
+When the user writes '<p'in org-mode and hits tab key it expands to a
+python source code block like this:
+
+#+BEGIN_SRC org
+,#+BEGIN_SRC python :results value
+
+,#+END_SRC
+#+END_SRC
+
+
+Elisp code:
+
+#+BEGIN_SRC elisp
+(add-to-list 'org-structure-template-alist
+	     '("p" "#+BEGIN_SRC python :results ?value\n\n#+END_SRC"))
+#+END_SRC
+** Code Blocks API
+*** Overview
+
+ 1. To test this the code block API divide the window in two parts,
+    one cointaining a org buffer with some org-mode file and other one
+    the emacs shell, IELM, that can be invoked with M-x ielm.
+
+ 2. At the org-mode buffer position the cursor at the code block.
+
+ 3. Go to the IELM buffer and run C-c C-b or type =M-x ielm-change-working-buffer=
+    and change the working buffer to the org-mode buffer by typing its
+    name and hitting tab to complete it.
+
+ 4. Run the commands at the IELM shell. If it was done the command
+
+    - (buffer-name) will return the name of the org-mode buffer
+      instead of ~*ielm*~.
+
+
+In this section, it is supposed that the org-buffer has this code block:
+
+#+BEGIN_SRC org
+  ,#+BEGIN_SRC scala :tangle /tmp/scalatest.scala
+    import java.awt.BorderLayout
+    import javax.swing.{JFrame, JPanel, JButton, JTextArea}
+
+    val frame = new JFrame("Border Layout")
+    val btn1  = new JButton("North")
+    val btn2  = new JButton("South")
+    val btn3  = new JButton("Center")
+    val btn4  = new JButton("West")
+    val btn5  = new JButton("East")
+
+    frame.setLayout(new BorderLayout())
+    frame.add(btn1, BorderLayout.NORTH)
+    frame.add(btn2, BorderLayout.SOUTH)
+    frame.add(btn3, BorderLayout.CENTER)
+    frame.add(btn4, BorderLayout.WEST)
+    frame.add(btn5, BorderLayout.EAST)
+
+    frame.setSize(300, 400)
+    frame.setVisible(true)
+  ,#+END_SRC
+#+END_SRC
+
+It would be rendered as:
+
+#+BEGIN_SRC scala :tangle /tmp/scalatest.scala
+  import java.awt.BorderLayout
+  import javax.swing.{JFrame, JPanel, JButton, JTextArea}
+
+  val frame = new JFrame("Border Layout")
+  val btn1  = new JButton("North")
+  val btn2  = new JButton("South")
+  val btn3  = new JButton("Center")
+  val btn4  = new JButton("West")
+  val btn5  = new JButton("East")
+
+  frame.setLayout(new BorderLayout())
+  frame.add(btn1, BorderLayout.NORTH)
+  frame.add(btn2, BorderLayout.SOUTH)
+  frame.add(btn3, BorderLayout.CENTER)
+  frame.add(btn4, BorderLayout.WEST)
+  frame.add(btn5, BorderLayout.EAST)
+
+  frame.setSize(300, 400)
+  frame.setVisible(true)
+#+END_SRC
+
+*** Get information about code block
+
+#+BEGIN_SRC elisp
+ELISP> (org-babel-get-src-block-info)
+("scala" "import java.awt.BorderLayout\nimport javax.swing.{JFrame, JPanel, JButton, JTextArea}\n\nval frame = new JFrame(\"Border Layout\")\nval btn1  = new JButton(\"North\")\nval btn2  = new JButton(\"South\")\nval btn3  = new JButton(\"Center\")\nval btn4  = new JButton(\"West\")\nval btn5  = new JButton(\"East\")\n\nframe.setLayout(new BorderLayout())\nframe.add(btn1, BorderLayout.NORTH)\nframe.add(btn2, BorderLayout.SOUTH)\nframe.add(btn3, BorderLayout.CENTER)\nframe.add(btn4, BorderLayout.WEST)\nframe.add(btn5, BorderLayout.EAST)\n\nframe.setSize(300, 400)\nframe.setVisible(true)"
+ ((:colname-names)
+  (:rowname-names)
+  (:result-params "replace")
+  (:result-type . value)
+  (:comments . "")
+  (:shebang . "")
+  (:cache . "no")
+  (:padline . "")
+  (:noweb . "no")
+  (:tangle . "/tmp/scalatest.scala")
+  (:exports . "code")
+  (:results . "replace")
+  (:hlines . "no")
+  (:session . "none"))
+ "" nil 0 2257)
+
+ELISP>
+#+END_SRC
+
+*** Getting the programming language of the code block
+
+#+BEGIN_SRC elisp
+ELISP> (car (org-babel-get-src-block-info))
+"scala"
+ELISP>
+#+END_SRC
+
+*** Getting the source code of the code block
+
+#+BEGIN_SRC elisp
+ELISP> (cadr (org-babel-get-src-block-info))
+"import java.awt.BorderLayout\nimport javax.swing.{JFrame, JPanel, JButton, JTextArea}\n\nval frame = ..."
+ELISP>
+
+ELISP> (print (cadr (org-babel-get-src-block-info)))
+
+"import java.awt.BorderLayout
+import javax.swing.{JFrame, JPanel, JButton, JTextArea}
+
+val frame = new JFrame(\"Border Layout\")
+val btn1  = new JButton(\"North\")
+val btn2  = new JButton(\"South\")
+val btn3  = new JButton(\"Center\")
+val btn4  = new JButton(\"West\")
+val btn5  = new JButton(\"East\")
+
+frame.setLayout(new BorderLayout())
+frame.add(btn1, BorderLayout.NORTH)
+frame.add(btn2, BorderLayout.SOUTH)
+frame.add(btn3, BorderLayout.CENTER)
+frame.add(btn4, BorderLayout.WEST)
+frame.add(btn5, BorderLayout.EAST)
+
+frame.setSize(300, 400)
+frame.setVisible(true)"
+
+#+END_SRC
+
+*** Getting code block attributes
+
+#+BEGIN_SRC elisp
+  ELISP> (caddr (org-babel-get-src-block-info))
+  ((:colname-names)
+   (:rowname-names)
+   (:result-params "replace")
+   (:result-type . value)
+   (:comments . "")
+   (:shebang . "")
+   (:cache . "no")
+   (:padline . "")
+   (:noweb . "no")
+   (:tangle . "/tmp/scalatest.scala")
+   (:exports . "code")
+   (:results . "replace")
+   (:hlines . "no")
+   (:session . "none"))
+
+  ELISP> (assoc :exports (caddr (org-babel-get-src-block-info)))
+  (:exports . "code")
+
+  ELISP> (cdr (assoc :exports (caddr (org-babel-get-src-block-info))))
+  "code"
+  ELISP>
+
+  ELISP> (assoc :tangle (caddr (org-babel-get-src-block-info)))
+  (:tangle . "/tmp/scalatest.scala")
+
+  ELISP> (cdr (assoc :tangle (caddr (org-babel-get-src-block-info))))
+  "/tmp/scalatest.scala"
+  ELISP>
+#+END_SRC
+*** Run a Scala code block 
+
+This example is specific for the Scala language, but can be easily
+adapated to other languages.
+
+Usage: 
+
+ 1. Place the cursos at the some scala code block
+ 2. run M-x org/run-scala-block
+
+It will run save the code block content to the file /tmp/scala-snippet.scala
+and run the command =$ scala /tmp/scala-snippet.scala= in the
+compiling mode.
+
+#+BEGIN_SRC elisp 
+  (defun org/run-scala-block ()
+    (interactive)
+           ;; Org-mode block contents 
+    (let* ((content (cadr (org-babel-get-src-block-info)))
+           ;; File in that the contents will be saved.
+           (file    "/tmp/scala-snippet.scala"))
+      ;; Execute the commands inside this special form
+      ;; in a temporary buffer 
+      (with-temp-buffer
+        ;; Delete file if it exists
+        (if (file-exists-p file) (delete-file file))
+        ;; Insert the code block contents in the temporary buffer 
+        (insert content)
+        ;; Write the buffer contents to fil.
+        (append-to-file (point-min) (point-max) file))    
+      ;; Run the compilation command 
+      (compile (format "scala %s" file))))
+#+END_SRC
+
+** Custom Protocols
+*** Open directory with dired mode
+
+Org-mode already provides the protocol ~file:<filename>~ to open a
+directory or file. The motivation to implement this protocol is that it
+is unambiguous like file protocol and easy to search.
+
+Hyperlink syntax:  ~dir:<file-path>~
+
+
+#+BEGIN_SRC elisp
+(add-hook 'org-mode-hook
+          (lambda ()
+	      (org-add-link-type "dir" #'dired nil)))
+#+END_SRC
+
+
+Org-mode file example:
+
+#+BEGIN_SRC
+Log directory      -  dir:/var/log  -  [[dir:/var/log][Log directory]]
+
+System cofiguration - dir:/etc
+#+END_SRC
+
+*** Open directory with system file manager
+
+Hyperlink format: ~dire:<directory-path>~
+
+#+BEGIN_SRC elisp
+(defvar default-file-manager-app "pcmanfm-qt")
+
+(defun org/protocol-dire (input)
+  (start-process  "proc" ;; Process name
+		  nil    ;; Buffer name
+
+		  default-file-manager
+		  input
+		  ))
+
+(add-hook 'org-mode-hook
+          (lambda ()
+	      (org-add-link-type "dire" #'org/protocol-dire nil)))
+#+END_SRC
+
+Example:
+
+#+BEGIN_SRC
+
+To open the directory file:/var/log in the system file
+manager click on the hyperlink bellow.
+
+
+ - Hyperlink1:   dire:/var/log
+
+ - Hyperlink2:   [[dire:/var/log][System Log directory]]
+
+#+END_SRC
+
+
+[[file:images/org-mode-protocol-file-manager.png][file:images/org-mode-protocol-file-manager.png]]
+
+*** Man page
+
+Provides a hyperlink that displays a man page when clicked.
+
+
+#+BEGIN_SRC elisp
+(add-hook 'org-mode-hook
+          (lambda ()
+	         (org-add-link-type  "man" #'woman nil)))
+#+END_SRC
+
+Example:
+
+file test.org
+
+#+BEGIN_SRC
+Click on the hyperlinks bellow to open the man pages:
+
+Gcc Man Page:
+
+ - man:gcc
+
+C-function cbrt Man Page
+
+ - man:cbrt
+
+ - [[man:cbrt][C-function cbrt Man Page]]
+#+END_SRC
+
+*** Elisp Documentation
+
+Provides clickable link that shows the the Elisp documentation.
+
+A link of format ~elisp-doc:add-hook~ will show the =add-hook=
+documentation when clicked.
+
+Hyperlink format:  ~elisp-doc:<function-name>~ or ~[elisp-doc:<function-name>]~
+
+#+BEGIN_SRC elisp
+  (defun org/protocol-elisp-doc (function-symbol)
+    (princ function-symbol)
+    (describe-function (intern-soft function-symbol)))
+
+
+  (defun org/protocol-elisp-doc-html (path desc backend)
+     (cl-case backend
+       (html (format
+              "<a href='' title='%s'>%s</a>"
+              (documentation (intern-soft path))
+              (or desc path)))))
+
+  (add-hook 'org-mode-hook
+        (lambda ()
+          (org-add-link-type "elisp-doc"
+                             #'org/protocol-elisp-doc
+                             #'org/protocol-elisp-doc-html)))
+
+#+END_SRC
+
+Example:
+
+file: ~/tmp/test.org~
+
+#+BEGIN_SRC org-mode
+Elisp documentation protocol:
+
+[[elisp-doc:add-hook][Function Add hook]]
+
+The function elisp-doc:start-process is used to start an asynchronous process.
+#+END_SRC
+
+
+This screenshot show what happens when the user clicks in the hyperlink.
+
+[[file:images/elisp-doc-org-mode-protocol-click.png][file:images/elisp-doc-org-mode-protocol-click.png]]
+
+Exported to html with: =M-x org-html-export-to-html=
+
+[[file:images/elisp-doc-org-mode-protocol.png][file:images/elisp-doc-org-mode-protocol.png]]
+** Settings
+*** General Settings
+
+Syntax highlight for code blocks  ~#+BEGIN_SRC .. #+END_SRC~
+
+#+BEGIN_SRC elisp
+;; Syntax highlight for code blocks  #+BEGIN_SRC .. #+END_SRC
+;;
+(setq org-src-fontify-natively t)
+#+END_SRC
+
+Syntax highlight for latex fragments
+
+#+BEGIN_SRC elisp
+(setq org-highlight-latex-and-related '(latex script entities))
+#+END_SRC
+
+*** Code Block - Org-babel
+
+Enable source code block in org files
+
+#+BEGIN_SRC elisp
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (sh . t)
+   (python . t)
+   (scheme . t)
+   (lisp . t)
+   (clojure . t)
+   (R . t)
+   (latex . t)
+   (ruby . t)
+   (C . t)
+   ;;; (C++ . t)
+   (ditaa . t)
+   (haskell . t)
+ ;;  (fsharp . t)
+ ;;  (java . t)
+ ;;  (scala . t)
+;;   (javascript . t)
+   (maxima . t)
+  ))
+#+END_SRC
+
+Disable Security confirmation:
+
+#+BEGIN_SRC elisp
+;; Disable security confirmations
+;;
+
+(setq   ;; Confirmation for running coide blocks
+        org-confirm-babel-evaluate      nil
+        ;; Confirmation for elisp links
+        org-confirm-elisp-link-function nil
+        ;; Confirmation for shell links
+        org-confirm-shell-link-function nil
+
+        org-export-babel-evaluate       nil
+        )
+#+END_SRC 
+
