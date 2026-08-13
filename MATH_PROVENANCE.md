@@ -2,6 +2,23 @@
 
 Documents that carry mathematics, added to exercise formula extraction across every format that can hold it. Each one was fetched from the source below, and its licence read from the source repository, the document itself, or the publisher's stated terms.
 
+## No ground truth, and why
+
+These documents ship without `ground_truth/` files.
+
+The corpus takes ground truth from upstream and normalizes it, then gates each document against an independent oracle. These documents bring none: they are raw published files. Deriving it by running the extractor over them would record today's output as the definition of correct, so a later regression would match the golden file and pass. The corpus is better served by an honest gap than by a golden file that cannot fail.
+
+There is one seam worth noting for later. Four of the documents carry 1,046 LaTeX strings written by their own authors, in MathML `annotation-tex`:
+
+| document | annotations |
+|---|---|
+| `html/math/mathematics_mathml_pandoc_b65cef.html` | 577 |
+| `html/math/2212_09410_f9ff0c.html` | 339 |
+| `html/math/2608_12173v1_cf6425.html` | 117 |
+| `html/math/2608_11028v2_419bae.html` | 13 |
+
+That is real formula-level ground truth, independent of any extractor. `README.md` places targets of that kind in `ground_truth/structured/`, which the repository does not yet contain, so this change does not invent the format. The material is here when that directory arrives.
+
 ## Committed
 
 | path | source | licence | notation |
