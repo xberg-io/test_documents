@@ -190,3 +190,19 @@ Vendored WordPerfect-family test files. Per-file provenance (upstream path, revi
 - **License:** CC-BY-SA-4.0. ShareAlike is copyleft, so these are reference only.
 - **Used here:** 178 mathematics articles, reference.
 - **Modifications:** none.
+
+## Synthetic scanned math pages
+
+- **Citation:** none; generated for this corpus.
+- **Source:** rendered with matplotlib mathtext, rasterized at 300 DPI, binarized, and packed as CCITT G4 PDFs with no text layer, to mirror the shape of a scanned textbook page (xberg issue #1385).
+- **License:** MIT, as our own work.
+- **Used here:** `pdf_scanned/synthetic_math_*.pdf`, four pages that carry display equations only as pixels. They exercise formula detection and recognition on scanned input, including a skewed scan.
+- **Modifications:** not applicable.
+
+## xberg benchmark-harness fixtures
+
+- **Citation:** none; part of the xberg repository.
+- **Source:** <https://github.com/xberg-io/xberg>, `tools/benchmark-harness/fixtures/split/memo_marketing_form.pdf`, page 1, rasterized at 300 DPI and packed as a bilevel CCITT G4 scan.
+- **License:** MIT, as our own work.
+- **Used here:** `pdf_scanned/memo_prose_scanned.pdf`, the negative case: a scanned page with no mathematics, which must yield no formulas.
+- **Modifications:** rasterized and binarized from the vector original.
