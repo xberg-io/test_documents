@@ -160,7 +160,12 @@ That is real formula-level ground truth, independent of any extractor. `README.m
 | `xml/math/journal_pcbi_1005589_type_manuscript_58c02e.xml` | [PLOS Computational Biology](https://journals.plos.org/ploscompbiol/article/file?id=10.1371/journal.pcbi.1005589&type=manuscript) | CC-BY-4.0 | MathML inside JATS <alternatives>, JATS Journa |
 | `xml/math/manuscript_933c4c.xml` | [Texture](https://raw.githubusercontent.com/substance/texture/master/data/kitchen-sink/manuscript.xml) | MIT | LaTeX in <tex-math> CDATA, JATS disp-formula / |
 
-Committed: 136. The binary formats among them live in the bucket and are pinned by `corpus.lock.json`, following the storage split in `README.md`.
+| `pdf_scanned/synthetic_math_interpolation_scanned.pdf` | Generated for this corpus (matplotlib mathtext, 300 DPI bilevel CCITT G4, no text layer) | MIT | Rasterized display equations (interpolation) |
+| `pdf_scanned/synthetic_math_interpolation_skew_scanned.pdf` | Generated for this corpus; same page rotated 1.2 degrees before binarization | MIT | Rasterized display equations, skewed scan |
+| `pdf_scanned/synthetic_math_matrix_scanned.pdf` | Generated for this corpus (matplotlib mathtext, 300 DPI bilevel CCITT G4, no text layer) | MIT | Rasterized display equations (determinants) |
+| `pdf_scanned/synthetic_math_series_scanned.pdf` | Generated for this corpus (matplotlib mathtext, 300 DPI bilevel CCITT G4, no text layer) | MIT | Rasterized display equations (series) |
+
+Committed: 140. The binary formats among them live in the bucket and are pinned by `corpus.lock.json`, following the storage split in `README.md`.
 
 ## Reference only, not committed
 

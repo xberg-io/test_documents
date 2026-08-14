@@ -1625,6 +1625,10 @@
       "sha256": "0350f7e061a91df9c11548f061ac308360f0a1a0e8389c74e1b76c1bb70d5184",
       "size": 126609
     },
+    "pdf_scanned/memo_prose_scanned.pdf": {
+      "sha256": "9f75e84ec7e322b71715a626f06df1ce1ebe5bd7d921e6b046807d18a981b484",
+      "size": 42912
+    },
     "pdf_scanned/multi_page_scanned.pdf": {
       "sha256": "cc9455385e3fa2621664ef6fc3afc58f5df29ea37139e0fdd8d5dbb3b74073e1",
       "size": 2527028
@@ -1676,6 +1680,22 @@
     "pdf_scanned/nougat_012_scanned.pdf": {
       "sha256": "2da8b562f74b778fcba92efe07fb8892aad1b279dbf84daba412ee148a4b56c8",
       "size": 1233386
+    },
+    "pdf_scanned/synthetic_math_interpolation_scanned.pdf": {
+      "sha256": "99dd205450e6dfbd638a2a4ce03058ba595436acdafe0e736e126753c5b71834",
+      "size": 14894
+    },
+    "pdf_scanned/synthetic_math_interpolation_skew_scanned.pdf": {
+      "sha256": "553023190b90aa46e6196e74a55bf71939853db478c3109aea3ef1e90c4e4fe7",
+      "size": 15586
+    },
+    "pdf_scanned/synthetic_math_matrix_scanned.pdf": {
+      "sha256": "8505715c5362ce8eb733cd3cc783d27cffa218d51dabbf2a971820cc37b09090",
+      "size": 10464
+    },
+    "pdf_scanned/synthetic_math_series_scanned.pdf": {
+      "sha256": "6dcf181fa25d84409f7d99531bb4f1cd6607f003b73f81de8dbeb34e91fb3074",
+      "size": 11751
     },
     "ppt/simple.ppt": {
       "sha256": "731b1a5478f36b996e02a0a2151df3de46c1c8293b3f0e10e7eda8aa24f249ab",
