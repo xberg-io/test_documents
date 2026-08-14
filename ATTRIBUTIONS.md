@@ -142,3 +142,43 @@ Vendored WordPerfect-family test files. Per-file provenance (upstream path, revi
 - **Rendering tools:** the source graphs are ours; the SVGs and PDFs are what each renderer emitted from them. Graphviz 15.1.1 (`dot`/`neato`) is EPL-1.0, Mermaid CLI 11.16.0 is MIT, PlantUML 1.2026.0 is GPL, LibreOffice 26.2.5.2 is MPL-2.0, librsvg 2.62.3 (`rsvg-convert`) is LGPL-2.1-or-later, qpdf 12.3.2 is Apache-2.0, and Google Chrome 151 is proprietary. None of these licenses reaches the output: rendering a document is not a derivative work of the renderer, and PlantUML says so explicitly in its FAQ. No tool binary, jar or stylesheet is redistributed here.
 - **Embedded fonts:** a PDF carries subsetted glyph outlines of whatever fonts the renderer reached for, so the fixtures under `diagrams/pdf/` do redistribute font data. Each family was checked against the OS/2 `fsType` bit of the system font it came from, which is where a font states its own embedding terms: Helvetica and Liberation Sans report 0 (installable, no restriction), Times New Roman and Trebuchet MS report 8 (editable embedding). All four permit it. `scripts/build_diagram_pdfs.py` holds that allowlist and fails a build that reaches for anything outside it. That check is why `graphviz_cjk` ships as SVG only: macOS's Songti reports `fsType` 2, restricted, which forbids embedding without the owner's permission, so no CJK PDF is published until an open-licensed CJK face is available to render one.
 - **Modifications:** every fixture whose producer states its own graph also ships as a `*_geometry.svg` variant with that metadata removed by `scripts/strip_svg_graph_metadata.py` — Graphviz writes the node ids and the full edge list into `<title>` elements and again into XML comments; Mermaid into `id="L_start_auth_0"`, again into `data-id`, and the edge's waypoints into `data-points`; PlantUML into `id="Read config-to-Open input"`, again into a comment, again into a `data-entity-1`/`data-entity-2` pair, and once more into a `<?plantuml-src?>` processing instruction carrying its whole deflated source; and LibreOffice by tagging each group with its shape kind, which across a whole file is the node/edge partition. A fixture that names its own answer cannot measure geometry recovery. Stripping removes no geometry: each variant renders to a byte-identical PNG. `nested_transforms.svg`, `icon_nodes.svg`, `mixed_page.svg`, `two_diagrams.svg` and the three `negative_*.svg` files are hand-written. Ground truth is the source graph restated by node label, so it is independent of any recogniser's numbering.
+
+## PubMed Central open access
+
+- **Citation:** Europe PMC RESTful Web Service, Europe PMC Consortium.
+- **Source:** <https://europepmc.org>
+- **License:** per article, read from each file's JATS `ali:license_ref`. 498 are CC-BY-4.0 or CC0 and vendored; 214 are CC-BY-NC or CC-BY-NC-ND and reference only.
+- **Used here:** 712 full-text JATS articles vendored, 214 reference.
+- **Modifications:** none. Each file is byte-identical to what the service returns.
+
+## arXiv
+
+- **Citation:** arXiv.org e-Print archive, Cornell University.
+- **Source:** <https://arxiv.org>
+- **License:** per paper, read from its OAI record. 204 are CC-BY-4.0 and vendored. 993 carry the arXiv perpetual non-exclusive licence, which grants distribution to arXiv rather than to third parties, so they are reference only.
+- **Used here:** 204 PDFs vendored, 993 reference.
+- **Modifications:** none.
+
+## Project Gutenberg
+
+- **Citation:** Project Gutenberg Literary Archive Foundation.
+- **Source:** <https://www.gutenberg.org>
+- **License:** US public domain. The Project Gutenberg trademark and licence terms attach to the header, not to the underlying public-domain work.
+- **Used here:** 500 EPUBs vendored, as prose ballast that carries no mathematics.
+- **Modifications:** none.
+
+## govdocs1
+
+- **Citation:** Garfinkel, Farrell, Roussev and Dinolt, "Bringing science to digital forensics with standardized forensic corpora" (DFRWS 2009).
+- **Source:** <https://digitalcorpora.org/corpora/file-corpora/files/>
+- **License:** US government works, public domain under 17 U.S.C. 105.
+- **Used here:** 400 mixed office documents vendored, from shards 000 and 001.
+- **Modifications:** none. Files are taken from the published shards under their original names, prefixed with the shard.
+
+## Wikipedia
+
+- **Citation:** Wikipedia contributors, English Wikipedia.
+- **Source:** <https://en.wikipedia.org>
+- **License:** CC-BY-SA-4.0. ShareAlike is copyleft, so these are reference only.
+- **Used here:** 178 mathematics articles, reference.
+- **Modifications:** none.

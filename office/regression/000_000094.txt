@@ -1,0 +1,1346 @@
+Common Core of Data CD-ROM -- School Years 1996-1997 through 1999-2000
+School Year 1998-99 Public School Universe data
+Corrections to Agency Locale Codes
+using Version 1c of the Public School Universe data files, dated June 2001
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+                                                          |                     |
+0100420 BLOUNT COUNTY SCH DIST                            |     7         8     |
+0100840 COLBERT COUNTY SCH DIST                           |     4         8     |
+0101050 DALE COUNTY SCH DIST                              |     7         4     |
+0101770 HOUSTON COUNTY SCH DIST                           |     7         8     |
+0101920 JEFFERSON COUNTY SCH DIST                         |     3         2     |
+0102010 LAUDERDALE COUNTY SCH DIST                        |     7         8     |
+0103062 SAINT CLAIR COUNTY SCH DIST                       |     7         8     |
+0400021 COLORADO CITY UNIFIED DISTRICT                    |     7         8     |
+0400083 PPEP TEC HIGH SCHOOL                              |     1         2     |
+0400116 CASA BLANCA MIDDLE SCHOOL                         |     7         3     |
+0400480 AGUILA ELEMENTARY DISTRICT                        |     7         3     |
+0400720 ANTELOPE UNION HIGH SCH DIST                      |     7         8     |
+0400840 ARLINGTON ELEMENTARY DISTRICT                     |     7         3     |
+0401710 CASA GRANDE ELEMENTARY DIST                       |     7         3     |
+0401740 CASA GRANDE UNION HIGH DIST                       |     7         3     |
+0402010 CHLORIDE ELEMENTARY DISTRICT                      |     7         8     |
+0402250 CONTINENTAL ELEMENTARY DIST                       |     7         3     |
+0403080 FREDONIA MOCCASIN UNIFIED DIST                    |     7         8     |
+0403240 GADSDEN ELEMENTARY DISTRICT                       |     7         4     |
+0403310 GILA BEND UNIFIED DISTRICT                        |     7         8     |
+0403550 GRAND CANYON UNIFIED DISTRICT                     |     7         4     |
+0403900 HYDER ELEMENTARY DISTRICT                         |     7         4     |
+0404290 LAVEEN ELEMENTARY DISTRICT                        |     7         2     |
+0404410 LITTLEFIELD ELEMENTARY DIST                       |     7         3     |
+0404440 LITTLETON ELEMENTARY DISTRICT                     |     7         3     |
+0404530 MAINE CONSOL ELEMENTARY DIST                      |     7         4     |
+0404720 MARICOPA UNIFIED SCHOOL DIST                      |     7         3     |
+0404770 ALTAR VALLEY ELEMENTARY DIST                      |     7         3     |
+0405100 MOBILE ELEMENTARY DISTRICT                        |     7         3     |
+0405220 MOHAWK VALLEY ELEMENTARY DIST                     |     7         4     |
+0405340 MORRISTOWN ELEMENTARY DISTRICT                    |     7         3     |
+0405460 NADABURG ELEMENTARY DISTRICT                      |     7         3     |
+0405730 OWENS WHITNEY ELEM DIST                           |     7         3     |
+0405850 PALO VERDE ELEMENTARY DISTRICT                    |     7         3     |
+0406120 PEACH SPRINGS UNIFIED DIST                        |     7         8     |
+0406360 PICACHO ELEMENTARY DISTRICT                       |     7         3     |
+0406850 RAY UNIFIED DISTRICT                              |     7         8     |
+0406900 RED ROCK ELEMENTARY DISTRICT                      |     7         3     |
+0407170 RUTH FISHER ELEMENTARY DIST                       |     7         3     |
+0407200 SACATON ELEMENTARY DISTRICT                       |     7         8     |
+0407300 SAHUARITA UNIFIED DISTRICT                        |     7         3     |
+0407680 SENTINEL ELEMENTARY DISTRICT                      |     7         4     |
+0407820 SNOWFLAKE UNIFIED DISTRICT                        |     6         3     |
+0408130 STANFIELD ELEMENTARY DISTRICT                     |     7         3     |
+0408430 PALOMA ELEMENTARY DISTRICT                        |     7         8     |
+0408640 TOPOCK ELEMENTARY DISTRICT                        |     7         3     |
+0408850 VAIL ELEMENTARY DISTRICT                          |     8         3     |
+0408880 VALENTINE ELEMENTARY DISTRICT                     |     7         8     |
+0409090 WELLTON ELEMENTARY DISTRICT                       |     7         8     |
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+0409570 YUCCA ELEMENTARY DISTRICT                         |     7         3     |
+0500012 RIVERSIDE SCHOOL DISTRICT                         |     7         8     |
+0502330 ALTHEIMER UNIFIED SCHOOL DISTRICT                 |     7         8     |
+0502790 BAUXITE SCHOOL DISTRICT                           |     7         8     |
+0502820 BAY SCHOOL DISTRICT                               |     7         8     |
+0503030 PEA RIDGE SCHOOL DISTRICT                         |     7         8     |
+0503570 BRIGHT STAR SCHOOL DISTRI                         |     7         4     |
+0503640 BROOKLAND SCHOOL DISTRICT                         |     7         8     |
+0503710 BUFFALO ISLAND CENTRAL SCHOOL DISTRICT            |     7         4     |
+0503960 CARLISLE SCHOOL DISTRICT                          |     7         8     |
+0504080 CEDARVILLE SCHOOL DISTRICT                        |     7         4     |
+0504770 CRAWFORDSVILLE SCHOOL DIS                         |     7         8     |
+0504980 DECATUR SCHOOL DISTRICT                           |     7         8     |
+0505760 ELKINS SCHOOL DIST #10                            |     7         8     |
+0506360 FOUKE SCHOOL DISTRICT                             |     7         8     |
+0507140 GUYPERKINS SCHOOLS                                |     7         8     |
+0507410 HARTFORD DISTRICT #94                             |     7         8     |
+0508730 LAVACA PUBLIC SCHOOLS                             |     7         8     |
+0508940 LINCOLN SCHOOL DISTRICT                           |     7         8     |
+0509330 MANSFIELD SCHOOL DISTRICT                         |     7         8     |
+0509540 MAYFLOWER  SCHOOL DISTRICT                        |     7         8     |
+0510080 MT.VERNONENOLA SCHOOL DISTRICT                    |     7         8     |
+0510260 MOUNTAINBURG SCHOOLS                              |     7         8     |
+0510290 MULBERRY  SCHOOL DISTRICT                         |     7         8     |
+0511760 PRAIRIE GROVE SCHOOL DISTRICT                     |     7         8     |
+0513260 TURRELL SCHOOL DISTRICT                           |     7         8     |
+0513530 VILONIA SCHOOL DISTRICT                           |     7         8     |
+0513860 WINSLOW SCHOOL DISTRICT                           |     7         8     |
+0600001 ACTON-AGUA DULCE UNIFIED                          |     7         8     |
+0600009 CUYAMA JOINT UNIFIED                              |     7         4     |
+0600023 CHAWANAKEE JT. ELEMENTARY                         |     7         3     |
+0600026 EL TEJON UNIFIED                                  |     7         4     |
+0600031 PACIFIC UNIFIED                                   |     7         4     |
+0600041 MINARETS JT. UNION HIGH                           |     7         3     |
+0600042 WARNER UNIFIED                                    |     7         3     |
+0602010 ALPAUGH UNIFIED                                   |     7         4     |
+0602250 ALTA-DUTCH FLAT UNION ELEMENTA                    |     7         3     |
+0603060 ARCOHE UNION ELEMENTARY                           |     7         3     |
+0603610 BAKER VALLEY UNIFIED                              |     7         3     |
+0604350 BELLA VISTA ELEMENTARY                            |     7         4     |
+0604560 BELRIDGE ELEMENTARY                               |     7         4     |
+0604860 BIG CREEK ELEMENTARY                              |     7         3     |
+0605040 BIGGS UNIFIED                                     |     7         8     |
+0605240 BLACK OAK MINE UNIFIED                            |     7         3     |
+0605250 BLAKE ELEMENTARY                                  |     7         4     |
+0605520 BOLINAS-STINSON UNION ELEMENTA                    |     7         8     |
+0605730 BRADLEY UNION ELEMENTARY                          |     7         4     |
+0606960 CALIENTE UNION ELEMENTARY                         |     7         4     |
+0607260 CAMPTONVILLE ELEMENTARY                           |     7         4     |
+0607350 CANYON ELEMENTARY                                 |     7         3     |
+0607620 CARUTHERS UNION ELEMENTARY                        |     7         8     |
+0607650 CARUTHERS UNION HIGH                              |     7         8     |
+0607710 CASMALIA ELEMENTARY                               |     7         4     |
+0608580 CHUALAR UNION ELEMENTARY                          |     7         4     |
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+0609300 COLFAX ELEMENTARY                                 |     7         8     |
+0609510 COLUMBINE ELEMENTARY                              |     7         4     |
+0609990 COTTONWOOD UNION ELEMENTARY                       |     7         8     |
+0610380 CUTTEN ELEMENTARY                                 |     6         7     |
+0611100 DESERT CENTER UNIFIED                             |     7         3     |
+0611550 DUCOR UNION ELEMENTARY                            |     7         4     |
+0612360 ELK HILLS ELEMENTARY                              |     7         4     |
+0612660 EMIGRANT GAP ELEMENTARY                           |     7         3     |
+0612690 EMPIRE UNION ELEMENTARY                           |     2         4     |
+0613710 FEATHER FALLS UNION ELEMENTARY                    |     7         4     |
+0614490 FRENCH GULCH-WHISKEYTOWN ELEME                    |     7         4     |
+0615600 GORMAN ELEMENTARY                                 |     7         3     |
+0616830 HEBER ELEMENTARY                                  |     6         7     |
+0616860 HELENDALE ELEMENTARY                              |     7         3     |
+0617580 HORICON ELEMENTARY                                |     7         3     |
+0617640 HOT SPRINGS ELEMENTARY                            |     7         4     |
+0618270 INDIAN SPRINGS ELEMENTARY                         |     7         4     |
+0619320 KELSEYVILLE UNIFIED                               |     6         7     |
+0620160 LA GRANGE ELEMENTARY                              |     7         4     |
+0620220 LA HONDA-PESCADERO UNIFIED                        |     7         3     |
+0620520 LAGUNITAS ELEMENTARY                              |     7         3     |
+0622620 LOS ALAMOS ELEMENTARY                             |     7         4     |
+0622920 LOS OLIVOS ELEMENTARY                             |     7         4     |
+0624300 MCKINLEYVILLE UNION ELEMENTARY                    |     6         7     |
+0624930 MILLVILLE ELEMENTARY                              |     7         4     |
+0625650 MONTGOMERY ELEMENTARY                             |     7         3     |
+0626340 MT. BALDY JOINT ELEMENTARY                        |     7         3     |
+0626970 NEW HOPE ELEMENTARY                               |     7         4     |
+0627040 MOUNTAIN UNION ELEMENTARY                         |     7         4     |
+0627120 NEWCASTLE ELEMENTARY                              |     7         3     |
+0627300 NICASIO ELEMENTARY                                |     7         3     |
+0627870 OAK RUN ELEMENTARY                                |     7         4     |
+0628650 ORANGE UNIFIED                                    |     3         2     |
+0628950 ORO GRANDE ELEMENTARY                             |     7         3     |
+0629340 PACIFIC ELEMENTARY                                |     7         3     |
+0630060 PAUMA ELEMENTARY                                  |     7         3     |
+0630120 PENRYN ELEMENTARY                                 |     7         3     |
+0630630 PIXLEY UNION ELEMENTARY                           |     7         8     |
+0631350 POND UNION ELEMENTARY                             |     7         4     |
+0631680 RAISIN CITY ELEMENTARY                            |     7         3     |
+0632340 KASHIA ELEMENTARY                                 |     7         3     |
+0632430 RICHGROVE ELEMENTARY                              |     7         8     |
+0633110 RIVER DELTA JOINT UNIFIED                         |     7         3     |
+0634050 SAN ANTONIO UNION ELEMENTARY                      |     7         4     |
+0634080 SAN ARDO UNION ELEMENTARY                         |     7         4     |
+0634770 SAN LUCAS UNION ELEMENTARY                        |     7         4     |
+0636360 SEQUOIA UNION ELEMENTARY                          |     7         4     |
+0636570 SHASTA UNION ELEMENTARY                           |     7         4     |
+0636670 SHORELINE UNIFIED                                 |     7         3     |
+0636810 SILVER FORK ELEMENTARY                            |     7         3     |
+0636820 SILVER VALLEY UNIFIED                             |     7         3     |
+0636960 SNELLING-MERCED FALLS UNION EL                    |     7         4     |
+0636990 SOLANA BEACH ELEMENTARY                           |     3         2     |
+0637350 SOUTH BAY UNION ELEMENTARY                        |     6         7     |
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+0637680 SPENCER VALLEY ELEMENTARY                         |     7         3     |
+0637710 SPRECKELS UNION ELEMENTARY                        |     7         4     |
+0638130 STRATHMORE UNION ELEMENTARY                       |     7         8     |
+0639600 TRAVER JOINT ELEMENTARY                           |     7         4     |
+0641220 VISTA DEL MAR UNION ELEMENTARY                    |     7         4     |
+0642210 WESTSIDE ELEMENTARY                               |     7         3     |
+0642330 WHEATLAND ELEMENTARY                              |     7         8     |
+0642350 WHEATLAND UNION HIGH                              |     7         8     |
+0642420 WHITMORE UNION ELEMENTARY                         |     7         4     |
+0691063 DEL NORTE CO. OFFICE OF EDUCAT                    |     6         7     |
+0691134 GOLDEN PLAINS UNIFIED                             |     7         3     |
+0691137 BIG OAK FLAT-GROVELAND UNIFIED                    |     6         7     |
+0802310 AULT-HIGHLAND       RE-9                          |     7         8     |
+0802550 BRIGGSDALE          RE-10                         |     7         3     |
+0802730 CALHAN RJ-1                                       |     7         8     |
+0803030 PLATEAU VALLEY      50                            |     7         8     |
+0803240 DE BEQUE            49JT                          |     7         8     |
+0803270 DEER TRAIL          26J                           |     7         8     |
+0804200 GILCREST            RE-1                          |     7         8     |
+0804440 PAWNEE              RE-12                         |     7         8     |
+0804830 JOHNSTOWN-MILLIKEN  RE-5J                         |     7         8     |
+0804920 KEENESBURG          RE-3(J)                       |     7         8     |
+0804950 PLATTE VALLEY       RE-7                          |     7         8     |
+0806060 PEYTON              23 JT                         |     7         3     |
+0806150 PUEBLO COUNTY RURAL 70                            |     4         8     |
+0806720 PRAIRIE             RE-11                         |     7         8     |
+0806750 STRASBURG           31J                           |     7         3     |
+0900150 BARKHAMSTED SCHOOL DISTRICT                       |     6         8     |
+0900360 BOLTON SCHOOL DISTRICT                            |     6         8     |
+0900900 COLUMBIA SCHOOL DISTRICT                          |     6         8     |
+0901080 DEEP RIVER SCHOOL DISTRICT                        |     6         7     |
+0901200 EAST HADDAM SCHOOL DISTRICT                       |     7         8     |
+0902760 NEW HARTFORD SCHOOL DISTRICT                      |     6         8     |
+0903480 PUTNAM SCHOOL DISTRICT                            |     6         7     |
+0903510 REDDING SCHOOL DISTRICT                           |     6         8     |
+1200390 DADE COUNTY SCHOOL DISTRICT                       |     7         3     |
+1200540 FLAGLER COUNTY SCHOOL DISTRICT                    |     7         8     |
+1200930 INDIAN RIVER COUNTY SCHOOL DISTRICT               |     6         7     |
+1201650 SANTA ROSA COUNTY SCHOOL DISTRICT                 |     4         8     |
+1300930 CATOOSA COUNTY                                    |     7         4     |
+1301050 CHATTAHOOCHEE COUNTY                              |     7         8     |
+1301590 DADE COUNTY                                       |     7         8     |
+1301740 DEKALB COUNTY                                     |     3         2     |
+1301980 EFFINGHAM COUNTY                                  |     7         8     |
+1302280 FULTON COUNTY                                     |     3         2     |
+1302820 HENRY COUNTY                                      |     3         8     |
+1303150 JONES COUNTY                                      |     7         8     |
+1303270 LEE COUNTY                                        |     7         8     |
+1303480 MADISON COUNTY                                    |     7         8     |
+1304110 PICKENS COUNTY                                    |     7         8     |
+1305220 TWIGGS COUNTY                                     |     7         8     |
+1500030 HAWAII DEPARTMENT OF EDUCATION                    |     3         2     |
+1600930 BONNEVILLE JOINT SCHOOL DISTRICT 93               |     6         7     |
+1601950 MARSH VALLEY JOINT SCHOOL DISTRICT 21             |     7         8     |
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+1602070 MELBA JOINT SCHOOL DISTRICT 136                   |     7         8     |
+1602550 PARMA SCHOOL DISTRICT 137                         |     7         8     |
+1603480 WILDER SCHOOL DISTRICT 133                        |     7         8     |
+1700058 LAKE CO H S TECHNOLOGY CAMPUS                     |     6         8     |
+1700106 HERITAGE COMM UNIT SCH DIST 8                     |     7         8     |
+1700109 RIDGEVIEW COMM UNIT SCH DIST 19                   |     7         8     |
+1700123 MERIDIAN COMM UNIT SCH DIST 15                    |     7         8     |
+1700195 LEE/OGLE ROE                                      |     7         4     |
+1700196 LOGAN/MASON/MENARD ROE                            |     7         8     |
+1703270 ALBERS SCHOOL DISTRICT 63                         |     7         8     |
+1703660 ALWOOD COMM UNIT SCH DIST 225                     |     7         8     |
+1703810 ANNAWAN COMM UNIT SCH DIST 226                    |     7         8     |
+1703990 ARGENTA-OREANA COMM UNIT SCH D 1                  |     7         8     |
+1704470 ATHENS COMM UNIT SCH DIST 213                     |     7         8     |
+1704740 AVISTON SCHOOL DISTRICT 21                        |     7         8     |
+1705160 BARTELSO SCHOOL DISTRICT 57                       |     7         8     |
+1705430 BEECHER C U SCH DIST 200U                         |     7         8     |
+1706840 BRACEVILLE SCHOOL DIST 75                         |     7         8     |
+1707200 BRIMFIELD C U SCHOOL DIST 309                     |     7         8     |
+1707830 CENTRAL COMM UNIT SCH DIST 301                    |     7         8     |
+1708010 BYRON COMM UNIT SCHOOL DIST 226                   |     7         8     |
+1709850 CHESTER-EAST LINCOLN CCS DIST 61                  |     6         7     |
+1711220 CRESTON COMM CONS SCHOOL DIST 161                 |     7         8     |
+1711880 DEER CREEK-MACKINAW CUSD 701                      |     7         8     |
+1712300 DIVERNON C U SCHOOL DIST 13                       |     7         8     |
+1712700 DUNLAP C U SCHOOL DIST 323                        |     7         8     |
+1713920 TRI VALLEY C U SCHOOL DISTRICT 3                  |     7         8     |
+1714160 ELWOOD C C SCH DIST 203                           |     7         8     |
+1714410 ESWOOD C C DISTRICT 269                           |     7         4     |
+1714430 EUREKA C U DIST 140                               |     4         8     |
+1715180 FISHER C U SCHOOL DISTRICT 1                      |     7         8     |
+1715490 FORRESTVILLE VALLEY C U S D 221                   |     7         8     |
+1716230 GARDNER COMM CONS SCH DIST 72C                    |     7         8     |
+1716260 GARDNER S WILMINGTON THS DIST 73                  |     7         8     |
+1716290 GAVIN SCHOOL DIST 37                              |     7         3     |
+1716530 GERMANTOWN SCHOOL DISTRICT 60                     |     7         8     |
+1717370 GRANT PARK C U  SCHOOL DIST 6                     |     7         8     |
+1717700 GREENVIEW C U SCH DIST 200                        |     7         8     |
+1717760 GRIDLEY C U SCH DIST 10                           |     7         8     |
+1718840 HERSCHER COMM UNIT SCH DIST 2                     |     7         8     |
+1718870 HEYWORTH C U SCH DIST 4                           |     7         8     |
+1719260 HINCKLEY BIG ROCK C U S D 429                     |     7         8     |
+1719960 ILLINI BLUFFS CU SCH DIST 327                     |     7         8     |
+1719980 ILLIOPOLIS C U SCHOOL DIST 12                     |     7         8     |
+1721300 HIAWATHA C U SCHOOL DIST 426                      |     7         8     |
+1722710 LEXINGTON C U SCH DIST 7                          |     7         8     |
+1723310 LIVINGSTON C C SCHOOL DIST 4                      |     7         8     |
+1723700 LUDLOW C C SCHOOL DIST 142                        |     7         8     |
+1724190 MALTA COMM UNIT SCH DIST 433                      |     7         8     |
+1724750 MAROA FORSYTH C U SCH DIST 2                      |     7         8     |
+1725190 MAZON-VERONA-KINSMAN ESD 2C                       |     7         8     |
+1725690 MERIDIAN C U SCH DIST 223                         |     7         8     |
+1727990 COMMUNITY UNIT SCHOOL DIST 16                     |     7         8     |
+1728270 NEWARK COMM CONS SCH DIST 66                      |     7         3     |
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+1728470 NIANTIC-HARRISTOWN C U S D 6                      |     7         8     |
+1729640 OGDEN COMM CONS SCH DIST 212                      |     7         8     |
+1729890 OLYMPIA C U SCHOOL DIST 16                        |     7         8     |
+1731140 PEMBROKE C C SCHOOL DISTRICT 259                  |     7         8     |
+1731410 PORTA COMM UNIT SCHOOL DIST 202                   |     7         8     |
+1731920 PLEASANT PLAINS C U SCHOOL DIST 8                 |     7         8     |
+1732560 PRAIRIEVIEW COMM CONS DIST 192                    |     7         8     |
+1734140 ROANOKE BENSON C U S DIST 60                      |     7         8     |
+1735970 INDIAN CREEK COMM UNIT DIST 425                   |     7         8     |
+1736240 SHIRLAND C C SCHOOL DIST 134                      |     7         4     |
+1736510 SMITHTON C C SCHOOL DIST 130                      |     7         8     |
+1736570 SOMONAUK C U SCHOOL DIST 432                      |     7         8     |
+1736780 SOUTH PEKIN SCHOOL DIST 137                       |     7         8     |
+1736840 SOUTH WILMINGTON CONS SCH DIST 74                 |     7         8     |
+1736990 SPRING GROVE SCH DIST 11                          |     7         8     |
+1737120 ST ANNE C C SCHOOL DIST 256                       |     7         8     |
+1737140 ST ANNE COMM H S DIST 302                         |     7         8     |
+1737350 TRIAD COMM UNIT SCHOOL DIST 2                     |     3         8     |
+1737380 ST JOSEPH C C SCHOOL DIST 169                     |     7         8     |
+1737410 ST JOSEPH OGDEN C H S DIST 305                    |     7         8     |
+1737440 ST LIBORY CONS SCH DIST 30                        |     7         8     |
+1738790 THOMASBORO C C SCHOOL DIST 130                    |     7         8     |
+1739120 TOLONO C U SCHOOL DIST 7                          |     7         8     |
+1739450 TRI CITY COMM UNIT SCH DIST 1                     |     7         8     |
+1740830 WARRENSBURG-LATHAM C U DIST 11                    |     7         8     |
+1740920 LOWPOINT-WASHBURN C U S DIST 21                   |     7         8     |
+1742480 WILLIAMSVILLE C U SCHOOL DIST 15                  |     7         8     |
+1742790 WINNEBAGO C U SCH DIST 323                        |     7         8     |
+1802130 CLINTON CENTRAL SCHOOL CORP                       |     7         8     |
+1803210 SHELBY EASTERN SCHOOLS                            |     7         3     |
+1803330 EMINENCE COMMUNITY SCHOOL CORP                    |     7         3     |
+1804140 MONROE-GREGG SCHOOL DISTRICT                      |     7         3     |
+1804470 WESTERN SCHOOL CORP                               |     7         8     |
+1806660 MILL CREEK COMMUNITY SCH CORP                     |     7         8     |
+1807500 NEW HARMONY TOWN & TWP CON SCH                    |     7         8     |
+1807620 NINEVEH-HENSLEY-JACKSON UNITED                    |     7         8     |
+1808070 NORTH VERMILLION COM SCH CORP                     |     7         8     |
+1809120 JOHN GLENN SCHOOL CORPORATION                     |     7         8     |
+1809600 RISING SUN-OHIO CO COM                            |     7         8     |
+1811190 SUNMAN-DEARBORN COM SCH CORP                      |     7         8     |
+1812240 WA-NEE COMMUNITY SCHOOLS                          |     4         8     |
+1905070 BONDURANT-FARRAR COMM SCHOOL DISTRICT             |     7         8     |
+1906660 CENTER POINT-URBANA COMM SCHOOL DISTRICT          |     7         8     |
+1908520 DALLAS CENTER-GRIMES COMM SCHOOL DISTRICT         |     7         4     |
+1909540 DUNKERTON COMM SCHOOL DISTRICT                    |     7         8     |
+1917250 LISBON COMM SCHOOL DISTRICT                       |     7         8     |
+1918750 MARTENSDALE-ST MARYS COMM SCHOOL DISTRICT         |     7         8     |
+1920820 NORTH LINN COMM SCHOOL DISTRICT                   |     7         4     |
+1923110 PLEASANT VALLEY COMM SCHOOL DISTRICT              |     7         4     |
+1926580 SOLON COMM SCHOOL DISTRICT                        |     7         8     |
+1931350 WESTERN DUBUQUE COMM SCHOOL DISTRICT              |     7         8     |
+1931950 WOODBURY CENTRAL COMM SCHOOL DISTRICT             |     7         8     |
+1932010 WOODWARD-GRANGER COMM SCHOOL DISTRICT             |     7         8     |
+2003780 BASEHOR-LINWOOD                                   |     7         8     |
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+2006330 FT LEAVENWORTH                                    |     7         3     |
+2006540 GODDARD                                           |     7         8     |
+2008550 BLUESTEM                                          |     7         8     |
+2008970 LOUISBURG                                         |     7         8     |
+2011080 RENWICK                                           |     7         8     |
+2011220 FLINTHILLS                                        |     7         3     |
+2012210 TONGANOXIE                                        |     7         8     |
+2012300 CIRCLE                                            |     7         8     |
+2101020 CARTER CO                                         |     7         4     |
+2102130 GALLATIN CO                                       |     7         8     |
+2102250 GRANT CO                                          |     7         8     |
+2102400 GREENUP CO                                        |     7         8     |
+2102490 HARDIN CO                                         |     6         7     |
+2102990 JEFFERSON CO                                      |     3         2     |
+2103960 MCCRACKEN CO                                      |     6         7     |
+2104530 OLDHAM CO                                         |     7         3     |
+2104740 PENDLETON CO                                      |     7         8     |
+2105700 WALTON VERONA IND                                 |     7         3     |
+2106000 WOODFORD CO                                       |     4         8     |
+2200024 SAINT LANDRY CHARTER SCHOOL - AGENCY              |     7         4     |
+2200030 ACADIA PARISH SCHOOL BOARD                        |     4         8     |
+2302850 BAR HARBOR                                        |     6         7     |
+2303780 BRUNSWICK                                         |     6         7     |
+2304860 DAYTON                                            |     6         8     |
+2304890 DEDHAM                                            |     6         8     |
+2305300 EC-S CTY TEC 10                                   |     6         7     |
+2308100 MECHANIC FALLS                                    |     7         8     |
+2308280 MILLINOCKET                                       |     6         7     |
+2309100 N PENOB TC R 3                                    |     6         7     |
+2309110 SCH APPL TEC RG 9                                 |     6         7     |
+2309330 ORRINGTON                                         |     6         8     |
+2310500 SANFORD                                           |     6         7     |
+2310710 S.A.D. 15       GRAY                              |     6         8     |
+2311010 S.A.D. 24       VAN BUREN                         |     6         7     |
+2311160 S.A.D. 29       HOULTON                           |     6         7     |
+2311790 S.A.D.  6       BUXTON                            |     6         8     |
+2314160 S.A.D. 52       TURNER                            |     6         8     |
+2314210 S.A.D. 61       BRIDGTON                          |     7         6     |
+2314330 S.A.D. 49       FAIRFIELD                         |     7         6     |
+2314360 S.A.D. 47       OAKLAND                           |     6         7     |
+2314440 S.A.D. 64       CORINTH                           |     6         7     |
+2314470 S.A.D. 63       EDDINGTON                         |     2         8     |
+2314560 S.A.D. 59       MADISON                           |     6         7     |
+2314610 S.A.D. 53       PITTSFIELD                        |     6         7     |
+2314760 S.A.D. 67       LINCOLN                           |     6         7     |
+2314761 S.A.D. 68       DOVER-FOXCROFT                    |     6         7     |
+2314768 S.A.D. 75       TOPSHAM                           |     8         7     |
+2400030 BOARD OF EDUC, ALLEGANY COUNTY                    |     7         4     |
+2400060 ANNE ARUNDEL COUNTY PUB SCHLS                     |     7         3     |
+2400150 CALVERT COUNTY PUBLIC SCHOOLS                     |     4         8     |
+2400240 BOARD OF ED OF CECIL COUNTY                       |     4         8     |
+2400270 BOARD OF EDUC, CHARLES COUNTY                     |     8         3     |
+2400330 FREDERICK COUNTY BOARD OF ED                      |     7         3     |
+2400390 HARFORD COUNTY PUBLIC SCHOOLS                     |     8         3     |
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+2400510 PRINCE GEORGES COUNTY PUB SCHS                    |     4         3     |
+2400540 BOARD OF ED,QUEEN ANNES COUNTY                    |     7         8     |
+2400600 SAINT MARYS COUNTY PUBLIC SCHS                    |     6         7     |
+2400660 BOARD OF ED, WASHINGTON COUNTY                    |     7         2     |
+2500002 SPENCER-E BROOKFIELD                              |     6         3     |
+2500038 FRANCIS W PARKER CHARTER                          |     6         8     |
+2502530 BERKSHIRE HILLS                                   |     6         7     |
+2502970 BREWSTER                                          |     6         8     |
+2503330 CARLISLE                                          |     6         8     |
+2503360 CARVER                                            |     6         8     |
+2504560 NAUSET                                            |     4         8     |
+2505270 GILL-MONTAGUE                                     |     4         7     |
+2505490 GREENFIELD                                        |     8         7     |
+2505500 GROTON-DUNSTABLE                                  |     8         3     |
+2506330 HOPKINTON                                         |     7         8     |
+2506570 LAKEVILLE                                         |     4         8     |
+2508310 NASHOBA                                           |     4         8     |
+2508790 NORTH MIDDLESEX                                   |     4         8     |
+2509180 ORANGE                                            |     3         7     |
+2509210 ORLEANS                                           |     7         8     |
+2509900 RALPH C MAHAR                                     |     8         7     |
+2510080 RICHMOND                                          |     6         8     |
+2510710 SHERBORN                                          |     7         8     |
+2511370 SUNDERLAND                                        |     1         8     |
+2511740 TRITON                                            |     7         8     |
+2511880 WACHUSETT                                         |     7         8     |
+2512060 WAREHAM                                           |     4         8     |
+2600066 GVSU--DISCOVERY ELEM. SCHOOL                      |     7         8     |
+2601920 ADDISON COMMUNITY SCHOOLS                         |     7         8     |
+2603240 ARMADA AREA SCHOOLS                               |     7         8     |
+2603870 BANGOR PUBLIC SCHS. (VAN BUREN                    |     3         8     |
+2604650 BELLEVUE COMMUNITY SCHOOLS                        |     7         8     |
+2606270 BLOOMINGDALE PUBLIC SCHOOL DIS                    |     7         8     |
+2606780 BRIDGEPORT-SPAULDING COMM. S/D                    |     7         4     |
+2607800 CAPAC COMMUNITY SCHOOL DISTRIC                    |     7         8     |
+2610020 CLIMAX-SCOTTS COMMUNITY SCHOOL                    |     4         8     |
+2610050 CLINTON COMMUNITY SCHOOLS                         |     3         8     |
+2610200 COLEMAN COMMUNITY SCH. DISTRIC                    |     3         8     |
+2610650 CONCORD COMMUNITY SCHOOLS                         |     7         8     |
+2610980 COVERT PUBLIC SCHOOLS                             |     7         8     |
+2611730 DEERFIELD PUBLIC SCHOOLS                          |     7         8     |
+2612240 DRYDEN COMMUNITY SCHOOLS                          |     7         8     |
+2612810 EAU CLAIRE PUBLIC SCHOOLS                         |     7         8     |
+2614230 FENNVILLE PUBLIC SCHOOLS                          |     7         8     |
+2614700 FOWLER PUBLIC SCHOOLS                             |     4         8     |
+2615060 FREELAND COMMUNITY SCH. DISTRI                    |     7         8     |
+2615450 GALESBURG-AUGUSTA COMM. SCHOOL                    |     7         8     |
+2615480 GALIEN TOWNSHIP SCHOOL DISTRIC                    |     7         8     |
+2616050 GOBLES PUBLIC SCHOOL DISTRICT                     |     6         8     |
+2616830 GRASS LAKE COMMUNITY SCHOOLS                      |     7         8     |
+2617250 GULL LAKE COMMUNITY SCHOOLS                       |     4         8     |
+2617340 HAGAR TOWNSHIP S/D #6                             |     7         8     |
+2617400 HAMILTON COMMUNITY SCHOOLS                        |     2         8     |
+2617640 HANOVER-HORTON SCHOOLS                            |     3         4     |
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+2617910 HARTLAND CONSOLIDATED SCHOOLS                     |     7         8     |
+2617970 HASTINGS AREA SCHOOL DISTRICT                     |     3         6     |
+2618180 HEMLOCK PUBLIC SCHOOL DISTRICT                    |     7         8     |
+2618510 HOLTON PUBLIC SCHOOLS                             |     7         8     |
+2618540 HOMER COMMUNITY SCHOOLS                           |     7         8     |
+2618570 HOPKINS PUBLIC SCHOOLS                            |     7         8     |
+2618840 HUDSONVILLE PUBLIC SCH. DISTRI                    |     7         4     |
+2620280 KENOWA HILLS PUBLIC SCHOOLS                       |     2         4     |
+2620940 LAKEVILLE COMMUNITY SCHOOLS                       |     7         8     |
+2621180 LAPEER COMMUNITY SCHOOLS                          |     4         8     |
+2622050 LOWELL AREA SCHOOLS                               |     7         4     |
+2622980 MARTIN PUBLIC SCHOOLS                             |     7         8     |
+2624180 MONTAGUE AREA PUBLIC SCHOOLS                      |     6         8     |
+2624420 MONTROSE COMMUNITY SCHOOLS                        |     7         8     |
+2624960 NAPOLEON COMMUNITY SCHOOLS                        |     7         8     |
+2625230 NEW HAVEN COMMUNITY SCHOOLS                       |     7         8     |
+2625680 NORTH BRANCH AREA SCHOOLS                         |     7         8     |
+2626370 OLIVET COMMUNITY SCHOOLS                          |     7         8     |
+2626520 ONSTED COMMUNITY SCHOOLS                          |     7         8     |
+2627960 PEWAMO-WESTPHALIA COMM. SCHOOL                    |     7         4     |
+2628140 PINCKNEY COMMUNITY SCHOOLS                        |     7         8     |
+2628530 PLAINWELL COMMUNITY SCHOOLS                       |     7         4     |
+2629160 POTTERVILLE PUBLIC SCHOOLS                        |     7         8     |
+2629790 RIVER VALLEY SCHOOL DISTRICT                      |     7         8     |
+2632820 ST. JOHNS PUBLIC SCHOOLS                          |     7         4     |
+2633030 STOCKBRIDGE COMMUNITY SCHOOLS                     |     7         8     |
+2633750 TEKONSHA COMMUNITY SCHOOLS                        |     7         8     |
+2634950 VICKSBURG COMMUNITY SCHOOLS                       |     7         8     |
+2635550 WAYLAND UNION SCHOOLS                             |     7         4     |
+2636600 YALE PUBLIC SCHOOLS                               |     7         8     |
+2680160 BERRIEN ISD                                       |     7         8     |
+2680520 INGHAM ISD                                        |     7         4     |
+2680660 LAPEER ISD                                        |     7         3     |
+2700008 ST. LOUIS COUNTY                                  |     3         8     |
+2700045 MEEKER & WRIGHT SP ED COOP                        |     7         8     |
+2700055 HIAWATHA VALLEY ED. DIST.                         |     4         6     |
+2700105 BELGRADE-BROOTEN-ELROSA                           |     7         8     |
+2700114 RIGHT STEP ACADEMY                                |     7         1     |
+2700123 HOWARD LAKE-WAVERLY-WINSTED                       |     7         8     |
+2700137 SUMMIT SCHOOL FOR THE ARTS                        |     7         8     |
+2700143 CENTRAL MINNESOTA JOINT POWERS                    |     7         8     |
+2702930 ALBANY                                            |     7         8     |
+2703150 ANNANDALE                                         |     3         8     |
+2703660 BARNESVILLE                                       |     7         8     |
+2706060 BRAHAM                                            |     7         8     |
+2707200 BUFFALO                                           |     4         3     |
+2707350 BYRON                                             |     7         8     |
+2708880 FRANCONIA                                         |     7         8     |
+2709360 CLIMAX                                            |     7         8     |
+2709440 COLD SPRING                                       |     7         8     |
+2710060 DASSEL-COKATO                                     |     7         8     |
+2710260 DILWORTH-GLYNDON-FELTON                           |     7         4     |
+2711370 ELK RIVER                                         |     7         3     |
+2711820 FARMINGTON                                        |     7         3     |
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+2711910 FERTILE-BELTRAMI                                  |     3         8     |
+2712300 FOSSTON                                           |     7         8     |
+2713560 HAWLEY                                            |     3         8     |
+2714190 HOLDINGFORD                                       |     4         8     |
+2714280 HOUSTON                                           |     7         8     |
+2717220 KIMBALL                                           |     7         8     |
+2717250 LACRESCENT-HOKAH                                  |     7         4     |
+2723820 NORTH BRANCH                                      |     7         8     |
+2723910 NORWOOD                                           |     7         8     |
+2730150 RANDOLPH                                          |     6         8     |
+2732070 ROCKFORD                                          |     6         8     |
+2732550 RUSH CITY                                         |     7         8     |
+2732880 SAUK RAPIDS                                       |     7         4     |
+2733300 SPRING GROVE                                      |     6         8     |
+2733510 ST. CLOUD                                         |     5         2     |
+2733540 ST. FRANCIS                                       |     7         3     |
+2733720 NETT LAKE                                         |     7         8     |
+2738190 STILLWATER                                        |     7         3     |
+2740810 ULEN-HITTERDAL                                    |     7         8     |
+2791449 WIN-E-MAC                                         |     7         8     |
+2800001 MISSISSIPPI STATE HOSPITAL                        |     8         4     |
+2801196 HUDSPETH CENTER ADMINISTRATION                    |     7         4     |
+2801510 FORREST COUNTY AG HIGH SCHOOL                     |     7         4     |
+2801740 HANCOCK CO SCHOOL DIST                            |     7         8     |
+2801770 HARRISON CO SCHOOL DIST                           |     7         2     |
+2801840 HINDS CO AHS                                      |     7         8     |
+2801860 HINDS CO SCHOOL DIST                              |     7         8     |
+2802160 JACKSON CO SCHOOL DIST                            |     8         4     |
+2802400 LAMAR COUNTY SCHOOL DISTRICT                      |     7         8     |
+2802760 LUMBERTON PUBLIC SCHOOL                           |     7         8     |
+2803830 RANKIN CO SCHOOL DIST                             |     7         8     |
+2900009 DIVISION OF YOUTH SERVICES                        |     4         8     |
+2902577 STATE SCHOOLS SEVERELY HANDICP                    |     7         6     |
+2903000 SANTA FE R-X                                      |     7         8     |
+2908430 CHADWICK R-I                                      |     3         8     |
+2909780 CLEVER R-V                                        |     7         8     |
+2910080 CONCORDIA R-II                                    |     7         8     |
+2910320 SHERWOOD CASS R-VIII                              |     7         8     |
+2910590 BUCHANAN CO. R-IV                                 |     3         8     |
+2910800 DIAMOND R-IV                                      |     2         8     |
+2911070 DREXEL R-IV                                       |     3         8     |
+2911160 EAST LYNNE 40                                     |     6         8     |
+2911250 EAST BUCHANAN CO. C-1                             |     6         8     |
+2911400 ELSBERRY R-II                                     |     7         8     |
+2911700 FAIR GROVE R-X                                    |     7         8     |
+2911940 MID-BUCHANAN CO. R-V                              |     6         4     |
+2912180 FORDLAND R-III                                    |     6         8     |
+2913080 GRAIN VALLEY R-V                                  |     7         8     |
+2913680 HARDIN-CENTRAL C-2                                |     6         8     |
+2916450 KEARNEY R-I                                       |     7         8     |
+2918220 LAWSON R-XIV                                      |     7         8     |
+2919170 GREENE CO. R-VIII                                 |     6         8     |
+2919200 LONEDELL R-XIV                                    |     6         3     |
+2920670 MEHLVILLE R-IX                                    |     6         3     |
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+2921060 MISSOURI CITY 56                                  |     6         8     |
+2921810 NEOSHO R-V                                        |     6         4     |
+2921960 NEW HAVEN                                         |     6         8     |
+2922500 NIANGUA R-V                                       |     7         8     |
+2922710 NORTH ANDREW CO. R-VI                             |     7         8     |
+2922830 NORTH PLATTE CO. R-I                              |     7         8     |
+2922890 NORTHWEST R-I                                     |     7         8     |
+2923340 GASCONADE CO. R-II                                |     6         7     |
+2923460 MERAMEC VALLEY R-III                              |     6         3     |
+2923730 RAYMORE-PECULIAR R-II                             |     6         8     |
+2927540 SARCOXIE R-II                                     |     6         8     |
+2927570 SAVANNAH R-III                                    |     7         4     |
+2927900 SENECA R-VII                                      |     7         8     |
+2928290 SILEX R-I                                         |     7         8     |
+2928740 SPARTA R-III                                      |     7         8     |
+2929470 STET R-XV                                         |     6         3     |
+2929640 STRAFFORD R-VI                                    |     3         8     |
+2929670 STRASBURG C-3                                     |     6         8     |
+2929700 STURGEON R-V                                      |     7         8     |
+2930420 EAST NEWTON CO. R-VI                              |     7         8     |
+2930450 TROY R-III                                        |     7         3     |
+2930990 WALNUT GROVE R-V                                  |     3         8     |
+2931500 WEBB CITY R-VII                                   |     7         4     |
+2931560 WELLINGTON-NAPOLEON R-IX                          |     6         8     |
+2932010 WILLARD R-II                                      |     7         8     |
+2932190 WINFIELD R-IV                                     |     6         8     |
+2932310 WRIGHT CITY R-II                                  |     6         8     |
+3004890 BROADVIEW ELEM                                    |     6         8     |
+3004920 BROADVIEW H S                                     |     6         8     |
+3005310 BUTTE H S                                         |     3         7     |
+3008130 CUSTER K-12 SCHOOLS                               |     3         4     |
+3010920 EVERGREEN ELEM                                    |     3         7     |
+3018570 MISSOULA ELEM                                     |     7         5     |
+3024300 SUN RIVER VALLEY ELEM                             |     6         4     |
+3024330 SIMMS H S                                         |     3         4     |
+3025130 CENTERVILLE ELEM                                  |     7         4     |
+3025140 CENTERVILLE H S                                   |     7         4     |
+3026880 ULM ELEM                                          |     7         4     |
+3100021 WAVERLY PUBLIC SCHOOLS                            |     7         8     |
+3100071 TEKAMAH-HERMAN COMMUNITY SCHS                     |     6         7     |
+3100088 NORRIS SCHOOL DIST 160                            |     7         8     |
+3103990 BENNINGTON PUBLIC SCHOOLS                         |     7         8     |
+3104950 RAYMOND CENTRAL SCHOOLS                           |     7         4     |
+3163000 WASHINGTON PUBLIC SCHOOL                          |     6         8     |
+3167380 OLIVE BRANCH PUBLIC SCHOOL                        |     7         8     |
+3170110 ELKHORN PUBLIC SCHOOLS                            |     7         8     |
+3173050 LOUISVILLE PUBLIC SCHOOLS                         |     1         8     |
+3174200 CONESTOGA PUBLIC SCHOOLS                          |     3         8     |
+3176860 SO SIOUX CITY COMMUNITY SCHS                      |     7         4     |
+3178030 VALLEY PUBLIC SCHOOLS                             |     4         8     |
+3178360 WATERLOO PUBLIC SCHOOLS                           |     7         8     |
+3180030 EDUCATIONAL SERVICE UNIT 3                        |     7         8     |
+3200090 DOUGLAS COUNTY SCHOOL DISTRICT                    |     3         7     |
+3200120 ELKO COUNTY SCHOOL DISTRICT                       |     2         7     |
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+3200240 LANDER COUNTY SCHOOL DISTRICT                     |     4         7     |
+3200360 NYE COUNTY SCHOOL DISTRICT                        |     4         3     |
+3200480 WASHOE COUNTY SCHOOL DISTRICT                     |     7         2     |
+3300017 EXETER REGION COOPERATIVE                         |     6         3     |
+3300616 MILTON SCH DIST                                   |     7         8     |
+3301650 BARRINGTON SCH DIST                               |     6         8     |
+3302070 BROOKLINE SCH DIST                                |     3         8     |
+3303540 HAMPTON FALLS SCH DIST                            |     7         8     |
+3304030 JAFFREY-RINDGE COOP SCH DIST                      |     8         7     |
+3304380 LITTLETON SCH DIST                                |     6         7     |
+3304950 MONT VERNON SCH DIST                              |     7         8     |
+3305580 PEMBROKE SCH DIST                                 |     4         7     |
+3306720 TIMBERLANE REGIONAL SCH DIST                      |     7         8     |
+3307110 WILTON SCH DIST                                   |     6         8     |
+3400810 ALLOWAY TWP                                       |     7         8     |
+3401110 AVALON BORO                                       |     7         8     |
+3401200 BASS RIVER TWP                                    |     7         8     |
+3401290 BEACH HAVEN BORO                                  |     6         8     |
+3403480 COMMERCIAL TWP                                    |     7         8     |
+3403620 CUMBERLAND REGIONAL                               |     6         8     |
+3403660 DEERFIELD TWP                                     |     7         8     |
+3403720 DELAWARE TWP                                      |     4         8     |
+3403840 DENNIS TWP                                        |     7         8     |
+3403960 DOWNE TWP                                         |     6         8     |
+3404650 ELMER BORO                                        |     6         8     |
+3405130 FARMINGDALE BORO                                  |     7         8     |
+3405340 FRANKFORD TWP                                     |     7         8     |
+3405460 FRANKLIN TWP                                      |     7         8     |
+3405940 GLEN RIDGE BORO                                   |     8         3     |
+3406090 GREEN TWP                                         |     7         8     |
+3406150 GREENWICH TWP                                     |     6         8     |
+3406600 HAMPTON BORO                                      |     3         8     |
+3407470 HOPE TWP                                          |     6         8     |
+3407530 HOPEWELL VALLEY REGIONAL                          |     6         3     |
+3407560 HOWELL TWP                                        |     7         8     |
+3407980 KINGSWAY REGIONAL                                 |     6         8     |
+3408070 KNOWLTON TWP                                      |     3         8     |
+3408910 LONG BEACH ISLAND                                 |     6         8     |
+3409510 MANSFIELD TWP                                     |     7         8     |
+3409780 MAURICE RIVER TWP                                 |     5         8     |
+3411070 MULLICA TWP                                       |     7         8     |
+3411520 NORTH CALDWELL BORO                               |     7         3     |
+3411980 OCEAN CO VOC-TECH                                 |     7         3     |
+3412210 OLDMANS TWP                                       |     6         8     |
+3412810 PEMBERTON TWP                                     |     6         3     |
+3413260 POHATCONG TWP                                     |     8         3     |
+3413380 PORT REPUBLIC CITY                                |     6         8     |
+3413620 RANCOCAS VALLEY REGIONAL                          |     6         3     |
+3414220 ROOSEVELT BORO                                    |     7         8     |
+3414610 SANDYSTON-WALPACK TWP                             |     6         8     |
+3415270 SOUTH HARRISON TWP                                |     6         8     |
+3415750 STILLWATER TWP                                    |     6         8     |
+3416560 UPPER FREEHOLD REGIONAL                           |     7         8     |
+3417460 WEST ESSEX REGIONAL                               |     8         3     |
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+3417700 W WINDSOR-PLAINSBORO REG                          |     7         8     |
+3418240 WOODLAND TWP                                      |     7         8     |
+3500060 ALBUQUERQUE PUBLIC SCHOOLS                        |     4         1     |
+3500210 BERNALILLO PUBLIC SCHOOLS                         |     7         3     |
+3500390 CENTRAL CONSOLIDATED SCHOOLS                      |     6         7     |
+3500660 CUBA INDEPENDENT SCHOOLS                          |     6         8     |
+3501080 GADSDEN INDEPENDENT SCHOOLS                       |     7         4     |
+3501230 HATCH VALLEY MUNICIPAL SCHOOLS                    |     7         8     |
+3501380 JEMEZ MOUNTAIN PUBLIC SCHOOLS                     |     3         7     |
+3501500 LAS CRUCES PUBLIC SCHOOLS                         |     7         2     |
+3501680 LOS LUNAS PUBLIC SCHOOLS                          |     7         3     |
+3502370 SANTA FE PUBLIC SCHOOLS                           |     7         2     |
+3600010 COBLESKILL-RICHMONDVILLE CSD                      |     3         4     |
+3600013 ONEIDA CITY SD                                    |     7         4     |
+3600016 AVERILL PARK CSD                                  |     6         8     |
+3602730 WINDSOR CSD                                       |     6         8     |
+3602820 ALTMAR-PARISH-WILLIAMSTOWN CSD                    |     6         8     |
+3603210 ARGYLE CSD                                        |     6         8     |
+3603270 ARLINGTON CSD                                     |     7         3     |
+3604530 BEMUS POINT CSD                                   |     7         8     |
+3604920 EAST BLOOMFIELD CSD                               |     6         4     |
+3605010 BOLTON CSD                                        |     6         8     |
+3605040 ADIRONDACK CSD                                    |     4         8     |
+3605310 BREWSTER CSD                                      |     6         8     |
+3605370 BRIDGEHAMPTON UFSD                                |     7         8     |
+3605670 BROOKFIELD CSD                                    |     6         8     |
+3606240 CAMDEN CSD                                        |     6         4     |
+3606300 CANAJOHARIE CSD                                   |     7         8     |
+3606420 CANDOR CSD                                        |     7         8     |
+3606660 CASSADAGA VALLEY CSD                              |     6         8     |
+3606900 CENTRAL SQUARE CSD                                |     7         8     |
+3607860 CLYDE-SAVANNAH CSD                                |     4         8     |
+3608340 PEMBROKE CSD                                      |     6         8     |
+3608850 DE RUYTER CSD                                     |     6         8     |
+3609210 DOVER UFSD                                        |     7         8     |
+3609360 DUANESBURG CSD                                    |     6         8     |
+3609630 EAST GREENBUSH CSD                                |     8         4     |
+3610230 EDINBURG COMN SD                                  |     6         8     |
+3611190 FONDA-FULTONVILLE CSD                             |     7         8     |
+3611280 FORT ANN CSD                                      |     6         8     |
+3611370 FORT PLAIN CSD                                    |     6         8     |
+3611610 FREWSBURG CSD                                     |     2         8     |
+3612120 GILBOA-CONESVILLE CSD                             |     2         8     |
+3612300 GORHAM-MIDDLESEX CSD (MARCUS W                    |     2         8     |
+3612840 GREENPORT UFSD                                    |     7         8     |
+3612900 GREENWICH CSD                                     |     7         8     |
+3612990 SPRINGVILLE-GRIFFITH INST CSD                     |     7         3     |
+3613590 HANNIBAL CSD                                      |     7         8     |
+3613710 HARPURSVILLE CSD                                  |     7         8     |
+3613830 HARTFORD CSD                                      |     7         8     |
+3614400 HIGHLAND CSD                                      |     4         7     |
+3614430 HIGHLAND FALLS CSD                                |     8         3     |
+3614610 HOLLEY CSD                                        |     2         8     |
+3614700 HONEOYE FALLS-LIMA CSD                            |     6         8     |
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+3615570 ITHACA CITY SD                                    |     7         5     |
+3615720 JEFFERSON CSD                                     |     7         8     |
+3615870 JOHNSBURG CSD                                     |     6         8     |
+3615990 JORDAN-ELBRIDGE CSD                               |     6         8     |
+3616470 LAKE GEORGE CSD                                   |     6         8     |
+3616560 EVANS-BRANT CSD (LAKE SHORE)                      |     7         8     |
+3616980 NORTH ROSE-WOLCOTT CSD                            |     6         8     |
+3617640 LIVONIA CSD                                       |     6         8     |
+3617970 LYNDONVILLE CSD                                   |     7         8     |
+3619170 MEXICO CSD                                        |     7         8     |
+3619260 MIDDLEBURGH CSD                                   |     6         8     |
+3619380 MILLBROOK CSD                                     |     6         8     |
+3619560 MINISINK VALLEY CSD                               |     2         8     |
+3619650 MONROE-WOODBURY CSD                               |     3         8     |
+3620970 NORTH COLLINS CSD                                 |     3         8     |
+3621450 DALTON-NUNDA CSD (KESHEQUA)                       |     3         8     |
+3621540 FIRE ISLAND UFSD                                  |     3         8     |
+3622050 OSWEGO CITY SD                                    |     3         4     |
+3622530 PAWLING CSD                                       |     7         8     |
+3623040 PINE PLAINS CSD                                   |     2         8     |
+3623370 POLAND CSD                                        |     6         8     |
+3623430 PORT BYRON CSD                                    |     3         8     |
+3623520 PORT JERVIS CITY SD                               |     6         3     |
+3623970 PUTNAM CSD                                        |     6         8     |
+3624240 RED HOOK CSD                                      |     6         8     |
+3624360 REMSEN CSD                                        |     7         8     |
+3624690 RIVERHEAD CSD                                     |     6         3     |
+3625320 FLORIDA UFSD                                      |     6         8     |
+3625650 SANDY CREEK CSD                                   |     6         8     |
+3626100 SCHOHARIE CSD                                     |     6         8     |
+3626160 SCHUYLERVILLE CSD                                 |     7         8     |
+3626580 SHARON SPRINGS CSD                                |     6         8     |
+3626640 SHELTER ISLAND UFSD                               |     6         8     |
+3626760 SHERRILL CITY SD                                  |     3         8     |
+3627120 SODUS CSD                                         |     7         8     |
+3627660 SOUTHWESTERN CSD AT JAMESTOWN                     |     7         4     |
+3627750 SPENCER-VAN ETTEN CSD                             |     7         8     |
+3627930 ST JOHNSVILLE CSD                                 |     6         8     |
+3628110 STILLWATER CSD                                    |     6         8     |
+3628800 TOWN OF WEBB UFSD                                 |     6         8     |
+3629130 TULLY CSD                                         |     6         8     |
+3629190 TUXEDO UFSD                                       |     6         8     |
+3629250 UNION SPRINGS CSD                                 |     7         8     |
+3630160 WATERVILLE CSD                                    |     6         8     |
+3630270 WAVERLY CSD                                       |     6         4     |
+3630330 WAYNE CSD                                         |     3         8     |
+3630420 WEEDSPORT CSD                                     |     3         8     |
+3630930 BRIDGEWATER-WEST WINFIELD CSD                     |     6         8     |
+3630990 WESTFIELD CSD                                     |     7         8     |
+3631020 WESTHAMPTON BEACH UFSD                            |     7         8     |
+3631050 WESTMORELAND CSD                                  |     6         8     |
+3631440 WILLIAMSON CSD                                    |     6         8     |
+3680900 BOCES TOMPKINS-SENECA-TIOGA                       |     6         7     |
+3700011 CUMBERLAND COUNTY SCHOOLS                         |     4         2     |
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+3700012 PITT COUNTY SCHOOLS                               |     8         2     |
+3700030 ALAMANCE-BURLINGTON SCHOOLS                       |     7         2     |
+3700053 WOODS CHARTER                                     |     7         4     |
+3700070 EAST WAKE ACADEMY                                 |     7         8     |
+3700090 ALEXANDER COUNTY SCHOOLS                          |     6         8     |
+3700420 BRUNSWICK COUNTY SCHOOLS                          |     7         8     |
+3700450 BUNCOMBE COUNTY SCHOOLS                           |     6         4     |
+3700580 CALDWELL COUNTY SCHOOLS                           |     7         2     |
+3700630 CARTERET COUNTY SCHOOLS                           |     7         6     |
+3700690 CATAWBA COUNTY SCHOOLS                            |     6         8     |
+3700750 CHATHAM COUNTY SCHOOLS                            |     8         4     |
+3701080 CURRITUCK COUNTY SCHOOLS                          |     7         3     |
+3701530 FRANKLIN COUNTY SCHOOLS                           |     7         8     |
+3702820 MADISON COUNTY SCHOOLS                            |     7         8     |
+3704380 STOKES COUNTY SCHOOLS                             |     7         4     |
+3705040 YADKIN COUNTY SCHOOLS                             |     7         8     |
+3800044 NORTHERN CASS 97                                  |     7         8     |
+3802320 BALDWIN 29                                        |     7         4     |
+3804090 CENTRAL CASS 17                                   |     7         8     |
+3806360 EMERADO 127                                       |     7         8     |
+3806930 FLASHER 39                                        |     7         8     |
+3807830 GLEN ULLIN 48                                     |     7         8     |
+3809180 HEBRON 13                                         |     7         8     |
+3810860 LARIMORE 44                                       |     7         8     |
+3811540 LITTLE HEART 4                                    |     7         4     |
+3812000 MANVEL 125                                        |     7         8     |
+3812020 MAPLE VALLEY 4                                    |     7         8     |
+3812030 MAPLETON 7                                        |     7         8     |
+3812510 MCKENZIE 34                                       |     7         4     |
+3812720 MENOKEN 33                                        |     7         4     |
+3813870 NEW SALEM 7                                       |     7         8     |
+3814340 NORTHWOOD 129                                     |     7         8     |
+3814730 PAGE 80                                           |     7         8     |
+3815670 REGAN 2                                           |     7         8     |
+3816950 SIMS 8                                            |     7         8     |
+3817760 STERLING 35                                       |     7         4     |
+3818280 THOMPSON 61                                       |     7         8     |
+3820130 WING 28                                           |     7         8     |
+3904480 SOUTH-WESTERN CITY SD                             |     3         2     |
+3904513 WORTHINGTON CITY SD                               |     3         2     |
+3904588 PYMATUNING VALLEY LOCAL SD                        |     7         8     |
+3904603 EASTERN LOCAL SD                                  |     7         8     |
+3904627 SOUTHEASTERN LOCAL SD                             |     7         8     |
+3904632 CLERMONT-NORTHEASTERN LOCAL S                     |     7         8     |
+3904645 UNITED LOCAL SD                                   |     7         8     |
+3904650 BUCKEYE CENTRAL LOCAL SD                          |     7         8     |
+3904651 COLONEL CRAWFORD LOCAL SD                         |     7         8     |
+3904674 BIG WALNUT LOCAL SD                               |     7         8     |
+3904681 PERKINS LOCAL SD                                  |     6         7     |
+3904684 AMANDA-CLEARCREEK LOCAL SD                        |     7         8     |
+3904685 BERNE UNION LOCAL SD                              |     7         8     |
+3904686 BLOOM CARROLL LOCAL SD                            |     7         8     |
+3904687 FAIRFIELD UNION LOCAL SD                          |     2         8     |
+3904707 PETTISVILLE LOCAL SD                              |     7         3     |
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+3904754 CONOTTON VALLEY UNION LOCAL S                     |     7         8     |
+3904779 EDISON LOCAL SD                                   |     7         8     |
+3904790 PERRY LOCAL SD                                    |     7         8     |
+3904816 KEYSTONE LOCAL SD                                 |     7         8     |
+3904825 JEFFERSON LOCAL SD                                |     7         3     |
+3904862 MIAMI EAST LOCAL SD                               |     7         8     |
+3904863 NEWTON LOCAL SD                                   |     7         8     |
+3904946 PLYMOUTH LOCAL SD                                 |     7         8     |
+3904966 WHEELERSBURG LOCAL SD                             |     6         7     |
+3904994 SANDY VALLEY LOCAL SD                             |     7         8     |
+3905000 MANCHESTER LOCAL SD                               |     7         3     |
+3905001 GREEN LOCAL SD                                    |     7         3     |
+3905009 BLOOMFIELD-MESPO LOCAL SD                         |     7         4     |
+3905017 JOSEPH BADGER LOCAL SD                            |     7         4     |
+3905048 FORT FRYE LOCAL SD                                |     7         8     |
+3905049 FRONTIER LOCAL SD                                 |     7         8     |
+3905051 WOLF CREEK LOCAL SD                               |     7         4     |
+3905112 JEFFERSON COUNTY JVSD                             |     7         8     |
+3906349 PORTAGE LAKES JVSD                                |     7         3     |
+3906351 CENTRAL OHIO JVSD                                 |     7         8     |
+3910018 WARREN LOCAL SD                                   |     7         4     |
+4003300 ASHER                                             |     7         8     |
+4003450 AVANT                                             |     7         8     |
+4003570 BARNSDALL                                         |     7         8     |
+4004680 BLANCHARD                                         |     7         8     |
+4005160 BOWRING                                           |     7         3     |
+4005850 BURBANK                                           |     7         8     |
+4006030 BYARS                                             |     7         8     |
+4006120 CACHE                                             |     7         8     |
+4006240 CALUMET                                           |     7         8     |
+4007320 CHATTANOOGA                                       |     7         8     |
+4007380 CHELSEA                                           |     7         8     |
+4007710 CIMARRON                                          |     7         8     |
+4008790 COVINGTON-DOUGLAS                                 |     7         8     |
+4008940 COYLE                                             |     7         8     |
+4009000 CRESCENT                                          |     7         8     |
+4009750 DEPEW                                             |     7         8     |
+4009870 DIBBLE                                            |     7         8     |
+4010170 DRUMMOND                                          |     7         8     |
+4010500 EARLSBORO                                         |     7         8     |
+4010710 ELGIN                                             |     7         8     |
+4011700 FLETCHER                                          |     7         8     |
+4012090 FOYIL                                             |     7         8     |
+4012390 GANS                                              |     7         8     |
+4012420 GARBER                                            |     7         8     |
+4012630 GERONIMO                                          |     7         8     |
+4012900 GORE                                              |     7         8     |
+4013600 GYPSY                                             |     7         8     |
+4014970 HOMINY                                            |     7         8     |
+4015420 INDIAHOMA                                         |     7         8     |
+4015480 INOLA                                             |     7         8     |
+4016170 KELLYVILLE                                        |     7         8     |
+4016500 KIEFER                                            |     7         8     |
+4016740 KREMLIN-HILLSDALE                                 |     7         8     |
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+4017700 LIBERTY                                           |     7         8     |
+4017760 LIBERTY                                           |     7         3     |
+4017820 GUM SPRINGS                                       |     7         8     |
+4018630 LUTHER                                            |     7         8     |
+4018660 MACOMB                                            |     7         8     |
+4018840 MANNFORD                                          |     7         8     |
+4018900 MAPLE                                             |     7         8     |
+4018960 MARBLE CITY                                       |     7         8     |
+4019290 MAUD                                              |     7         8     |
+4019560 MC LOUD                                           |     7         8     |
+4020010 MILFAY                                            |     7         3     |
+4020550 MOUNDS                                            |     7         8     |
+4020910 MULHALL-ORLANDO                                   |     7         8     |
+4022560 OILTON                                            |     7         8     |
+4022620 OKAY                                              |     7         8     |
+4023040 OOLOGAH-TALALA                                    |     7         8     |
+4024510 PIONEER-PLEASANT VALE                             |     7         8     |
+4025170 PRUE                                              |     7         8     |
+4026310 ROLAND                                            |     7         8     |
+4027630 SHIDLER                                           |     7         8     |
+4028170 SPERRY                                            |     7         8     |
+4028590 STERLING                                          |     7         8     |
+4030048 WOODLAND                                          |     7         8     |
+4030197 PORTER CONSOLIDATED                               |     7         8     |
+4030630 UNION CITY                                        |     7         8     |
+4031140 VIAN                                              |     7         8     |
+4031500 WANETTE                                           |     7         8     |
+4031710 WASHINGTON                                        |     7         8     |
+4031950 WAUKOMIS                                          |     7         8     |
+4032010 WAYNE                                             |     7         8     |
+4033330 WYNONA                                            |     7         8     |
+4100015 GERVAIS SCH DIST 001                              |     7         8     |
+4101920 BEAVERTON SCH DIST 48J                            |     3         2     |
+4102160 BLACHLY SCH DIST 090                              |     7         4     |
+4102580 BUTTE FALLS SCH DIST 091                          |     7         8     |
+4102780 CASCADE SCH DIST 005                              |     7         8     |
+4102970 CHENOWITH SCH DIST 009                            |     6         7     |
+4103260 COLUMBIA SCH DIST 6J                              |     7         8     |
+4103270 COLTON SCH DIST 053                               |     7         3     |
+4103420 CORBETT SCH DIST 039                              |     7         3     |
+4107740 MARCOLA SCH DIST 079J                             |     7         4     |
+4107980 MCKENZIE SCH DIST 068                             |     7         4     |
+4109530 PERRYDALE SCH DIST 21                             |     7         8     |
+4110200 PROSPECT SCH DIST 059                             |     7         4     |
+4110680 ROGUE RIVER SCH DIST 035                          |     7         8     |
+4111450 SILVER FALLS SCH DIST 4J                          |     3         8     |
+4111610 SOUTH UMPQUA SCH DIST 019                         |     6         7     |
+4113350 WILLAMINA SCH DIST 30J                            |     7         8     |
+4200022 CRESSON SECURE TREATMENT UNIT                     |     7         8     |
+4202100 ALBERT GALLATIN AREA SD                           |     7         8     |
+4202910 BALD EAGLE AREA SD                                |     6         8     |
+4203300 BELLWOOD-ANTIS SD                                 |     7         8     |
+4203390 BENTON AREA SD                                    |     7         8     |
+4204080 BROWNSVILLE AREA SD                               |     3         8     |
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+4204740 CAMBRIA HEIGHTS SD                                |     7         8     |
+4205460 CRESTWOOD SD                                      |     6         8     |
+4206120 CLAYSBURG-KIMMEL SD                               |     6         8     |
+4206420 CONEMAUGH TOWNSHIP AREA SD                        |     6         8     |
+4206660 CONNELLSVILLE AREA SD                             |     3         8     |
+4207540 DEER LAKES SD                                     |     7         8     |
+4208490 EAST LYCOMING SD                                  |     7         8     |
+4208820 EASTERN LANCASTER COUNTY SD                       |     4         8     |
+4209600 KARNS CITY AREA SD                                |     7         8     |
+4209932 LOYSVILLE YOUTH DEV CTR                           |     7         8     |
+4209934 YOUTH FORESTRY CAMP #2                            |     7         8     |
+4209940 FOREST HILLS SD                                   |     7         8     |
+4210350 FRAZIER SD                                        |     7         8     |
+4211340 HAMBURG AREA SD                                   |     4         8     |
+4212300 JAMESTOWN AREA SD                                 |     7         8     |
+4212990 LACKAWANNA TRAIL SD                               |     7         8     |
+4213710 LIGONIER VALLEY SD                                |     7         8     |
+4215450 MILLVILLE AREA SD                                 |     7         8     |
+4216170 MOUNT PLEASANT AREA SD                            |     6         8     |
+4216890 NEWPORT SD                                        |     7         8     |
+4217310 NORTH POCONO SD                                   |     7         8     |
+4217520 NORTHEASTERN YORK SD                              |     7         8     |
+4217610 NORTHERN CAMBRIA SD                               |     7         4     |
+4217640 NORTHERN LEBANON SD                               |     7         8     |
+4217790 NORTHWEST AREA SD                                 |     7         8     |
+4218810 PENNS VALLEY AREA SD                              |     7         8     |
+4220760 SALISBURY-ELK LICK SD                             |     7         8     |
+4221180 SHADE-CENTRAL CITY SD                             |     6         8     |
+4221240 SHAMOKIN AREA SD                                  |     6         7     |
+4221270 SHANKSVILLE-STONYCREEK SD                         |     7         8     |
+4222170 SOUTH EASTERN SD                                  |     7         8     |
+4222260 SOUTHERN COLUMBIA AREA SD                         |     7         8     |
+4222380 SOUTHERN YORK COUNTY SD                           |     7         8     |
+4222410 SOUTHMORELAND SD                                  |     6         8     |
+4222530 SPRING COVE SD                                    |     4         8     |
+4222590 SPRING GROVE AREA SD                              |     7         8     |
+4223040 SUSQUENITA SD                                     |     6         8     |
+4223820 TULPEHOCKEN AREA SD                               |     7         8     |
+4223850 TUNKHANNOCK AREA SD                               |     6         8     |
+4223880 TURKEYFOOT VALLEY AREA SD                         |     7         8     |
+4224000 TWIN VALLEY SD                                    |     7         8     |
+4224060 UNION AREA SD                                     |     6         7     |
+4224540 UPPER PERKIOMEN SD                                |     3         8     |
+4225740 WEST PERRY SD                                     |     7         8     |
+4226430 WILLIAMSBURG COMMUNITY SD                         |     7         8     |
+4280491 NORTHUMBERLAND CO AVTS                            |     6         7     |
+4400150 CHARIHO REG DIST                                  |     6         8     |
+4400600 LITTLE COMPTON SCH DIST                           |     6         8     |
+4400630 MIDDLETOWN SCH DIST                               |     6         7     |
+4500002 DORCHESTER SCHOOL DISTRICT 04                     |     7         8     |
+4500010 R D ANDERSON APP TECH CTR                         |     7         4     |
+4500840 ANDERSON SCHOOL DISTRICT 03                       |     7         8     |
+4501110 BEAUFORT COUNTY SCHOOL DIST                       |     6         7     |
+4502160 FLORENCE SCHOOL DISTRICT 02                       |     7         8     |
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+4502760 LEXINGTON SCHOOL DISTRICT 03                      |     6         4     |
+4503510 SPARTANBURG SCHOOL DISTRICT 02                    |     4         8     |
+4503600 SPARTANBURG SCHOOL DISTRICT 05                    |     7         8     |
+4503720 SUMTER SCHOOL DISTRICT 02                         |     7         8     |
+4700090 ANDERSON COUNTY SCHOOL DISTRCT                    |     7         4     |
+4701020 DICKSON COUNTY SCHOOL DISTRICT                    |     7         8     |
+4701170 FAYETTE COUNTY SCHOOL DISTRICT                    |     7         8     |
+4704080 TIPTON COUNTY SCHOOL DISTRICT                     |     7         8     |
+4704290 UNION COUNTY SCHOOL DISTRICT                      |     7         8     |
+4704380 WASHINGTON COUNTY SCHOOL DIST                     |     4         8     |
+4704530 WILLIAMSON COUNTY SCHOOL DIST                     |     3         2     |
+4800008 DRIPPING SPRINGS ISD                              |     7         8     |
+4800009 WIMBERLEY ISD                                     |     7         8     |
+4800010 HAYS CONS ISD                                     |     7         8     |
+4800039 COASTAL BEND YOUTH CITY                           |     7         8     |
+4807530 AGUA DULCE ISD                                    |     7         8     |
+4808190 ANAHUAC ISD                                       |     7         8     |
+4808910 AUBREY ISD                                        |     7         8     |
+4809030 AVALON ISD                                        |     7         3     |
+4809150 AXTELL ISD                                        |     7         4     |
+4809410 BANQUETE ISD                                      |     7         3     |
+4809450 BARBERS HILL ISD                                  |     7         8     |
+4809540 BARTLETT ISD                                      |     7         8     |
+4809780 BELLS ISD                                         |     7         8     |
+4810140 BIG SANDY ISD                                     |     7         8     |
+4810350 BLAND ISD                                         |     7         3     |
+4810500 BLOOMINGTON ISD                                   |     7         8     |
+4810590 BLUE RIDGE ISD                                    |     7         8     |
+4810740 BOLES ISD                                         |     7         8     |
+4811640 BROWNSBORO ISD                                    |     7         8     |
+4811730 BRUCEVILLE-EDDY ISD                               |     7         8     |
+4812060 BULLARD ISD                                       |     7         8     |
+4812390 CADDO MILLS ISD                                   |     7         8     |
+4812660 CAMPBELL ISD                                      |     7         8     |
+4813260 CELESTE ISD                                       |     7         8     |
+4814010 CHRISTOVAL ISD                                    |     7         4     |
+4814580 COLLINSVILLE ISD                                  |     7         8     |
+4814730 COMAL ISD                                         |     2         3     |
+4814850 COMMUNITY ISD                                     |     7         8     |
+4815420 COUPLAND ISD                                      |     7         3     |
+4815510 CRANDALL ISD                                      |     7         8     |
+4815600 CRAWFORD ISD                                      |     7         8     |
+4815840 CROSS ROADS ISD                                   |     7         8     |
+4816110 CYPRESS-FAIRBANKS ISD                             |     3         2     |
+4816260 DAMON ISD                                         |     7         3     |
+4816290 DANBURY ISD                                       |     7         8     |
+4816920 DEVERS ISD                                        |     7         8     |
+4817550 DRISCOLL ISD                                      |     7         8     |
+4817880 EAST CHAMBERS ISD                                 |     7         8     |
+4818480 ELYSIAN FIELDS ISD                                |     7         4     |
+4818720 EUSTACE ISD                                       |     7         8     |
+4818780 EVANT ISD                                         |     7         8     |
+4819320 FLORENCE ISD                                      |     7         8     |
+4821540 GRANDVIEW ISD                                     |     7         8     |
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+4821590 GRANGER ISD                                       |     7         8     |
+4821960 GUNTER ISD                                        |     7         8     |
+4822170 HALLSVILLE ISD                                    |     7         8     |
+4822380 HARDIN ISD                                        |     7         8     |
+4822410 HARDIN-JEFFERSON ISD                              |     7         5     |
+4822500 HARLETON ISD                                      |     7         4     |
+4823160 HIGH ISLAND ISD                                   |     7         3     |
+4823370 HOLLAND ISD                                       |     7         8     |
+4823400 HOLLIDAY ISD                                      |     7         8     |
+4823700 HUBBARD ISD                                       |     7         8     |
+4823880 HULL-DAISETTA ISD                                 |     7         8     |
+4824100 HUTTO ISD                                         |     7         8     |
+4824120 IDALOU ISD                                        |     7         8     |
+4824450 ITALY ISD                                         |     7         8     |
+4824600 JARRELL ISD                                       |     7         3     |
+4824750 JIM HOGG COUNTY ISD                               |     6         7     |
+4824780 JIM NED CONS ISD                                  |     7         8     |
+4824900 JONESBORO ISD                                     |     7         4     |
+4825110 KARNACK ISD                                       |     7         4     |
+4825320 KEMP ISD                                          |     7         8     |
+4825380 KENDLETON ISD                                     |     7         8     |
+4825740 KLEIN ISD                                         |     3         2     |
+4825920 KOUNTZE ISD                                       |     7         8     |
+4825980 KRUM ISD                                          |     7         8     |
+4826310 LA VERNIA ISD                                     |     7         8     |
+4826340 LA VILLA ISD                                      |     7         8     |
+4827420 LIBERTY HILL ISD                                  |     7         3     |
+4827510 LINDALE ISD                                       |     7         8     |
+4828020 LONE OAK ISD                                      |     7         8     |
+4828200 LORENA ISD                                        |     2         8     |
+4828290 LOS FRESNOS CONS ISD                              |     7         8     |
+4828780 MALAKOFF ISD                                      |     7         8     |
+4828890 MANOR ISD                                         |     7         2     |
+4829100 MARION ISD                                        |     7         8     |
+4829460 MAUD ISD                                          |     7         8     |
+4829580 MAYPEARL ISD                                      |     7         8     |
+4829760 MCDADE ISD                                        |     7         3     |
+4830090 MEGARGEL ISD                                      |     7         8     |
+4830120 MELISSA ISD                                       |     7         8     |
+4830340 MERKEL ISD                                        |     7         8     |
+4830780 MILFORD ISD                                       |     7         8     |
+4830870 MILLSAP ISD                                       |     7         8     |
+4830990 MIRANDO CITY ISD                                  |     7         4     |
+4831230 MONTE ALTO ISD                                    |     7         4     |
+4831290 MOODY ISD                                         |     7         8     |
+4832010 MURCHISON ISD                                     |     7         8     |
+4832310 NEEDVILLE ISD                                     |     7         8     |
+4832400 NEW CANEY ISD                                     |     7         3     |
+4832460 NEW DIANA ISD                                     |     7         4     |
+4833180 NORTHWEST ISD                                     |     7         8     |
+4833360 ODEM-EDROY ISD                                    |     7         8     |
+4833780 ORANGEFIELD ISD                                   |     7         4     |
+4833840 ORE CITY ISD                                      |     7         8     |
+4834500 PEASTER ISD                                       |     7         3     |
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+4835310 PONDER ISD                                        |     7         8     |
+4835340 POOLVILLE ISD                                     |     7         3     |
+4835370 PORT ARANSAS ISD                                  |     7         8     |
+4835550 POTH ISD                                          |     7         8     |
+4835570 BUSHLAND ISD                                      |     7         4     |
+4835580 POTTSBORO ISD                                     |     7         8     |
+4835700 PRAIRIE LEA ISD                                   |     7         3     |
+4835910 PROGRESO ISD                                      |     7         4     |
+4836240 QUINLAN ISD                                       |     7         8     |
+4836450 RANDOLPH FIELD ISD                                |     7         3     |
+4836750 REDWATER ISD                                      |     7         8     |
+4837170 RIO HONDO ISD                                     |     7         8     |
+4837710 ROGERS ISD                                        |     7         8     |
+4838220 ROYSE CITY ISD                                    |     7         8     |
+4838400 S AND S CONS ISD                                  |     7         8     |
+4838490 SABINE PASS ISD                                   |     7         4     |
+4838580 SALADO ISD                                        |     7         8     |
+4839330 SANTA MARIA ISD                                   |     7         4     |
+4839360 SANTA ROSA ISD                                    |     7         8     |
+4839870 SHALLOWATER ISD                                   |     7         8     |
+4840320 SIMMS ISD                                         |     7         4     |
+4840740 SOMERSET ISD                                      |     8         2     |
+4840890 SOUTHLAND ISD                                     |     7         8     |
+4841610 STOCKDALE ISD                                     |     7         8     |
+4842660 THRALL ISD                                        |     7         8     |
+4842870 TIOGA ISD                                         |     7         8     |
+4842900 TOLAR ISD                                         |     7         8     |
+4842930 TOM BEAN ISD                                      |     7         8     |
+4842990 TORNILLO ISD                                      |     7         3     |
+4843890 VAN ALSTYNE ISD                                   |     7         8     |
+4844010 VENUS ISD                                         |     7         8     |
+4844410 WALL ISD                                          |     7         4     |
+4844430 WALLER ISD                                        |     7         8     |
+4844470 BRAZOS ISD                                        |     7         8     |
+4844670 WASKOM ISD                                        |     7         8     |
+4844710 WATER VALLEY ISD                                  |     7         4     |
+4844810 WEBB CONS ISD                                     |     7         4     |
+4845000 WEST HARDIN COUNTY CONS ISD                       |     7         4     |
+4846080 WINDTHORST ISD                                    |     7         8     |
+4900480 KANE SCHOOL DISTRICT                              |     7         4     |
+4901080 UINTAH SCHOOL DISTRICT                            |     6         7     |
+5002130 BENNINGTON ID SCHOOL DISTRICT                     |     6         7     |
+5002490 BRATTLEBORO SCHOOL DISTRICT                       |     6         7     |
+5003030 CHAMPLAIN VALLEY UHSD 15                          |     6         8     |
+5003930 FAIRFAX SCHOOL DISTRICT                           |     7         8     |
+5004140 GEORGIA SCHOOL DISTRICT                           |     6         8     |
+5004290 GRAND ISLE SCHOOL DISTRICT                        |     7         8     |
+5004590 HARTFORD SCHOOL DISTRICT                          |     6         7     |
+5004680 HINESBURG SCHOOL DISTRICT                         |     6         8     |
+5004980 JERICHO SCHOOL DISTRICT                           |     6         8     |
+5005490 MIDDLEBURY ID SCHOOL DISTRICT                     |     6         7     |
+5005620 MISSISQUOI VALLEY UHSD 7                          |     6         8     |
+5005810 MOUNT ANTHONY UHSD 14                             |     6         7     |
+5005840 MOUNT MANSFIELD USD 17                            |     6         8     |
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+5006840 RICHMOND SCHOOL DISTRICT                          |     6         8     |
+5007530 SPRINGFIELD SCHOOL DISTRICT                       |     6         7     |
+5007650 SAINT JOHNSBURY SCHOOL DIST                       |     6         7     |
+5099911 SAINT JOHNSBURY SUPERVISORY DI                    |     6         7     |
+5099912 CHITTENDEN EAST SUPV UNION                        |     6         8     |
+5099914 CHITTENDEN SOUTH SUPV UNION                       |     6         8     |
+5099921 FRANKLIN NORTHWEST SUPV UNION                     |     6         8     |
+5099922 FRANKLIN WEST SUPV UNION                          |     7         8     |
+5099939 RUTLAND WINDSOR SUPV UNION                        |     6         7     |
+5099948 WINDHAM SOUTHEAST SUPV UNION                      |     6         7     |
+5099954 HARTFORD SUPERVISORY DISTRICT                     |     6         7     |
+5099956 SPRINGFIELD SUPERVISORY DISTRI                    |     6         7     |
+5100015 MIDDLE PENIN REG SP ED PR                         |     7         3     |
+5100026 NORTHERN VA REGIONAL SPEC EDUC PRGM               |     7         3     |
+5100210 AMHERST                                           |     7         4     |
+5100420 BOTETOURT                                         |     7         8     |
+5100600 CAMPBELL                                          |     7         4     |
+5101380 FLUVANNA                                          |     7         4     |
+5101620 GLOUCESTER                                        |     7         3     |
+5101710 GREENE                                            |     7         8     |
+5102430 MATHEWS                                           |     7         3     |
+5102610 NEW KENT                                          |     7         4     |
+5102940 PITTSYLVANIA                                      |     7         8     |
+5103480 SCOTT                                             |     7         4     |
+5300870 CARBONADO                                         |     7         8     |
+5301980 DARRINGTON                                        |     7         8     |
+5302070 DEER PARK                                         |     7         8     |
+5302310 EASTMONT                                          |     6         7     |
+5303180 GRANGER                                           |     7         8     |
+5303210 GRANITE FALLS                                     |     7         8     |
+5303780 KAHLOTUS                                          |     7         8     |
+5304260 LAKEWOOD                                          |     7         3     |
+5304560 RIVERVIEW                                         |     3         8     |
+5304650 MABTON                                            |     7         8     |
+5305640 NINE MILE FALLS                                   |     7         4     |
+5305670 NOOKSACK VALLEY                                   |     7         8     |
+5305730 NORTH FRANKLIN                                    |     7         8     |
+5306600 PATEROS                                           |     6         7     |
+5306630 PATERSON                                          |     7         4     |
+5307110 RAINIER                                           |     7         8     |
+5307350 RIDGEFIELD                                        |     7         8     |
+5308550 SULTAN                                            |     7         8     |
+5308820 TENINO                                            |     7         8     |
+5310140 YELM                                              |     7         8     |
+5400511 INSTITUTIONAL PROGRAMS                            |     7         6     |
+5401500 WAYNE COUNTY SCHOOL DISTRICT                      |     7         4     |
+5500720 BALDWIN-WOODVILLE AREA                            |     7         8     |
+5500780 BANGOR                                            |     7         8     |
+5500990 BELLEVILLE                                        |     7         8     |
+5502880 CORNELL                                           |     7         8     |
+5503510 KETTLE MORAINE                                    |     7         8     |
+5504260 ELKHART LAKE-GLENBEULAH                           |     7         8     |
+5504920 FREEDOM AREA                                      |     6         8     |
+5505520 GLENWOOD CITY                                     |     7         8     |
+
+                                                          |     Locale Code     |
+                                                          | ------------------- |
+NCES ID Agency                                            | Value in  Corrected |
+Agency  Name                                              |  CD-ROM     value   |
+------- --------------------------------------------------| --------  --------- |
+5506060 SAINT CROIX CENTRAL                               |     7         8     |
+5507680 LAKE HOLCOMBE                                     |     7         8     |
+5508670 MARATHON CITY                                     |     7         8     |
+5509300 NORTH LAKE                                        |     6         3     |
+5509360 MERTON COMMUNITY                                  |     7         8     |
+5510440 NEW AUBURN                                        |     7         8     |
+5512330 PULASKI COMMUNITY                                 |     7         8     |
+5512450 RANDOM LAKE                                       |     7         8     |
+5512880 FRIESS LAKE                                       |     6         8     |
+5513380 WILMOT GRADE                                      |     7         8     |
+5513860 SILVER LAKE J1                                    |     7         8     |
+5514190 SPENCER                                           |     7         8     |
+5514340 SPRING VALLEY                                     |     7         8     |
+5514520 STOCKBRIDGE                                       |     7         8     |
+5516770 WILMOT UHS                                        |     7         8     |
+5516830 WINNECONNE COMMUNITY                              |     7         8     |
+5604120 LARAMIE CO SCHOOL DIST 02                         |     7         8     |
+5900011 MINNEAPOLIS AREA OFFICE                           |     6         7     |
+5900015 PIMA AGENCY                                       |     7         3     |
+5900019 SACRAMENTO AREA OFFICE                            |     7         3     |
