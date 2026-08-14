@@ -1,0 +1,632 @@
+Identification_Information:
+  Citation:
+    Citation_Information:
+      Originator: U.S. Geological Survey, National Wetlands Research Center
+      Publication_Date: 200307
+      Title: 2000 Brown Marsh Habitat Data
+      Geospatial_Data_Presentation_Form: Digital vector data
+      Larger_Work_Citation:
+        Citation_Information:
+          Originator:
+            Barataria-Terrebonne National Estuary Program
+            Scientific-Technical Committee
+          Publication_Date: 20010207
+          Title:
+            Requests for submission of Scope of Services for Marsh
+            Dieback and Nutria Control Emergency Response.
+          Geospatial_Data_Presentation_Form: document
+          Publication_Information:
+            Publication_Place: Thibodaux, LA
+            Publisher:
+              Barataria-Terrebonne National Estuary Program
+              Scientific-Technical Committee
+          Online_Linkage: http://www.brownmarsh.net/reports/brown_marsh_rfp.pdf
+  Description:
+    Abstract:
+      This data set consists of digital data describing wetland and upland
+      habitats for the Brown Marsh area in 2000.  The data set includes 12
+      7.5' quadrangles.  Wetlands were classified according to the Marsh
+      Dieback Syndrome (MaDS) signature classification scheme. The
+      classification was developed to delineate features of healthy and
+      affected marsh and created through the use of field observations and
+      laboratory analysis of the photography. The classification (key)
+      references the defining vegetation and/or features and provides
+      signature information (consistent photographic elements) for photo
+      interpretation (located at http://www.brownmarsh.net).
+    Purpose:
+      The intended use of this data set is to map the extent of the marsh
+      dieback for 2000 and to provide information for comparison to later
+      habitat mapping efforts.
+  Time_Period_of_Content:
+    Time_Period_Information:
+      Range_of_Dates/Times:
+        Beginning_Date: 20000927
+        Ending_Date: 20001115
+    Currentness_Reference: Ground Condition during source photography acquisition.
+  Status:
+    Progress: Complete
+    Maintenance_and_Update_Frequency: None Planned
+  Spatial_Domain:
+    Bounding_Coordinates:
+      West_Bounding_Coordinate: -90.00
+      East_Bounding_Coordinate: -89.00
+      North_Bounding_Coordinate: 29.500
+      South_Bounding_Coordinate: 28.875
+  Keywords:
+    Theme:
+      Theme_Keyword_Thesaurus: None
+      Theme_Keyword: aquatic
+      Theme_Keyword: forested
+      Theme_Keyword: bayous
+      Theme_Keyword: canals
+      Theme_Keyword: scrub shrub
+      Theme_Keyword: wetlands
+      Theme_Keyword: marshes
+      Theme_Keyword: swamps
+      Theme_Keyword: marshlands
+      Theme_Keyword: habitats
+      Theme_Keyword: uplands
+      Theme_Keyword: impacted
+      Theme_Keyword: non-impacted
+      Theme_Keyword: uplands
+      Theme_Keyword: modifiers
+      Theme_Keyword: disease
+      Theme_Keyword: coastal
+      Theme_Keyword: emergent
+      Theme_Keyword: coastal habitats
+      Theme_Keyword: geographic information system data
+      Theme_Keyword: classified aerial photography
+      Theme_Keyword: maps
+      Theme_Keyword: mapping
+      Theme_Keyword: digitizing
+      Theme_Keyword: open water
+      Theme_Keyword: unconsolidated
+      Theme_Keyword: rocky shore
+      Theme_Keyword: dieback
+      Theme_Keyword: brown marsh
+      Theme_Keyword: wrack
+      Theme_Keyword: mangrove
+    Place:
+      Place_Keyword_Thesaurus: U.S. Geological Survey, Geographic Names Information System
+      Place_Keyword: Louisiana
+      Place_Keyword: Louisiana Coast
+      Place_Keyword: South Louisiana
+      Place_Keyword: Lake Quitman
+      Place_Keyword: Lake Tambour
+      Place_Keyword: Lake Felicity
+      Place_Keyword: Bay Courant
+      Place_Keyword: Oyster Bayou
+      Place_Keyword: East Bay Junop
+      Place_Keyword: Grand Bayou du Large
+      Place_Keyword: Dog Lake
+      Place_Keyword: Cocodrie
+      Place_Keyword: Pelican Pass
+      Place_Keyword: Leeville
+      Place_Keyword: Central Isle Dernieres
+    Temporal:
+      Temporal_Keyword_Thesaurus: None
+      Temporal_Keyword: 2000
+      Temporal_Keyword: fall
+  Access_Constraints:
+    It is strongly recommended that this data is directly acquired from the
+    distributor described above or from another USGS Biological Resources
+    Division server and not indirectly through other sources which may have
+    changed the data in some way.  The distributor makes no claims as to the
+    data's suitability for other purposes.
+  Use_Constraints:
+    Acknowledgement of the U.S. Geological Survey, National Wetlands Research
+    Center as a data source would be appreciated in products developed from
+    these data, and such acknowledgment as is standard for citation and legal
+    practices for data source is expected by users of this data. Sharing new
+    data layers developed directly from these data would also be appreciated
+    by U.S. Geological Survey, National Wetlands Research Center staff. Users
+    should be aware that comparison with other data sets for the same area
+    from other time periods may be inaccurate due to inconsistencies resulting
+    from changes in mapping conventions, data collection, and computer
+    processes over time. The distributor shall not be liable for improper or
+    incorrect use of this data, based on the description of
+    appropriate/inappropriate uses described in this metadata document.  These
+    data are not legal documents and are not to be used as such.
+  Point_of_Contact:
+    Contact_Information:
+      Contact_Organization_Primary:
+        Contact_Organization: U.S. Geological Survey, National Wetlands Research Center
+        Contact_Person: Larry Handley
+      Contact_Position: Geographer and Principle Investigator
+      Contact_Address:
+        Address_Type: Mailing and Physical Address
+        Address: 700 Cajundome Blvd
+        City: Lafayette
+        State_or_Province: LA
+        Postal_Code: 70506
+        Country: USA
+      Contact_Voice_Telephone: 337 266-8691
+      Contact_Facsimile_Telephone: 337 266-8513
+      Contact_Electronic_Mail_Address: larry_handley@usgs.gov
+  Point_of_Contact:
+    Contact_Information:
+      Contact_Organization_Primary:
+        Contact_Organization: U.S. Geological Survey, National Wetlands Research Center
+        Contact_Person: Steve Hartley
+      Contact_Position: Senior GIS Analyst/Geographer
+      Contact_Address:
+        Address_Type: Mailing and Physical Address
+        Address: 700 Cajundome Blvd
+        City: Lafayette
+        State_or_Province: LA
+        Postal_Code: 70506
+        Country: USA
+      Contact_Voice_Telephone: 337 266-8543
+      Contact_Facsimile_Telephone: 337 266-8616
+      Contact_Electronic_Mail_Address: steve_hartley@usgs.gov
+  Data_Set_Credit: None
+  Native_Data_Set_Environment: Arc8.3, NT
+
+Data_Quality_Information:
+  Attribute_Accuracy:
+    Attribute_Accuracy_Report:
+      The attribute accuracy was tested using several methods during the
+      data development phases and completion. All interpreted photos were
+      checked by two photo interpreters; all transfered based maps were
+      checked by a cartographer and a photo interpreter, who didn't perform
+      the original interpretations. Within in the interpretation phase,
+      there were at least three stages of quality control. To further ensure
+      the accuracy of the classification, ground truthing was conducted for
+      both impacted and non-impacted areas. For areas of questionablity,
+      similar non-impacted sites were visited to assist in supporting the
+      classification. 1998 and 2000 aerial photography were used in the
+      ground truthing activity. For digitizing phase, data are checked at
+      least twice before finalization of maps. Data were tested by manual
+      comparison of the source with hard copy printouts and/or symbolized
+      display of the digital wetlands data on an interactive computer
+      graphic system.  A check for adjacent polygons with the same attribute
+      was conducted using an Arcview Avenue script. Overall, the attribute
+      accuracy is believed high due to the multiple error-checking steps
+      done redundantly during processing (for both the photo-interpretation
+      and digitizing phases). Exact tolerances vary with coverages, as does
+      the date of the processing and testing.
+  Logical_Consistency_Report:
+    This logical consistency report includes information about both general
+    and specific topological tests and data generation dynamics in the
+    fidelity of data.  Data is inherently polygonal.  Polygons intersecting
+    the neatline are closed along the border.  Segments making up the outer
+    and inner boundaries of a polygon tie end-to-end to completely enclose the
+    area.  Line segments are a set of sequentially numbered coordinate pairs. 
+    No duplicate features exist nor duplicate points in a data string. 
+    Intersecting lines are separated into individual line segments at the
+    points of intersection.  Point data are represented by two sets of
+    coordinate pairs, each with the same coordinate values.  All nodes are
+    represented by a single coordinate pair which indicates the beginning or
+    end of a line segment.  The neatline for each quad is generated by
+    connecting four corners of a digital file, as established during
+    initialization of the digital file.  All data crossing the neatline are
+    clipped to the neatline and data within a specified tolerance of the
+    neatline are snapped to the neatline. During the photointerpretation
+    stage, the large scale maps were edge matched to ensure line connection
+    and attribute labeling.
+  Completeness_Report:
+    All photo-interpretable wetlands are identified and mapped using standard
+    methodologies and equipment for the photo interpretation phases of the
+    data development.  All wetlands were identified and mapped regardless of
+    the size.  In general, the minimum mapping unit is .5 acres depending of
+    the wetland type and the scale and emulsion of the source aerial
+    photography. Processing of the digital data also follows conventions and
+    standard methodologies for the time period and within limitations of
+    available workstation equipment at the date of data development.
+  Positional_Accuracy:
+    Horizontal_Positional_Accuracy:
+      Horizontal_Positional_Accuracy_Report:
+        For reference points accuracy, the accuracy for the digital data
+        are tested by visual comparison of the source with hard copy maps,
+        and by understanding of the hardware tolerances and processing
+        values reported by the software used in data development. 
+        Additional checks on comparison were possible when
+        georeferencing/rectification was done using the USGS maps, which
+        cite National Mapping Accuracy Standard compliance.
+  Lineage:
+    Source_Information:
+      Source_Citation:
+        Citation_Information:
+          Originator: U.S. Geological Survey, National Wetlands Research Center
+          Publication_Date: 2001
+          Title: Brown Marsh Rectified Aerial Photography
+          Edition: first
+          Geospatial_Data_Presentation_Form: Remote-Sensing Image
+          Publication_Information:
+            Publication_Place: Lafayette, LA
+            Publisher:
+              U.S. Geological Survey, National Wetlands Research
+              Center
+      Type_of_Source_Media: digital data base file
+      Source_Time_Period_of_Content:
+        Time_Period_Information:
+          Range_of_Dates/Times:
+            Beginning_Date: 20000927
+            Ending_Date: 20001115
+        Source_Currentness_Reference: Source Photography Date
+      Source_Citation_Abbreviation: USGS CIR
+      Source_Contribution:
+        Primary data for photo interpretation and identification of
+        wetland and upland classes.
+    Source_Information:
+      Source_Citation:
+        Citation_Information:
+          Originator: U.S. Geological Survey, National Mapping Division
+          Publication_Date: 1998
+          Title: 1998 National Aerial Photography Program
+          Geospatial_Data_Presentation_Form: Remote-Sensing Image
+          Publication_Information:
+            Publication_Place: Lafayette, LA
+            Publisher:
+              U.S. Geological Survey, National Wetlands Research
+              Center
+      Type_of_Source_Media: stable based material
+      Source_Time_Period_of_Content:
+        Time_Period_Information:
+          Single_Date/Time:
+            Calendar_Date: 1998
+        Source_Currentness_Reference: Source Photography Date
+      Source_Citation_Abbreviation: USGS NAPP
+      Source_Contribution: Reference data for barren areas and new, questionable open water.
+    Process_Step:
+      Process_Description:
+        Color infrared aerial photographs were photo interpreted for marsh
+        habitat and upland habitat according to the MaDS classification.
+        For questionable areas of barren and open water, the 1998 NAPP
+        photography was used to ensure if the feature was dieback related.
+        The interpreted photos were overlaid upon maps generated by the
+        original photography.
+      Process_Date: 2002-2003
+    Process_Step:
+      Process_Description:
+        The hard copy maps were scanned, georeferenced, and vectorized at
+        the U.S. Geological Survey, National Wetlands Research Center
+        using an Ideal FCS 8010 scanner, Arc8.3 georeferencing module and
+        Able Software Corporation Raster to Vector (R2V) conversion
+        software.
+      Process_Date: 2003
+
+Spatial_Data_Organization_Information:
+  Direct_Spatial_Reference_Method: Vector
+
+Spatial_Reference_Information:
+  Horizontal_Coordinate_System_Definition:
+    Planar:
+      Grid_Coordinate_System:
+        Grid_Coordinate_System_Name: Universal Transverse Mercator
+        Universal_Transverse_Mercator:
+          UTM_Zone_Number: 15
+          Transverse_Mercator:
+            Longitude_of_Central_Meridian: -93
+            Latitude_of_Projection_Origin: 0
+            False_Easting: 500000
+            False_Northing: 0
+            Scale_Factor_at_Central_Meridian: .9996
+      Planar_Coordinate_Information:
+        Planar_Coordinate_Encoding_Method: Coordinate Pair
+        Coordinate_Representation:
+          Abscissa_Resolution: .61
+          Ordinate_Resolution: .61
+        Planar_Distance_Units: Meters
+    Geodetic_Model:
+      Horizontal_Datum_Name: North American Datum of 1983
+      Ellipsoid_Name: GRS80
+      Semi-major_Axis: 6378137
+      Denominator_of_Flattening_Ratio: 298.257
+
+Entity_and_Attribute_Information:
+  Detailed_Description:
+    Entity_Type:
+      Entity_Type_Label: Marsh and Upland Habitat
+      Entity_Type_Definition:
+        Wetlands are saturated or inundated by water for an extended
+        period of time during the growing season. For the photo
+        interpretation process, the hydroregime results in hydric soil
+        formation and hydrophytic plant species that present consistent
+        aerial photographic signatures. For photointerpretation purposes,
+        uplands are areas not periodically saturated or inundated,
+        resulting in non-hydrophytic vegetation and soil signatures.
+      Entity_Type_Definition_Source:
+        Cowardin, Lewis M., Virginia Carter, Francis Goblet, and Edward T.
+        Laroe.  Classification of wetlands and deepwater habitats of the
+        United States.  U.S. Fish and Wildlife Service.  Biological
+        Services Program; FWS/OBS - 79/31. 103 pp.
+    Attribute:
+      Attribute_Label: data
+      Attribute_Definition:
+        The alphanumerical designation for the wetlands and upland in the
+        brown marsh dieback impacted and non-impacted area. The values may
+        have associated modifiers attached. Modifiers include x
+        (excavated), s (spoil), h (impounded), g (mangrove), o (oil), r,
+        (wrack), and k (artificial). The designations were developed by an
+        ad hoc committee comprised of marsh dieback scientists and
+        researchers. All designations were developed through the use of
+        field observations, expertise of scientific community, and
+        examination of aerial photography. The signature key was developed
+        specifically for the marsh dieback.
+      Attribute_Definition_Source: Ad hoc MaDS committee
+      Attribute_Domain_Values:
+        Enumerated_Domain:
+          Enumerated_Domain_Value: EM
+          Enumerated_Domain_Value_Definition:
+            Healthy emergent marsh is comprised of relatively dense
+            vegetation dominated by smooth cordgrass (Spartina
+            alterniflora). Other emergent marsh species that may be
+            present, usually to a considerably lesser extent include
+            salt grass (Distichlis spicata), needle rush (Juncus
+            romerianus), and roseau cane (Phragmites australis).
+            Herbaceous species may occur, but do not contribute
+            significantly to the photographic signature. The emergent
+            vegetation is usually 0.3 to 1.5 m tall. Signature feature
+            - brilliant fuchsia with an even texture.
+          Enumerated_Domain_Value_Definition_Source: Ad hoc MaDS committee
+      Attribute_Domain_Values:
+        Enumerated_Domain:
+          Enumerated_Domain_Value: SS
+          Enumerated_Domain_Value_Definition:
+            Scrub/shrub is composed of woody vegetation under 6 meters
+            in height. Common species include mangrove (Avicennia
+            germinans), toothache tree (Zanthoxylum clava-herculis),
+            sugarberry (Celtis laevagata), wax myrtle (Myrica
+            cerifera), saltbush (Baccharis halimifolia), yaupon (Ilex
+            vomitoria), marsh elder (Iva frutescens), and live oak
+            (Quercus virginiana). There are four subclasses,
+            designated as 1 (Deciduous - uneven texture, color is
+            variable but generally a pale pink), 2 (Evergreen - uneven
+            texture, color is variable but generally a dark red), 3
+            (Mixed - Uneven texture with highly variable color), and 4
+            (Mangrove - uneven to smooth texture with consistent
+            brilliant red).
+          Enumerated_Domain_Value_Definition_Source: Ad hoc MaDS committee
+      Attribute_Domain_Values:
+        Enumerated_Domain:
+          Enumerated_Domain_Value: FO
+          Enumerated_Domain_Value_Definition:
+            Forest - Forest cover is composed of roughly the same
+            species as scrub/shrub, but canopy is greater than 6
+            meters in height. There are three subclasses, designated
+            as 1 (Deciduous - uneven texture, color is variable but
+            generally a pale pink), 3 (Evergreen - Uneven texture,
+            color is variable but generally a dark red), and 4 (Mixed
+            - uneven texture with highly variable color).
+          Enumerated_Domain_Value_Definition_Source: Ad hoc MaDS committee
+      Attribute_Domain_Values:
+        Enumerated_Domain:
+          Enumerated_Domain_Value: AB
+          Enumerated_Domain_Value_Definition:
+            Aquatic bed is composed of algae, floating aquatic, rooted
+            submerged aquatic vegetation. Signature feature - smooth,
+            smokey texture with variable color from dark purples to
+            lavender.
+          Enumerated_Domain_Value_Definition_Source: Ad hoc MaDS committee
+      Attribute_Domain_Values:
+        Enumerated_Domain:
+          Enumerated_Domain_Value: OW
+          Enumerated_Domain_Value_Definition:
+            Open water is a vegetation-free water signature that is
+            consistent with the 1998 NAPP photography as being open
+            water to differentiate it from recent formation due to
+            marsh dieback. Signature feature - Even texture and dark
+            blue.
+          Enumerated_Domain_Value_Definition_Source: Ad hoc MaDS committee
+      Attribute_Domain_Values:
+        Enumerated_Domain:
+          Enumerated_Domain_Value: US
+          Enumerated_Domain_Value_Definition:
+            Unconsolidated shore is exposed vegetation-free soil, sand
+            or exposed shell bed that is saturated or tidally
+            inundated. Signature feature - Even texture and gray to
+            bluish depending on the moisture present. Lack of moisture
+            results in an even white color.
+          Enumerated_Domain_Value_Definition_Source: Ad hoc MaDS committee
+      Attribute_Domain_Values:
+        Enumerated_Domain:
+          Enumerated_Domain_Value: RS
+          Enumerated_Domain_Value_Definition:
+            Rocky shore is rip-rap deposited as oil canal plugs shore
+            stabilization structures and other similar features.
+            Signature feature - smooth texture, brilliant white.
+          Enumerated_Domain_Value_Definition_Source: Ad hoc MaDS committee
+      Attribute_Domain_Values:
+        Enumerated_Domain:
+          Enumerated_Domain_Value: USS
+          Enumerated_Domain_Value_Definition:
+            Upland scrub/shrub may be composed of a large list of
+            plants including those within the wetland scrub/shrub
+            signature. There are three subclasses, 1 (Deciduous -
+            uneven texture, color is variable but generally a pale
+            pink), 3 (Evergreen - uneven texture, color is variable
+            but generally a dark red), and 4 (Mixed - uneven texture
+            with highly variable color).
+          Enumerated_Domain_Value_Definition_Source: Ad hoc MaDS committee
+      Attribute_Domain_Values:
+        Enumerated_Domain:
+          Enumerated_Domain_Value: UF
+          Enumerated_Domain_Value_Definition:
+            Upland forest may be composed of the same species found in
+            the upland scrub/shrub. The canopy greater than 6 meters.
+            There are three subclasses, 1 (Deciduous - uneven texture,
+            color is variable but generally a pale pink), 3 (Evergreen
+            - uneven texture, color is variable but generally a dark
+            red), and 4 (Mixed - Uneven texture with highly variable
+            color).
+          Enumerated_Domain_Value_Definition_Source: Ad hoc MaDS committee
+      Attribute_Domain_Values:
+        Enumerated_Domain:
+          Enumerated_Domain_Value: UR
+          Enumerated_Domain_Value_Definition:
+            Upland range is mown grassland or pastures. Signature
+            feature - texture is smooth with even light red color. No
+            dark mottling present (indication of saturated soils).
+          Enumerated_Domain_Value_Definition_Source: Ad hoc MaDS committee
+      Attribute_Domain_Values:
+        Enumerated_Domain:
+          Enumerated_Domain_Value: UB
+          Enumerated_Domain_Value_Definition:
+            Upland barren is recently deposited or bulldozed areas.
+            Signature feature - texture like oatmeal with a
+            whitish-gray color.
+          Enumerated_Domain_Value_Definition_Source: Ad hoc MaDS committee
+      Attribute_Domain_Values:
+        Enumerated_Domain:
+          Enumerated_Domain_Value: UU
+          Enumerated_Domain_Value_Definition:
+            Upland urban is developed  upland areas containing urban
+            structures (houses, buildings, etc.)
+          Enumerated_Domain_Value_Definition_Source: Ad hoc MaDS committee
+      Attribute_Domain_Values:
+        Enumerated_Domain:
+          Enumerated_Domain_Value: IEM
+          Enumerated_Domain_Value_Definition:
+            Slightly impacted emergent marsh vegetation. Herbaceous
+            plants exhibit some color characteristics similar to
+            healthy vegetation. Signature feature - color is less
+            brilliant to pale pink with even texture. No soil
+            exposure.)
+          Enumerated_Domain_Value_Definition_Source: Ad hoc MaDS committee
+      Attribute_Domain_Values:
+        Enumerated_Domain:
+          Enumerated_Domain_Value: BM2
+          Enumerated_Domain_Value_Definition:
+            Moderately impacted emergent marsh with intact vegetation
+            signature. Signature feature - faint pink present with
+            pale, gray-blue to whitish inclusions. Texture is still
+            smooth without soil exposure.
+          Enumerated_Domain_Value_Definition_Source: Ad hoc MaDS committee
+      Attribute_Domain_Values:
+        Enumerated_Domain:
+          Enumerated_Domain_Value: USBM
+          Enumerated_Domain_Value_Definition:
+            Unconsolidated shore/severly impacted emergent marsh.
+            Vegetation is less dense with some soil exposure.
+            Signature feature - color is quite variable. The substrate
+            color (faintly pale bluish to clear blue) is becoming
+            increasingly evident through the pale pink to white
+            vegetation. Texture is clumped white to pink inclusions on
+            the bluish background.
+          Enumerated_Domain_Value_Definition_Source: Ad hoc MaDS committee
+      Attribute_Domain_Values:
+        Enumerated_Domain:
+          Enumerated_Domain_Value: USDM
+          Enumerated_Domain_Value_Definition:
+            Unconsolidated shore/dead emergent marsh. Stubble present
+            with exposed soil as dominant signature. Signature feature
+            - color is gray to bluish-gray with no apparent
+            photosynthetic tissue. There is no pink component. Texture
+            is very smooth and even. Color transitions are smooth and
+            gradual.
+          Enumerated_Domain_Value_Definition_Source: Ad hoc MaDS committee
+      Attribute_Domain_Values:
+        Enumerated_Domain:
+          Enumerated_Domain_Value: IUS
+          Enumerated_Domain_Value_Definition:
+            Impacted, unconsolidated shore. Exposed soil with no
+            vegetation present. Signature feature - color is dark blue
+            with absolutely no reddish or pinkish component. Very
+            little or no white or gray indicating stubble.
+            Differential from non-impacted unconsolidated shore by use
+            of 1998 NAPP photography.
+          Enumerated_Domain_Value_Definition_Source: Ad hoc MaDS committee
+      Attribute_Domain_Values:
+        Enumerated_Domain:
+          Enumerated_Domain_Value: NOW
+          Enumerated_Domain_Value_Definition:
+            Impacted open water. These areas were marsh prior to marsh
+            dieback. These are the most degraded areas with elevation
+            loss (through erosion and/or subsidence), allowing for the
+            formation of permanent ponds within the marsh or
+            confluence with pre-existing open water. Signature feature
+            - signature is differential from non-impacted open water
+            by use of 1998 NAPP photography.
+          Enumerated_Domain_Value_Definition_Source: Ad hoc MaDS committee
+      Attribute_Domain_Values:
+        Enumerated_Domain:
+          Enumerated_Domain_Value: IAB
+          Enumerated_Domain_Value_Definition:
+            Impacted aquatic beds. Marsh dieback areas that have been
+            converted to aquatic vegetation. Signature feature -
+            signature differentiated from unimpacted aquatic
+            vegetation by use of 1998 NAPP photography.
+          Enumerated_Domain_Value_Definition_Source: Ad hoc MaDS committee
+Distribution_Information:
+  Distributor:
+    Contact_Information:
+      Contact_Organization_Primary:
+        Contact_Organization: U.S. Geological Survey, National Wetlands Research Center
+        Contact_Person: Scott Wilson
+      Contact_Position: Electrical Engineer
+      Contact_Address:
+        Address_Type: Mailing and Physical Address
+        Address: 700 Cajundome Blvd.
+        City: Lafayette
+        State_or_Province: Louisiana
+        Postal_Code: 70506
+        Country: USA
+      Contact_Voice_Telephone: 337 266-8644
+      Contact_Facsimile_Telephone: 337 266-8513
+      Contact_Electronic_Mail_Address: scott_wilson@usgs.gov
+      Hours_of_Service: 8:00 a.m. to 4:00 p.m. Monday Through Friday
+  Distribution_Liability:
+    Although these data have been processed successfully on a computer system
+    at the U.S. Geological Survey, National Wetlands Research Center, no
+    warranty expressed or implied is made regarding the accuracy or utility of
+    the data on any other system or for general or scientific purposes, nor
+    shall the act of distribution constitute any such warranty. This
+    disclaimer applies both to individual use of the data and aggregate use
+    with other data. It is strongly recommended that these data are directly
+    acquired from a Biological Resources Division server, and not indirectly
+    through other sources which may have changed the data in some way. It is
+    also strongly recommended that careful attention be paid to the contents
+    of the metadata file associated with these data. U.S. Geological Survey,
+    National Wetlands Research Center shall not be held liable for improper or
+    incorrect use of the data described and/or contained herein. So, these
+    data are provided "as is" and without any express or implied warranties,
+    including, without limitation, the implied warranties or merchantability
+    and fitness for a particular purpose. Also, use of trade names or
+    commercial products in this metadata is solely for the purpose of
+    providing specific information, and does not imply recommendation or
+    endorsement by the US Government. Any downloading and use of these data
+    signifies a user's agreement to comprehension and compliance of the U.S.
+    Geological Survey, National Wetlands Research Center Standard Disclaimer.
+    Insure all portions of metadata are read and clearly understood before
+    using these data in order to protect both user and U.S. Geological Survey,
+    National Wetlands Research Center interests.
+  Standard_Order_Process:
+    Digital_Form:
+      Digital_Transfer_Information:
+        Format_Name: ARCE
+        Format_Version_Number: 8.3
+        File_Decompression_Technique: ARC/INFO Export .e00 Compression Format
+      Digital_Transfer_Option:
+        Online_Option:
+          Computer_Contact_Information:
+            Network_Address:
+              Network_Resource_Name: http://www.brownmarsh.net
+    Fees: None, if data are available online.
+  Custom_Order_Process: None
+
+Metadata_Reference_Information:
+  Metadata_Date: 20030714
+  Metadata_Review_Date: 20030723
+  Metadata_Contact:
+    Contact_Information:
+      Contact_Organization_Primary:
+        Contact_Organization: U.S. Geological Survey, National Wetlands Research Center
+      Contact_Position: Metadata specialist
+      Contact_Address:
+        Address_Type: Mailing and Physical Address
+        Address: 700 Cajundome Blvd
+        City: Lafayette
+        State_or_Province: Louisiana
+        Postal_Code: 70506
+        Country: USA
+      Contact_Voice_Telephone: 337 266-8500
+      Contact_Facsimile_Telephone: 337 266-8513
+  Metadata_Access_Constraints: None
+  Metadata_Use_Constraints:
+    Acknowledgement of the National Wetlands Research Center as the metadata
+    source would be appreciated. Please cite the original metadata when using
+    portions of the record to create a similar record of slightly altered
+    data, such as reprojection.
+  Metadata_Standard_Name: Content Standard for Digital Geospatial Metadata
+  Metadata_Standard_Version: FGDC-STD-001-1998

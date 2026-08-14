@@ -150,3 +150,43 @@ Vendored WordPerfect-family test files. Per-file provenance (upstream path, revi
 - **License:** per document. 136 are vendored under permissive terms, chiefly MIT (36), CC-BY-4.0 (25), Apache-2.0 (21), US public domain (13), BSD-3-Clause (12) and MPL-2.0 (5). Four state a dual `CC-BY OR GPL-3.0-or-later` licence and are taken under the CC-BY arm. 12 carry ShareAlike, GPL or GFDL terms and are reference only, recorded without their bytes.
 - **Used here:** 136 documents vendored, 12 reference.
 - **Modifications:** none. Each document is byte-identical to what its publisher serves, so a fixture measures the real file rather than a rewritten one. No ground truth is derived from them here.
+
+## PubMed Central open access
+
+- **Citation:** Europe PMC RESTful Web Service, Europe PMC Consortium.
+- **Source:** <https://europepmc.org>
+- **License:** per article, read from each file's JATS `ali:license_ref`. 498 are CC-BY-4.0 or CC0 and vendored; 214 are CC-BY-NC or CC-BY-NC-ND and reference only.
+- **Used here:** 712 full-text JATS articles vendored, 214 reference.
+- **Modifications:** none. Each file is byte-identical to what the service returns.
+
+## arXiv
+
+- **Citation:** arXiv.org e-Print archive, Cornell University.
+- **Source:** <https://arxiv.org>
+- **License:** per paper, read from its OAI record. 204 are CC-BY-4.0 and vendored. 993 carry the arXiv perpetual non-exclusive licence, which grants distribution to arXiv rather than to third parties, so they are reference only.
+- **Used here:** 204 PDFs vendored, 993 reference.
+- **Modifications:** none.
+
+## Project Gutenberg
+
+- **Citation:** Project Gutenberg Literary Archive Foundation.
+- **Source:** <https://www.gutenberg.org>
+- **License:** US public domain. The Project Gutenberg trademark and licence terms attach to the header, not to the underlying public-domain work.
+- **Used here:** 500 EPUBs vendored, as prose ballast that carries no mathematics.
+- **Modifications:** none.
+
+## govdocs1
+
+- **Citation:** Garfinkel, Farrell, Roussev and Dinolt, "Bringing science to digital forensics with standardized forensic corpora" (DFRWS 2009).
+- **Source:** <https://digitalcorpora.org/corpora/file-corpora/files/>
+- **License:** US government works, public domain under 17 U.S.C. 105.
+- **Used here:** 400 mixed office documents vendored, from shards 000 and 001.
+- **Modifications:** none. Files are taken from the published shards under their original names, prefixed with the shard.
+
+## Wikipedia
+
+- **Citation:** Wikipedia contributors, English Wikipedia.
+- **Source:** <https://en.wikipedia.org>
+- **License:** CC-BY-SA-4.0. ShareAlike is copyleft, so these are reference only.
+- **Used here:** 178 mathematics articles, reference.
+- **Modifications:** none.

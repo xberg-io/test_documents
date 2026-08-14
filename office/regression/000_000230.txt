@@ -1,0 +1,666 @@
+DECEMBER, 1903. MONTHLY WEATHER REVIEW. 573
+for which we can also write,
+4 A But P~~ = is the vertical velocity of ascent, corresponil- zXdaf,"oo
+ing to a definite density x,,,, of the air, and to the correspond-
+ing buoyancy appropriate to it. With this notittion we obtain
+or ap1)roxiIuately -
+I' = I %,,
+$;.
+Hence, the velocities of ascent are inversely as the Gth root
+of the corresponding air pressures.
+According to the preceding tlie maximuni height that an
+elastic balloon can attain clepentls iiot a t all on tlie size of the
+balloon, the nature of the gas with which it is filled, etc., lmt
+only upon the capacity of tlie material for elastic expansion.
+The great,er the volume of the elastic coveriiig can become
+without bursting, so much the greater the height. The size
+of the balloon is only to be considered in ho far a:, tliiit i t
+must be sufficient, without being too greatly espamled. to gil e
+the buoyancy necessary in order to raise the bnlloon and the
+instruments. Tlie ballooiis met1 heretofore. a:, furnished by
+the Continental GummifaLrik in Hanover. can easily stretcli to
+double their diameter n ithout bursting. Therefore. the height
+they will attain is about lS,OOO meters.
+The following table will be of use in the einploynient of
+india rubber balloons. The first coluinn sliows the density of
+the air, the seconcl tlie altituc1e, the third the ratio ('.the fourth (I ,,
+theratio , the fifth the ratio of the ventilation, or of the
+('0,
+mass of air flowing past the 1)alloon.
+-~ -
+Ikiisily
+of the sir.
+I . 2s
+1.1!1
+1.13
+I .0 i
+1.01
+0. 96
+u. 91
+U. S i
+0. s2
+0. 7s
+0. 74
+IJ. 711
+0. 66
+0. 6::
+0. 39
+11. 56
+0. 53
+Blti-
+tlldl.. +l,,
+1. 00
+I . (I'
+1.04
+1. I).-,
+1. O i
+1. IJ3
+1.11
+1. 1 3
+1. 15
+1. l i
+1. 15
+1.21
+1.24
+1. 21;
+1. 2!1
+I . 31
+I . Y6
+.l t ,' l ' ,,
+1.110
+1 .0 1
+1. u:: 1. I):{
+1. u4
+1. 04
+1. IJ5
+1. Ill;
+1.0;
+1. IJS
+I . I19
+1 . 10
+I . 11
+1. I:!
+1. 1:;
+1. 14
+1. IS
+r l ,r l a ,
+I . RG
+1. ::!I
+1.41
+1 .4 4
+1.49
+1.5;
+I . G7
+1. it:
+1. H i
+1.91
+~~~ ~
+1 ,' , :',,
+~-
+I . 16
+1. IS
+1. I!l
+1. 211
+I . '1"
+1.25
+I.!!!)
+I . 3::
+1. :x
+1 .ss l,!l9 , 1.41
+2.Ili 1.44
+?. IS 1.4s
+2. I.-, , I . 5n
+2 .z
+~
+1.51
+?.2 S
+~
+1.51
+0.46
+0. 44
+0. 43
+11. 41
+0. 31;
+0. x:!
+0. I S
+10. 25
+0. "I
+0. 3 1
+0. IS
+0. I6
+0. 11
+0. l:j
+0. 111
+0. os
+Table I? s h o w that very considerable heights can be
+attained with closed rubber balloons i f they can espand to
+more than twice their original diaiiieter. I n practise, however,
+the misfortune is often noticed t,liat the enrelopes in expand-
+ing develope sinall holes tlirough which the gas rapidly
+escapes. In such cases i t happens that the balloons (10 not
+explode although the altitudes that they can attain under
+such circuinstances are very considerable, such as 12,W)O-
+13.000 meters.
+However, in such cases we lose one advantage whicli Assmann
+iiiore especially has pointed out, namely, that a closed l~alloon
+FC
+11-2
+ascends with increasing velocity and does not maintain any
+position of equilibrium. The leaky balloon floats for some
+time a t the highest altitude, so that the thermometers have
+no proper ventilation, and then descends too slowly. On this
+account, it would be well in all cases to give the balloon, by
+a strong distension in the beginning, a more than sufficient
+upward impulse, so that in the first place it will certainly
+explode, ani1 in the second place be suficiently ventilated.
+The fact that the velocity varies inversely as the 6th root of
+the pressure, therefore, increases somewhat slowly, iiiakes a
+great velocity in the beginning particularly desirable.
+If me take the product of the vertical velocity by the density
+of the air :IS the measure of the ventilation) then in the vicinity
+o f the surface of the earth and a t 4 meters per second this will
+lie 5 , h i t a t an altitude of 20,00() iiieters where the velocity,
+nccvrcling to our table, has risen to G meters per second, the
+ventilation will be 0.65. The latter figure is certainly no
+longer snffic.ient to protect even well sheltered thermometers
+axainst radiation. According to our esperieiice we must at-
+tain a value of 1. This figure. however. requires an initial
+ascensional velocity of 5.7 iueters per second. a velocity that can
+easily be given to rubber balloons. For still greater maxiinurn
+altitudes a still greater initial velocity must be given. For
+these asceiicliag velocities, however, one intist use very sensi-
+tive instruiueiits and iiot slug@ thermometers. In Stras-
+burg, since the introduction of tlie closed rub1)er balloons, me
+have with great success met1 the tubular thermometer, de-
+scribed by me in the protocol of the Conference of the Iuter-
+national Coniiuission for scieutific balloon ascensions a t Berlin.
+This theriiiometer lias a sensitiveness more than suficient to
+enable it to recortl properly during the above desired velocity
+of ascension; it also possesses the lightness (weighing with the
+clock mil protecting case 33) grams) necessary to make it
+possible to rise with ruliber balloons of 1.50 meters diameter.
+The further advantages possessed by the rubber 1JallOOllS
+have been SO fully described by the inrentor, Dr. Assmann, in
+the protocol to the abore-mentioned conference that I do not
+need to go into any ftirtlier details. I will only close with the
+wish that tliej- may be used frequently and with good results.
+DETAILED CLOUD OBSERVATIONS. A PROGRESSIVE
+PHASE IN WEATHER FORECASTING.
+U! F:ev FRLULKI~ h I , l l r ,r \n i ~ 1 1 . 9 .T , dntr~l .Talluar~ S 11104 hIet?orulogicsl Obserrs-
+tarn tbf ht. 1g11.lt1ua C O I I ~~~, I iprriau;i, o L o
+Isobars have formed the stepping stones on which weather
+forecasting has mounted to take its place among the sciences.
+The dailj sur^ ey o f the atiiioslhere a d the publication of
+weather iuaps hare enaldecl meteorologists to bring out these
+ftiots: that tlie /i r t /)c w of (nir nentlier depends on the configu-
+ration o f isobaric. lineh, but its r i i /+w s t /y on their gradient.
+With these t n o lninciples to start with, a few decades hnve
+sufticecl to de\ elop a iiietliocl of forecasting that lias met
+with very encouraging rehults ant1 11:~s been of great value to
+iuoht varied classes of interests. But. in spite of these suc-
+cesses, tliere is a prevailing conviction aniong forecasters that
+in the face o f great clifticulties progress. a t tlie present time,
+is checked.
+In spite of telrgrapliic bysteins aiid the imp material a t our
+disposal twice each claj-, certain obstacleh bar our further
+aclvance \thich iiiay l w siitniuecl up as follows:
+1. We iiiih:, iuaiiy nn important detail in the iiiap.
+I?. We are often left ignorant of tlie sudden formation or
+dissolution of highs and lows. or of cliaiiges in their intensity.
+3 . Tlie irregular progrebs of some isobaric systems can not be
+detected on, IJr inferred from. even the most perfect niap The
+initiated will hardly call for a proof of this statement. But
+how are we to mend our condition Y -4 thousand stittioiifl
+woiild linrcllg bring out the necessary cletail in a nap; and,
+even if they did, the changes in atiuosplieric conditions would
+574 MONTHLY WEATHER REVIEW. DECEMBER, 1903
+make the map unreliable for the hours which intervene be-
+tween the morning and the evening report. Moreover, a
+change may occur even during the short space of time that
+elapses between the observations and the compilation or util-
+ization of the map. Continuous teleonieteorology might offer
+an eficient remedy, but that must be considered, for the pres-
+ent a t least, as a scientific utopian dream.
+Much diligence and eminent talent are being brought to
+bear on nieteorological problems. There is great activity
+everywhere; the atmosphere is sounded by menus of kites and
+balloons, clrtta are collected and collated, Init the results ap-
+parently answer the *‘ how ” and the ‘6 wherefore ” o f the
+theorist, rather than the pleading ‘‘ what ” and ‘‘ when ’’ o f tlie
+solitary forecaster, to whom the public looks for definite iu-
+formation, and who stands or falls by his personal wits.
+It is fair, therefore, to say that the weather niap alone,
+though an indispensable help, will not advance the science of
+forecasting much beyond its present stage. We have read
+everything out of the i m p which beeins contained in i t : still
+we are often a t a loss, often a t fault. It will be wise, there-
+fore, to look elsewhere in the hope of striking a nen trail,
+which will advance 17s another step such as that taken \\hen
+we began to consider the configuration of isobars.
+For quite a run of years. while constantly and diligently
+observing the clouils [as they come and go in their varied
+forms and directions, their different colors and speecls] the ccm-
+riction has firmly taken liold of me tlint they have more to
+tell than we have hitherto bupposecl. I believe that a system-
+atic ancl detailed study of the clouds will. to say the leabt,
+advance us one more step in the science of forecasting. Poh-
+sibly that step mag be iuiicli more progressive than we can c)r
+dare imagine a t the present nioment.
+This conviction is chiefly based on m y personal experience ;
+yet it seeins that auy one who considers tlie nature of clontls
+bught to come to the same conclu5ion. C~OUCZS are the iiume-
+cliate product of weather conditions, not iiideecl directly over-
+head, but a t some distance froin us. We have here a relation
+of cause and effect. Similar causes are followed l,y siinilar
+effects. The coinbination of weather elements is varied, but
+any variation here will produce a corresponding change in the
+effect, namely in the cloucls. I would, therefore, consider
+cloucl as an index; as a hieroglyphic language of the weather,
+if ,you will, written against the blue sky. I f they are unin-
+telligible to 11s it is not nature’s fault; she never writes in
+meaningless scrawls.
+What attempt has thus far heen macle to decipher this
+script? We have picked out ten or a dozen cloud forms and
+observed these in a way. But is it reasonable to expect that
+the ever changing weather in its endless variety can be de-
+picted by means of 10 simple signs? Abercromby seeiiis to
+me to contradict himself, when he writes within the space of
+three pages the two following passages. After referring to his
+catalogue of 10 cloud forms, he says:’
+Almost all the smaller varieties are so rare or tran4ent that for ~~r a c -
+timi purposes they IJP neglected. IJllt if. un the contrary, the 1u main
+words are reqtrictecl to tlie forms of cloud \\e hare (I
+them * * * then tlie author can
+observaticin in all lon~itucle+ and i n latitud
+5 5 O bouth, that gU per cent of skies in e ~e
+sufficiently accurately defined liy these 10 a
+Two pages further on he remarks:’
+We have seen that there ih a fine-weather c.umulus, as well as cuiilulo-
+nimbus, a fine-weather, as well as a dangerous cirrus, while fieecy
+have not the same import in L ~n d ~i i as on the etluator. In pract good and bad forins can rarely be mistaken, hut sometimes very difficult
+cases arise. Clouds. in fact, tell us by their appearance, what might l w
+written in words. that more or less damp air is rising or falling under
+certain conditions uf upper ancl lower wind currents: the significance
+must be judged hy the siirrounding~ and antecedents, just as the zeu+e
+of many words can only I J ~ judged IJY the (.ontext. ________ -
+Weather, p. 118. 2 Ibld, p. 12u.
+We must remark, that there is nothing so small in nature
+that we mag neglect it with impunity. It may be possible
+with these 10 forms to define the general appearance of 90 per
+cent of skies; but 95 per cent of observers would be able to
+conclude precious little about the weather conditions under
+skies so vaguely described. Then the certain conditioiis, the
+surroundings and antecedents, whicli are written in the clods-
+these are the very things we wish to get at, and I doubt
+seriously i f 10 words are sufficient to describe the great nuin-
+ber of combillations furiuecl by neather factors, ~l i o s e esist-
+ence must, be and is eqwebsecl in cloud lnnguage.
+Cloud
+language ant1 cloucl clidect seem to promise the much coveted
+aid, and percliaiice this language mill be as serviceable as is
+tlie incomparable barometer.
+If the sky were as iutelligible to us as is t,he daily weather
+niap wfth its isobars, isotlierius, wind direction, and velocity,
+we could follow weather changes n itli solliething like the cer-
+tainty uf a sldled pliysicinn watching the syiuptoms of his
+patient toward recovery or total collapse. This knowledge,
+and the facility in using it, can be acquired only with patient
+and SJ steiuntic labor. We must study the letters, the words,
+and phrases of clou(l language. I n the beginning. no doubt,
+i t will be :L task no less arcluous than that undertaken by thobe
+who fii ht decil)liere(l liieroglppliic inscriptions, but it seems
+no lesh 1)roiuisiiig.
+Some 1)rogress has already been iuade along these lines.
+11-e have the 10 cloud forms. laid as a founclation by the in-
+teriiationnl cloud cwnimittee. Blue Hill, Upsala, and several
+other observatories have clone very efficient work. Still these
+are isolated atteiu1)ts. and it is to l ~e feared that there are too
+fern who are really interested in this iinportaiit subject, oning
+to its primitive condition, niid p e r h n p to a lack of metliocl-
+ical clirectiuns in its pursuit.
+For these reasons I liave attelIIlJte(1 to piit the subject in the
+light in which I view it, and will giie tlie clnsbification used
+a t the Meteorologicd 0l)servatory of St. Igiiatius College, to-
+gether with wine of our iilethocls. reseriiiig the finer tletails
+for sn1,sequent articles i f the subject hliould prove interesting
+to tlie readers of the RET-IEW.
+PIInuy will, no doubtm, be shocked by our elaborate catalogue
+of cloud varieties, but it lias nlreatly 1)een stated that the
+simple, tliongh funclamental c7ivisions of the Iiiteriiational
+Cloud Coininittee can do nothing to advance the science of
+fiwecasting. These are a part of tlie A, 13, C! of cloud lan-
+guage, and will remain so unless we progress.
+Abercroin1,y lias correctly stated tlie practical object of
+cloucl study when he says?
+Thp fi)iinilatioii o f all modt.rn ~~l o 1 1 1 1 l i n i ~\r l i ~i l ~~ turns roniiil the rela-
+tia3n o f i ~l o u d forniz to shalws o f isoLni>.
+Now, there :ire more than 10 staple foriiis o f clouds, each of
+nliich has its own peculiar significance. because it is the pro-
+c1uc.t of a peculiar conibinatiun of weather factors, and we can
+not, therefore. neglect any one of tlisiii without running the
+risk of leaXing :L very seriouq gap in the s>steiuatic knowl-
+eclge we are :tn.;ioub to acqnire. It will be our task to recog-
+nize aiid record all staple cloud forms, together with the at-
+mospheric condi tioiis that precede, acconipany, or follow them.
+If I am told that cirrus preceded a certain storm, I know very
+little, siiice I ha\ e many forms of cirrus in mind, and i t would
+interest me to know precisely which form \vas observed in
+that particular ewe, and, more than this, there are many in-
+terebting, intelligible points about eT-erj- cloud that demand
+recognition and interpretation. It is evident, therefore, that
+cloud language ant1 cloud study can not be so siiiiple as seems
+to have been taken for grantecl in a11 instructions to observers;
+one will prove as coinplicatecl as the other.
+Here. then. is evicleiitly an oliportunity for progress.
+-_
+JVeather, 11. 122.
+DECEMBER, 1903. MONTHLY WEATHER REVIEW. 575
+I n setting forth our system of species and varieties I have
+added no definitions, as the names, for all preient purposes,
+are suficiently self-esplanatory. It has been my endeavor to
+make the classification as rational and exhaustive as possible.
+Hence, principles of division were assumed, which mill coTer
+the whole field, ancl are so simple and elastic that they inay
+be applied to the most peculiar climate or sky. I n judging of
+the cletail in classification, I would caution the reacler to re-
+member that this is the particular dialect of cloud language as
+it is found in ancl around C'leveland, Ohio. How it mould work
+in other regions I know not, though it occurs to me that sev-
+eral good exact monographs for fipecial localities could later
+on easily be reduced to a universally practical system.
+Dr. Hann remarks in a note to his chapter on cloucl classi-
+fication :'
+The inexpedience of atteinpts to clct4fy cloi I J n purely genetic and
+physical prinuiples, i. e ., nitliout a iiiorpliok a1 lmsis, has lwen in-
+sisted on repeatedly.
+The reasons are plain. Our present linowlec1,rre of the causes
+of difierent cloucl forms is too limited to establish a natural
+classification. Even i f me understood the genesis of cloucl
+forms, the huinaii eye and the cloud forms will always remain
+the only factors on which the observer must rely for his incli-
+cations of the coming weather.
+What is desirecl, therefore, is an erhanstive, or, a t least. an
+espansive system of cloud forms, even if it, be art,ificixl, arounil
+the elements of which we mag group the results of our obser-
+vations. Our classification of c.loucls will naturally follow tlie
+mine laws and pass through the same stages as did the zoologi-
+cal and botanical systeiiis of Liiinwus.
+Gratitl diuision (p i i t nntrcrr or inntrrinl f!f
+thP C Z O /d ).
+Class I. Ice cloucls: Crystals.
+Class 11. Watery clouds: Solid mater particles.
+S'ditlitwioti i)ito-fiondi~.s (p r i w i ~i Z t ~ qf dirihti-thr e.rft~isioi/ (f /1 1 ~
+rloutl).
+Family I. (The line.) Cirrus: Fiber cluucls.
+Family 11. (The surface.) Stratus: Layer cloucls.
+Family 111. (The solid.)
+With these five elenients, obtained 11s divicling according to
+nature aiid extension, we have five genera of cloucls, a division
+which is exhaustive and conies very near to that of Howard.
+Cumulus: Lump clouds.
+TI1 f, .t? 1.6, y ' l / P rn.
+1. Cirrus.
+2. Cirro-stratus.
+3 . Cirro-cumulus.
+4. Stratus. (a) Alto-Stratus.
+5. Cumdus. (0 ) Alto-c~1~dut;.
+(h ) Low stratus.
+(h ) Low C U I ~U ~U S .
+by dorrd.-High level, 30,000 to 27,000 feet:
+(2 ) Streamer.
+(3 ) Plume.
+(1) Wisp.
+ni i r isio it i f 0 sp"c I P S (1) r iu r Qi1P-t 11 P !j ~u t w i l o ii t I t )/ e or rsttvt s i v n ) .
+C'irrns. (1) Fiher.
+Cirro-stratus. (5) Baacl.
+(6 ) Bar.
+(7 ) Patch.
+(8) Veil.
+(10) Ch-o-cumulus balls.
+Cirro-oumulus. ( 9) Cirro-cumulus pellets.
+4Lelirbuch, p. 263. [Genu. Ed.]
+ITl'ater cloud-Central level, 12,000 to 15,000 feet:
+Alto-stratus. (11) Gauze.
+(12) Band.
+(14) Cover.
+(13) Patch.
+Alto-c~1mulus. (15) Alto-cumulus ba11~.
+(16) Alto-cumulus plates.
+Iliittv- rlvutl.-Lower level, 2000 to 6000 feet:
+Stratus. (17) Sheet.
+(18) Cover.
+Cumulus. (19) TVoolpack.
+(20) Mountain.
+(21) Roll-cumulus.
+(22) Strato-cu1uulus.
+(23) Wrack.
+(21) Fog.
+From the above it is apparent that clouds may be naturally
+and exhaustively cliTicled into species on the principle of gen-
+eral outline. There are, however. cliflerentiations of species
+constituting varieties, which, though easily and generally
+nrerluoked. :we of the very greatest import, since every turn
+in a staple form must have a corresponding cause in the com-
+bination of weather factors that produced i t ; ant1 it is here
+that we depart on new lines. What others have heretofore
+clesignatecl trifles, that we now take up. suspecting them to
+contain the very knowledge we are after.
+I)(ffwi,ttntiolts (constituting varieties) mag be observed in:
+(a). The general outline.
+(11). The surface.
+(c). The organization.
+OUTLINE.
+Hooked.
+Bent,.
+Branched.
+Pectinate.
+Screwecl.
+Curved.
+Tangled.
+SUKFhCE. ORGANIZATION.
+Undulating. Flaky.
+Drifted. Granulated.
+Warpecl. Watery.
+Rippled: Fibrous.
+Banked. Lumpy.
+(a) Plain.
+(b ) With interfer-
+ence.
+Furrowed. Marbled.
+Striated:
+((0 Lengthwise.
+(h ) L4cross.
+(c ) Obliquely.
+Headed:
+(I / ) Forward.
+(1 )) Backward.
+Wispy.
+Tapering.
+Feathery.
+Fleecy.
+Fringed.
+A combination of one of these adjectives with one of the
+names in the list of species makes it possible to perfectly
+designate ant1 register a large number of staple cloud forms.
+Certain storm clouds are so independent ancl so well organ-
+ized that special terms are required to fully describe them.
+They exhibit peculiar rlerelopnients. which I will call processes.
+1. &lamm,u.
+2. Antlers.
+3. Beards.
+4. Trailers.
+5 . Fringe.
+The well-cleveloped thunclercloud shows some or all of the
+-4t /op : (1 ) Beak (forward).
+Eelurr,: (1 ) Ram (front).
+following processes :
+(2 ) Spur (rear).
+(2) Ruclder (rear).
+576 MONTHLY WEATHER R;EVIEW. DECEMBER, 1903
+These four, when they occur combined together, have long
+Besides this classical ago suggested the name of anvil cloud.
+form I may mention:
+1. Cloud wedge.
+2. Crescent.
+3. Funnel.
+4. Umbrella cloud.
+Thus far I have made use of form only and have shown that
+all clouds may be fully described according to a uniform prin-
+ciple. But it is not the form only which has its story to t,ell;
+on the contrary, form tells but half the history of the cloucl.
+If we desire to derive all the information possible we must take
+in the accidentals. These may be grouped under the follow-
+ing heads:
+1. Condition.
+2. Motion.
+3. Distribut,ion.
+4. C!olor.
+Condition: &lo tion :
+3. Stable.
+4. Forming.
+5. Breaking up.
+6. I n transforniation :
+From-to.
+Distribution:
+1. Isolated.
+2. Scattered.
+:3. Flocked.
+4. Aligned.
+5. Radiate.
+6. Continuous.
+7. Coalescing.
+1.
+2.
+3.
+4.
+5 .
+(i .
+7.
+8.
+Color :
+1.
+2.
+3.
+4.
+5.
+6.
+7.
+Slom.
+Rapid.
+Average.
+Boiling.
+Encl on.
+Broad side on.
+Aslant.
+Direction w1ienc.e.
+White.
+Blackish.
+Red.
+Yellow.
+Green.
+Iridescent,, with. . . .
+as prevailing color.
+C h y .
+v
+The 1)rngrani of a single cloud observation will be. as followb:
+We are to determine, (1) the species aiiil \ariety; (2) pro-
+cesbes; (3) conditions; (4) elements of motion; (5 ) clistribu-
+tion; ( 6 ) color; (7 ) configuration of isobars.
+The answers to the firht six points are enterecl by means of
+symboiic signs in one column of a journal, and in a coluiiln
+parallel to this :we to he entered the configuration of ibobars.
+together wit11 the state of the weather. Regarding the con-
+figuration of isobars, it is evicleiit that most attention must be
+paid to that system under whose control the ohserver happens
+to be a t the time of observntion. The final alii1 crowning
+work \\ill be the collating of the two columns. These mill in
+the course of time show repetitions, regularly recurring mho-
+ciatioils of cloucl forms and type of weather, and s~tch ~g r r l o ~
+associntions n w tlir r.rlu*f-ssio,i qf n loti, (f )zntuw: the) will form
+laws for the forecaster. By such method only shall we reach
+any practical results in cloud study. I n way of consolation
+for those who find this method too elaborate or too difticult. I
+will quote a few lines froin Clement Ley.5
+All said then. and dour. the laud of i.louds is not eutirel) oui' (i f fancy.
+The art of distinguishing ant1 o f risrfril playing tlir ili4inction.s IIC-
+tween the vaiieties of clout1 is not nra
+which the amateur engages Iiim+t~lf f i r tlir
+very cursory aciluaintance with tlir laliois o
+if it is uot insiilious to say this o f C+er~uan and Aiiirricnu writer+-sati&r,
+every one as to the fact that therr is also a 5c.iencr of nryhologg. na+iwut
+though this scieuce may be. Hcw ('an practibe anil knuwle(lge lie most
+successfully promotril ?
+To this question, as put by RIr. Ley, I mould answer: By
+systematic and detailed cloud olwervations; by attending to the
+so-called fr(Pes.
+5 Cloiidlantl. 1). 201
+I might enter into some very interesting details myself, but
+since it is my object to shorn that cloud study, as a scientific
+branch of meteorology, is something more thau noting one of
+10 cloud forins opposite a given date, but I will close, hoping
+that some of the readers of the REVIEW will interest themselves
+in one of nature's most interesting languages and lend a help-
+ing hand in interpreting it ani1 teaching it to others.
+'
+~
+__
+METHODS OF FORECASTING THE WEATHER.
+A Lecture ilelivererl hp Prof. Dr J. 31 Peruter to tlie A-sociation for the Advancement of svieotilic Kuunl~dge, Vienna. .Ienuar) 14. 1903. Trm~slaterl from the Vot trage dcs Verpiue* L i i r V d w i t ~i i i ~ untiiraisseir~rlinttli~ her Keuntuisse i n Wicu .13d Jebrgang,
+Hf*ft 14
+Allow me to-clay to adclress yon once again on the subject
+of weather prophets, and this time to bring before you not
+only one or two kinds of weather forecasting, but to give you
+a more general survey of all methods a t present in use, be
+they right or wrong, with or without results. I will keep
+strictly to the title of this lecture and give the prominent
+place to the iiiethocls of forecasting. I shall esplain them and
+subject them to critical analysis, naming a t the same time the
+advocates of each of the various methods; in the technical inves-
+tigation, me have to do with the value of the methods anil not
+that of the persons. I must, lionever, at once bring promi-
+nently forward the fact that 11 e have a t present, unfortunate-
+1y. no method bp wliich we can forecast the weather with ab-
+solute certainty even for one day in advance, to say nothing
+of longer periuds. Thib is already self-evident from the fact
+that we are now able to speak of many methods of forecasting,
+whereas if there were a sure ani1 infallihle method, then i t
+woulcl be out of Illace to speak of the other methods to this
+soc,iety for the ndvniicemeiit of scientific knowledge.
+All methods of weather forecasting, not excepting those in
+use by the central meteorological offices, are based upon ob-
+serrecl weatlier conditions and have, therefore, an empirical
+founilatioii. Many of tlieiii do not elen make the slightest
+attempt to put their methods on a theoretical basis and content
+themselves with setting u p &'weather rules. " Even the scien-
+tific iiiethocls of profe onal meteorologists have not yet suc-
+ceeded in cleclncing a theory capable of determining in advance
+the clirtnges of the weather ah the effect of one or several
+known causes. Only the advoc:ttes of the influence of the
+moon hare veiit8ured solely by means of aprioristic theories to
+l.calcnlate" the weather for long periocls in advance.
+There are many widely different methods by which the va-
+rious Glasses :ind kinds of weather prophets c y r y on the mark
+of weather forecasting. There are those who iiiake use of the
+behavior of animrls to foretell the weather; hunters who rec-
+ognize the cliarncter of the apprnaching seahon from the ac-
+tions of the wild animals; the observers of lirds. spiders,
+crickets, ants. and other aniuials from whose conduct they
+judge of the approaching weather. But in aclilition to tliis class
+which utilizes living animals there is another opposing class
+that prefers to inake use of the dead substances of the animal
+or regetable kingdoms, such as hairs, strings of instruments,
+roots and fibers of plants; by iueans of their espansions or
+contractions, either with the aid of little weather houses and
+figure6 or without them. they recoguize the coming weather.
+Others prefer to consult stones ani1 walls as to the character
+of the weather to be expected, ani1 turn rather to inorgmic
+nature in order to learn froni the '*sweating" or Jryness of
+these whether to espect rain c)r continued fine weather. Thus,
+as you see, all the kingdoms uf nature are drawn upon to fur-
+nish prognostics of the weather, and it may de1)encl upon tlie
+occupations rind predilections of the various persons in-
+terested in the coming weather mliether they give the
+preference to one or the other. But I had almost for-
+gotten to inention another class-perhaps the largest-
+those who are not to be satisfied by any one of the three king-
+cloms nor even by all three together, ani1 who rely only on
