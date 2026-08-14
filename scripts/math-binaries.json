@@ -1,0 +1,277 @@
+{
+  "epub/math/IS4E_fbdd3c.epub": {
+    "sha256": "517110e8bb835a54b8fa6b26047f426a27f820584c7794dcf3f4d1a33850e4b7",
+    "size": 17841570,
+    "url": "https://bookdown.org/bkrauth/IS4E/IS4E.epub"
+  },
+  "epub/math/cnt_mathml_support_a20d9b.epub": {
+    "sha256": "61f61f7631c684d2e42ad7384c0c48435517b8908f528165ab83419f129589dd",
+    "size": 2109,
+    "url": "https://w3c.github.io/epub-tests/tests/cnt-mathml-support.epub"
+  },
+  "epub/math/quadratic_functions_4ebefc.epub": {
+    "sha256": "3db31eade669b979099ba01d2846b28713766e5d78a328f64474a2f8e49f5d44",
+    "size": 47629,
+    "url": "https://archive.org/download/cnx-org-col11284/quadratic-functions.epub"
+  },
+  "epub/math/statistical_learning_theory_d50966.epub": {
+    "sha256": "a549ea3e7b66b5d97c13a9164a68f44ebc373beabe3345fa90a71f0baf231c35",
+    "size": 808958,
+    "url": "https://archive.org/download/cnx-org-col10532/statistical-learning-theory.epub"
+  },
+  "hwp/math/EC_88_98_EC_8B_9D_2acc8f.hwp": {
+    "sha256": "b58d59eeb903e2553a7d67049dbca3f639aedf7d8276875663775b0ac4404082",
+    "size": 11776,
+    "url": "https://raw.githubusercontent.com/neolord0/hwplib/main/sample_hwp/basic/%EC%88%98%EC%8B%9D.hwp"
+  },
+  "hwp/math/SimpleEquation_4e1760.hwpx": {
+    "sha256": "15091aadf5dc5ac451383472afbdf02af75c225db894f3f9ace621634db9d57a",
+    "size": 12416,
+    "url": "https://raw.githubusercontent.com/neolord0/hwpxlib/main/testFile/reader_writer/SimpleEquation.hwpx"
+  },
+  "hwp/math/doc_8713v3a8b_3D23v9e_3D4av07_3D85v3e_3Dcfafvbb7dv2ad9_v_a3c2e7.hwp": {
+    "sha256": "99c998a31f6d965ef5aa72981be5a7ce3f2b275bcf27e3bf3716320badc1550f",
+    "size": 303616,
+    "url": "https://raw.githubusercontent.com/Ahnd6474/jakal-hwpx/main/hwpx_collection/doc_8713v3a8b%3D23v9e%3D4av07%3D85v3e%3Dcfafvbb7dv2ad9_v4607.hwpx"
+  },
+  "hwp/math/eq_01_71f171.hwp": {
+    "sha256": "d4b5e4730da12395c953d16c026c979adfdf3235eee4be605cef0ab758a7e5ec",
+    "size": 16384,
+    "url": "https://raw.githubusercontent.com/postmelee/alhangeul-macos/main/samples/eq-01.hwp"
+  },
+  "hwp/math/equation_p0_e63f26.hwpx": {
+    "sha256": "02a3a6defefb73df29081f1415e96cdf14dab20b6f20c2ab5dd881a601bdc757",
+    "size": 8113,
+    "url": "https://raw.githubusercontent.com/airmang/python-hwpx/main/tests/fixtures/equation_preview/equation_p0.hwpx"
+  },
+  "hwp/math/from_5d05e0.hwpx": {
+    "sha256": "49a7c76c740f82e5970306e0904c2d78b3c9712bd3718a27151de3c7a79066a1",
+    "size": 28084,
+    "url": "https://raw.githubusercontent.com/neolord0/hwp2hwpx/main/test/equation/from.hwpx"
+  },
+  "hwp/math/from_ecaebf.hwp": {
+    "sha256": "12d57c6c2138057d9e094e80e117c234a71d479c074af1ed61c2f752b751ed8d",
+    "size": 26624,
+    "url": "https://raw.githubusercontent.com/neolord0/hwp2hwpx/main/test/equation/from.hwp"
+  },
+  "hwp/math/hard_20example_3d4d15.hwpx": {
+    "sha256": "6f1c666deacae0c646a1f271f570f0e643ad88eabd09c3bc4b9061069a91b862",
+    "size": 677943,
+    "url": "https://raw.githubusercontent.com/Ahnd6474/jakal-hwpx/main/hwpx_collection/hard%20example.hwpx"
+  },
+  "iwork/math/geometric_means_qcmc_revised_7d7c7a.key": {
+    "sha256": "3de4f9988d87ad7c7c4ec309ce4ac9b5506f6485dd72af031d08a71d2c0d92ee",
+    "size": 5401722,
+    "url": "https://zenodo.org/api/records/14309036/files/geometric-means-qcmc-revised.key/content"
+  },
+  "office/math/03_Inferential_20statistics2024_2025_bd7449.pptx": {
+    "sha256": "03b0f4c525f33b55a0d36715599abcacd28ea8d381bc103c07ca27c530768ef1",
+    "size": 3513002,
+    "url": "https://zenodo.org/api/records/14361416/files/03_Inferential%20statistics2024_2025.pptx/content"
+  },
+  "office/math/Fermat_general_7d3de0.pptx": {
+    "sha256": "e954b70ded17a50b457115e3cb604f10a694f4f95532a91639b355da709a80f6",
+    "size": 1681059,
+    "url": "https://zenodo.org/api/records/15252111/files/Fermat_general.pptx/content"
+  },
+  "office/math/MG35_1_MathGuide_7e950e.odt": {
+    "sha256": "c0e53945ffb02ff180fce94b652c711353035a67c5c9e5d340dee368a912da58",
+    "size": 2346986,
+    "url": "https://wiki.documentfoundation.org/images/8/8b/MG35_1-MathGuide.odt"
+  },
+  "office/math/MG44_MathGuide_ed525b.odt": {
+    "sha256": "9883969d194db7529f95d56652220d302615b051270e585a643d985250772c86",
+    "size": 4244438,
+    "url": "https://wiki.documentfoundation.org/images/b/bc/MG44-MathGuide.odt"
+  },
+  "office/math/MG7001_CrearEditarFormulas_de2112.odt": {
+    "sha256": "abe50d99993bee2157cc14a95f13784f7027de176bd6f0404475f56c33b8e2f5",
+    "size": 522897,
+    "url": "https://wiki.documentfoundation.org/images/4/44/MG7001-CrearEditarFormulas.odt"
+  },
+  "office/math/MG7003_FormulasCalcDrawImpress_0129ab.odt": {
+    "sha256": "e0511d4f4341a31898400cc43504fe79fa644eb48a0329b0a7710c9f9e76fed9",
+    "size": 157126,
+    "url": "https://wiki.documentfoundation.org/images/9/93/MG7003-FormulasCalcDrawImpress.odt"
+  },
+  "office/math/Manju_20Ghalyan_2d1798.docx": {
+    "sha256": "8c818dde0c722f62f8bc7cd7245e714709e3ff749ab2c1047f60916ebceb4527",
+    "size": 87656,
+    "url": "https://zenodo.org/api/records/822996/files/Manju%20Ghalyan.docx/content"
+  },
+  "office/math/OpenDocument_v1_2_os_part1_0fdaaa.odt": {
+    "sha256": "07c76a5ac11828005399dd4787244892ef6241211e467a61d5b409d0218488d1",
+    "size": 758963,
+    "url": "https://raw.githubusercontent.com/tdf/odftoolkit/master/xslt-runner/src/test/resources/odf12/OpenDocument-v1.2-os-part1.odt"
+  },
+  "office/math/OpenDocument_v1_3_cs01_part3_schema_80057c.odt": {
+    "sha256": "be1260902cc33e52cf8554833b6c2b3125194325ab38a0f4b6945b7968ae8088",
+    "size": 940234,
+    "url": "https://raw.githubusercontent.com/tdf/odftoolkit/master/xslt-runner/src/test/resources/odf13/OpenDocument-v1.3-cs01-part3-schema.odt"
+  },
+  "office/math/PSAAP_review_presentation_102022_SAND2022_14495_PE_a5d658.pptx": {
+    "sha256": "e04de6ae8da82d2a8c0639e58a0cf29d88ce196a169854e13167959f3d7bddda",
+    "size": 4807104,
+    "url": "https://zenodo.org/api/records/7232101/files/PSAAP_review_presentation_102022-SAND2022-14495-PE.pptx/content"
+  },
+  "office/math/PejmanJouzdani_f8d8e3.pptx": {
+    "sha256": "d56022efa248785a1ecb18e33a11c72cef01792924dac030ca3dcec1c840824f",
+    "size": 6032262,
+    "url": "https://zenodo.org/api/records/10407797/files/PejmanJouzdani.pptx/content"
+  },
+  "office/math/Single_THz_photon_detector_JuliangLi_ANL_82bc42.pptx": {
+    "sha256": "1d3f018e81e2834632ca707d7c965382e5f19047c3f95b400f14edfc4ed0244b",
+    "size": 1937311,
+    "url": "https://zenodo.org/api/records/4641119/files/Single_THz_photon_detector_JuliangLi_ANL.pptx/content"
+  },
+  "office/math/Supplementry_20Material_1e5dc4.docx": {
+    "sha256": "277b1f91b026f7716b77b1a9a533dfcfacca464c97bf0d5ef1e5c9aea620ffbe",
+    "size": 90635,
+    "url": "https://zenodo.org/api/records/19008259/files/Supplementry%20Material.docx/content"
+  },
+  "office/math/Zucker_EAAT_statistics_16c5f9.pptx": {
+    "sha256": "672433f3aa9c1fa22e910f459c8b16b50050ce93a09afce7858bdb39bbcb60de",
+    "size": 3452639,
+    "url": "https://zenodo.org/api/records/7072775/files/Zucker_EAAT_statistics.pptx/content"
+  },
+  "office/math/editable_04513a.pptx": {
+    "sha256": "f8984dbdbdc837cebf488ae1549a98fd94c04d35add14732cc59131561269817",
+    "size": 45633,
+    "url": "https://raw.githubusercontent.com/giszzt/figedit/main/assets/examples/ast-reveal/editable.pptx"
+  },
+  "office/math/editable_0c0c46.pptx": {
+    "sha256": "7ac0409c7b10c4a2841505ef942c96e87772bca85e7de958252e4306e1bf6ea0",
+    "size": 42264,
+    "url": "https://raw.githubusercontent.com/giszzt/figedit/main/assets/examples/parallel-loops/editable.pptx"
+  },
+  "office/math/equation_16f2f6.docx": {
+    "sha256": "a0d7a34186e37e303ef10f6469834221d92ae74c886078d7f32f2dc1a7fd96a5",
+    "size": 12548,
+    "url": "https://raw.githubusercontent.com/dotnet/Open-XML-SDK/main/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/equation/equation.docx"
+  },
+  "office/math/equation_a59623.doc": {
+    "sha256": "eccab1c32bf3ef27e36dfeb46b3ebfba4981666e0fe9364eef05fa55f6463980",
+    "size": 13824,
+    "url": "https://raw.githubusercontent.com/apache/poi/trunk/test-data/document/equation.doc"
+  },
+  "office/math/equations_b6ad03.docx": {
+    "sha256": "339b064492530598859de0bde8504de7a4aefead88210baf3e9f3db0ed925b40",
+    "size": 15235,
+    "url": "https://raw.githubusercontent.com/microsoft/markitdown/main/packages/markitdown/tests/test_files/equations.docx"
+  },
+  "office/math/equations_d0d980.docx": {
+    "sha256": "32933facc78a062cd504f91286521f7615c86895ebbad410c9a3bf586cbe36d8",
+    "size": 18917,
+    "url": "https://raw.githubusercontent.com/docling-project/docling/main/tests/data/docx/sources/equations.docx"
+  },
+  "office/math/math_OOo311_71135a.odt": {
+    "sha256": "dc25e9b848844a34ca18997090b20f30b9a3b3b10159096c3974be9ca4a4d6ca",
+    "size": 10485,
+    "url": "https://raw.githubusercontent.com/tdf/odftoolkit/master/validator/src/test/resources/math_OOo311.odt"
+  },
+  "office/math/pascal_digital_binomial_theorem_Senior_20Seminar_20Thesi_82393b.pptx": {
+    "sha256": "eb3e1f727a55bec3cda398c91aa8bd1b65616f8ca80cad07101336e028fcd071",
+    "size": 103918,
+    "url": "https://zenodo.org/api/records/20702180/files/pascal_digital_binomial_theorem(Senior%20Seminar%20Thesis,%20%ED%95%99%EC%82%AC%20%EC%84%B8%EB%AF%B8%EB%82%98%20%EB%B0%9C%ED%91%9C%20%EC%9E%90%EB%A3%8C,%20%EC%9B%90%EB%B3%B8).pptx/content"
+  },
+  "office/math/strict_20math_53ebf7.docx": {
+    "sha256": "ab7b91701cfb3b069b287d2ad1c47493b4c0f94820fe79559606d7c555586f35",
+    "size": 13754,
+    "url": "https://raw.githubusercontent.com/plutext/docx4j/VERSION_17_0_3/docx4j-samples-docx4j/sample-docs/strict/strict%20math.docx"
+  },
+  "office/math/table_with_equations_f14832.docx": {
+    "sha256": "fe924e9bef7ab34a7785fcd4fd74c975142e2530ba6e5db75a9ad16421c942a8",
+    "size": 14228,
+    "url": "https://raw.githubusercontent.com/docling-project/docling/main/tests/data/docx/sources/table_with_equations.docx"
+  },
+  "office/math/tdf119223_394ffc.odp": {
+    "sha256": "971a9c8ad5089d8575827f491f52999d369c47539fd653ad57ebceb72567f10f",
+    "size": 18335,
+    "url": "https://raw.githubusercontent.com/LibreOffice/core/master/sd/qa/unit/data/odp/tdf119223.odp"
+  },
+  "office/math/tdf130614_9b6224.ods": {
+    "sha256": "c016ebe42220f29c185f3424937152c33fc667e83977057b4df1902019948cbc",
+    "size": 11466,
+    "url": "https://raw.githubusercontent.com/LibreOffice/core/master/sc/qa/unit/uicalc/data/tdf130614.ods"
+  },
+  "office/math/tdf159046_e964cb.ods": {
+    "sha256": "fe3b2e2c887891e3c6eb3095a16c16de4e4bbf39f474bdea6e8985b6f063f384",
+    "size": 17146,
+    "url": "https://raw.githubusercontent.com/LibreOffice/core/master/sc/qa/unit/uicalc/data/tdf159046.ods"
+  },
+  "office/math/testMSEquation_govdocs_863534_a6c49e.doc": {
+    "sha256": "88619cf1ad37819c2eda2ab13be06a0f377c574e8cf3a3346dbe5af33fd0e704",
+    "size": 30720,
+    "url": "https://raw.githubusercontent.com/apache/tika/main/tika-parsers/tika-parsers-standard/tika-parsers-standard-modules/tika-parser-microsoft-module/src/test/resources/test-documents/testMSEquation-govdocs-863534.doc"
+  },
+  "office/math/testWORD_2006ml_9696cd.docx": {
+    "sha256": "a27f2b9244f5147cce25a05d4cddb1eec9c72259a41d52a7bf5eb3806b28207c",
+    "size": 151733,
+    "url": "https://raw.githubusercontent.com/apache/tika/main/tika-parsers/tika-parsers-standard/tika-parsers-standard-modules/tika-parser-microsoft-module/src/test/resources/test-documents/testWORD_2006ml.docx"
+  },
+  "office/math/unknown_content_bda4e1.odt": {
+    "sha256": "dc8b8eb66397a7283ebe8e83a0426d27b0aabed8b8179f216086f98067aca07c",
+    "size": 19437,
+    "url": "https://raw.githubusercontent.com/tdf/odftoolkit/master/odfdom/src/test/resources/test-input/unknown-content.odt"
+  },
+  "office/math/w11_w11_fore0ww8_8441b1.rtf": {
+    "sha256": "cde856f45465f2d08ddcde6489e1a85cf706a2269a26dc7a517b29946dde8d6c",
+    "size": 16253,
+    "url": "https://raw.githubusercontent.com/dotnet/wpf-test/main/src/Test/Editing/FeatureTests/Data/rtf/rtfcit/w11_w11_fore0ww8.rtf"
+  },
+  "pdf/math/19930091059_e5a481.pdf": {
+    "sha256": "1971643025181d1216b0b0a359d2a5a3adf5d254d3e158e19ba880b368b86e53",
+    "size": 6771826,
+    "url": "https://ntrs.nasa.gov/api/citations/19930091059/downloads/19930091059.pdf"
+  },
+  "pdf/math/19930093947_a3f534.pdf": {
+    "sha256": "555a041af6af5760df49c3e36b4b598ae83a809e48594e4f3a65edbd5ffae316",
+    "size": 685508,
+    "url": "https://ntrs.nasa.gov/api/citations/19930093947/downloads/19930093947.pdf"
+  },
+  "pdf/math/20100014819_ba4d91.pdf": {
+    "sha256": "45c31c828c0adc581d5b5fe46cbaf5287eedd3fa8c48678ee07dbdb5ddb43d44",
+    "size": 710491,
+    "url": "https://ntrs.nasa.gov/api/citations/20100014819/downloads/20100014819.pdf"
+  },
+  "pdf/math/2306_08071_597a81.pdf": {
+    "sha256": "5cf1d1b6b1ac4785b6a1951f693861e61ac661f94108140ee9ad34239af7c2d9",
+    "size": 868197,
+    "url": "https://arxiv.org/pdf/2306.08071"
+  },
+  "pdf/math/2502_20028_047181.pdf": {
+    "sha256": "35ee55acb80f61cd652fbce785468c80b4eae799a810bc655e0fb1b08a071ff8",
+    "size": 333066,
+    "url": "https://arxiv.org/pdf/2502.20028"
+  },
+  "pdf/math/2511_07120_8176dc.pdf": {
+    "sha256": "0d4c0e948a6157c2fea77ab1cfcf898e1d159daadc7eff867223a027a34240c7",
+    "size": 611865,
+    "url": "https://arxiv.org/pdf/2511.07120"
+  },
+  "pdf/math/CollegeAlgebra_OP_7d1fcd.pdf": {
+    "sha256": "74a89e41f7b2db84e18b158a9a5548a2813f1878927e816536d43229c20439d4",
+    "size": 56807291,
+    "url": "https://assets.openstax.org/oscms-prodcms/media/documents/CollegeAlgebra-OP.pdf"
+  },
+  "pdf/math/amsldoc_642b4e.pdf": {
+    "sha256": "374fcfb073739395a1a5a1eb9416bc9fcec5000255f52ad4acbe9b5e0227985e",
+    "size": 497706,
+    "url": "https://mirrors.ctan.org/macros/latex/required/amsmath/amsldoc.pdf"
+  },
+  "pdf/math/journal_pcbi_1012015_type_printable_1eeb41.pdf": {
+    "sha256": "8ff2319ed38a2b2487f02b5265a156781e9edf2d8d595985a2211911069a7ae7",
+    "size": 3162336,
+    "url": "https://journals.plos.org/ploscompbiol/article/file?id=10.1371/journal.pcbi.1012015&type=printable"
+  },
+  "pdf/math/physica_manual_bcb494.pdf": {
+    "sha256": "1ba158f65aac4f46bb2dd9a6431f4475e691c94042d10889a5b166e36d60c7b0",
+    "size": 518570,
+    "url": "https://raw.githubusercontent.com/Leedehai/typst-physics/master/physica-manual.pdf"
+  },
+  "pdf/math/testmath_e28157.pdf": {
+    "sha256": "2cfed881f790c42e4d36e1f18fde4c949186c41af64f8630199cec97d39f7f34",
+    "size": 448958,
+    "url": "https://mirrors.ctan.org/macros/latex/required/amsmath/testmath.pdf"
+  }
+}
