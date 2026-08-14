@@ -62,3 +62,11 @@
 *.7z
 *.dbf
 ground_truth/structured/parsebench/*.jsonl
+
+# Regression corpus: bulk material in every format, published to the bucket and never
+# committed. Path-scoped so an ordinary .xml or .html fixture elsewhere in the tree is unaffected.
+jats/regression/
+html/regression/
+pdf/regression/
+epub/regression/
+office/regression/
