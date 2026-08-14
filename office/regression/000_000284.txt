@@ -1,0 +1,524 @@
+The Journal of Nervous and Mental Disease 
+
+(C) 2000 Lippincott Williams & Wilkins, Inc.
+
+Volume 188(3), March 2000, pp 135-140
+
+A Critical Time Intervention with Mentally III Homeless Men: Impact On
+Psychiatric Symptoms
+[Articles]
+
+HERMAN, DANIEL D.S.W.1; OPLER, LEWIS M.D., Ph.D.2; FELIX, ALAN M.D.3; VALENCIA,
+ELIE J.D., M.A.4; WYATT, RICHARD JED M.D.5; SUSSER, EZRA M.D., Dr.PH.6
+1 New York State Psychiatric Institute and Department of Psychiatry, Columbia
+University College of Physicians and Surgeons, 100 Haven Avenue, #31F, New York,
+New York 10032. Send reprint requests to Dr. Herman.
+2 Albert Einstein College of Medicine and New York State Office of Mental
+Health.
+3 Columbia Presbyterian Medical Center and Department of Psychiatry, Columbia
+University College of Physicians and Surgeons.
+4 Joseph L. Mailman School of Public Health, Columbia University.
+5 Neuropsychiatry Branch, National Institute of Mental Health and Department of
+Psychiatry, Columbia University College of Physicians and Surgeons.
+6 New York State Psychiatric Institute and Joseph L. Mailman School of Public
+Health, Columbia University.
+This work was supported by grant MH-48041 (E. Valencia, PI) from the National
+Institute of Mental Health and NIMH Research Scientist Development Award
+MH-01204 and a NARSAD Young Investigator Award to Dr. Herman.
+
+----------------------------------------------
+
+Outline
+
+  Abstract
+
+  Methods
+
+  Subjects
+
+  Intervention
+
+  Measures
+
+  Data Analysis
+
+  Results
+
+  Discussion
+
+  Limitations
+
+  Conclusions
+
+  References
+
+Graphics
+
+Table 1
+Table 2
+
+Abstract
+
+We describe the impact of a psychosocial intervention, critical time intervention
+(CTI), on the cardinal symptom dimensions of schizophrenia, namely negative,
+positive, and general psychopathology. Ninety-six men with schizophrenia and
+other psychotic disorders who were discharged from a homeless shelter were
+randomly assigned to receive either CTI or usual services only. CTI is a
+time-limited intervention designed to enhance continuity of care during the
+transition from institution to community. Symptom severity at baseline and at 6
+months was assessed using the Positive and Negative Syndrome Scale. Using data
+on 76 subjects for whom we have complete symptom data, we assessed the impact of
+CTI on change in symptoms. The results suggest that CTI was associated with a
+statistically significant decrease in negative symptoms at the 6-month
+follow-up, reflecting modest clinical improvement. There was no significant
+effect on positive or general psychopathology symptoms.
+
+----------------------------------------------
+
+In an earlier publication, we reported the results of a randomized clinical
+trial demonstrating the effectiveness of critical time intervention (CTI) in
+preventing recurrent homelessness among homeless men with schizophrenia and
+other psychotic disorders (Susser et al., 1997). Here we describe the impact of
+this psychosocial intervention on the cardinal symptom dimensions of schizophrenia,
+namely negative, positive, and general psychopathology.
+
+Typically, traditional antipsychotic medications produce significant improvement
+in hallucinations, delusions, and disordered thinking-so-called positive
+symptoms-whereas they are relatively ineffective against the apathy, blunted
+affect, and social withdrawal that characterize the negative symptom domain in
+schizophrenia. Recent studies have suggested that the newer antipsychotics, in
+contrast to standard or conventional antipsychotics, might treat negative and
+general psychopathology symptoms in addition to positive symptoms (Beasley et
+al., 1997; Chouinard et al., 1993; Marder and Meibach 1994). Although few
+studies have focused specifically on the impact of psychosocial interventions on
+symptom clusters in schizophrenia, a recent meta-analysis of the effectiveness
+of psychosocial treatments in schizophrenia (Mojtabai et al., 1998) suggests
+that such interventions, in conjunction with somatic treatment, may have a
+greater effect on negative symptoms than on positive or general psychopathology
+symptoms.
+
+Discontinuity between institutional and community treatment is a critical
+problem (Dorwart and Hoover 1994; Olfson et al., 1998) that has contributed to a
+range of negative outcomes among persons with severe mental illness after
+institutional care. CTI is a time-limited intervention that overlaps the period
+before and after discharge from the institution to the community. A key aspect
+of CTI is that the post-discharge phase of the intervention is delivered by
+staff who have established relationships with patients during their institutional
+stay. CTI shares with long-term assertive community treatment models (Lehman et
+al., 1997) a focus on stabilizing patients in the community through "in vivo"
+development of independent living skills and by building effective support
+networks in the community. The emphasis, however, is on maintaining continuity
+of care during a critical period of transition, whereas primary responsibility
+is gradually passed to the existing supports in the community.
+
+In our randomized clinical trial of CTI among severely mentally ill men being
+discharged from a shelter to community living, we found the intervention to be
+associated with a significant, lasting reduction in post-discharge homelessness.
+Although CTI was designed specifically to prevent homelessness, we speculated
+that it might also have a favorable impact on important clinical outcomes. In
+the analyses below, we examine whether, in the context of treatment with
+maintenance antipsychotic pharmacotherapy, this psychosocial intervention is
+associated with differential effects on positive, negative, and general
+psychopathology symptoms, respectively, over a 6-month follow-up period.
+
+Methods
+
+Subjects
+
+The methods of the CTI study have been described in detail in our previous
+report (Susser et al., 1997). Briefly, the subjects were patients discharged
+from an on-site psychiatry program in a New York City men's shelter to
+community-based housing. All patients of the program had severe mental illness,
+usually schizophrenia or other psychotic disorders such as bipolar disorder. The
+vast majority were African-Americans and Latinos.
+
+The on-site program, described in detail elsewhere (Valencia et al., 1996;
+Valencia et al., 1997), treated 60 to 80 men at any given time, providing
+outreach and rehabilitation services and preparing them for housing in the
+community. Patients who completed the on-site program had access to a broad
+spectrum of supportive housing in New York City, ranging from intensively
+supervised community residences to single-room-occupancy hotels with on-site
+social services. Nonetheless, a significant minority of men could not or would
+not be accommodated in any of these settings and were discharged to family,
+friends, or miscellaneous other arrangements.
+
+Over a 2-year period (1991 to 1993), all 102 men who were being discharged to
+housing in the New York City region were invited to participate in the clinical
+trial. Ninety-six (94%) chose to participate and signed an informed consent
+form. After their housing placement had been selected, these men were randomly
+assigned to receive either CTI or usual services only (USO). The men in the CTI
+group received 9 months of CTI plus usual services and then usual services only
+for the following 9 months. The men in the USO group received usual services
+only for the entire 18 months of the study.
+
+Complete follow-up data on homelessness-the study's primary outcome-was obtained
+on the entire sample. To maximize follow-up on the primary outcome in the
+context of a limited budget, symptom ratings and other measures of clinical
+outcome were not collected on subjects enrolled during the latter stages of the
+study. We report here on the 76 subjects (38 in CTI and 38 in USO) for whom we
+have complete symptom data at baseline and at 6-month follow-up. When we
+compared these 76 subjects with the remaining 20 subjects on demographic,
+diagnostic, and homelessness variables, we found no significant differences
+between groups.
+
+Intervention
+
+CTI has two components. The first is to strengthen the individual's long-term
+ties to services, family, and friends. These supports are potentially available
+in varying measures, but mentally ill individuals and those upon whom they
+depend often need assistance to work with one another. The second component of
+CTI is providing emotional and practical support during the critical time of
+transition. During a stay in an institution such as a large shelter, an
+individual may develop strong ties and become used to having many of his social
+and physical needs met on-site. The return to a possibly isolated and destitute
+life in the community, however welcome, can be emotionally painful.
+
+For each man randomly assigned to CTI, the clinical team devised a plan for the
+transfer of care to other formal and informal supports. For this purpose, the
+team identified one or two specific areas of potential discontinuity that were
+related to the risk of homelessness for that individual, and in which intervention
+was likely to be effective in preventing homelessness, for instance, medication
+adherence or money management. Each man was then assigned to a "CTI worker" to
+implement the plan. This worker did not need to have a professional degree but
+did need to have experience working with this population and enough "street
+smarts" to work in vivo with these men in the community. A psychiatrist or other
+mental health professional supervised the CTI worker.
+
+To implement the first component of CTI, the strengthening of long-term ties,
+this CTI worker provided support for both the man and those who could assist him
+in the areas of treatment that were selected. This generally entailed visiting
+the family home or community residence, being present at appointments, and
+giving advice in crises. The CTI worker often functioned as a mediator, helping
+to ensure that the man and his supports communicated until they had negotiated
+workable relationships between themselves. When this approach failed, the CTI
+worker could intervene directly. Occasionally, the man was transferred to
+another community service. He could also be relocated to another residence where
+his particular form of disturbed behavior was more likely to be tolerated.
+
+To implement the second component of CTI, support during a critical period,
+during the first 2 weeks after discharge the CTI worker spent time with the
+patient in the community observing his physical and social surroundings and
+daily habits. Subsequent support was individually tailored; at one extreme some
+patients needed only a few follow-up visits, whereas other patients needed
+frequent visits and practical assistance for several months.
+
+In the USO group, the men were referred to mental health and rehabilitation
+programs that were generally of high quality. Following the usual model of
+discharge from an institution, the staff of the onsite shelter psychiatry
+program were available to these agencies for consultation on request but did not
+actively seek a role in the patient's care after discharge. The men were also
+referred as needed to community agencies for substance abuse, general health,
+income support, education, legal advocacy, and other services. The number and
+the range of potential service agencies in New York City was greater than in
+most urban areas. The connections among the various agencies in regard to the
+care of an individual, however, were generally weak and unsystematized.
+
+The CTI and USO interventions were applied in a standardized fashion, as
+specified in a manual (available from the first author). To ensure adherence to
+the specified protocols, the investigators met weekly with the clinical team.
+The clinical team presented cases in CTI and USO at these meetings, and in each
+case presentation they specified the relation of the treatment plan to the
+respective CTI or USO protocol. In this way, any departures from the intended
+experimental and control treatments were detected rapidly.
+
+Measures
+
+Psychiatric Symptoms. Symptom severity was assessed using the Positive and
+Negative Syndrome Scale (PANSS; Kay et al., 1992), a 30-item, 7-point severity
+scale that has been widely employed in both clinical and research settings,
+including a prior study of homelessness among chronically mentally ill adults
+(Opler et al., 1994). The PANSS generates scale scores in three domains-positive
+symptoms, negative symptoms, and general psychopathology. The positive scale is
+computed by summing ratings on delusions, conceptual disorganization, hallucinatory
+behavior, excitement, grandiosity, suspiciousness/persecution, and hostility.
+The negative scale is computed by summing ratings on blunted affect, emotional
+withdrawal, poor rapport, passive-apathetic social withdrawal, difficulty in
+abstract thinking, lack of spontaneity and flow of conversation, and stereotyped
+thinking. The general psychopathology scale consists of the sum of the following
+16 items not included in the positive and negative scales: somatic concern,
+anxiety, guilt feelings, tension, mannerisms and posturing, depression, motor
+retardation, uncooperativeness, unusual thought content, disorientation, poor
+attention, lack of judgment and insight, disturbance of volition, poor impulse
+control, preoccupation, and active social avoidance. For each scale, lower
+scores indicate less psychopathology. Symptom ratings were performed at baseline
+and 6 months by trained raters blind to group assignment. Reliability for these
+measures was good (alpha for baseline positive, negative, and general symptoms
+were .80, .86, and .89, respectively).
+
+Data Analysis
+
+The primary purpose of the data analyses was to examine differences between the
+experimental and control groups on the outcomes of interest. First, we compared
+the experimental and control group means and standard deviations for each
+symptom scale at baseline and 6 months. To formally assess the effect of the
+intervention on psychiatric symptoms, we then performed three multivariate
+regression analyses in which the dependent variable was one of the three symptom
+scales measured at 6 months, the independent variable was group membership, and
+the respective baseline symptom factor score was entered as a covariate. We
+conducted further analyses stratifying by age group and ethnic group. The
+results of these analyses were unchanged.
+
+Results
+
+Table 1 provides the demographic and diagnostic characteristics of the sample.
+The sample was primarily African-American, and most men were over age 35 (median
+age = 36). The majority of the sample had been homeless for over a year during
+their lifetime. Schizophrenia and its related disorders (including schizoaffective
+and schizophreniform) were the most frequent diagnoses.
+
+----------------------------------------------
+
+  
+    
+      TABLE 1 Descriptive Characteristics of the Sample (N = 76) 
+    
+  
+
+----------------------------------------------
+
+There were 76 cases (38 CTI and 38 USO) for whom there were complete symptom
+data at base-line and at 6 months. Table 2 compares the CTI and the USO groups
+on mean symptom scale scores at these two time points (all scores and mean
+differences are unadjusted). On the negative symptoms scale (baseline range = 8
+to 36), the mean change in the CTI group was -2.6 compared with a mean change of
++1.0 in the USO group. On the positive symptoms scale (baseline range = 7 to
+40), the mean change in the CTI group was -2.2 compared with a mean change of
+-2.7 in the USO group. On the general psychopathology scale (baseline range = 19
+to 67), the mean change in the CTI group was -6.5 compared with a mean change of
+-3.1 in the USO group. In the regression analyses controlling for baseline score
+for the 6-month outcomes, there was a significant group effect for negative
+symptoms only (F = 5.7, p = .02).
+
+----------------------------------------------
+
+  
+    
+      TABLE 2 PANSS Symptom Scores in USO and CTI Groups at Baseline and 6
+Months 
+    
+  
+
+----------------------------------------------
+
+When we confined the analysis to 57 subjects diagnosed with schizophrenia and
+related disorders (schizophrenia, schizoaffective, and schizophreni-form
+disorder), the pattern of results was quite similar. On the negative symptoms
+scale, the mean change in the CTI group was -2.9 compared with a mean change of
++.5 in the USO group. On the positive symptoms scale, the mean change in the CTI
+group was -3.1 compared with a mean change of -3.0 in the USO group. On the
+general psychopathology scale, the mean change in the CTI group was -8.3
+compared with a mean change of -4.4 in the USO group. In the regression analyses
+controlling for baseline score for the 6-month outcomes, there was a marginally
+significant group effect (F = 3.4, p = .07) for negative symptoms only (this
+larger p value reflects the reduced statistical power associated with the
+smaller sample size employed in these analyses).
+
+Discussion
+
+In this study, CTI was associated with a statistically significant decrease in
+negative symptoms at the 6-month follow-up, reflecting modest clinical
+improvement. This is an important finding as it is one of the few studies of
+which we are aware that has focused specifically on the effect of a psychosocial
+intervention on negative symptoms in psychotic disorders. It is also consistent
+with the conclusion of a recent meta-analysis of controlled outcome studies in
+this area (Mojtabai et al., 1998). There was no significant effect on positive
+or general psychopathology symptoms. We consider below several possible
+explanations for the observed reduction in negative symptoms.
+
+Negative symptoms are frequently cited as among the most disabling aspects of
+psychotic disorders and among the most resistant to treatment. Because standard
+antipsychotics have been shown to have little if any impact on negative symptoms
+(and none of the subjects in this study were receiving either the atypical
+antipsychotic clozapine or the novel antipsychotics risperidone, olanzpine, or
+quetiapine), it is unlikely that the observed reduction in negative symptoms in
+the experimental group can be explained by a different pattern of medication use
+in that group. Further, the lack of group differences on positive symptoms,
+which are responsive to antipsychotic medications, also suggests that it is not
+differences in medication use that account for the observed differences on
+negative symptom scores. Nevertheless, we compared the proportion of subjects in
+the experimental and control groups who reported having taken psychoactive
+medications over the course of the follow-up period. At 6 months, the proportion
+of experimental and control group members having taken antipsychotic medication
+in the prior month were virtually identical, providing further evidence that the
+treatment effect was not a function of differential rates of medication use.
+Although we consider it unlikely, because we did not collect data on medication
+dosing we cannot rule out the possibility that the USO group received higher
+doses of standard neuroleptics and/or lower doses of antiparkinsonian medications
+leading to higher levels of secondary negative symptoms (i.e., resulting from
+neuroleptic medications).
+
+As we have reported elsewhere (Susser et al., 1997) the treatment group
+experienced significantly fewer homeless nights over the follow-up period than
+did the control group. Therefore, we explored whether the observed effect on
+negative symptoms was mediated by the experience of homelessness. To investigate
+this possibility, we performed a hierarchical regression analysis predicting
+negative symptom score at 6 months in which we first entered baseline negative
+symptom score and treatment condition (step 1) followed by a variable indicating
+the number of homeless nights experienced during the 6-month follow-up period
+(step 2). We found no increase in explanatory power associated with the addition
+of the homelessness variable (F of change = .20, p = .65), indicating that
+reduced homelessness did not mediate the effect of the treatment on negative
+symptom score at 6 months.
+
+The evidence suggesting that neither medication nor homelessness accounted for
+the observed reduction in negative symptoms supports the idea that the effect
+can be attributed to the intervention. However, as in many experimental studies
+that test a composite "package" of services such as CTI, it can be difficult to
+identify the specific mechanisms through which the treatment produced the
+observed effect. In this case, the primary focus of CTI was to prevent recurrent
+homelessness after discharge from the shelter. How might the intervention have
+directly contributed to the apparent improvement in negative symptoms?
+
+Several studies have suggested that the degree of prefrontal cortical dysfunction
+in schizophrenia is related both to impairments in carrying out executive tasks
+and to severity of negative symptoms (Andreasen et al., 1992; Opler et al.,
+1991; Wolkin et al., 1992). One intriguing possibility is that by encouraging
+patients to focus on planning and organizing their transition from institution
+to community living, CTI provides cognitive remediation, helping to reactivate
+prefrontal cortical functions as they are summoned to carry out executive tasks
+that were underutilized during lengthy periods of passivity and regression. In
+future studies, we hope to investigate the prospect that this psychosocial
+intervention may improve prefrontally mediated cognitive functions as well as
+negative symptoms.
+
+It is also possible to offer a psychodynamic mechanism that may have contributed
+to the reduction in negative symptoms. For homeless mentally ill men who
+commonly have experienced multiple emotional losses during their lives, the
+withdrawal, apathy, and affective blunting that comprise negative symptoms may,
+in part, be a reaction to these important psychological events. CTI focuses
+explicitly on issues of relationship and social support. As described above, one
+of its key elements is that the strong ties that develop between patients and
+treatment staff are not abruptly severed at the point of discharge but rather
+are used to promote successful community reintegration through a successful
+transition process. Perhaps this experience plays a role in ameliorating the
+hopelessness and despair that has characterized these men's lives and, in turn,
+leads to an observed lessening in negative symptoms.
+
+In all likelihood, no single mechanism can account for the reduction in negative
+symptoms we observed in the experimental group. Rather, we suspect that this
+improvement may be attributable to the synergistic effect of cognitive,
+psychopharmacological, and psychodynamic mechanisms operating simultaneously. We
+hope to design future studies of the CTI model in such a way as to shed further
+light on this question.
+
+As noted above, there was no significant effect of CTI on positive or general
+psychopathology symptoms. The most recent quantitative review of the research on
+the role of psychosocial treatments in schizophrenia suggested that positive and
+general symptoms tend to be less responsive to psychosocial interventions than
+are negative symptoms (Mojtabai et al., 1998). Although the reasons for this are
+not well understood, it may be that negative symptoms, particularly among
+persons who have been ill for a number of years, are partly related to factors
+such as social isolation and demoralization, which might be more responsive to
+psychosocial interventions.
+
+Limitations
+
+There were a number of limitations to the study. First, the number of total
+participants was modest. Although 96 men were randomized into the two experimental
+conditions, symptom data at baseline and 6-month follow-up was available for
+only 76 men. Although there appear to be no systematic differences between these
+76 men and the 20 for whom data are incomplete, it is possible that this may
+have affected the results to some unknown degree. Second, although the change in
+negative symptoms in the full group was statistically significant at the .05
+level, the magnitude of the effect was modest.
+
+Third, the degree to which the observed effect on negative symptoms was a
+lasting one cannot be adequately assessed since our outcome data were collected
+at 6 months. However, in a subgroup of 47 subjects whose symptoms were measured
+at 18 months, the trend was toward continued lower levels of negative symptoms
+in the experimental group when compared with the controls (mean negative
+symptoms score in CTI group = 15.3, SD = 4.8; mean negative symptoms score in
+USO group = 17.6, SD = 6.5, p = .16).
+
+Finally, although we specified a priori that we would evaluate the effect of our
+intervention on psychiatric symptoms, the intriguing finding presented here did
+not conform with our original hypothesis, which predicted improvement in
+negative, positive, and general psychopathology symptoms.
+
+Conclusions
+
+In an earlier paper, we reported that CTI was effective in its primary intended
+outcome-reducing recurrent homelessness among severely mentally ill men after
+discharge from a shelter. The present report suggests that a time-limited
+intervention focused on the transitional period may also have had beneficial
+effects on an important clinical outcome, namely negative symptoms, that has
+stubbornly resisted the effect of treatment in many previous efforts. Because
+negative symptoms are considered to play an important role with respect to the
+quality of life of persons with severe mental disorders, this finding warrants
+further study. Although CTI was originally designed and tested with homeless men
+leaving a shelter, we believe that it may also be fruitfully applied in other
+settings including psychiatric hospitals and correctional facilities.
+
+References
+
+Andreasen N, Rezai K, Alliger R, Swayze V, Flaum M, Kirchner P, Cohen G, O'Leary
+D (1992) Hypofrontality in neuroleptic-naive patients and in patients with
+chronic schizophrenia: Assessment with xenon 133 single-photon emission computed
+tomography and the Tower of London. Arch Gen Psychiatry 49:943-958. Bibliographic
+Links 
+
+Beasley CJ, Hamilton S, Crawford A, Delva M, Tollefson G, Tran P, Blin O, Beuzen
+J (1997) Olanzapine versus haloperidol: Acute phase results of the international
+double-blind olanzapine trial. Eur Neuropsychopharmacol 7:125-137. Bibliographic
+Links 
+
+Carpenter W, Heinrichs D, Wagman A (1988) Deficit and nondeficit forms of
+schizophrenia: the concept. Am J Psychiatry 145:578-583. Bibliographic Links
+
+Chouinard G, Jones B, Remington G, Bloom D, Addington D, MacEwan W, Labelle A,
+Beauclair L, Arnott W (1993) A Canadian multicenter placebo-controlled study of
+fixed doses of risperidone and haloperidol in the treatment of chronic
+schizophrenic patients. J Clin Psychopharmacol 13:25-40. Bibliographic Links 
+
+Dorwart RA, Hoover CW (1994) A national study of transitional hospital services
+in mental health. Am J Public Health 84:1229-1234. Full Text Bibliographic Links
+
+
+Kay S, Opler L, Fiszbein A (1992) Positive and negative syndrome scale (PANSS)
+manual. Toronto: Multi-Health Systems, Inc. 
+
+Lehman AF, Dixon LB, Kernan E, DeForge BR, Postrado LT (1997) A randomized trial
+of assertive community treatment for homeless persons with severe mental
+illness. Arch Gen Psychiatry 54:1038-1043. 
+
+Marder S, Meibach R (1994) Risperidone in the treatment of schizophrenia. Am J
+Psychiatry 141:825-835. 
+
+Mojtabai R, Nicholson R, Carpenter B (1998) Role of psychosocial treatments in
+management of schizophrenia: A meta-analytic review of controlled outcome
+studies. Schizophr Bull 24:571-588. 
+
+Olfson M, Mechanic D, Boyer CA, Hansell S (1998) Linking inpatients with
+schizophrenia to outpatient care. Psychiatr Services 49:911-917. 
+
+Opler L, Ramirez P, Rosenkilde C, Fiszbein A (1991) Neurocognitive features of
+chronic schizophrenic inpatients. J Nerv Ment Dis 179:638-640. Bibliographic
+Links 
+
+Opler LA, Caton CL, Shrout P, Dominguez B, Kass F (1994) Symptom profiles and
+homelessness in schizophrenia. J Nerv Ment Dis 182:174-177. Bibliographic Links 
+
+Susser E, Valencia E, Conover S, Felix A, Tsai W, Wyatt R (1997) Preventing
+recurrent homelessness among mentally ill men: A "critical time" intervention
+after discharge from a shelter. Am J Public Health 87:256-262. Ovid Full Text
+Full Text Bibliographic Links 
+
+Valencia E, Susser E, McQuiston H (1996) Critical time points in the clinical
+care of homeless mentally ill individuals. In J Vaccaro, G Clark (Eds),
+Practicing psychiatry in the community: A manual (pp 259-276). Washington, DC:
+American Psychiatric Press. 
+
+Valencia E, Susser E, Torres J, Felix A, Conover S (1997) Critical time
+intervention for homeless mentally ill individuals in transition from shelter to
+community living. In W Breakey, J Thompson (Eds), Mentally ill and homeless:
+special programs for special needs (pp 75-94). Newark, NJ: Gordon and Breach
+Science Publishers. 
+
+Wolkin A, Sanfilipo M, Wolf A, Angrist B, Brodie J, Rotrosen J (1992) Negative
+symptoms and hypofrontality in chronic schizophrenia. Arch Gen Psychiatry
+49:959-963. Bibliographic Links 
+
+----------------------------------------------
+Accession Number: 00005053-200003000-00002
+
+

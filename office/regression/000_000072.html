@@ -1,0 +1,332 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<HTML lang="eng">
+<HEAD>
+    <meta HTTP-EQUIV="Content-type" CONTENT="text/html; charset=windows-1252">
+    <meta name="description" content="This is the dynamic data retrieval routine that is used to retrieve all data from the CO-OPS database">
+    <meta name="keywords" content="station information, tide, water level, predictions, current, meteorological, PORTS, model, bench mark, benchmark, datums, harminic constituents, sea level,">
+	<TITLE>Data Retrieval</TITLE>
+<script type="text/javascript" src="calendarDateInput.js">
+
+/***********************************************
+* Jason's Date Input Calendar- By Jason Moon http://www.jasonmoon.net/
+* Script featured on and available at http://www.dynamicdrive.com
+* Keep this notice intact for use.
+***********************************************/
+
+</script>
+		<link rel="STYLESHEET" type="text/css" href="/styles/template.css">
+	<link rel="STYLESHEET" type="text/css" href="/styles/menu.css">
+
+	<script language="JavaScript1.2" src="/coolmenus4.js" type="text/javascript">
+	/*****************************************************************************
+	Copyright (c) 2001 Thomas Brattli (webmaster@dhtmlcentral.com)
+
+	DHTML coolMenus - Get it at coolmenus.dhtmlcentral.com
+	Version 4.0_beta
+	This script can be used freely as long as all copyright messages are
+	intact.
+
+	Extra info - Coolmenus reference/help - Extra links to help files **** 
+	CSS help: http://www.dhtmlcentral.com/projects/coolmenus/reference.asp?m=37
+	General: http://www.dhtmlcentral.com/projects/coolmenus/
+	Menu properties: http://www.dhtmlcentral.com/projects/coolmenus/properties.asp?m=47&id=27
+	Level properties: http://www.dhtmlcentral.com/projects/coolmenus/properties.asp?m=48
+	Background bar properties: http://www.dhtmlcentral.com/projects/coolmenus/properties.asp?m=49
+	Item properties: http://www.dhtmlcentral.com/projects/coolmenus/properties.asp?m=50
+	******************************************************************************/
+	</script>
+</HEAD>
+
+<BODY STYLE="margin: 0; background-image: url(/images/darkblue.png);">
+<script language="JavaScript1.2" src="/includes/menu.js" type="text/javascript"></script>
+
+<map name="navigation">
+<area shape="rect" alt="Home" coords="330,92,378,109" href="/index.shtml">
+<area shape="rect" alt="Products" coords="382,92,447,109" href="/products.html">
+<area shape="rect" alt="Programs" coords="451,92,522,109" href="/programs.html">
+<area shape="rect" alt="Partnerships" coords="526,92,613,109" href="/partnerships.html">
+<area shape="rect" alt="Education" coords="618,92,688,109" href="/education.html">
+<area shape="rect" alt="Help" coords="692,91,736,109" href="/help.html">
+<area shape="circle" alt="NOAA Web Site Link" coords="31,34,31" href="http://www.noaa.gov">
+</map>
+
+
+
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" STYLE="height: 97%; width: 100%;">
+    <TR><!-- HEADER -->
+        <TD COLSPAN="3" HEIGHT="111" STYLE="background: url(images/darkblue.png);">        <!-- Search My Google Search Appliance -->
+     <form method="get" action="http://search1.co-ops.nos.noaa.gov/search">
+        <IMG SRC="/images/sub_header_sm.png" WIDTH="754" HEIGHT="111" ALT="banner graphic" TITLE="banner graphic" USEMAP="#navigation" BORDER="0">
+        <SPAN STYLE="position: absolute; left: 550px; top: 21px;"><label for="text-1117295871"></label>
+        <input type="text" name="q" size="14" maxlength="255" STYLE="background-color: #015FA9; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 10px; color: White; font-weight: bold;" id="text-1117295871"></SPAN>
+        <SPAN STYLE="position: absolute; left: 656px; top: 23px;">
+        <input type="Image" name="btnG" ALT="Search" SRC="/images/search.png"></SPAN>
+        <input type="hidden" name="site" value="tac">
+        <input type="hidden" name="client" value="tac">
+        <input type="hidden" name="proxystylesheet" value="tac">
+        <input type="hidden" name="output" value="xml_no_dtd">
+      
+</form>
+<!-- Search My Google Search Appliance-->
+
+        </TD>
+        
+    </TR>
+    <TR>
+        <!-- LEFT MARGIN -->
+        <TD VALIGN="top" WIDTH="130">Error: Could not include menu file, Station ID not found.<noscript>
+		    <p class="content"><a href="station_info.shtml?stn=9445246 Whitney Point, WA" style="color:#FFFFFF; font-size: 8pt">Station Information</a></p>
+            <p class="content"><a href="data_menu.shtml?stn=9445246 Whitney Point, WA&type=Tide+Data" style="color:#FFFFFF; font-size: 8pt">Tide Data - preliminary</a></p>
+            <p class="content"><a href="data_menu.shtml?stn=9445246 Whitney Point, WA&type=Historic+Tide+Data" style="color:#FFFFFF; font-size: 8pt">Tide Data - historic</a></p>
+            <p class="content"><a href="data_menu.shtml?stn=9445246 Whitney Point, WA&type=Tide+Predictions" style="color:#FFFFFF; font-size: 8pt">Tide Predictions</a></p>
+            <p class="content"><a href="data_menu.shtml?stn=9445246 Whitney Point, WA&type=Current+Data" style="color:#FFFFFF; font-size: 8pt">Current Data</a></p>
+            <p class="content"><a href="data_menu.shtml?stn=9445246 Whitney Point, WA&type=Meteorological+Observations" style="color:#FFFFFF; font-size: 8pt">Meteorological Observations</a></p>
+            <p class="content"><a href="data_menu.shtml?stn=9445246 Whitney Point, WA&type=Physical+Oceanographic+Real-Time+System&port=" style="color:#FFFFFF; font-size: 8pt">Physical Oceanographic Real-Time System</a></p>
+            <p class="content"><a href="data_menu.shtml?stn=9445246 Whitney Point, WA&type=OFS&ofs=&dtype=" style="color:#FFFFFF; font-size: 8pt">Operational Forecast System</a></p>
+            <p class="content"><a href="data_menu.shtml?stn=9445246 Whitney Point, WA&type=Bench+Mark+Sheets" style="color:#FFFFFF; font-size: 8pt">Bench Mark Sheets</a></p>
+            <p class="content"><a href="data_menu.shtml?stn=9445246 Whitney Point, WA&type=Datums" style="color:#FFFFFF; font-size: 8pt">Datums</a></p>
+            <p class="content"><a href="data_menu.shtml?stn=9445246 Whitney Point, WA&type=Harmonic+Constituents" style="color:#FFFFFF; font-size: 8pt">Harmonic Constituents</a></p>
+			</noscript>
+        </TD>
+        <!-- MAIN CONTENT -->
+        <TD VALIGN="top" BGCOLOR="#ffffff">
+    
+            <table style="width: 98%;"><tr>
+                <td align="left" style="font-size: 12pt; font-weight: bold; color: #015FA9">Whitney Point, WA</td>        <td align="right" style="font-size: 10pt; font-weight: bold; color: #015FA9">Whitney Point, WA: <a href="data_menu.shtml?stn=9445246 Whitney Point, WA&type=Data+Inventory">Data Inventory</a></td></tr><tr><td align="left" style="font-size: 10pt; font-weight: bold; color: #015FA9">Station ID: 9445246</td><td align="right" style="font-size: 10pt; font-weight: bold; color: #015FA9"><a href="/help_Superseded Bench Mark.html">Page Help</a></td></tr></table><div align="center" style="font-size: 12pt; font-weight: bold; color: #015FA9">Superseded Bench Mark</div><div align="center" style="font-size:8pt">Click <a href="/benchmarks/benchmarks_old/9445246.html" target="_blank">HERE</a> for printable version</div>
+<br>
+<DIV CLASS="content" align="center"><table><tr><td align="left">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=windows-1252">
+   <META name="keywords" content="bench marks, datum">
+   <META name="description" content="Published Bench Mark Sheet for 9445246 WHITNEY POINT, DABOB BAY, HOOD CANAL WASHINGTON">
+   <TITLE>Published Bench Mark Sheet for 9445246 WHITNEY POINT, DABOB BAY, HOOD CANAL WASHINGTON</TITLE>
+</HEAD>
+<BODY BGCOLOR="WHITE">
+<PRE style="page-break-after: always;">                          U.S. DEPARTMENT OF COMMERCE
+                National Oceanic and Atmospheric Administration
+                            National Ocean Service
+<a href="#DatumsPage">Datums Page</a>                                                        Page  1 of  4
+
+                                                   PUBLICATION DATE:  04/18/1984
+<B>Station ID: 9445246                                SUPERCEDED DATE:   04/21/2003
+Name:       WHITNEY POINT, DABOB BAY, HOOD CANAL              
+            WASHINGTON
+NOAA Chart: 18445                                  Latitude:         47&deg; 45.7' N
+USGS Quad:  TENINO SW                              Longitude:       122&deg; 51.0' W</B>
+
+
+To reach the tidal bench marks from the high school in Quilcene, proceed south
+on U.S. Highway 101 for 8.35 miles (13.44 km) to a paved road leading to the
+Washington Shellfish Laboratory at Whitney Point, then NE on paved road for 2.4
+miles (3.9 km) to the State Shellfish Laboratory Building.  The bench marks are
+located between the Laboratory Building and the helicopter pad and the tide gage
+and staff were located on the east side of the pier, on the sixth and fifth
+pilings, respectively from shore.
+
+
+                        <B> T I D A L   B E N C H   M A R K S</B>
+
+
+                <B> PRIMARY BENCH MARK STAMPING:  B3 1969</B>
+
+MONUMENTATION:           Survey Disk                               VM#:     9039
+AGENCY:                                                            <a href="http://www.ngs.noaa.gov/cgi-bin/ds2.prl?retrieval_type=by_pid&PID=SY1164">PID#:  SY1164</a>
+SETTING CLASSIFICATION:  Concrete Sidewalk
+
+
+The bench mark is set flush in the western end of a concrete sidewalk on the
+north side of the Shellfish Laboratory, along a wall just west of the
+westernmost door.
+
+
+
+                <B>         BENCH MARK STAMPING:  NO 1 1969</B>
+
+MONUMENTATION:           Survey Disk                               VM#:     9040
+AGENCY:                                                            <a href="http://www.ngs.noaa.gov/cgi-bin/ds2.prl?retrieval_type=by_pid&PID=SY1162">PID#:  SY1162</a>
+SETTING CLASSIFICATION:  Concrete Bulkhead
+
+
+The bench mark is set flush in the top of a bulkhead at the NW corner of the
+Washington State Shellfish Laboratory building.
+
+</PRE><PRE style="page-break-after: always;">                          U.S. DEPARTMENT OF COMMERCE
+                National Oceanic and Atmospheric Administration
+                            National Ocean Service
+                                                                   Page  2 of  4
+
+                                                   PUBLICATION DATE:  04/18/1984
+<B>Station ID: 9445246                                SUPERCEDED DATE:   04/21/2003
+Name:       WHITNEY POINT, DABOB BAY, HOOD CANAL              
+            WASHINGTON
+NOAA Chart: 18445                                  Latitude:         47&deg; 45.7' N
+USGS Quad:  TENINO SW                              Longitude:       122&deg; 51.0' W</B>
+
+
+                        <B> T I D A L   B E N C H   M A R K S</B>
+
+
+                <B>         BENCH MARK STAMPING:  NO 2 1969</B>
+
+MONUMENTATION:           Survey Disk                               VM#:     9041
+AGENCY:                                                            <a href="http://www.ngs.noaa.gov/cgi-bin/ds2.prl?retrieval_type=by_pid&PID=SY1163">PID#:  SY1163</a>
+SETTING CLASSIFICATION:  Rock
+
+
+The bench mark is located in a large rock which forms part of a bulkhead at the
+north end of a pipe for salt water flowing between ponds, 300 feet (91 m) west
+of a floating pier and 300 feet (91 m) NW of the NW corner of the Washington
+State Shellfish Laboratory.  The bench mark is set in rock that is submerged at
+times and the stamping is barely discernable.
+
+</PRE><PRE style="page-break-after: always;"><a name="DatumsPage"></a>                          U.S. DEPARTMENT OF COMMERCE
+                National Oceanic and Atmospheric Administration
+                            National Ocean Service
+                                                                   Page  3 of  4
+
+                                                   PUBLICATION DATE:  04/18/1984
+<B>Station ID: 9445246                                SUPERCEDED DATE:   04/21/2003
+Name:       WHITNEY POINT, DABOB BAY, HOOD CANAL              
+            WASHINGTON
+NOAA Chart: 18445                                  Latitude:         47&deg; 45.7' N
+USGS Quad:  TENINO SW                              Longitude:       122&deg; 51.0' W</B>
+
+
+<B>                            T I D A L   D A T U M S </B>
+
+
+Tidal datums at WHITNEY POINT, DABOB BAY, HOOD CANAL based on:
+
+     LENGTH OF SERIES:      1 MONTH
+     TIME PERIOD:           FEBRUARY 1978
+     TIDAL EPOCH:           1960-1978
+     CONTROL TIDE STATION:  9447130 SEATTLE
+
+
+Elevations of tidal datums referred to Mean Lower Low Water (MLLW), in FEET:
+
+     HIGHEST OBSERVED WATER LEVEL (02/09/1978)    =  14.66
+     MEAN HIGHER HIGH WATER (MHHW)                =  11.55
+     MEAN HIGH WATER (MHW)                        =  10.59
+     MEAN TIDE LEVEL (MTL)                        =   6.80
+     MEAN LOW WATER (MLW)                         =   3.00
+     MEAN LOWER LOW WATER (MLLW)                  =   0.00
+     LOWEST  OBSERVED WATER LEVEL (01/23/1978)    =  -1.01
+
+<a href="http://www.ngs.noaa.gov/cgi-bin/ngs_opsd.prl?PID=SY1164&EPOCH=1960-1978">National Geodetic Vertical Datum (NGVD 29)</a>
+
+Bench Mark Elevation Information           In FEET above:
+
+     Stamping or Designation               MLLW        MHW
+
+     B3 1969                               17.28      6.69
+     NO 1 1969                             19.94      9.35
+     NO 2 1969                             10.54     -0.05
+
+
+</PRE><PRE style="page-break-before: always;">                          U.S. DEPARTMENT OF COMMERCE
+                National Oceanic and Atmospheric Administration
+                            National Ocean Service
+                                                                   Page  4 of  4
+
+                                                   PUBLICATION DATE:  04/18/1984
+<B>Station ID: 9445246                                SUPERCEDED DATE:   04/21/2003
+Name:       WHITNEY POINT, DABOB BAY, HOOD CANAL              
+            WASHINGTON
+NOAA Chart: 18445                                  Latitude:         47&deg; 45.7' N
+USGS Quad:  TENINO SW                              Longitude:       122&deg; 51.0' W</B>
+
+
+                             <B>D E F I N I T I O N S</B>
+
+
+Mean Sea Level (MSL) is a tidal datum determined over a 19-year National Tidal
+Datum Epoch.  It pertains to local mean sea level and should not be confused
+with the fixed datums of North American Vertical Datum of 1988 (NAVD 88).
+
+NGVD 29 is a fixed datum adopted as a national standard geodetic reference for
+heights but is now considered superseded.  NGVD 29 is sometimes referred to as
+Sea Level Datum of 1929 or as Mean Sea Level on some early issues of Geological
+Survey Topographic Quads.  NGVD 29 was originally derived from a general
+adjustment of the first-order leveling networks of the U.S. and Canada after
+holding mean sea level observed at 26 long term tide stations as fixed.
+Numerous local and wide-spread adjustments have been made since establishment in
+1929.  Bench mark elevations relative to NGVD 29 are available from the National
+Geodetic Survey (NGS) data base via the World Wide Web at 
+<a href="http://www.ngs.noaa.gov/cgi-bin/ngs_opsd.prl?PID=SY1164&EPOCH=1960-1978">National Geodetic Survey</a>.
+
+NAVD 88 is a fixed datum derived from a simultaneous, least squares, minimum
+constraint adjustment of Canadian/Mexican/United States leveling observations.
+Local mean sea level observed at Father Point/Rimouski, Canada was held fixed as
+the single initial constraint.  NAVD 88 replaces NGVD 29 as the national
+standard geodetic reference for heights.  Bench mark elevations relative to
+NAVD 88 are available from NGS through the World Wide Web at 
+<a href="http://www.ngs.noaa.gov/cgi-bin/ngs_opsd.prl?PID=SY1164&EPOCH=1960-1978">National Geodetic Survey</a>.
+
+NGVD 29 and NAVD 88 are fixed geodetic datums whose elevation relationships to
+local MSL and other tidal datums may not be consistent from one location to
+another.
+
+The Vertical Mark Number (VM#) and PID# shown on the bench mark sheet are unique
+identifiers for bench marks in the tidal and geodetic databases, respectively.
+Each bench mark in either database has a single, unique VM# and/or PID# assigned.
+Where both VM# and PID# are indicated, both tidal and geodetic elevations are
+available for the bench mark listed.
+
+The NAVD 88 elevation is shown on the Elevations of Tidal Datums Table Referred
+to MLLW only when two or more of the bench marks listed have NAVD 88 elevations.
+The NAVD 88 elevation relationship shown in the table is derived from an average
+of several bench mark elevations relative to tide station datum.  As a result of
+this averaging, NAVD 88 bench mark elevations computed indirectly from the tidal
+datums elevation table may differ slightly from NAVD 88 elevations listed for
+each bench mark in the NGS database.
+
+</PRE>
+</BODY>
+</HTML>
+</td></tr></table>
+</DIV><BR><BR><BR>
+
+	    <div align="center" style="font-size:8pt">
+                <a href="/index.shtml" style="color:black">home</a> | 
+                <a href="/products.html" style="color:black">products</a> | 
+                <a href="/programs.html" style="color:black">programs</a> | 
+                <a href="/partnerships.html" style="color:black">partnerships</a> | 
+		<a href="/education.html" style="color:black">education</a> | 
+		<a href="/help.html" style="color:black">help</a>
+            </div>
+        </TD>
+        <!-- RIGHT MARGIN -->
+        <TD WIDTH="21">&nbsp;</TD>
+    </TR>
+</TABLE>
+    
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" STYLE="height: 20px; width: 100%;" summary="Footer layout">
+	<TR><!-- FOOTER -->
+		<TD BGCOLOR="#00519E" HEIGHT="20">
+			<SPAN CLASS="footer">
+				<A HREF="/disclaimers.html" STYLE="text-decoration: none; color: #ffffff;">Disclaimers&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</A>
+				<A HREF="/contact.html" STYLE="text-decoration: none; color: #ffffff;">Contact Us&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</A>
+				<A HREF="http://www.noaa.gov/privacy.html" STYLE="text-decoration: none; color: #ffffff;" target="_blank">Privacy Policy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</A>
+				<A HREF="/about.html" STYLE="text-decoration: none; color: #ffffff;">About CO-OPS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</A>
+				<A HREF="http://intranet.nos-tcn.noaa.gov" STYLE="text-decoration: none; color: #ffffff;">For CO-OPS Employees Only&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</A>
+				
+			    Revised: 11/23/2005
+			</SPAN>
+		</TD>
+		<TD COLSPAN="2" ALIGN="right" BGCOLOR="#00519E">
+			<SPAN CLASS="footer">
+				<A HREF="http://www.noaa.gov" STYLE="text-decoration: none; color: #ffffff;" target="_blank">NOAA /</A>
+				<A HREF="http://oceanservice.noaa.gov" STYLE="text-decoration: none; color: #ffffff;" target="_blank"> National Ocean Service</A>
+			</SPAN>
+		</TD>
+	</TR>
+</TABLE>
+
+</body>
+</html>
+

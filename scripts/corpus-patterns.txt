@@ -62,3 +62,9 @@
 *.7z
 *.dbf
 ground_truth/structured/parsebench/*.jsonl
+
+# The regression corpus's PubMed Central slice: 712 full-text JATS files, 314 MB. Text is normally
+# committed, and this is the one exception: at that size it would quadruple every clone. The
+# binaries in the regression corpus need no entry here, since the extension patterns above already
+# cover them. Path-scoped, so an ordinary .nxml elsewhere in the tree is unaffected.
+jats/regression/

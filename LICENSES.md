@@ -44,4 +44,7 @@ non-commercial benchmark use non-commercial data.
 | [ds4sd/DocLayNet](https://huggingface.co/datasets/ds4sd/DocLayNet-v1.1) | CDLA-Permissive-1.0 | vendor |
 | [google-research-datasets/hiertext](https://github.com/google-research-datasets/hiertext) | CC-BY-SA-4.0 | reference (ShareAlike — not committed) |
 
-Vendored sources: 6. Reference-only sources: 1. WordPerfect corpus provenance: `wordperfect/PROVENANCE.md`.
+| regression corpus: [PubMed Central OA](https://europepmc.org), [Project Gutenberg](https://www.gutenberg.org), [govdocs1](https://digitalcorpora.org), [arXiv](https://arxiv.org) | CC-BY-4.0 / CC0 / US-PD, per document | vendor (1,816) |
+| regression corpus, restricted subset | CC-BY-SA, CC-BY-NC*, arXiv nonexclusive-distrib | reference (1,459, not committed) |
+
+Vendored sources: 7. Reference-only sources: 2. WordPerfect corpus provenance: `wordperfect/PROVENANCE.md`.
