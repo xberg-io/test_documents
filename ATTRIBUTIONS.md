@@ -206,3 +206,11 @@ Vendored WordPerfect-family test files. Per-file provenance (upstream path, revi
 - **License:** MIT, as our own work.
 - **Used here:** `pdf_scanned/memo_prose_scanned.pdf`, the negative case: a scanned page with no mathematics, which must yield no formulas.
 - **Modifications:** rasterized and binarized from the vector original.
+
+## City of Sugar Land, Texas — Ordinance No. 2197
+
+- **Citation:** City of Sugar Land, Texas, Ordinance No. 2197 (adopted 4 August 2020), a zoning change for approximately 0.7906 acres at Lake Pointe Parkway and Creek Bend Drive.
+- **Source:** City of Sugar Land public records.
+- **License:** US public domain. Texas municipal ordinances are edicts of government and carry no copyright.
+- **Used here:** `pdf_scanned/ordinance_2197_scanned.pdf`, a 16-page office-scanner capture (Xerox AltaLink C8045, JBIG2 masks over JPEG backgrounds) with no text layer. It pairs long-form legal prose with signature blocks, a recorded survey plat, and six architectural exhibit sheets whose labels are rotated 90 degrees, so it exercises OCR reading order across mixed upright and landscape content.
+- **Modifications:** none to the document. Ground truth in `ground_truth/pdf/ordinance_2197.txt` was produced with PaddleOCR and proofread page by page against 300 DPI renders. It covers the ten prose pages in full, including the handwritten adoption dates; the six drawing sheets are represented only by the printed title-block text that could be read with confidence, since their surveyor and hand-lettered CAD annotations are not legibly transcribable.

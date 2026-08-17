@@ -1681,6 +1681,10 @@
       "sha256": "2da8b562f74b778fcba92efe07fb8892aad1b279dbf84daba412ee148a4b56c8",
       "size": 1233386
     },
+    "pdf_scanned/ordinance_2197_scanned.pdf": {
+      "sha256": "94dcfbd413fb69aedc0b2005893ddba2ea77be82da3ff3631dd17ff4c983749a",
+      "size": 538907
+    },
     "pdf_scanned/synthetic_math_interpolation_scanned.pdf": {
       "sha256": "99dd205450e6dfbd638a2a4ce03058ba595436acdafe0e736e126753c5b71834",
       "size": 14894
