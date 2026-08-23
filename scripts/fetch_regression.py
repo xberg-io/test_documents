@@ -40,7 +40,7 @@ RETRIES = 3
 
 def download(url: str) -> bytes:
     last = ""
-    for attempt in range(1, RETRIES + 1):
+    for _attempt in range(1, RETRIES + 1):
         try:
             request = urllib.request.Request(url, headers={"User-Agent": "xberg-test-documents"})
             with urllib.request.urlopen(request, timeout=TIMEOUT) as response:

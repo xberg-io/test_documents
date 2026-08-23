@@ -41,12 +41,15 @@ exclude = [
   "markup/**",
   "odp/**",
   "odt/**",
+  "/office/**",
   "opml/**",
   "org/**",
   "pdf/**",
   "pdf_scanned/**",
   "ppt/**",
   "pptx/**",
+  "/MATH_PROVENANCE.md",
+  "/REGRESSION_PROVENANCE.md",
   "rst/**",
   "rtf/**",
   "semantic/**",
@@ -62,3 +65,6 @@ exclude = [
   "xml/**",
   "yaml/**",
 ]
+
+[per-file-ignores]
+"LICENSES.md" = ["MD075"]
