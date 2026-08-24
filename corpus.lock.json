@@ -701,6 +701,10 @@
       "sha256": "53dbe75ad27f3d6113db2caad2ab130fc34d04e94ce2811bfeb5437b817002f8",
       "size": 9505
     },
+    "ordinance-2197.pdf": {
+      "sha256": "94dcfbd413fb69aedc0b2005893ddba2ea77be82da3ff3631dd17ff4c983749a",
+      "size": 538907
+    },
     "pdf/10075815.pdf": {
       "sha256": "57f7cbd0da6ad48055bb35c046a6ae112cd08f640e64b05eb6ad59a8ddd30add",
       "size": 119196
@@ -1088,6 +1092,10 @@
     "pdf/iso_21111_10_2021_road_vehicles_in_vehicle_ethernet_conformance_test_plans.pdf": {
       "sha256": "e8823c2220c879acd864fe4e74abb6a9473ef544165ce8cba7218507bb1f5ef9",
       "size": 2343170
+    },
+    "pdf/issue-1484-two-column-hanging-number-gutter.pdf": {
+      "sha256": "918494c7dffcf8f2c2fb2d560581f8e5de195957271c8114e0fe7923b2f48b92",
+      "size": 4823
     },
     "pdf/issue-636-chunk-pages.pdf": {
       "sha256": "a2050f1095efcccda02327ca56bc5cf0fcf74763265dd3ad99da06d1a4790bc2",

@@ -207,6 +207,15 @@ Vendored WordPerfect-family test files. Per-file provenance (upstream path, revi
 - **Used here:** `pdf_scanned/memo_prose_scanned.pdf`, the negative case: a scanned page with no mathematics, which must yield no formulas.
 - **Modifications:** rasterized and binarized from the vector original.
 
+## Xberg issue #1484 two-column gutter reproduction
+
+- **Source:** authored by Eric Evers (`@erichevers`) and attached to
+  <https://github.com/xberg-io/xberg/issues/1484> as a minimal reproduction.
+- **License:** MIT, as a contribution to the Xberg test corpus.
+- **Used here:** `pdf/issue-1484-two-column-hanging-number-gutter.pdf`, a two-page A4 fixture whose
+  first page uses hanging clause numbers and whose unnumbered second page is the control.
+- **Modifications:** renamed for stable corpus addressing; document bytes are otherwise unchanged.
+
 ## City of Sugar Land, Texas — Ordinance No. 2197
 
 - **Citation:** City of Sugar Land, Texas, Ordinance No. 2197 (adopted 4 August 2020), a zoning change for approximately 0.7906 acres at Lake Pointe Parkway and Creek Bend Drive.
