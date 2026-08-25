@@ -7,8 +7,6 @@ binary (published to the bucket, never committed) and must be documented in
 `EPUB_EDGE_CASES.md`.
 """
 
-from __future__ import annotations
-
 import hashlib
 import io
 import json

@@ -22,8 +22,6 @@ way afterwards:
     python3 scripts/publish_corpus.py --bucket xberg-test-documents
 """
 
-from __future__ import annotations
-
 import argparse
 import concurrent.futures
 import hashlib

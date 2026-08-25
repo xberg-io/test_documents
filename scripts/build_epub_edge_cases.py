@@ -15,8 +15,6 @@ checks that pin against a fresh build.
     python3 scripts/build_epub_edge_cases.py --list     # print path and sha256
 """
 
-from __future__ import annotations
-
 import argparse
 import hashlib
 import io
