@@ -41,6 +41,8 @@ CONTAINER_XML = (
 
 XHTML11_DOCTYPE = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">\n'
 
+HTML5_DOCTYPE = "<!DOCTYPE html>\n"
+
 XHTML_NS = 'xmlns="http://www.w3.org/1999/xhtml"'
 
 
@@ -94,12 +96,20 @@ def package(
     manifest_extra: str = "",
 ) -> str:
     """The package document. `items` are (id, href, media-type, extra attributes)."""
+    # Every package carries a table of contents, so epubcheck reads the fixture as a
+    # conforming EPUB and the defect under test is the only thing wrong with it.
+    if version == "2.0":
+        items = [*items, ("ncx", "toc.ncx", "application/x-dtbncx+xml", "")]
+        toc_attr = ' toc="ncx"'
+    else:
+        items = [*items, ("nav", "nav.xhtml", "application/xhtml+xml", ' properties="nav"')]
+        metadata += '    <meta property="dcterms:modified">2026-08-25T00:00:00Z</meta>\n'
+        toc_attr = ""
     manifest = "".join(
         f'    <item id="{item_id}" href="{href}" media-type="{media_type}"{extra}/>\n'
         for item_id, href, media_type, extra in items
     )
     itemrefs = "".join(f'    <itemref idref="{item_id}"/>\n' for item_id in spine)
-    toc_attr = ' toc="ncx"' if any(item_id == "ncx" for item_id, _, _, _ in items) else ""
     return (
         '<?xml version="1.0" encoding="utf-8"?>\n'
         f'<package xmlns="http://www.idpf.org/2007/opf" version="{version}" unique-identifier="uid">\n'
@@ -119,6 +129,29 @@ def basic_metadata(title: str, identifier: str) -> str:
         f"    <dc:title>{title}</dc:title>\n"
         "    <dc:language>en</dc:language>\n"
     )
+
+
+def toc_member(version: str, first_href: str, identifier: str, title: str = "Start") -> tuple[str, bytes]:
+    """The table-of-contents member that `package` declared: an NCX for EPUB 2, a nav document for EPUB 3."""
+    if version == "2.0":
+        ncx = (
+            '<?xml version="1.0" encoding="utf-8"?>\n'
+            '<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">\n'
+            f'<head><meta name="dtb:uid" content="urn:xberg-test-documents:{identifier}"/><meta name="dtb:depth" content="1"/>'
+            '<meta name="dtb:totalPageCount" content="0"/><meta name="dtb:maxPageNumber" content="0"/></head>\n'
+            "<docTitle><text>Test</text></docTitle>\n"
+            f'<navMap><navPoint id="n1" playOrder="1"><navLabel><text>{title}</text></navLabel><content src="{first_href}"/></navPoint></navMap>\n'
+            "</ncx>\n"
+        )
+        return "OEBPS/toc.ncx", ncx.encode("utf-8")
+    nav = (
+        '<?xml version="1.0" encoding="utf-8"?>\n'
+        '<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">\n'
+        "<head><title>Contents</title></head>\n"
+        f'<body><nav epub:type="toc"><ol><li><a href="{first_href}">{title}</a></li></ol></nav></body>\n'
+        "</html>\n"
+    )
+    return "OEBPS/nav.xhtml", nav.encode("utf-8")
 
 
 def simple_epub(
@@ -147,6 +180,7 @@ def simple_epub(
     members = [("META-INF/container.xml", CONTAINER_XML.encode("utf-8")), ("OEBPS/content.opf", opf)]
     members += [(f"OEBPS/{href}", data) for href, data in chapters]
     members += extra_members or []
+    members.append(toc_member(version, chapters[0][0], slug))
     return pack(members)
 
 
@@ -206,11 +240,11 @@ def unparseable_chapter() -> bytes:
 # that 20,000 passes and 30,000 ends the process.
 def nested_30000(depth: int = 30_000) -> bytes:
     body = (
-        "<p>DEPTH-LEAD paragraph.</p>\n"
+        "<p>DEPTH-LEAD paragraph.</p>\n<div>"
         + "<span>" * depth
         + "DEPTH-CORE"
         + "</span>" * depth
-        + "\n<p>DEPTH-TAIL paragraph.</p>"
+        + "</div>\n<p>DEPTH-TAIL paragraph.</p>"
     )
     chapter = xhtml(body, title="Deep").encode("utf-8")
     return simple_epub("nested-30000", "Thirty thousand nested elements", [("deep.xhtml", chapter)])
@@ -219,7 +253,9 @@ def nested_30000(depth: int = 30_000) -> bytes:
 # Issue #1491: a spine item whose manifest href is a URL. The path-traversal
 # and absolute-path forms come from the epubcheck test suite.
 def remote_url_spine_item() -> bytes:
-    chapter = xhtml("<p>LOCAL-CHAPTER next to a remote spine item.</p>", title="Local").encode("utf-8")
+    chapter = xhtml("<p>LOCAL-CHAPTER next to a remote spine item.</p>", title="Local", doctype=HTML5_DOCTYPE).encode(
+        "utf-8"
+    )
     items = [
         ("c1", "chapter1.xhtml", "application/xhtml+xml", ""),
         ("remote", "https://example.org/remote.xhtml", "application/xhtml+xml", ""),
@@ -230,7 +266,7 @@ def remote_url_spine_item() -> bytes:
         items=items,
         spine=["c1", "remote"],
     ).encode("utf-8")
-    return simple_epub("remote-url-spine-item", "", [("chapter1.xhtml", chapter)], opf_bytes=opf)
+    return simple_epub("remote-url-spine-item", "", [("chapter1.xhtml", chapter)], version="3.0", opf_bytes=opf)
 
 
 # Issue #1492: every Dublin Core element that the last-wins parser got wrong,
@@ -274,6 +310,7 @@ def cover_meta_points_at_xhtml() -> bytes:
         ("OEBPS/cover.xhtml", cover_page),
         ("OEBPS/chapter1.xhtml", chapter),
         ("OEBPS/cover.png", png_1x1()),
+        toc_member("2.0", "cover.xhtml", "cover-meta-xhtml"),
     ]
     return pack(members)
 
@@ -349,7 +386,9 @@ def media_type_labels() -> bytes:
         chapters.append(
             (
                 f"OEBPS/{href}",
-                xhtml(f"<p>{marker} chapter declared as {label or 'an empty attribute'}.</p>").encode("utf-8"),
+                xhtml(
+                    f"<p>{marker} chapter declared as {label or 'an empty attribute'}.</p>", doctype=HTML5_DOCTYPE
+                ).encode("utf-8"),
             )
         )
         items.append((slug, href, label, ""))
@@ -360,6 +399,7 @@ def media_type_labels() -> bytes:
         spine=[slug for slug, _ in MEDIA_TYPE_LABELS],
     ).encode("utf-8")
     members = [("META-INF/container.xml", CONTAINER_XML.encode("utf-8")), ("OEBPS/content.opf", opf)] + chapters
+    members.append(toc_member("3.0", MEDIA_TYPE_LABELS[0][0] + ".xhtml", "media-type-labels"))
     return pack(members)
 
 

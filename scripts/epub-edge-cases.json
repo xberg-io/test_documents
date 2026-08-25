@@ -1,7 +1,7 @@
 {
   "epub/edge-cases/depth/synthetic_nested_30000.epub": {
-    "sha256": "146a7cf1b6cc4fd24fde021ff279f645760915d0534e02e1d8f06091ff2f9ba5",
-    "size": 391599,
+    "sha256": "90b231226f65c3aab5fa8ffdc48c9a187545483b6592ab2b5b1c1e1484ae2b18",
+    "size": 392285,
     "generated": true
   },
   "epub/edge-cases/encoding/epubcheck_ocf_encryption_unknown_valid.epub": {
@@ -33,33 +33,33 @@
     "url": "https://archive.org/download/whyiamsocialist441besa/whyiamsocialist441besa_lcp.epub"
   },
   "epub/edge-cases/encoding/synthetic_cp1252.epub": {
-    "sha256": "0da0e670340d371099e3145a616d520e1e08edf29bab884cc2c36f182d5bfe46",
-    "size": 1508,
+    "sha256": "5b1361c037dd41e4d5b91a99c90ebfe8a41300c3598a375d0babd4ec93dc5730",
+    "size": 2181,
     "generated": true
   },
   "epub/edge-cases/encoding/synthetic_latin1.epub": {
-    "sha256": "b870d3ad34cdffd48e954a23598d080b7c3b706094fc6f8bb5cb76c8a5e1bd81",
-    "size": 1512,
+    "sha256": "7d59757ed4627556292a3a9f2e49caf567b423f94e04ca67b1fcde6d47c67a43",
+    "size": 2185,
     "generated": true
   },
   "epub/edge-cases/encoding/synthetic_opf_latin1.epub": {
-    "sha256": "5ecfbedb85de8393c778aa08ffa5912ddcb954ebcde87d32cfdec702691eacab",
-    "size": 1605,
+    "sha256": "7be3c8b04b2742406726efbdd1f2fae6d09691cf08b522fe2c4ca90af0180dcb",
+    "size": 2282,
     "generated": true
   },
   "epub/edge-cases/encoding/synthetic_shift_jis.epub": {
-    "sha256": "9e47bace789e724b09dca29462bb77b00b9b92f2d975ac98fec6d7c89ac89c06",
-    "size": 1499,
+    "sha256": "405cfa75ec479e0b3435aff3e9914317abfcff63478d55b4ac42a22a86e5ac4d",
+    "size": 2175,
     "generated": true
   },
   "epub/edge-cases/encoding/synthetic_utf16be.epub": {
-    "sha256": "fcdd83f4e5699cf883e055e6d9f613cb221c653a68d7633b205af911a0db0596",
-    "size": 1668,
+    "sha256": "1241a258e2b4e6fca02aad819ae974f2494c040c4b6ec47e50e7c38e3fcb59d9",
+    "size": 2342,
     "generated": true
   },
   "epub/edge-cases/encoding/synthetic_utf16le.epub": {
-    "sha256": "6a814d4459896bb75674ced0c7b1ac3a27088fb64fba0beded7fb8670a9a4674",
-    "size": 1668,
+    "sha256": "9c93a9a421ee8e8aca670976453e534b0bd685e96b4a80335101ce9862235ea8",
+    "size": 2342,
     "generated": true
   },
   "epub/edge-cases/encoding/w3c_ocf_font_obfuscation.epub": {
@@ -68,18 +68,18 @@
     "url": "https://w3c.github.io/epub-tests/tests/ocf-font_obfuscation.epub"
   },
   "epub/edge-cases/entities/synthetic_bom_prelude.epub": {
-    "sha256": "95649b4d7cc23e5d82c34ed276aeec3e414ffc898ab67840abe6bd77f3d9fb49",
-    "size": 1603,
+    "sha256": "3e665d43dc0090458a6291bc35fbc3e1a2945e482ff779c80d8bacb108c75298",
+    "size": 2281,
     "generated": true
   },
   "epub/edge-cases/entities/synthetic_entity_style.epub": {
-    "sha256": "8c8e0556ec503ee165ab92c7f86ba2d974c115a81285d25d5576a9c0c05e9663",
-    "size": 2464,
+    "sha256": "923cfd02ab00e45ee843cef9eae47f765e57847cd669a2cfc58365f9dc4492e2",
+    "size": 3143,
     "generated": true
   },
   "epub/edge-cases/entities/synthetic_unparseable_chapter.epub": {
-    "sha256": "acb8a50373ee3b2bd08d4bb9aee6883351a2f25756ff2495728099c08463031b",
-    "size": 1967,
+    "sha256": "2fa647c947e1d157830bc2636759c4fb0f4237e17ff4f351ca9af89326618525",
+    "size": 2649,
     "generated": true
   },
   "epub/edge-cases/media-types/ia_foodresearchinst00stan.epub": {
@@ -88,8 +88,8 @@
     "url": "https://archive.org/download/foodresearchinst00stan/foodresearchinst00stan.epub"
   },
   "epub/edge-cases/media-types/synthetic_media_type_labels.epub": {
-    "sha256": "aff26748d03f918d5bfed027437fa92a181d1234db22bc2c8110ac70e645630c",
-    "size": 4325,
+    "sha256": "ef904ba92960a3a079a3ea61d5aebfd5d3fb78d9b1248c9625f5f4244754acee",
+    "size": 4359,
     "generated": true
   },
   "epub/edge-cases/metadata/epublib_testbook1.epub": {
@@ -108,13 +108,13 @@
     "url": "https://standardebooks.org/ebooks/mary-shelley/frankenstein/downloads/mary-shelley_frankenstein.epub?source=download"
   },
   "epub/edge-cases/metadata/synthetic_cover_meta_xhtml.epub": {
-    "sha256": "a4442310903112d4908a2873fbfd20b8ba5fa08b372389551ef7a2082a5a7fc9",
-    "size": 2401,
+    "sha256": "54a6221beaeb2467b0f8367d992ac1c85f2c4d34d7b03b81b5df50446b657ce0",
+    "size": 3081,
     "generated": true
   },
   "epub/edge-cases/metadata/synthetic_dublin_core_epub2.epub": {
-    "sha256": "e3fced23737465c6eee65b512c5aa12ad7314f044079ac47dd2cd64602ffcbaa",
-    "size": 2013,
+    "sha256": "b3ddac99341d7845aa78e55e80c35416c8bb5db560c1d913f2566eae6d92f015",
+    "size": 2697,
     "generated": true
   },
   "epub/edge-cases/navigation/epubjs_alice.epub": {
@@ -198,8 +198,8 @@
     }
   },
   "epub/edge-cases/unsafe-href/synthetic_remote_url_spine_item.epub": {
-    "sha256": "2cf9c292eec74946bcbb76d80b604390bdb24afb6ce1907543fdcbcbfab06cf7",
-    "size": 1719,
+    "sha256": "5112a7d5a1e8d03640669ebc9ea10ff4fdd764c14149a645ae7832a1d9a0bc4a",
+    "size": 2162,
     "generated": true
   }
 }
