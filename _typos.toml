@@ -1,0 +1,4 @@
+# typos (run by poly lint) reads this file. "opf" is the EPUB package document format, not a
+# misspelling of "of"; it appears throughout the EPUB corpus provenance and tooling.
+[default.extend-words]
+opf = "opf"
