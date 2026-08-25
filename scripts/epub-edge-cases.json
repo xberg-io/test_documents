@@ -1,0 +1,205 @@
+{
+  "epub/edge-cases/depth/synthetic_nested_30000.epub": {
+    "sha256": "146a7cf1b6cc4fd24fde021ff279f645760915d0534e02e1d8f06091ff2f9ba5",
+    "size": 391599,
+    "generated": true
+  },
+  "epub/edge-cases/encoding/epubcheck_ocf_encryption_unknown_valid.epub": {
+    "sha256": "dc9a685eaa19916621e07292d7c0c5dbec40dc181df1b19d874c85fa061967c2",
+    "size": 3157,
+    "members": {
+      "META-INF/container.xml": "https://raw.githubusercontent.com/w3c/epubcheck/82b174ec319ea3e6c9d2488f84155fa4a9171fc2/src/test/resources/epub3/04-ocf/files/ocf-encryption-unknown-valid/META-INF/container.xml",
+      "META-INF/encryption.xml": "https://raw.githubusercontent.com/w3c/epubcheck/82b174ec319ea3e6c9d2488f84155fa4a9171fc2/src/test/resources/epub3/04-ocf/files/ocf-encryption-unknown-valid/META-INF/encryption.xml",
+      "EPUB/package.opf": "https://raw.githubusercontent.com/w3c/epubcheck/82b174ec319ea3e6c9d2488f84155fa4a9171fc2/src/test/resources/epub3/04-ocf/files/ocf-encryption-unknown-valid/EPUB/package.opf",
+      "EPUB/nav.xhtml": "https://raw.githubusercontent.com/w3c/epubcheck/82b174ec319ea3e6c9d2488f84155fa4a9171fc2/src/test/resources/epub3/04-ocf/files/ocf-encryption-unknown-valid/EPUB/nav.xhtml",
+      "EPUB/content_001.xhtml": "https://raw.githubusercontent.com/w3c/epubcheck/82b174ec319ea3e6c9d2488f84155fa4a9171fc2/src/test/resources/epub3/04-ocf/files/ocf-encryption-unknown-valid/EPUB/content_001.xhtml"
+    }
+  },
+  "epub/edge-cases/encoding/epubcheck_ocf_obfuscation_valid.epub": {
+    "sha256": "1153d1ca421bf1e799d2d70cf216e17d275f54f3ca8aa16b36b9fda5d4d9d98c",
+    "size": 7055,
+    "members": {
+      "META-INF/container.xml": "https://raw.githubusercontent.com/w3c/epubcheck/82b174ec319ea3e6c9d2488f84155fa4a9171fc2/src/test/resources/epub3/04-ocf/files/ocf-obfuscation-valid/META-INF/container.xml",
+      "META-INF/encryption.xml": "https://raw.githubusercontent.com/w3c/epubcheck/82b174ec319ea3e6c9d2488f84155fa4a9171fc2/src/test/resources/epub3/04-ocf/files/ocf-obfuscation-valid/META-INF/encryption.xml",
+      "EPUB/package.opf": "https://raw.githubusercontent.com/w3c/epubcheck/82b174ec319ea3e6c9d2488f84155fa4a9171fc2/src/test/resources/epub3/04-ocf/files/ocf-obfuscation-valid/EPUB/package.opf",
+      "EPUB/nav.xhtml": "https://raw.githubusercontent.com/w3c/epubcheck/82b174ec319ea3e6c9d2488f84155fa4a9171fc2/src/test/resources/epub3/04-ocf/files/ocf-obfuscation-valid/EPUB/nav.xhtml",
+      "EPUB/content_001.xhtml": "https://raw.githubusercontent.com/w3c/epubcheck/82b174ec319ea3e6c9d2488f84155fa4a9171fc2/src/test/resources/epub3/04-ocf/files/ocf-obfuscation-valid/EPUB/content_001.xhtml",
+      "EPUB/obfuscated-font.otf": "https://raw.githubusercontent.com/w3c/epubcheck/82b174ec319ea3e6c9d2488f84155fa4a9171fc2/src/test/resources/epub3/04-ocf/files/ocf-obfuscation-valid/EPUB/obfuscated-font.otf"
+    }
+  },
+  "epub/edge-cases/encoding/ia_whyiamsocialist441besa_lcp.epub": {
+    "sha256": "0cf29b7753b646809d3ce3a01f4315503bd9c6837b188248fb1eb140f3a9902b",
+    "size": 1227313,
+    "url": "https://archive.org/download/whyiamsocialist441besa/whyiamsocialist441besa_lcp.epub"
+  },
+  "epub/edge-cases/encoding/synthetic_cp1252.epub": {
+    "sha256": "0da0e670340d371099e3145a616d520e1e08edf29bab884cc2c36f182d5bfe46",
+    "size": 1508,
+    "generated": true
+  },
+  "epub/edge-cases/encoding/synthetic_latin1.epub": {
+    "sha256": "b870d3ad34cdffd48e954a23598d080b7c3b706094fc6f8bb5cb76c8a5e1bd81",
+    "size": 1512,
+    "generated": true
+  },
+  "epub/edge-cases/encoding/synthetic_opf_latin1.epub": {
+    "sha256": "5ecfbedb85de8393c778aa08ffa5912ddcb954ebcde87d32cfdec702691eacab",
+    "size": 1605,
+    "generated": true
+  },
+  "epub/edge-cases/encoding/synthetic_shift_jis.epub": {
+    "sha256": "9e47bace789e724b09dca29462bb77b00b9b92f2d975ac98fec6d7c89ac89c06",
+    "size": 1499,
+    "generated": true
+  },
+  "epub/edge-cases/encoding/synthetic_utf16be.epub": {
+    "sha256": "fcdd83f4e5699cf883e055e6d9f613cb221c653a68d7633b205af911a0db0596",
+    "size": 1668,
+    "generated": true
+  },
+  "epub/edge-cases/encoding/synthetic_utf16le.epub": {
+    "sha256": "6a814d4459896bb75674ced0c7b1ac3a27088fb64fba0beded7fb8670a9a4674",
+    "size": 1668,
+    "generated": true
+  },
+  "epub/edge-cases/encoding/w3c_ocf_font_obfuscation.epub": {
+    "sha256": "11dd9d68fb7ace03ead5cb478a3717708ee680c1f345f1def97317c7e951957a",
+    "size": 55727,
+    "url": "https://w3c.github.io/epub-tests/tests/ocf-font_obfuscation.epub"
+  },
+  "epub/edge-cases/entities/synthetic_bom_prelude.epub": {
+    "sha256": "95649b4d7cc23e5d82c34ed276aeec3e414ffc898ab67840abe6bd77f3d9fb49",
+    "size": 1603,
+    "generated": true
+  },
+  "epub/edge-cases/entities/synthetic_entity_style.epub": {
+    "sha256": "8c8e0556ec503ee165ab92c7f86ba2d974c115a81285d25d5576a9c0c05e9663",
+    "size": 2464,
+    "generated": true
+  },
+  "epub/edge-cases/entities/synthetic_unparseable_chapter.epub": {
+    "sha256": "acb8a50373ee3b2bd08d4bb9aee6883351a2f25756ff2495728099c08463031b",
+    "size": 1967,
+    "generated": true
+  },
+  "epub/edge-cases/media-types/ia_foodresearchinst00stan.epub": {
+    "sha256": "a2fcab9bf0906e18675692dca7538252b2a8e86ff9e6b7da26813edce955d0f0",
+    "size": 13282,
+    "url": "https://archive.org/download/foodresearchinst00stan/foodresearchinst00stan.epub"
+  },
+  "epub/edge-cases/media-types/synthetic_media_type_labels.epub": {
+    "sha256": "aff26748d03f918d5bfed027437fa92a181d1234db22bc2c8110ac70e645630c",
+    "size": 4325,
+    "generated": true
+  },
+  "epub/edge-cases/metadata/epublib_testbook1.epub": {
+    "sha256": "1e30fb5671604c2905143ccfc446acbd94c40e608284e86c230864d1c01ae6cd",
+    "size": 337350,
+    "url": "https://raw.githubusercontent.com/psiegman/epublib/4936fd9ff26237ef7452b6d1f89d259f98831be1/epublib-core/src/test/resources/testbook1.epub"
+  },
+  "epub/edge-cases/metadata/pg27805_epub2.epub": {
+    "sha256": "afaacf7c948d630e5bf668e971053f64ac77d08877fb02bd6db5b891d9019ac7",
+    "size": 240203,
+    "url": "https://www.gutenberg.org/ebooks/27805.epub.noimages"
+  },
+  "epub/edge-cases/metadata/se_frankenstein.epub": {
+    "sha256": "52f92aa83c8430e9e0edb4409571331968be188ff00598e7884a3f41bede3299",
+    "size": 685738,
+    "url": "https://standardebooks.org/ebooks/mary-shelley/frankenstein/downloads/mary-shelley_frankenstein.epub?source=download"
+  },
+  "epub/edge-cases/metadata/synthetic_cover_meta_xhtml.epub": {
+    "sha256": "a4442310903112d4908a2873fbfd20b8ba5fa08b372389551ef7a2082a5a7fc9",
+    "size": 2401,
+    "generated": true
+  },
+  "epub/edge-cases/metadata/synthetic_dublin_core_epub2.epub": {
+    "sha256": "e3fced23737465c6eee65b512c5aa12ad7314f044079ac47dd2cd64602ffcbaa",
+    "size": 2013,
+    "generated": true
+  },
+  "epub/edge-cases/navigation/epubjs_alice.epub": {
+    "sha256": "deeca92b3705f7a23dad92f2d59d37369450a4336d7931aa5a28d5641f5f4f3c",
+    "size": 536540,
+    "url": "https://raw.githubusercontent.com/futurepress/epub.js/eee359d0790002115a1156a9833c54f4bcd44c1d/test/fixtures/alice.epub"
+  },
+  "epub/edge-cases/navigation/idpf_childrens_literature.epub": {
+    "sha256": "191d14d07bcaefde647e494256f73d789f265c8edc46c404320641b23c86b76a",
+    "size": 161291,
+    "url": "https://github.com/IDPF/epub3-samples/releases/download/20230704/childrens-literature.epub"
+  },
+  "epub/edge-cases/navigation/pg14838_epub3.epub": {
+    "sha256": "c1115a54a9c1ab2ded630925012df2aefbd0b4b5eba166e6dfadf8c685b82713",
+    "size": 1510370,
+    "url": "https://www.gutenberg.org/ebooks/14838.epub3.images"
+  },
+  "epub/edge-cases/navigation/pg1661_epub2.epub": {
+    "sha256": "4e380df6664160703b706b3b690f1a63b1242c2c5085c30ee79727f0177230b0",
+    "size": 311604,
+    "url": "https://www.gutenberg.org/ebooks/1661.epub.noimages"
+  },
+  "epub/edge-cases/navigation/pg28885_epub3.epub": {
+    "sha256": "17bb2c40e514a7cf4f0c6d0139aadad45c82a535a2a2202aa3da3c4501186e64",
+    "size": 1475190,
+    "url": "https://www.gutenberg.org/ebooks/28885.epub3.images"
+  },
+  "epub/edge-cases/navigation/w3c_cnt_svg_support.epub": {
+    "sha256": "2d716ac916b9273786c1be3c5beb047de8dc53b866214f7386ecd437cd4f266c",
+    "size": 3022,
+    "url": "https://w3c.github.io/epub-tests/tests/cnt-svg-support.epub"
+  },
+  "epub/edge-cases/navigation/w3c_lay_pp_image_only.epub": {
+    "sha256": "572e0ec4ef3af2016fc3384662071d8514470f30113ace00aaa0d7c35e2d44b9",
+    "size": 191246,
+    "url": "https://w3c.github.io/epub-tests/tests/lay-pp-spine-overrides_image-only-pp.epub"
+  },
+  "epub/edge-cases/navigation/w3c_nav_spine_in_spine.epub": {
+    "sha256": "0afe8029a7f432d9602a1a83dad2cd793fcd0edc8e6586eefa32e339a9248923",
+    "size": 2267,
+    "url": "https://w3c.github.io/epub-tests/tests/nav-spine_in-spine.epub"
+  },
+  "epub/edge-cases/navigation/w3c_pkg_spine_order_svg.epub": {
+    "sha256": "e5407a13baf6b22526faa135dca4befa8f6b7711297ed93ef7dbfbe40987ae48",
+    "size": 2589,
+    "url": "https://w3c.github.io/epub-tests/tests/pkg-spine-order-svg.epub"
+  },
+  "epub/edge-cases/rendering/pg39292_epub2.epub": {
+    "sha256": "26c2857ab7501ebfa68a418a87fb6e3ebdcc6dfd9a3986b9ca90433b60aaa2a6",
+    "size": 86945,
+    "url": "https://www.gutenberg.org/ebooks/39292.epub.noimages"
+  },
+  "epub/edge-cases/rendering/pg98_epub2.epub": {
+    "sha256": "94e22b2d9db5a53b462e82957cad4b4680ce133b33ebe32bde70d7cb8c3b30e3",
+    "size": 487514,
+    "url": "https://www.gutenberg.org/ebooks/98.epub.noimages"
+  },
+  "epub/edge-cases/rendering/w3c_ocf_url_link_leaking_relative.epub": {
+    "sha256": "3644ae2b58dfb8b4bbf9977c1f2841900fe73e12559e1660a9d7422612e8b34c",
+    "size": 321387,
+    "url": "https://w3c.github.io/epub-tests/tests/ocf-url_link-leaking-relative.epub"
+  },
+  "epub/edge-cases/unsafe-href/epubcheck_ocf_url_leaking_in_opf.epub": {
+    "sha256": "0352c1650ad217376fa27998ddb2548bc636423b0b6cb81764c454f8b7e13217",
+    "size": 2087,
+    "members": {
+      "META-INF/container.xml": "https://raw.githubusercontent.com/w3c/epubcheck/82b174ec319ea3e6c9d2488f84155fa4a9171fc2/src/test/resources/epub3/04-ocf/files/ocf-url-leaking-in-opf-error/META-INF/container.xml",
+      "EPUB/package.opf": "https://raw.githubusercontent.com/w3c/epubcheck/82b174ec319ea3e6c9d2488f84155fa4a9171fc2/src/test/resources/epub3/04-ocf/files/ocf-url-leaking-in-opf-error/EPUB/package.opf",
+      "EPUB/nav.xhtml": "https://raw.githubusercontent.com/w3c/epubcheck/82b174ec319ea3e6c9d2488f84155fa4a9171fc2/src/test/resources/epub3/04-ocf/files/ocf-url-leaking-in-opf-error/EPUB/nav.xhtml",
+      "EPUB/content_001.xhtml": "https://raw.githubusercontent.com/w3c/epubcheck/82b174ec319ea3e6c9d2488f84155fa4a9171fc2/src/test/resources/epub3/04-ocf/files/ocf-url-leaking-in-opf-error/EPUB/content_001.xhtml"
+    }
+  },
+  "epub/edge-cases/unsafe-href/epubcheck_ocf_url_path_absolute.epub": {
+    "sha256": "4bee6cefa8e63111b1c96b01af45f50725fac2a343901aaa888dc19d24aa95e9",
+    "size": 2054,
+    "members": {
+      "META-INF/container.xml": "https://raw.githubusercontent.com/w3c/epubcheck/82b174ec319ea3e6c9d2488f84155fa4a9171fc2/src/test/resources/epub3/04-ocf/files/ocf-url-path-absolute-error/META-INF/container.xml",
+      "EPUB/package.opf": "https://raw.githubusercontent.com/w3c/epubcheck/82b174ec319ea3e6c9d2488f84155fa4a9171fc2/src/test/resources/epub3/04-ocf/files/ocf-url-path-absolute-error/EPUB/package.opf",
+      "EPUB/nav.xhtml": "https://raw.githubusercontent.com/w3c/epubcheck/82b174ec319ea3e6c9d2488f84155fa4a9171fc2/src/test/resources/epub3/04-ocf/files/ocf-url-path-absolute-error/EPUB/nav.xhtml",
+      "EPUB/content_001.xhtml": "https://raw.githubusercontent.com/w3c/epubcheck/82b174ec319ea3e6c9d2488f84155fa4a9171fc2/src/test/resources/epub3/04-ocf/files/ocf-url-path-absolute-error/EPUB/content_001.xhtml"
+    }
+  },
+  "epub/edge-cases/unsafe-href/synthetic_remote_url_spine_item.epub": {
+    "sha256": "2cf9c292eec74946bcbb76d80b604390bdb24afb6ce1907543fdcbcbfab06cf7",
+    "size": 1719,
+    "generated": true
+  }
+}
