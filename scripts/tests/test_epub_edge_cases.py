@@ -14,8 +14,8 @@ import re
 import unittest
 import zipfile
 
-import build_epub_edge_cases
 from corpus_tools import paths
+from corpus_tools.epub import build as build_epub_edge_cases
 from corpus_tools.patterns import load_patterns, matches_corpus_pattern
 
 SCRIPTS_DIR = paths.SCRIPTS_DIR
