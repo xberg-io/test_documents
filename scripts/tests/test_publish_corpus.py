@@ -7,6 +7,7 @@ from pathlib import Path
 
 from corpus_tools import paths
 from corpus_tools.corpus.backends import LocalDirBackend
+from corpus_tools.corpus.fetch import fetch_one
 from corpus_tools.corpus.publish import (
     EXTRA_ROOT_FILES,
     STAGING_DIR_PREFIX,
@@ -32,7 +33,6 @@ from corpus_tools.manifest import (
     unique_objects_by_sha256,
 )
 from corpus_tools.patterns import PATTERNS_FILENAME, load_patterns, matches_any, matches_corpus_pattern
-from fetch_corpus import fetch_one
 
 REPO_ROOT = paths.REPO_ROOT
 

@@ -11,7 +11,7 @@ exercised is the interpretation of a curl result, which is where the logic actua
 
 import unittest
 
-import verify_corpus
+from corpus_tools.corpus import verify as verify_corpus
 from corpus_tools.http import HeadResult, HttpError
 
 DIGEST_A = "a" * 64

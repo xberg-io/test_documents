@@ -15,55 +15,16 @@ import argparse
 import sys
 from pathlib import Path
 
-from corpus_tools.hashing import BYTES_PER_MIB, sha256_bytes, sha256_file
+from corpus_tools.corpus.fetch import MAX_REPORTED_FAILURES, fetch_one
+from corpus_tools.hashing import BYTES_PER_MIB
 from corpus_tools.http import (
-    BUCKET_OBJECT_TIMEOUT_SECONDS,
-    DEFAULT_RETRY,
     AdcCredential,
     CurlTransport,
-    HttpError,
-    RetryPolicy,
-    Transport,
-    get,
 )
-from corpus_tools.manifest import DEFAULT_BUCKET, MANIFEST_FILENAME, lock_objects, object_url
+from corpus_tools.manifest import DEFAULT_BUCKET, MANIFEST_FILENAME, lock_objects
 from corpus_tools.paths import REPO_ROOT
 from corpus_tools.patterns import matches_any
 from corpus_tools.pool import add_jobs_argument, map_parallel
-
-MAX_REPORTED_FAILURES = 20
-
-
-def fetch_one(
-    bucket: str,
-    root: Path,
-    rel_path: str,
-    sha256: str,
-    *,
-    transport: Transport | None = None,
-    retry: RetryPolicy = DEFAULT_RETRY,
-) -> str | None:
-    """Materialise one object. transport/retry are injectable so tests need no network or backoff."""
-    destination = root / rel_path
-    if destination.is_file() and sha256_file(destination) == sha256:
-        return None
-
-    destination.parent.mkdir(parents=True, exist_ok=True)
-    try:
-        payload = get(
-            object_url(bucket, sha256),
-            timeout=BUCKET_OBJECT_TIMEOUT_SECONDS,
-            transport=transport if transport is not None else CurlTransport(),
-            retry=retry,
-        )
-    except HttpError as error:
-        return f"{rel_path}: {error.reason}"
-
-    actual = sha256_bytes(payload)
-    if actual != sha256:
-        return f"{rel_path}: expected {sha256} but bucket served {actual}"
-    destination.write_bytes(payload)
-    return None
 
 
 def parse_args(argv: list[str] | None) -> argparse.Namespace:
