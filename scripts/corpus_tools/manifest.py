@@ -11,7 +11,7 @@ the pair round-trips the committed file byte for byte.
 
 import json
 from dataclasses import dataclass
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Any
 
 from corpus_tools.hashing import sha256_file
@@ -40,7 +40,27 @@ def load_lock(manifest_path: Path) -> dict[str, Any]:
 
 def lock_objects(manifest_path: Path) -> dict[str, dict[str, Any]]:
     objects: dict[str, dict[str, Any]] = load_lock(manifest_path)["objects"]
+    for rel_path in objects:
+        validate_manifest_path(rel_path)
     return objects
+
+
+def validate_manifest_path(rel_path: str) -> str:
+    """Require a normalized relative POSIX path before joining it to a corpus root."""
+    posix_path = PurePosixPath(rel_path)
+    windows_path = PureWindowsPath(rel_path)
+    invalid = (
+        not rel_path
+        or "\\" in rel_path
+        or posix_path.is_absolute()
+        or windows_path.is_absolute()
+        or bool(windows_path.drive)
+        or posix_path.as_posix() != rel_path
+        or any(part in {".", ".."} for part in posix_path.parts)
+    )
+    if invalid:
+        raise ValueError(f"manifest path must be normalized and relative: {rel_path!r}")
+    return rel_path
 
 
 def lock_pins(manifest_path: Path) -> dict[str, int]:

@@ -132,3 +132,51 @@ class FetchCorpusMainTest(unittest.TestCase):
 
         self.assertEqual(result, 0)
         self.assertEqual(len(self.transport.requested), 1)
+
+    def test_should_reject_manifest_paths_that_escape_the_requested_root(self) -> None:
+        outside = self.root / "escaped.pdf"
+        for unsafe_path in ["../escaped.pdf", "/escaped.pdf", "nested/../../escaped.pdf", "C:\\escaped.pdf"]:
+            with self.subTest(path=unsafe_path):
+                write_manifest(
+                    {
+                        "schema": 1,
+                        "objects": {
+                            unsafe_path: {
+                                "sha256": sha256_bytes(b"outside"),
+                                "size": len(b"outside"),
+                            }
+                        },
+                    },
+                    self.manifest,
+                )
+
+                with self.assertRaises(ValueError):
+                    self._run()
+
+                self.assertFalse(outside.exists())
+                self.assertEqual(self.transport.requested, [])
+
+    def test_should_reject_a_manifest_path_that_escapes_through_a_symlink(self) -> None:
+        destination = self.root / "tree"
+        destination.mkdir()
+        outside = self.root / "outside"
+        outside.mkdir()
+        (destination / "link").symlink_to(outside, target_is_directory=True)
+        write_manifest(
+            {
+                "schema": 1,
+                "objects": {
+                    "link/escaped.pdf": {
+                        "sha256": sha256_bytes(b"outside"),
+                        "size": len(b"outside"),
+                    }
+                },
+            },
+            self.manifest,
+        )
+
+        with self.assertRaises(ValueError):
+            self._run()
+
+        self.assertFalse((outside / "escaped.pdf").exists())
+        self.assertEqual(self.transport.requested, [])

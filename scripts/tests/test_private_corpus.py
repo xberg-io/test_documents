@@ -256,14 +256,31 @@ class AdcCredentialTest(unittest.TestCase):
         return run, calls
 
     def test_should_send_a_bearer_header_only_when_a_credential_is_supplied(self) -> None:
-        run, calls = self._runner()
+        calls: list[tuple[list[str], dict]] = []
+
+        def run(command, **kwargs):
+            calls.append((command, kwargs))
+            if command[0] == "gcloud":
+                return subprocess.CompletedProcess(command, 0, "ya29.token\n", "")
+            return subprocess.CompletedProcess(command, 0, b"payload", b"")
+
         anonymous_run, anonymous_calls = self._runner()
 
         CurlTransport(anonymous_run).fetch("https://example.invalid/x", timeout=30)
         CurlTransport(run, credential=AdcCredential(run)).fetch("https://example.invalid/x", timeout=30)
 
         self.assertNotIn("-H", anonymous_calls[0])
-        self.assertIn("Authorization: Bearer ya29.token", calls[-1])
+        curl_call, curl_kwargs = calls[-1]
+        self.assertNotIn("ya29.token", " ".join(curl_call))
+        self.assertEqual(curl_call[curl_call.index("--config") + 1], "-")
+        self.assertEqual(curl_kwargs["input"], b'header = "Authorization: Bearer ya29.token"\n')
+
+    def test_should_acquire_the_application_default_credential_not_the_cli_account(self) -> None:
+        run, calls = self._runner()
+
+        AdcCredential(run).token()
+
+        self.assertEqual(calls, [["gcloud", "auth", "application-default", "print-access-token"]])
 
     def test_should_reuse_a_token_within_its_lifetime_rather_than_shelling_out_per_object(self) -> None:
         run, calls = self._runner()
@@ -311,19 +328,16 @@ class AdcCredentialTest(unittest.TestCase):
     def test_should_not_retry_a_credential_failure_across_every_object(self) -> None:
         # ~keep A missing ADC login fails identically every time. Retrying turns one clear message
         # into attempts x objects subprocesses and seconds of backoff before saying the same thing.
-        run, _ = self._runner(returncode=1, stderr="ERROR: (gcloud.auth) not logged in")
+        run, calls = self._runner(returncode=1, stderr="ERROR: (gcloud.auth) not logged in")
         transport = CurlTransport(run, credential=AdcCredential(run))
         attempts: list[float] = []
 
-        with self.assertRaises(CredentialError):
-            get(
-                "https://example.invalid/o",
-                timeout=30,
-                transport=transport,
-                sleep=attempts.append,
-            )
+        for url in ["https://example.invalid/one", "https://example.invalid/two"]:
+            with self.assertRaises(CredentialError):
+                get(url, timeout=30, transport=transport, sleep=attempts.append)
 
         self.assertEqual(attempts, [], "a credential failure must not sleep for a retry")
+        self.assertEqual(len(calls), 1, "one terminal ADC failure must be shared by every object")
 
     def test_should_explain_how_to_authenticate_when_no_credential_is_available(self) -> None:
         run, _ = self._runner(returncode=1, stderr="ERROR: (gcloud.auth) not logged in")

@@ -106,10 +106,10 @@ ACCESS_TOKEN_MAX_AGE_SECONDS = 30 * 60
 class AdcCredential:
     """An Application Default Credentials bearer token, refreshed as it ages.
 
-    ~keep Deliberately shells out to `gcloud auth print-access-token` rather than importing
+    ~keep Deliberately shells out to `gcloud auth application-default print-access-token` rather than importing
     google.auth. This package is stdlib-only because consumers run it on a bare checkout with
     nothing installed, and the CI path (google-github-actions/auth with WIF) populates ADC exactly
-    the same way a local `gcloud auth login` does — so one code path serves both.
+    the same way a local `gcloud auth application-default login` does — so one code path serves both.
     """
 
     def __init__(
@@ -120,6 +120,7 @@ class AdcCredential:
         self._run = runner
         self._clock = clock
         self._token: str | None = None
+        self._failure: CredentialError | None = None
         self._acquired_at = 0.0
         # ~keep token() is called from every worker thread. Without this the first batch of --jobs
         # threads all miss the cache at once and stampede gcloud with N identical subprocesses.
@@ -127,8 +128,14 @@ class AdcCredential:
 
     def token(self) -> str:
         with self._lock:
+            if self._failure is not None:
+                raise self._failure
             if self._token is None or self._clock() - self._acquired_at >= ACCESS_TOKEN_MAX_AGE_SECONDS:
-                self._token = self._acquire()
+                try:
+                    self._token = self._acquire()
+                except CredentialError as error:
+                    self._failure = error
+                    raise
                 # ~keep Stamped AFTER acquiring, not before: gcloud can take a second or two, and
                 # dating the token from before that shortens its usable life by exactly that much.
                 self._acquired_at = self._clock()
@@ -136,21 +143,28 @@ class AdcCredential:
 
     def _acquire(self) -> str:
         result = self._run(
-            ["gcloud", "auth", "print-access-token"],
+            ["gcloud", "auth", "application-default", "print-access-token"],
             capture_output=True,
             text=True,
             check=False,
         )
         if result.returncode != 0:
             raise CredentialError(
-                "gcloud auth print-access-token",
+                "gcloud auth application-default print-access-token",
                 "could not obtain an access token. Run `gcloud auth application-default login`, or "
                 f"check the workload-identity setup in CI: {result.stderr.strip()}",
             )
-        return result.stdout.strip()
+        token = result.stdout.strip()
+        if not token or '"' in token or any(character.isspace() for character in token):
+            raise CredentialError(
+                "gcloud auth application-default print-access-token",
+                "gcloud returned an invalid access token",
+            )
+        return token
 
-    def headers(self) -> list[str]:
-        return ["-H", f"Authorization: Bearer {self.token()}"]
+    def curl_config(self) -> str:
+        """Return an stdin-only curl config so the bearer token never enters process arguments."""
+        return f'header = "Authorization: Bearer {self.token()}"\n'
 
 
 @dataclass(frozen=True)
@@ -194,13 +208,18 @@ class CurlTransport:
         # credentials and that is the path this repo's CI proves still works.
         self._credential = credential
 
-    def _auth_headers(self) -> list[str]:
-        return self._credential.headers() if self._credential is not None else []
+    def _auth_config(self, *, text: bool) -> tuple[list[str], str | bytes | None]:
+        if self._credential is None:
+            return [], None
+        config = self._credential.curl_config()
+        return ["--config", "-"], config if text else config.encode()
 
     def fetch(self, url: str, *, timeout: float) -> bytes:
+        auth_args, auth_input = self._auth_config(text=False)
         result = self._run(
-            ["curl", "-sS", "--fail", "--max-time", str(int(timeout)), *self._auth_headers(), url],
+            ["curl", "-sS", "--fail", "--max-time", str(int(timeout)), *auth_args, url],
             capture_output=True,
+            input=auth_input,
             check=False,
         )
         if result.returncode != 0:
@@ -216,14 +235,15 @@ class CurlTransport:
         per object because process startup dominates a HEAD request, and curl reuses the
         connection across URLs given in a single invocation.
         """
-        command = ["curl", "-sS", "--head", "--max-time", str(int(timeout)), *self._auth_headers()]
+        auth_args, auth_input = self._auth_config(text=True)
+        command = ["curl", "-sS", "--head", "--max-time", str(int(timeout)), *auth_args]
         command += ["-w", "%{http_code} %header{content-length} %{url_effective}\n"]
         for url in urls:
             # ~keep -o must repeat per URL; curl applies a single -o to the first transfer only and
             # dumps every later response to stdout, which corrupts the write-out lines we parse.
             command += ["-o", "/dev/null", url]
 
-        result = self._run(command, capture_output=True, text=True, check=False)
+        result = self._run(command, capture_output=True, input=auth_input, text=True, check=False)
         if result.returncode != 0:
             raise HttpError(f"a batch of {len(urls)}", f"curl failed: {result.stderr.strip()}")
 

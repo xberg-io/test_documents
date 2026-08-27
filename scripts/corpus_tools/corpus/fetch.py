@@ -12,7 +12,7 @@ from corpus_tools.http import (
     Transport,
     get,
 )
-from corpus_tools.manifest import object_url
+from corpus_tools.manifest import object_url, validate_manifest_path
 
 MAX_REPORTED_FAILURES = 20
 
@@ -27,7 +27,10 @@ def fetch_one(
     retry: RetryPolicy = DEFAULT_RETRY,
 ) -> str | None:
     """Materialise one object. transport/retry are injectable so tests need no network or backoff."""
-    destination = root / rel_path
+    root = root.resolve()
+    destination = root / validate_manifest_path(rel_path)
+    if not destination.resolve().is_relative_to(root):
+        raise ValueError(f"manifest path escapes the corpus root through a symlink: {rel_path!r}")
     if destination.is_file() and sha256_file(destination) == sha256:
         return None
 
