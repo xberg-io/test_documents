@@ -17,6 +17,13 @@ import unittest
 from pathlib import Path
 
 import fetch_corpus
+from corpus_tools.corpus.publish import (
+    PublishTargetRefused,
+    corpus_paths,
+    guard_against_publishing_private_corpus_publicly,
+    guard_against_root_outside_the_corpus,
+    resolve_targets,
+)
 from corpus_tools.http import (
     ACCESS_TOKEN_MAX_AGE_SECONDS,
     AdcCredential,
@@ -35,14 +42,7 @@ from corpus_tools.manifest import (
 )
 from corpus_tools.paths import REPO_ROOT
 from corpus_tools.patterns import PATTERNS_FILENAME, load_patterns, matches_corpus_pattern
-from publish_corpus import (
-    PublishTargetRefused,
-    corpus_paths,
-    guard_against_publishing_private_corpus_publicly,
-    guard_against_root_outside_the_corpus,
-    parse_args,
-    resolve_targets,
-)
+from publish_corpus import parse_args
 
 PRIVATE_BUCKET = "internal-corpus"
 

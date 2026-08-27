@@ -6,6 +6,23 @@ import unittest
 from pathlib import Path
 
 from corpus_tools import paths
+from corpus_tools.corpus.backends import LocalDirBackend
+from corpus_tools.corpus.publish import (
+    EXTRA_ROOT_FILES,
+    STAGING_DIR_PREFIX,
+    WRITE_PROBE_KEY,
+    CorpusFileTracked,
+    EmptyCorpus,
+    GuardViolation,
+    WriteProbeFailed,
+    corpus_paths,
+    guard_against_forbidden_paths,
+    guard_against_tracked_corpus_files,
+    staged_by_sha256,
+    upload_extra_files,
+    upload_unique_objects,
+    verify_write_access,
+)
 from corpus_tools.hashing import sha256_file
 from corpus_tools.http import RetryPolicy
 from corpus_tools.manifest import (
@@ -16,23 +33,6 @@ from corpus_tools.manifest import (
 )
 from corpus_tools.patterns import PATTERNS_FILENAME, load_patterns, matches_any, matches_corpus_pattern
 from fetch_corpus import fetch_one
-from publish_corpus import (
-    EXTRA_ROOT_FILES,
-    STAGING_DIR_PREFIX,
-    WRITE_PROBE_KEY,
-    CorpusFileTracked,
-    EmptyCorpus,
-    GuardViolation,
-    LocalDirBackend,
-    WriteProbeFailed,
-    corpus_paths,
-    guard_against_forbidden_paths,
-    guard_against_tracked_corpus_files,
-    staged_by_sha256,
-    upload_extra_files,
-    upload_unique_objects,
-    verify_write_access,
-)
 
 REPO_ROOT = paths.REPO_ROOT
 

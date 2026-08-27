@@ -15,8 +15,8 @@ import unittest
 import zipfile
 
 import build_epub_edge_cases
-import publish_corpus
 from corpus_tools import paths
+from corpus_tools.patterns import load_patterns, matches_corpus_pattern
 
 SCRIPTS_DIR = paths.SCRIPTS_DIR
 REPO_ROOT = paths.REPO_ROOT
@@ -38,10 +38,10 @@ class ManifestTests(unittest.TestCase):
             self.assertGreater(entry["size"], 0, path)
 
     def test_every_path_is_a_corpus_binary_under_the_edge_case_directory(self) -> None:
-        patterns = publish_corpus.load_patterns(REPO_ROOT)
+        patterns = load_patterns(REPO_ROOT)
         for path in load_manifest():
             self.assertTrue(path.startswith(f"{build_epub_edge_cases.CORPUS_DIR}/"), path)
-            self.assertTrue(publish_corpus.matches_corpus_pattern(path, patterns), f"{path} is not a corpus binary")
+            self.assertTrue(matches_corpus_pattern(path, patterns), f"{path} is not a corpus binary")
 
     def test_generated_entries_match_the_manifest_and_builders_agree(self) -> None:
         manifest = load_manifest()
