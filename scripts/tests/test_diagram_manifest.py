@@ -14,8 +14,6 @@ the Graphviz graphs with the renderer, and `scripts/build_diagram_pdfs.py --chec
 PDFs and compares the bytes.
 """
 
-from __future__ import annotations
-
 import json
 import re
 import unittest

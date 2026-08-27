@@ -19,8 +19,6 @@ A download whose digest does not match is written to `<path>.mismatch` and
 reported, rather than replacing a good file with a source that has changed.
 """
 
-from __future__ import annotations
-
 import argparse
 import functools
 import json

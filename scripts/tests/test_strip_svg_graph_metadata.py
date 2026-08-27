@@ -8,8 +8,6 @@ removing them would change a pixel. Everything else is the producer talking abou
 graph.
 """
 
-from __future__ import annotations
-
 import unittest
 
 from corpus_tools.diagrams.svg_metadata import strip

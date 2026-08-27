@@ -18,8 +18,6 @@ the content-addressed bucket and `corpus.lock.json` are for; this script is what
 honest about the command that made it.
 """
 
-from __future__ import annotations
-
 import argparse
 import os
 import re

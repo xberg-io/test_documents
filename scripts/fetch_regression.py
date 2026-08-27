@@ -19,8 +19,6 @@ the shard and the member inside it. A shard is downloaded once and every member
 taken from it before it is discarded.
 """
 
-from __future__ import annotations
-
 import argparse
 import collections
 import functools

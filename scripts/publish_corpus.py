@@ -12,8 +12,6 @@ Run it locally after adding or changing a fixture, then commit the refreshed
 corpus.lock.json. CI cannot do this: a checkout contains no binaries at all.
 """
 
-from __future__ import annotations
-
 import argparse
 import base64
 import hashlib

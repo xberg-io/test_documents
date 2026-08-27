@@ -1,7 +1,5 @@
 """Unit tests for the corpus publisher. Run with `python3 -m unittest discover -s scripts`."""
 
-from __future__ import annotations
-
 import subprocess
 import tempfile
 import unittest

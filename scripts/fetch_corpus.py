@@ -11,8 +11,6 @@ with include_bytes!/include_str!, so the files must exist on disk before `cargo 
 Already-correct files are left alone, so re-running costs one hash per file and no network.
 """
 
-from __future__ import annotations
-
 import argparse
 import sys
 from pathlib import Path

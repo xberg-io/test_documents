@@ -78,8 +78,6 @@ Usage:
         diagrams/svg/graphviz_flow_geometry.svg
 """
 
-from __future__ import annotations
-
 import re
 from pathlib import Path
 

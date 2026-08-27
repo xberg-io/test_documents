@@ -13,8 +13,6 @@ covers all of them and the expensive hash check covers a deterministic sample (e
 over the sorted sha256 list, so it is reproducible yet not always the same handful).
 """
 
-from __future__ import annotations
-
 import argparse
 import sys
 

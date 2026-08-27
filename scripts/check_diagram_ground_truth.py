@@ -22,8 +22,6 @@ Usage:
     python3 scripts/check_diagram_ground_truth.py
 """
 
-from __future__ import annotations
-
 import re
 import shutil
 import subprocess
