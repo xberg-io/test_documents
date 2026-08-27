@@ -1,12 +1,14 @@
 """Fetch-or-build each EPUB edge case from the source its manifest records."""
 
+from typing import Any
+
 from corpus_tools import paths
 from corpus_tools.epub import build as build_epub_edge_cases
 from corpus_tools.http import SOURCE_FILE_TIMEOUT_SECONDS, UrllibTransport, get
 from corpus_tools.materialize import materialize_one
 
 REPO_ROOT = paths.REPO_ROOT
-MANIFEST = Path(__file__).resolve().parent / "data" / "epub-edge-cases.json"
+MANIFEST = paths.EPUB_MANIFEST_PATH
 
 
 TRANSPORT = UrllibTransport()

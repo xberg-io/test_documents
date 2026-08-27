@@ -22,9 +22,11 @@ Usage:
     python3 scripts/check_diagram_ground_truth.py
 """
 
+import argparse
 import re
 import shutil
 import subprocess
+import sys
 from collections.abc import Sequence
 from pathlib import Path
 from typing import TypeVar
@@ -103,12 +105,28 @@ def report_difference(name: str, drawn: Sequence[T], recorded: Sequence[T]) -> N
     print(f"     {name} in ground truth but not drawn: {sorted(set(recorded) - set(drawn))}")
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument(
+        "--only",
+        action="append",
+        default=[],
+        metavar="STEM",
+        help="check only this fixture stem; repeatable. Defaults to every fixture.",
+    )
+    args = parser.parse_args(argv)
+
     if shutil.which("dot") is None:
         print("graphviz is not installed, skipping the ground-truth cross-check")
         return 0
+
+    selected = {stem: engine for stem, engine in ENGINES.items() if not args.only or stem in args.only}
+    if not selected:
+        print(f"no fixture stem matched {args.only}; known stems: {', '.join(sorted(ENGINES))}", file=sys.stderr)
+        return 1
+
     failures = 0
-    for stem, engine in sorted(ENGINES.items()):
+    for stem, engine in sorted(selected.items()):
         drawn_nodes, drawn_edges = drawn_graph(stem, engine)
         recorded_nodes, recorded_edges = recorded_graph(stem)
         if drawn_nodes == recorded_nodes and drawn_edges == recorded_edges:
@@ -124,4 +142,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    sys.exit(main())
