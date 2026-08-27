@@ -27,66 +27,40 @@ import functools
 import io
 import json
 import sys
-import urllib.request
 import zipfile
 from pathlib import Path
 
 from corpus_tools import paths
-from corpus_tools.hashing import sha256_bytes, sha256_file
+from corpus_tools.http import SHARD_TIMEOUT_SECONDS, SOURCE_FILE_TIMEOUT_SECONDS, UrllibTransport, get
+from corpus_tools.materialize import STATUS_SKIPPED, is_current, materialize_one, write_verified
 from corpus_tools.pool import THIRD_PARTY_SOURCE_JOBS, add_jobs_argument, run_parallel
 
 REPO_ROOT = paths.REPO_ROOT
 MANIFEST = Path(__file__).resolve().parent / "data" / "regression-objects.json"
-TIMEOUT = 300
-RETRIES = 3
 
 
-def download(url: str) -> bytes:
-    last = ""
-    for _attempt in range(1, RETRIES + 1):
-        try:
-            request = urllib.request.Request(url, headers={"User-Agent": "xberg-test-documents"})
-            with urllib.request.urlopen(request, timeout=TIMEOUT) as response:
-                return response.read()
-        except Exception as error:  # noqa: BLE001 - retry any transport failure
-            last = f"{type(error).__name__}: {error}"
-    raise RuntimeError(last)
-
-
-def write_checked(path: str, payload: bytes, expected: str) -> str:
-    target = REPO_ROOT / path
-    target.parent.mkdir(parents=True, exist_ok=True)
-    digest = sha256_bytes(payload)
-    if digest != expected:
-        target.with_suffix(target.suffix + ".mismatch").write_bytes(payload)
-        return f"mismatch got {digest[:12]} want {expected[:12]}"
-    target.write_bytes(payload)
-    return "ok"
-
-
-def up_to_date(path: str, expected: str) -> bool:
-    target = REPO_ROOT / path
-    return target.exists() and sha256_file(target) == expected
+TRANSPORT = UrllibTransport()
 
 
 def fetch_direct(path: str, entry: dict, force: bool) -> tuple[str, str]:
-    if not force and up_to_date(path, entry["sha256"]):
-        return path, "skipped"
-    try:
-        return path, write_checked(path, download(entry["url"]), entry["sha256"])
-    except Exception as error:  # noqa: BLE001 - report rather than abort the run
-        return path, f"error {error}"
+    status = materialize_one(
+        REPO_ROOT / path,
+        entry["sha256"],
+        lambda: get(entry["url"], timeout=SOURCE_FILE_TIMEOUT_SECONDS, transport=TRANSPORT),
+        force=force,
+    )
+    return path, status
 
 
 def fetch_shard(url: str, members: list[tuple[str, dict]], force: bool) -> list[tuple[str, str]]:
     """Download one archive and take every member wanted from it."""
-    wanted = [(p, e) for p, e in members if force or not up_to_date(p, e["sha256"])]
+    wanted = [(p, e) for p, e in members if force or not is_current(REPO_ROOT / p, e["sha256"])]
     if not wanted:
-        return [(p, "skipped") for p, _ in members]
+        return [(p, STATUS_SKIPPED) for p, _ in members]
     try:
-        blob = download(url)
-    except Exception as error:  # noqa: BLE001
-        return [(p, f"error {error}") for p, _ in wanted]
+        blob = get(url, timeout=SHARD_TIMEOUT_SECONDS, transport=TRANSPORT)
+    except Exception as error:  # noqa: BLE001 - one bad shard must not abort the whole run
+        return [(p, f"error {type(error).__name__}: {error}") for p, _ in wanted]
 
     results: list[tuple[str, str]] = []
     with zipfile.ZipFile(io.BytesIO(blob)) as archive:
@@ -96,7 +70,7 @@ def fetch_shard(url: str, members: list[tuple[str, dict]], force: bool) -> list[
             if name is None:
                 results.append((path, f"error member {entry['member']} not in shard"))
                 continue
-            results.append((path, write_checked(path, archive.read(name), entry["sha256"])))
+            results.append((path, write_verified(REPO_ROOT / path, archive.read(name), entry["sha256"])))
     return results
 
 
@@ -123,8 +97,8 @@ def main() -> int:
     problems: list[str] = []
 
     def record(path: str, status: str) -> None:
-        counts[status.split()[0]] += 1
-        if status.split()[0] in {"error", "mismatch"}:
+        counts[status.split(maxsplit=1)[0]] += 1
+        if status.split(maxsplit=1)[0] in {"error", "mismatch"}:
             problems.append(f"  {path}: {status}")
 
     calls = [functools.partial(fetch_direct, p, e, args.force) for p, e in direct]

@@ -139,7 +139,14 @@ lint.ignore = [
   "FBT",
   "FIX",
   "ISC001",
+  # ~keep N818 wants every exception named <Something>Error. GuardViolation, CorpusFileTracked and
+  # EmptyCorpus read as sentences at the raise site and are named in the publisher's tests and
+  # error messages; renaming four public exceptions to satisfy a suffix convention is churn with a
+  # blast radius. TC003 wants runtime-only imports moved into a TYPE_CHECKING block, which buys
+  # nothing here — these modules import Path to USE it, and the indirection costs more than it saves.
+  "N818",
   "PGH003",
+  "TC003",
   "PLR2004",
   "S104",
   "S110",
@@ -155,8 +162,22 @@ lint.ignore = [
 # removing the import can change semantics in a file with a genuine forward reference.
 lint.flake8-tidy-imports.banned-api."__future__.annotations".msg = "Unnecessary: the tooling targets Python 3.10+, where PEP 604 unions and PEP 585 generics evaluate natively. See issue #11."
 
-lint.per-file-ignores."scripts/*.py" = ["INP001", "T201"]
-lint.per-file-ignores."scripts/corpus_tools/**" = ["PLC0415", "S607", "SIM105", "T201"]
+# ~keep D101/D102/D103 are off for the tooling, matching the xberg-io/actions template. Every
+# module, and every function whose behaviour is not obvious from its name, carries a docstring or a
+# ~keep comment already; forcing one onto `def sha256_bytes(payload: bytes) -> str` adds noise, not
+# information. S607 is off because these tools shell out to git, curl and qpdf by name on purpose —
+# resolving absolute paths would break the "works on a bare checkout" property they exist to have.
+lint.per-file-ignores."scripts/*.py" = ["D101", "D102", "D103", "EXE001", "INP001", "PLW1510", "S607", "T201"]
+lint.per-file-ignores."scripts/corpus_tools/**" = [
+  "D101",
+  "D102",
+  "D103",
+  "PLC0415",
+  "PLW1510",
+  "S607",
+  "SIM105",
+  "T201",
+]
 lint.per-file-ignores."scripts/tests/**" = [
   "ANN",
   "ARG002",
@@ -175,6 +196,7 @@ lint.per-file-ignores."scripts/tests/**" = [
   "S",
   "SLF001",
 ]
+lint.per-file-ignores."scripts/tests/test_http.py" = ["ANN", "D", "PLR2004", "PT009", "S", "SLF001"]
 lint.mccabe.max-complexity = 15
 lint.pydocstyle.convention = "google"
 lint.pylint.max-args = 10

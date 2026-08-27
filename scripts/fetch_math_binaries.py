@@ -25,49 +25,29 @@ import argparse
 import functools
 import json
 import sys
-import urllib.request
 from pathlib import Path
 
 from corpus_tools import paths
-from corpus_tools.hashing import sha256_bytes, sha256_file
+from corpus_tools.http import SOURCE_FILE_TIMEOUT_SECONDS, UrllibTransport, get
+from corpus_tools.materialize import materialize_one
 from corpus_tools.pool import add_jobs_argument, run_parallel
 
 REPO_ROOT = paths.REPO_ROOT
 MANIFEST = Path(__file__).resolve().parent / "data" / "math-binaries.json"
-TIMEOUT = 120
-RETRIES = 3
+
+
+TRANSPORT = UrllibTransport()
 
 
 def fetch_one(path: str, entry: dict, force: bool) -> tuple[str, str]:
     """Return (path, status). Status is ok, skipped, mismatch or an error."""
-    target = REPO_ROOT / path
-    if target.exists() and not force:
-        digest = sha256_file(target)
-        if digest == entry["sha256"]:
-            return path, "skipped"
-
-    last_error = ""
-    for attempt in range(1, RETRIES + 1):
-        try:
-            request = urllib.request.Request(entry["url"], headers={"User-Agent": "xberg-test-documents"})
-            with urllib.request.urlopen(request, timeout=TIMEOUT) as response:
-                payload = response.read()
-            break
-        except Exception as error:  # noqa: BLE001 - any failure is worth one more try
-            last_error = f"{type(error).__name__}: {error}"
-            if attempt == RETRIES:
-                return path, f"error {last_error}"
-    else:  # pragma: no cover - the loop always breaks or returns
-        return path, f"error {last_error}"
-
-    digest = sha256_bytes(payload)
-    target.parent.mkdir(parents=True, exist_ok=True)
-    if digest != entry["sha256"]:
-        (target.with_suffix(target.suffix + ".mismatch")).write_bytes(payload)
-        return path, f"mismatch got {digest[:12]} want {entry['sha256'][:12]}"
-
-    target.write_bytes(payload)
-    return path, "ok"
+    status = materialize_one(
+        REPO_ROOT / path,
+        entry["sha256"],
+        lambda: get(entry["url"], timeout=SOURCE_FILE_TIMEOUT_SECONDS, transport=TRANSPORT),
+        force=force,
+    )
+    return path, status
 
 
 def main() -> int:

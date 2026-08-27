@@ -1,4 +1,4 @@
-"""corpus.lock.json: the shape it has, and the bytes it must keep.
+r"""corpus.lock.json: the shape it has, and the bytes it must keep.
 
 ~keep The serialisation here is a CROSS-REPO CONTRACT, not an implementation detail. Consumers
 fetch the corpus through xberg-io/actions/fetch-test-documents, which hashes this file to key its

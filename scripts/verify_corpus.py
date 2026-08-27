@@ -16,72 +16,57 @@ over the sorted sha256 list, so it is reproducible yet not always the same handf
 from __future__ import annotations
 
 import argparse
-import json
-import subprocess
 import sys
-from pathlib import Path
 
 from corpus_tools.hashing import sha256_bytes
+from corpus_tools.http import (
+    BUCKET_HEAD_TIMEOUT_SECONDS,
+    BUCKET_OBJECT_TIMEOUT_SECONDS,
+    CurlTransport,
+    HttpError,
+    get,
+)
+from corpus_tools.manifest import MANIFEST_FILENAME, lock_pins, object_url
 from corpus_tools.paths import REPO_ROOT
 from corpus_tools.pool import DEFAULT_JOBS, add_jobs_argument, map_parallel
 
-MANIFEST_FILENAME = "corpus.lock.json"
-OBJECTS_PREFIX = "objects"
-REQUEST_TIMEOUT_SECONDS = 60
 # ~keep One curl process per batch rather than per object: process startup dominates a HEAD
-# request, and curl reuses the connection across URLs given in a single invocation.
+# request, and curl reuses the connection across URLs given in a single invocation. The batching
+# itself now lives in CurlTransport.head_many; what stays here is the INTERPRETATION of a result —
+# mapping a URL back to its pin and phrasing the failure — which is corpus knowledge, not transport.
+HTTP_OK = 200
 HEAD_BATCH_SIZE = 64
 MAX_REPORTED_FAILURES = 20
-
-
-def object_url(bucket: str, sha256: str) -> str:
-    return f"https://storage.googleapis.com/{bucket}/{OBJECTS_PREFIX}/{sha256}"
-
-
-def load_pins(root: Path) -> dict[str, int]:
-    """Map sha256 -> size. Duplicate paths collapse onto one object, which is the point."""
-    manifest = json.loads((root / MANIFEST_FILENAME).read_text(encoding="utf-8"))
-    return {entry["sha256"]: entry["size"] for entry in manifest["objects"].values()}
+TRANSPORT = CurlTransport()
 
 
 def head_batch(bucket: str, batch: list[str], pins: dict[str, int]) -> list[str]:
-    command = ["curl", "-sS", "--head", "--max-time", str(REQUEST_TIMEOUT_SECONDS)]
-    command += ["-w", "%{http_code} %header{content-length} %{url_effective}\n"]
-    for sha256 in batch:
-        # ~keep -o must repeat per URL; curl applies a single -o to the first transfer only and
-        # dumps every later response to stdout, which corrupts the write-out lines we parse.
-        command += ["-o", "/dev/null", object_url(bucket, sha256)]
-
-    result = subprocess.run(command, capture_output=True, text=True, check=False)
-    if result.returncode != 0:
-        return [f"curl failed for a batch of {len(batch)}: {result.stderr.strip()}"]
+    urls = [object_url(bucket, sha256) for sha256 in batch]
+    try:
+        results = TRANSPORT.head_many(urls, timeout=BUCKET_HEAD_TIMEOUT_SECONDS)
+    except HttpError as error:
+        return [f"curl failed for a batch of {len(batch)}: {error.reason}"]
 
     failures: list[str] = []
-    seen: set[str] = set()
-    for line in result.stdout.splitlines():
-        fields = line.split()
-        if len(fields) != 3:
-            continue
-        status, content_length, url = fields
-        sha256 = url.rsplit("/", 1)[-1]
-        seen.add(sha256)
-        if status != "200":
-            failures.append(f"{sha256}: HTTP {status}")
-        elif content_length.isdigit() and int(content_length) != pins[sha256]:
-            failures.append(f"{sha256}: pinned size {pins[sha256]} but bucket serves {content_length}")
-    failures += [f"{sha256}: no response parsed" for sha256 in batch if sha256 not in seen]
+    # ~keep strict=True: head_many returns exactly one result per URL, including a placeholder
+    # for a response that never parsed. A length mismatch means that contract broke, and
+    # silently zipping short would report a missing object as fine.
+    for sha256, result in zip(batch, results, strict=True):
+        if result.status is None:
+            failures.append(f"{sha256}: no response parsed")
+        elif result.status != HTTP_OK:
+            failures.append(f"{sha256}: HTTP {result.status}")
+        elif result.content_length is not None and result.content_length != pins[sha256]:
+            failures.append(f"{sha256}: pinned size {pins[sha256]} but bucket serves {result.content_length}")
     return failures
 
 
 def check_content(bucket: str, sha256: str) -> list[str]:
-    result = subprocess.run(
-        ["curl", "-sS", "--fail", "--max-time", str(REQUEST_TIMEOUT_SECONDS), object_url(bucket, sha256)],
-        capture_output=True,
-        check=False,
-    )
-    if result.returncode != 0:
-        return [f"{sha256}: download failed: {result.stderr.decode().strip()}"]
-    actual = sha256_bytes(result.stdout)
+    try:
+        payload = get(object_url(bucket, sha256), timeout=BUCKET_OBJECT_TIMEOUT_SECONDS, transport=TRANSPORT)
+    except HttpError as error:
+        return [f"{sha256}: {error.reason}"]
+    actual = sha256_bytes(payload)
     return [] if actual == sha256 else [f"{sha256}: content hashes to {actual}"]
 
 
@@ -131,7 +116,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     root = REPO_ROOT
-    pins = load_pins(root)
+    pins = lock_pins(root / MANIFEST_FILENAME)
     if not pins:
         print(f"{MANIFEST_FILENAME} pins no objects", file=sys.stderr)
         return 1

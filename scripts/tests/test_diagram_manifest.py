@@ -39,7 +39,7 @@ def is_bucket_managed(path: str) -> bool:
 
 
 COMMENT = re.compile(r"//.*")
-GT_NODE = re.compile(r'^\s*"([^"]+)"\s*\[', re.M)
+GT_NODE = re.compile(r'^\s*"([^"]+)"\s*\[', re.MULTILINE)
 GT_EDGE = re.compile(r'"([^"]+)"\s*-[->]\s*"([^"]+)"')
 XML_COMMENT = re.compile(r"<!--.*?-->", re.DOTALL)
 ATTRIBUTE = re.compile(r'[\w:.-]+="([^"]*)"')

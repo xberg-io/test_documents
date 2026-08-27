@@ -53,7 +53,7 @@ GROUND_TRUTH = ROOT / "ground_truth" / "dot"
 PLAIN_TOKEN = re.compile(r'"[^"]*"|\S+')
 PORT = re.compile(r"<\w+>")
 COMMENT = re.compile(r"//.*")
-GT_NODE = re.compile(r'^\s*"([^"]+)"\s*\[', re.M)
+GT_NODE = re.compile(r'^\s*"([^"]+)"\s*\[', re.MULTILINE)
 GT_EDGE = re.compile(r'"([^"]+)"\s*-[->]\s*"([^"]+)"')
 
 

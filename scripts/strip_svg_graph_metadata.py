@@ -141,7 +141,7 @@ def selector_text(stylesheet: str) -> str:
 
 
 def unescape_css_identifier(name: str) -> str:
-    """`com\\.sun\\.star` in a selector is the class token `com.sun.star` in the document."""
+    r"""`com\.sun\.star` in a selector is the class token `com.sun.star` in the document."""
     return CSS_ESCAPE.sub(lambda m: chr(int(m.group(1), 16)) if m.group(1) else m.group(2), name)
 
 

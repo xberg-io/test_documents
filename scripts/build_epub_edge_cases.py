@@ -399,7 +399,7 @@ def media_type_labels() -> bytes:
         items=items,
         spine=[slug for slug, _ in MEDIA_TYPE_LABELS],
     ).encode("utf-8")
-    members = [("META-INF/container.xml", CONTAINER_XML.encode("utf-8")), ("OEBPS/content.opf", opf)] + chapters
+    members = [("META-INF/container.xml", CONTAINER_XML.encode("utf-8")), ("OEBPS/content.opf", opf), *chapters]
     members.append(toc_member("3.0", MEDIA_TYPE_LABELS[0][0] + ".xhtml", "media-type-labels"))
     return pack(members)
 

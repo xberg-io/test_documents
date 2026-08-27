@@ -15,47 +15,57 @@ from __future__ import annotations
 
 import argparse
 import json
-import subprocess
 import sys
-from fnmatch import fnmatch
 from pathlib import Path
 
 from corpus_tools.hashing import BYTES_PER_MIB, sha256_bytes, sha256_file
+from corpus_tools.http import (
+    BUCKET_OBJECT_TIMEOUT_SECONDS,
+    DEFAULT_RETRY,
+    CurlTransport,
+    HttpError,
+    RetryPolicy,
+    Transport,
+    get,
+)
+from corpus_tools.manifest import DEFAULT_BUCKET, MANIFEST_FILENAME, object_url
 from corpus_tools.paths import REPO_ROOT
+from corpus_tools.patterns import matches_any
 from corpus_tools.pool import add_jobs_argument, map_parallel
 
-MANIFEST_FILENAME = "corpus.lock.json"
-OBJECTS_PREFIX = "objects"
-DEFAULT_BUCKET = "xberg-test-documents"
-REQUEST_TIMEOUT_SECONDS = 120
+TRANSPORT = CurlTransport()
 MAX_REPORTED_FAILURES = 20
 
 
-def matches_any(rel_path: str, patterns: list[str]) -> bool:
-    # ~keep '**' is not special to fnmatch, whose '*' already crosses '/', so 'pdf/**' and 'pdf/*'
-    # both mean "anything under pdf/". Callers write the glob they'd write for the CI action.
-    return any(fnmatch(rel_path, pattern) for pattern in patterns)
-
-
-def fetch_one(bucket: str, root: Path, rel_path: str, sha256: str) -> str | None:
+def fetch_one(
+    bucket: str,
+    root: Path,
+    rel_path: str,
+    sha256: str,
+    *,
+    transport: Transport | None = None,
+    retry: RetryPolicy = DEFAULT_RETRY,
+) -> str | None:
+    """Materialise one object. transport/retry are injectable so tests need no network or backoff."""
     destination = root / rel_path
     if destination.is_file() and sha256_file(destination) == sha256:
         return None
 
     destination.parent.mkdir(parents=True, exist_ok=True)
-    url = f"https://storage.googleapis.com/{bucket}/{OBJECTS_PREFIX}/{sha256}"
-    result = subprocess.run(
-        ["curl", "-sS", "--fail", "--max-time", str(REQUEST_TIMEOUT_SECONDS), url],
-        capture_output=True,
-        check=False,
-    )
-    if result.returncode != 0:
-        return f"{rel_path}: download failed: {result.stderr.decode().strip()}"
+    try:
+        payload = get(
+            object_url(bucket, sha256),
+            timeout=BUCKET_OBJECT_TIMEOUT_SECONDS,
+            transport=transport if transport is not None else TRANSPORT,
+            retry=retry,
+        )
+    except HttpError as error:
+        return f"{rel_path}: {error.reason}"
 
-    actual = sha256_bytes(result.stdout)
+    actual = sha256_bytes(payload)
     if actual != sha256:
         return f"{rel_path}: expected {sha256} but bucket served {actual}"
-    destination.write_bytes(result.stdout)
+    destination.write_bytes(payload)
     return None
 
 

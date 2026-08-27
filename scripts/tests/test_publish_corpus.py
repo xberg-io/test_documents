@@ -9,14 +9,15 @@ from pathlib import Path
 
 from corpus_tools import paths
 from corpus_tools.hashing import sha256_file
+from corpus_tools.http import RetryPolicy
 from corpus_tools.manifest import (
     OBJECTS_PREFIX,
     CorpusObject,
     build_manifest,
     unique_objects_by_sha256,
 )
-from corpus_tools.patterns import PATTERNS_FILENAME, load_patterns, matches_corpus_pattern
-from fetch_corpus import fetch_one, matches_any
+from corpus_tools.patterns import PATTERNS_FILENAME, load_patterns, matches_any, matches_corpus_pattern
+from fetch_corpus import fetch_one
 from publish_corpus import (
     EXTRA_ROOT_FILES,
     STAGING_DIR_PREFIX,
@@ -246,9 +247,8 @@ class StagingTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as name:
             root = Path(name)
             obj = corpus_object(root, "pdf/memo.pdf", b"memo bytes")
-            with self.assertRaises(RuntimeError):
-                with staged_by_sha256(root, {obj.sha256: obj}):
-                    raise RuntimeError("upload failed")
+            with self.assertRaises(RuntimeError), staged_by_sha256(root, {obj.sha256: obj}):
+                raise RuntimeError("upload failed")
             self.assertEqual([path.name for path in root.glob(f"{STAGING_DIR_PREFIX}*")], [])
 
 
@@ -380,18 +380,16 @@ class WriteProbeTests(unittest.TestCase):
             def upload(self, local_path: Path, key: str) -> None:
                 raise subprocess.CalledProcessError(1, ["gcloud", "storage", "cp"])
 
-        with tempfile.TemporaryDirectory() as bucket_name:
-            with self.assertRaises(WriteProbeFailed):
-                verify_write_access(RejectingBackend(Path(bucket_name)))
+        with tempfile.TemporaryDirectory() as bucket_name, self.assertRaises(WriteProbeFailed):
+            verify_write_access(RejectingBackend(Path(bucket_name)))
 
     def test_should_raise_when_the_write_is_silently_dropped(self) -> None:
         class SilentlyDiscardingBackend(LocalDirBackend):
             def upload(self, local_path: Path, key: str) -> None:
                 return None
 
-        with tempfile.TemporaryDirectory() as bucket_name:
-            with self.assertRaises(WriteProbeFailed) as caught:
-                verify_write_access(SilentlyDiscardingBackend(Path(bucket_name)))
+        with tempfile.TemporaryDirectory() as bucket_name, self.assertRaises(WriteProbeFailed) as caught:
+            verify_write_access(SilentlyDiscardingBackend(Path(bucket_name)))
 
         self.assertIn("could not read it back", str(caught.exception))
 
@@ -400,9 +398,8 @@ class WriteProbeTests(unittest.TestCase):
             def read_text(self, key: str) -> str | None:
                 return "a token from some earlier run\n"
 
-        with tempfile.TemporaryDirectory() as bucket_name:
-            with self.assertRaises(WriteProbeFailed) as caught:
-                verify_write_access(StaleReadBackend(Path(bucket_name)))
+        with tempfile.TemporaryDirectory() as bucket_name, self.assertRaises(WriteProbeFailed) as caught:
+            verify_write_access(StaleReadBackend(Path(bucket_name)))
 
         self.assertIn("read back as", str(caught.exception))
 
@@ -427,7 +424,15 @@ class FetchTests(unittest.TestCase):
 
     def test_should_report_a_failure_when_the_object_cannot_be_downloaded(self) -> None:
         with tempfile.TemporaryDirectory() as name:
-            failure = fetch_one("bucket.invalid", Path(name), "pdf/missing.pdf", "0" * 64)
+            # ~keep One attempt, no backoff: this asserts the failure is REPORTED rather than
+            # raised, and paying the real retry schedule to learn that only slows the suite.
+            failure = fetch_one(
+                "bucket.invalid",
+                Path(name),
+                "pdf/missing.pdf",
+                "0" * 64,
+                retry=RetryPolicy(attempts=1),
+            )
 
             self.assertIsNotNone(failure)
             self.assertIn("pdf/missing.pdf", failure)

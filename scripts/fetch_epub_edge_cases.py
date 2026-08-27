@@ -26,38 +26,30 @@ import argparse
 import functools
 import json
 import sys
-import urllib.request
 from pathlib import Path
 
 import build_epub_edge_cases
 from corpus_tools import paths
-from corpus_tools.hashing import sha256_bytes, sha256_file
+from corpus_tools.http import SOURCE_FILE_TIMEOUT_SECONDS, UrllibTransport, get
+from corpus_tools.materialize import materialize_one
 from corpus_tools.pool import add_jobs_argument, run_parallel
 
 REPO_ROOT = paths.REPO_ROOT
 MANIFEST = Path(__file__).resolve().parent / "data" / "epub-edge-cases.json"
-TIMEOUT = 120
-RETRIES = 3
-USER_AGENT = "xberg-test-documents"
 
 
-def download(url: str) -> bytes:
-    last_error = ""
-    for _attempt in range(RETRIES):
-        try:
-            request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-            with urllib.request.urlopen(request, timeout=TIMEOUT) as response:
-                return response.read()
-        except Exception as error:  # noqa: BLE001 - any transport failure is worth one more try
-            last_error = f"{type(error).__name__}: {error}"
-    raise RuntimeError(last_error)
+TRANSPORT = UrllibTransport()
+
+
+def fetch(url: str) -> bytes:
+    return get(url, timeout=SOURCE_FILE_TIMEOUT_SECONDS, transport=TRANSPORT)
 
 
 def materialize(path: str, entry: dict, generated: dict[str, bytes]) -> bytes:
     if "url" in entry:
-        return download(entry["url"])
+        return fetch(entry["url"])
     if "members" in entry:
-        members = [(name, download(url)) for name, url in entry["members"].items() if name != "mimetype"]
+        members = [(name, fetch(url)) for name, url in entry["members"].items() if name != "mimetype"]
         return build_epub_edge_cases.pack(members)
     if entry.get("generated"):
         return generated[path]
@@ -66,22 +58,13 @@ def materialize(path: str, entry: dict, generated: dict[str, bytes]) -> bytes:
 
 def fetch_one(path: str, entry: dict, force: bool, generated: dict[str, bytes]) -> tuple[str, str]:
     """Return (path, status). Status is ok, skipped, mismatch or an error."""
-    target = REPO_ROOT / path
-    if target.exists() and not force:
-        if sha256_file(target) == entry["sha256"]:
-            return path, "skipped"
-    try:
-        payload = materialize(path, entry, generated)
-    except Exception as error:  # noqa: BLE001 - reported per file below
-        return path, f"error {type(error).__name__}: {error}"
-
-    digest = sha256_bytes(payload)
-    target.parent.mkdir(parents=True, exist_ok=True)
-    if digest != entry["sha256"]:
-        target.with_suffix(target.suffix + ".mismatch").write_bytes(payload)
-        return path, f"mismatch got {digest[:12]} want {entry['sha256'][:12]}"
-    target.write_bytes(payload)
-    return path, "ok"
+    status = materialize_one(
+        REPO_ROOT / path,
+        entry["sha256"],
+        lambda: materialize(path, entry, generated),
+        force=force,
+    )
+    return path, status
 
 
 def main() -> int:
