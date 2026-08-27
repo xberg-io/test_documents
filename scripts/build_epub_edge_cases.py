@@ -16,15 +16,16 @@ checks that pin against a fresh build.
 """
 
 import argparse
-import hashlib
 import io
 import struct
 import sys
 import zipfile
 import zlib
-from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+from corpus_tools import paths
+from corpus_tools.hashing import sha256_bytes
+
+REPO_ROOT = paths.REPO_ROOT
 CORPUS_DIR = "epub/edge-cases"
 # ~keep A fixed timestamp keeps the ZIP bytes identical across builds; the sha256 in the
 # manifest depends on it.
@@ -436,7 +437,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--list", action="store_true", help="print path, size and sha256 without writing")
     args = parser.parse_args(argv)
     for path, data in build_all().items():
-        digest = hashlib.sha256(data).hexdigest()
+        digest = sha256_bytes(data)
         if args.list:
             print(f"{path}\t{len(data)}\t{digest}")
             continue

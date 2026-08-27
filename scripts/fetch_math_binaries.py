@@ -23,13 +23,15 @@ from __future__ import annotations
 
 import argparse
 import concurrent.futures
-import hashlib
 import json
 import sys
 import urllib.request
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+from corpus_tools import paths
+from corpus_tools.hashing import sha256_bytes, sha256_file
+
+REPO_ROOT = paths.REPO_ROOT
 MANIFEST = Path(__file__).resolve().parent / "data" / "math-binaries.json"
 TIMEOUT = 120
 RETRIES = 3
@@ -39,7 +41,7 @@ def fetch_one(path: str, entry: dict, force: bool) -> tuple[str, str]:
     """Return (path, status). Status is ok, skipped, mismatch or an error."""
     target = REPO_ROOT / path
     if target.exists() and not force:
-        digest = hashlib.sha256(target.read_bytes()).hexdigest()
+        digest = sha256_file(target)
         if digest == entry["sha256"]:
             return path, "skipped"
 
@@ -57,7 +59,7 @@ def fetch_one(path: str, entry: dict, force: bool) -> tuple[str, str]:
     else:  # pragma: no cover - the loop always breaks or returns
         return path, f"error {last_error}"
 
-    digest = hashlib.sha256(payload).hexdigest()
+    digest = sha256_bytes(payload)
     target.parent.mkdir(parents=True, exist_ok=True)
     if digest != entry["sha256"]:
         (target.with_suffix(target.suffix + ".mismatch")).write_bytes(payload)

@@ -29,6 +29,8 @@ import shutil
 import subprocess
 from pathlib import Path
 
+from corpus_tools.paths import REPO_ROOT
+
 # Engine per fixture: the layout Graphviz was invoked with, which has to match how the
 # committed SVG was rendered or the comparison is against a different drawing.
 ENGINES = {
@@ -44,7 +46,7 @@ ENGINES = {
     "graphviz_states": "dot",
 }
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = REPO_ROOT
 SOURCES = ROOT / "diagrams" / "src"
 GROUND_TRUTH = ROOT / "ground_truth" / "dot"
 

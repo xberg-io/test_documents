@@ -24,7 +24,6 @@ from __future__ import annotations
 import argparse
 import collections
 import concurrent.futures
-import hashlib
 import io
 import json
 import sys
@@ -32,7 +31,10 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+from corpus_tools import paths
+from corpus_tools.hashing import sha256_bytes, sha256_file
+
+REPO_ROOT = paths.REPO_ROOT
 MANIFEST = Path(__file__).resolve().parent / "data" / "regression-objects.json"
 TIMEOUT = 300
 RETRIES = 3
@@ -53,7 +55,7 @@ def download(url: str) -> bytes:
 def write_checked(path: str, payload: bytes, expected: str) -> str:
     target = REPO_ROOT / path
     target.parent.mkdir(parents=True, exist_ok=True)
-    digest = hashlib.sha256(payload).hexdigest()
+    digest = sha256_bytes(payload)
     if digest != expected:
         target.with_suffix(target.suffix + ".mismatch").write_bytes(payload)
         return f"mismatch got {digest[:12]} want {expected[:12]}"
@@ -63,7 +65,7 @@ def write_checked(path: str, payload: bytes, expected: str) -> str:
 
 def up_to_date(path: str, expected: str) -> bool:
     target = REPO_ROOT / path
-    return target.exists() and hashlib.sha256(target.read_bytes()).hexdigest() == expected
+    return target.exists() and sha256_file(target) == expected
 
 
 def fetch_direct(path: str, entry: dict, force: bool) -> tuple[str, str]:

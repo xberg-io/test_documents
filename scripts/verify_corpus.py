@@ -17,11 +17,13 @@ from __future__ import annotations
 
 import argparse
 import concurrent.futures
-import hashlib
 import json
 import subprocess
 import sys
 from pathlib import Path
+
+from corpus_tools.hashing import sha256_bytes
+from corpus_tools.paths import REPO_ROOT
 
 MANIFEST_FILENAME = "corpus.lock.json"
 OBJECTS_PREFIX = "objects"
@@ -80,7 +82,7 @@ def check_content(bucket: str, sha256: str) -> list[str]:
     )
     if result.returncode != 0:
         return [f"{sha256}: download failed: {result.stderr.decode().strip()}"]
-    actual = hashlib.sha256(result.stdout).hexdigest()
+    actual = sha256_bytes(result.stdout)
     return [] if actual == sha256 else [f"{sha256}: content hashes to {actual}"]
 
 
@@ -130,7 +132,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     args = parser.parse_args(argv)
 
-    root = Path(__file__).resolve().parent.parent
+    root = REPO_ROOT
     pins = load_pins(root)
     if not pins:
         print(f"{MANIFEST_FILENAME} pins no objects", file=sys.stderr)

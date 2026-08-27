@@ -22,10 +22,11 @@ import unittest
 from pathlib import Path
 
 from build_diagram_pdfs import RECIPES
+from corpus_tools import paths
 from publish_corpus import load_patterns, matches_corpus_pattern
 from strip_svg_graph_metadata import referenced_ids, strip
 
-ROOT = Path(__file__).resolve().parent.parent.parent
+ROOT = paths.REPO_ROOT
 MANIFEST = json.loads((ROOT / "diagrams" / "manifest.json").read_text(encoding="utf-8"))
 FIXTURES = MANIFEST["fixtures"]
 PATTERNS = load_patterns(ROOT)

@@ -7,6 +7,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from corpus_tools import paths
+from corpus_tools.hashing import sha256_file
 from fetch_corpus import fetch_one, matches_any
 from publish_corpus import (
     EXTRA_ROOT_FILES,
@@ -26,7 +28,6 @@ from publish_corpus import (
     guard_against_tracked_corpus_files,
     load_patterns,
     matches_corpus_pattern,
-    sha256_of,
     staged_by_sha256,
     unique_objects_by_sha256,
     upload_extra_files,
@@ -34,14 +35,14 @@ from publish_corpus import (
     verify_write_access,
 )
 
-REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+REPO_ROOT = paths.REPO_ROOT
 
 
 def corpus_object(root: Path, rel_path: str, content: bytes) -> CorpusObject:
     full_path = root / rel_path
     full_path.parent.mkdir(parents=True, exist_ok=True)
     full_path.write_bytes(content)
-    return CorpusObject(path=rel_path, sha256=sha256_of(full_path), size=len(content))
+    return CorpusObject(path=rel_path, sha256=sha256_file(full_path), size=len(content))
 
 
 class GuardTests(unittest.TestCase):
@@ -415,7 +416,7 @@ class FetchTests(unittest.TestCase):
             (root / "pdf").mkdir()
             target = root / "pdf/memo.pdf"
             target.write_bytes(b"already here")
-            digest = sha256_of(target)
+            digest = sha256_file(target)
 
             # ~keep A bucket name that cannot resolve: if the skip path is broken this raises
             # rather than silently re-downloading, which is what we actually want to detect.

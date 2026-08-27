@@ -24,15 +24,16 @@ way afterwards:
 
 import argparse
 import concurrent.futures
-import hashlib
 import json
 import sys
 import urllib.request
 from pathlib import Path
 
 import build_epub_edge_cases
+from corpus_tools import paths
+from corpus_tools.hashing import sha256_bytes, sha256_file
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = paths.REPO_ROOT
 MANIFEST = Path(__file__).resolve().parent / "data" / "epub-edge-cases.json"
 TIMEOUT = 120
 RETRIES = 3
@@ -66,14 +67,14 @@ def fetch_one(path: str, entry: dict, force: bool, generated: dict[str, bytes]) 
     """Return (path, status). Status is ok, skipped, mismatch or an error."""
     target = REPO_ROOT / path
     if target.exists() and not force:
-        if hashlib.sha256(target.read_bytes()).hexdigest() == entry["sha256"]:
+        if sha256_file(target) == entry["sha256"]:
             return path, "skipped"
     try:
         payload = materialize(path, entry, generated)
     except Exception as error:  # noqa: BLE001 - reported per file below
         return path, f"error {type(error).__name__}: {error}"
 
-    digest = hashlib.sha256(payload).hexdigest()
+    digest = sha256_bytes(payload)
     target.parent.mkdir(parents=True, exist_ok=True)
     if digest != entry["sha256"]:
         target.with_suffix(target.suffix + ".mismatch").write_bytes(payload)

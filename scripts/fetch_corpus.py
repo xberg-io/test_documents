@@ -15,29 +15,21 @@ from __future__ import annotations
 
 import argparse
 import concurrent.futures
-import hashlib
 import json
 import subprocess
 import sys
 from fnmatch import fnmatch
 from pathlib import Path
 
+from corpus_tools.hashing import BYTES_PER_MIB, sha256_bytes, sha256_file
+from corpus_tools.paths import REPO_ROOT
+
 MANIFEST_FILENAME = "corpus.lock.json"
 OBJECTS_PREFIX = "objects"
 DEFAULT_BUCKET = "xberg-test-documents"
 MAX_WORKERS = 8
 REQUEST_TIMEOUT_SECONDS = 120
-READ_CHUNK_SIZE = 1024 * 1024
-BYTES_PER_MIB = 1024 * 1024
 MAX_REPORTED_FAILURES = 20
-
-
-def sha256_of(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(READ_CHUNK_SIZE), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def matches_any(rel_path: str, patterns: list[str]) -> bool:
@@ -48,7 +40,7 @@ def matches_any(rel_path: str, patterns: list[str]) -> bool:
 
 def fetch_one(bucket: str, root: Path, rel_path: str, sha256: str) -> str | None:
     destination = root / rel_path
-    if destination.is_file() and sha256_of(destination) == sha256:
+    if destination.is_file() and sha256_file(destination) == sha256:
         return None
 
     destination.parent.mkdir(parents=True, exist_ok=True)
@@ -61,7 +53,7 @@ def fetch_one(bucket: str, root: Path, rel_path: str, sha256: str) -> str | None
     if result.returncode != 0:
         return f"{rel_path}: download failed: {result.stderr.decode().strip()}"
 
-    actual = hashlib.sha256(result.stdout).hexdigest()
+    actual = sha256_bytes(result.stdout)
     if actual != sha256:
         return f"{rel_path}: expected {sha256} but bucket served {actual}"
     destination.write_bytes(result.stdout)
@@ -79,7 +71,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     args = parser.parse_args(argv)
 
-    root = Path(__file__).resolve().parent.parent
+    root = REPO_ROOT
     objects = json.loads((root / MANIFEST_FILENAME).read_text(encoding="utf-8"))["objects"]
     wanted = {
         rel_path: entry["sha256"]

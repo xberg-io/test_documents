@@ -21,7 +21,6 @@ honest about the command that made it.
 from __future__ import annotations
 
 import argparse
-import hashlib
 import os
 import re
 import shutil
@@ -31,7 +30,10 @@ import tempfile
 from collections.abc import Callable
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+from corpus_tools.hashing import sha256_file
+from corpus_tools.paths import REPO_ROOT
+
+ROOT = REPO_ROOT
 
 CHROME_CANDIDATES = (
     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
@@ -148,10 +150,6 @@ def build(target: str, workspace: Path) -> Path:
     return finished
 
 
-def sha256_of(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="rebuild and compare, changing nothing on disk")
@@ -179,14 +177,14 @@ def main(argv: list[str] | None = None) -> int:
                 if not destination.is_file():
                     print(f"fail {target}: not built yet", file=sys.stderr)
                     failures.append(target)
-                elif sha256_of(destination) != sha256_of(finished):
+                elif sha256_file(destination) != sha256_file(finished):
                     print(f"fail {target}: rebuilt bytes differ from the committed file", file=sys.stderr)
                     failures.append(target)
                 else:
                     print(f"ok   {target}")
             else:
                 shutil.copyfile(finished, destination)
-                print(f"ok   {target}  {sha256_of(destination)[:12]}  {destination.stat().st_size} bytes")
+                print(f"ok   {target}  {sha256_file(destination)[:12]}  {destination.stat().st_size} bytes")
 
     if failures:
         print(f"\n{len(failures)} of {len(targets)} failed", file=sys.stderr)

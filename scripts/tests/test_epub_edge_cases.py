@@ -13,13 +13,13 @@ import json
 import re
 import unittest
 import zipfile
-from pathlib import Path
 
 import build_epub_edge_cases
 import publish_corpus
+from corpus_tools import paths
 
-SCRIPTS_DIR = Path(__file__).resolve().parent.parent
-REPO_ROOT = SCRIPTS_DIR.parent
+SCRIPTS_DIR = paths.SCRIPTS_DIR
+REPO_ROOT = paths.REPO_ROOT
 MANIFEST = SCRIPTS_DIR / "data" / "epub-edge-cases.json"
 PROVENANCE = REPO_ROOT / "EPUB_EDGE_CASES.md"
 SOURCE_KINDS = ("url", "members", "generated")

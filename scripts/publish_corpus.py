@@ -31,6 +31,9 @@ from fnmatch import fnmatch
 from pathlib import Path
 from typing import Protocol
 
+from corpus_tools.hashing import BYTES_PER_MIB, sha256_file
+from corpus_tools.paths import git_repo_root
+
 MANIFEST_SCHEMA_VERSION = 1
 MANIFEST_FILENAME = "corpus.lock.json"
 PATTERNS_FILENAME = "scripts/data/corpus-patterns.txt"
@@ -50,8 +53,6 @@ FORBIDDEN_PREFIXES = (".corpus-cache/", ".basemind/", ".venv/")
 SKIPPED_DIRECTORIES = frozenset(
     {".corpus-cache", ".basemind", ".github", "__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache", ".venv"}
 )
-READ_CHUNK_SIZE = 1024 * 1024
-BYTES_PER_MIB = 1024 * 1024
 STAGING_DIR_PREFIX = ".corpus-publish-staging-"
 # ~keep Bounds the argv of a single `gcloud storage cp`; gcloud parallelises within one invocation.
 UPLOAD_BATCH_SIZE = 250
@@ -190,13 +191,6 @@ class LocalDirBackend:
         return destination.read_text() if destination.is_file() else None
 
 
-def repo_root() -> Path:
-    output = subprocess.run(
-        ["git", "rev-parse", "--show-toplevel"], check=True, capture_output=True, text=True
-    ).stdout.strip()
-    return Path(output)
-
-
 def load_patterns(root: Path) -> list[str]:
     text = (root / PATTERNS_FILENAME).read_text(encoding="utf-8")
     return [line.strip() for line in text.splitlines() if line.strip() and not line.startswith("#")]
@@ -259,14 +253,6 @@ def guard_against_forbidden_paths(paths: list[str]) -> None:
         raise GuardViolation("refusing to run: forbidden path(s) would be included: " + ", ".join(offenders))
 
 
-def sha256_of(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(READ_CHUNK_SIZE), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
-
-
 def resolve_objects(root: Path, paths: list[str]) -> list[CorpusObject]:
     """Hash real working-tree bytes — the only source of truth for what gets published."""
     objects = []
@@ -274,7 +260,7 @@ def resolve_objects(root: Path, paths: list[str]) -> list[CorpusObject]:
         full_path = root / rel_path
         if not full_path.is_file():
             raise FileNotFoundError(f"corpus path has no content on disk: {rel_path}")
-        objects.append(CorpusObject(path=rel_path, sha256=sha256_of(full_path), size=full_path.stat().st_size))
+        objects.append(CorpusObject(path=rel_path, sha256=sha256_file(full_path), size=full_path.stat().st_size))
     return objects
 
 
@@ -407,7 +393,7 @@ def parse_args(argv: list[str] | None) -> argparse.Namespace:
 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
-    root = repo_root()
+    root = git_repo_root()
 
     paths = corpus_paths(root, load_patterns(root))
     guard_against_forbidden_paths(paths + list(EXTRA_ROOT_FILES))
