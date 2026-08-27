@@ -14,6 +14,7 @@ back through the real build_manifest and write_manifest, and require the bytes t
 network, no corpus binaries, no credentials — just the file that is already in git.
 """
 
+import hashlib
 import json
 import tempfile
 import unittest
@@ -26,6 +27,7 @@ from corpus_tools.manifest import (
     lock_objects,
     lock_pins,
     object_url,
+    resolve_objects,
     unique_objects_by_sha256,
     write_manifest,
 )
@@ -96,3 +98,26 @@ class LockReadersTest(unittest.TestCase):
             object_url("xberg-test-documents", digest),
             f"https://storage.googleapis.com/xberg-test-documents/objects/{digest}",
         )
+
+
+class ResolveObjectsTest(unittest.TestCase):
+    def test_should_hash_working_tree_bytes_rather_than_trusting_a_manifest(self) -> None:
+        with tempfile.TemporaryDirectory() as name:
+            root = Path(name)
+            (root / "pdf").mkdir()
+            (root / "pdf/memo.pdf").write_bytes(b"real bytes")
+
+            objects = resolve_objects(root, ["pdf/memo.pdf"])
+
+            self.assertEqual(len(objects), 1)
+            self.assertEqual(objects[0].sha256, hashlib.sha256(b"real bytes").hexdigest())
+            self.assertEqual(objects[0].size, len(b"real bytes"))
+
+    def test_should_refuse_a_path_with_no_content_on_disk(self) -> None:
+        # ~keep Publishing a manifest entry with nothing behind it would pin consumers to an object
+        # the bucket will never serve. Failing here is the only place that is cheap to fix.
+        with tempfile.TemporaryDirectory() as name:
+            with self.assertRaises(FileNotFoundError) as caught:
+                resolve_objects(Path(name), ["pdf/absent.pdf"])
+
+            self.assertIn("pdf/absent.pdf", str(caught.exception))

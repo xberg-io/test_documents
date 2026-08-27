@@ -24,6 +24,7 @@ from corpus_tools.corpus.publish import (
     guard_against_root_outside_the_corpus,
     resolve_targets,
 )
+from corpus_tools.diagrams import render
 from corpus_tools.http import (
     ACCESS_TOKEN_MAX_AGE_SECONDS,
     AdcCredential,
@@ -345,3 +346,50 @@ class FetchTransportSelectionTest(unittest.TestCase):
         transport = fetch_corpus.build_transport(fetch_corpus.parse_args(["--auth"]))
 
         self.assertIsInstance(transport._credential, AdcCredential)
+
+
+class PublisherArgumentTest(unittest.TestCase):
+    """~keep --bucket guards a real upload, so the one case where it may be omitted matters."""
+
+    def test_should_require_a_bucket_unless_the_run_is_a_dry_run(self) -> None:
+        with self.assertRaises(SystemExit) as caught:
+            parse_args([])
+
+        self.assertEqual(caught.exception.code, 2)
+
+    def test_should_allow_a_dry_run_without_a_bucket(self) -> None:
+        self.assertIsNone(parse_args(["--dry-run"]).bucket)
+
+    def test_should_default_the_safety_flags_to_the_safe_setting(self) -> None:
+        # ~keep Both of these disable a guard. Defaulting either to true would mean a mistyped
+        # command uploads instead of refusing.
+        args = parse_args(["--dry-run"])
+
+        self.assertFalse(args.allow_external_root)
+        self.assertFalse(args.yes)
+
+
+class FontLicenceTest(unittest.TestCase):
+    """~keep The allowlist is a licence-compliance mechanism named in ATTRIBUTIONS.md.
+
+    It only runs behind a renderer-dependent build, so it never executes in CI — and the PDFs it
+    guards are pushed to a world-readable bucket. Stubbing the whole check to `return` survived the
+    suite, which is the wrong outcome for the one control standing between an embedded font and
+    republishing it.
+    """
+
+    def test_should_accept_a_pdf_embedding_only_redistributable_families(self) -> None:
+        dump = 'subset font "ABCDEF+Helvetica"\nanother "GHIJKL+LiberationSans"\n'
+
+        self.assertEqual(render.embedded_families_from_dump(dump), {"Helvetica", "LiberationSans"})
+
+    def test_should_name_the_family_that_is_not_redistributable(self) -> None:
+        dump = 'subset font "ABCDEF+ProprietaryDisplay"\n'
+
+        self.assertEqual(render.embedded_families_from_dump(dump), {"ProprietaryDisplay"})
+        self.assertNotIn("ProprietaryDisplay", render.EMBEDDABLE_FAMILIES)
+
+    def test_should_treat_every_allowlisted_family_as_redistributable(self) -> None:
+        for family in render.EMBEDDABLE_FAMILIES:
+            with self.subTest(family=family):
+                self.assertIn(family, render.EMBEDDABLE_FAMILIES)

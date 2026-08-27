@@ -84,9 +84,18 @@ EMBEDDABLE_FAMILIES = frozenset({"Helvetica", "Helvetica-Bold", "LiberationSans"
 EMBEDDED_FONT = re.compile(r'"[A-Z]{6}\+([^"]+)"')
 
 
+def embedded_families_from_dump(dump: str) -> set[str]:
+    """~keep Split out from embedded_families so the parsing can be tested without qpdf installed.
+
+    The check only runs behind a renderer-dependent build, so it never executes in CI — and the
+    PDFs it guards go to a world-readable bucket.
+    """
+    return set(EMBEDDED_FONT.findall(dump))
+
+
 def embedded_families(path: Path) -> set[str]:
-    listing = subprocess.run(["mutool", "info", "-F", str(path)], capture_output=True, text=True)
-    return set(EMBEDDED_FONT.findall(listing.stdout))
+    listing = subprocess.run(["mutool", "info", "-F", str(path)], capture_output=True, text=True, check=False)
+    return embedded_families_from_dump(listing.stdout)
 
 
 def check_fonts_are_redistributable(path: Path) -> None:

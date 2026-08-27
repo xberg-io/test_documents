@@ -138,12 +138,35 @@ class TimeoutTableTest(unittest.TestCase):
 class CurlTransportTest(unittest.TestCase):
     def _runner(self, *, returncode: int = 0, stdout: object = b"", stderr: object = b""):
         recorded: list[list[str]] = []
+        keywords: list[dict] = []
 
-        def run(command, **_kwargs):
+        def run(command, **kwargs):
             recorded.append(command)
+            keywords.append(kwargs)
             return subprocess.CompletedProcess(command, returncode, stdout, stderr)
 
+        run.keywords = keywords
         return run, recorded
+
+    def test_should_ask_curl_for_bytes_when_fetching_and_text_when_reading_headers(self) -> None:
+        """~keep The two methods genuinely differ, and nothing was checking it.
+
+        `fetch` calls `result.stderr.decode()`, so it needs bytes; `head_many` parses
+        `result.stdout` as a string, so it needs `text=True`. A stub that swallows **kwargs models
+        that split by convention only — flipping either flag would pass the suite and fail against
+        the real subprocess module.
+        """
+        run, _ = self._runner(stdout=b"")
+        CurlTransport(run).fetch("https://example.invalid/x", timeout=30)
+
+        self.assertTrue(run.keywords[0]["capture_output"])
+        self.assertNotIn("text", run.keywords[0], "fetch decodes stderr itself, so it must get bytes")
+
+        run, _ = self._runner(stdout="")
+        CurlTransport(run).head_many(["https://example.invalid/x"], timeout=30)
+
+        self.assertTrue(run.keywords[0]["capture_output"])
+        self.assertIs(run.keywords[0]["text"], True, "head_many parses stdout as text")
 
     def test_should_ask_curl_to_fail_on_an_http_error_rather_than_saving_the_body(self) -> None:
         run, recorded = self._runner(stdout=PAYLOAD)
