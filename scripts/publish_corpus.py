@@ -17,7 +17,6 @@ from __future__ import annotations
 import argparse
 import base64
 import hashlib
-import json
 import os
 import secrets
 import shutil
@@ -26,18 +25,22 @@ import sys
 import tempfile
 from collections.abc import Iterator
 from contextlib import contextmanager
-from dataclasses import dataclass
-from fnmatch import fnmatch
 from pathlib import Path
 from typing import Protocol
 
-from corpus_tools.hashing import BYTES_PER_MIB, sha256_file
+from corpus_tools.hashing import BYTES_PER_MIB
+from corpus_tools.manifest import (
+    MANIFEST_FILENAME,
+    OBJECTS_PREFIX,
+    CorpusObject,
+    build_manifest,
+    resolve_objects,
+    unique_objects_by_sha256,
+    write_manifest,
+)
 from corpus_tools.paths import git_repo_root
+from corpus_tools.patterns import PATTERNS_FILENAME, load_patterns, matches_corpus_pattern
 
-MANIFEST_SCHEMA_VERSION = 1
-MANIFEST_FILENAME = "corpus.lock.json"
-PATTERNS_FILENAME = "scripts/data/corpus-patterns.txt"
-OBJECTS_PREFIX = "objects"
 EXTRA_ROOT_FILES = (
     "ATTRIBUTIONS.md",
     "LICENSES.md",
@@ -74,13 +77,6 @@ class EmptyCorpus(RuntimeError):
 
 class WriteProbeFailed(RuntimeError):
     """Raised when the credentials in use cannot demonstrably write to the bucket."""
-
-
-@dataclass(frozen=True)
-class CorpusObject:
-    path: str
-    sha256: str
-    size: int
 
 
 class StorageBackend(Protocol):
@@ -191,18 +187,6 @@ class LocalDirBackend:
         return destination.read_text() if destination.is_file() else None
 
 
-def load_patterns(root: Path) -> list[str]:
-    text = (root / PATTERNS_FILENAME).read_text(encoding="utf-8")
-    return [line.strip() for line in text.splitlines() if line.strip() and not line.startswith("#")]
-
-
-def matches_corpus_pattern(rel_path: str, patterns: list[str]) -> bool:
-    # ~keep gitattributes/gitignore semantics, which these patterns were lifted from: a pattern
-    # containing '/' is anchored to the repo root, one without matches a basename at any depth.
-    basename = rel_path.rsplit("/", 1)[-1]
-    return any(fnmatch(rel_path, p) if "/" in p else fnmatch(basename, p) for p in patterns)
-
-
 def corpus_paths(root: Path, patterns: list[str]) -> list[str]:
     """The publish set: working-tree files matching a corpus pattern.
 
@@ -251,36 +235,6 @@ def guard_against_forbidden_paths(paths: list[str]) -> None:
     offenders = [path for path in paths if any(path.startswith(prefix) for prefix in FORBIDDEN_PREFIXES)]
     if offenders:
         raise GuardViolation("refusing to run: forbidden path(s) would be included: " + ", ".join(offenders))
-
-
-def resolve_objects(root: Path, paths: list[str]) -> list[CorpusObject]:
-    """Hash real working-tree bytes — the only source of truth for what gets published."""
-    objects = []
-    for rel_path in paths:
-        full_path = root / rel_path
-        if not full_path.is_file():
-            raise FileNotFoundError(f"corpus path has no content on disk: {rel_path}")
-        objects.append(CorpusObject(path=rel_path, sha256=sha256_file(full_path), size=full_path.stat().st_size))
-    return objects
-
-
-def build_manifest(objects: list[CorpusObject]) -> dict:
-    ordered_objects = {
-        obj.path: {"sha256": obj.sha256, "size": obj.size} for obj in sorted(objects, key=lambda o: o.path)
-    }
-    return {"schema": MANIFEST_SCHEMA_VERSION, "objects": ordered_objects}
-
-
-def write_manifest(manifest: dict, destination: Path) -> None:
-    text = json.dumps(manifest, indent=2) + "\n"
-    destination.write_text(text, encoding="utf-8")
-
-
-def unique_objects_by_sha256(objects: list[CorpusObject]) -> dict[str, CorpusObject]:
-    representatives: dict[str, CorpusObject] = {}
-    for obj in objects:
-        representatives.setdefault(obj.sha256, obj)
-    return representatives
 
 
 @contextmanager

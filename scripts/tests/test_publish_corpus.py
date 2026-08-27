@@ -9,27 +9,27 @@ from pathlib import Path
 
 from corpus_tools import paths
 from corpus_tools.hashing import sha256_file
+from corpus_tools.manifest import (
+    OBJECTS_PREFIX,
+    CorpusObject,
+    build_manifest,
+    unique_objects_by_sha256,
+)
+from corpus_tools.patterns import PATTERNS_FILENAME, load_patterns, matches_corpus_pattern
 from fetch_corpus import fetch_one, matches_any
 from publish_corpus import (
     EXTRA_ROOT_FILES,
-    OBJECTS_PREFIX,
-    PATTERNS_FILENAME,
     STAGING_DIR_PREFIX,
     WRITE_PROBE_KEY,
     CorpusFileTracked,
-    CorpusObject,
     EmptyCorpus,
     GuardViolation,
     LocalDirBackend,
     WriteProbeFailed,
-    build_manifest,
     corpus_paths,
     guard_against_forbidden_paths,
     guard_against_tracked_corpus_files,
-    load_patterns,
-    matches_corpus_pattern,
     staged_by_sha256,
-    unique_objects_by_sha256,
     upload_extra_files,
     upload_unique_objects,
     verify_write_access,
