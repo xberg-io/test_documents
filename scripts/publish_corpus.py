@@ -188,7 +188,7 @@ class LocalDirBackend:
         return destination.read_text() if destination.is_file() else None
 
 
-def corpus_paths(root: Path, patterns: list[str]) -> list[str]:
+def corpus_paths(root: Path, patterns: list[str], patterns_source: str | Path = PATTERNS_FILENAME) -> list[str]:
     """The publish set: working-tree files matching a corpus pattern.
 
     ~keep Walks the working tree rather than asking git, because these files are deliberately
@@ -211,7 +211,7 @@ def corpus_paths(root: Path, patterns: list[str]) -> list[str]:
     # and unpin every consumer from every object.
     if not found:
         raise EmptyCorpus(
-            f"no working-tree file matched any pattern in {PATTERNS_FILENAME}; refusing to publish an "
+            f"no working-tree file matched any pattern in {patterns_source}; refusing to publish an "
             "empty manifest. Fetch the corpus first, or check that the patterns still describe it."
         )
     return sorted(found)
@@ -348,43 +348,59 @@ def resolve_targets(args: argparse.Namespace) -> tuple[Path, Path, Path]:
     return root, manifest, patterns
 
 
-def guard_against_publishing_private_corpus_publicly(root: Path, manifest: Path, bucket: str | None) -> None:
-    """Refuse a non-default root or manifest aimed at the public bucket.
+def guard_against_publishing_private_corpus_publicly(
+    root: Path, manifest: Path, patterns: Path, bucket: str | None
+) -> None:
+    """Refuse a non-default root, manifest OR pattern file aimed at the public bucket.
 
-    ~keep The public bucket is world-readable and its objects cannot be recalled once served. A
-    private corpus reaching it is not a bug you fix forward, so the combination fails loudly here
-    rather than being caught by review.
+    ~keep The public bucket is world-readable and its objects cannot be recalled once served, so
+    this fails loudly rather than being caught in review. All THREE targets are checked, not just
+    the root: the pattern file selects the byte set as directly as the root does, so
+    `--patterns /tmp/everything.txt` containing `*` would otherwise sweep the whole working tree
+    into a world-readable bucket while root and manifest still looked like the defaults.
     """
     if bucket != DEFAULT_BUCKET:
         return
     repository_root = git_repo_root()
-    if root != repository_root:
-        raise PublishTargetRefused(
-            f"refusing to publish --root {root} to the public bucket {DEFAULT_BUCKET}. "
-            f"That bucket serves {repository_root} anonymously to the whole internet. "
-            "Name a private bucket explicitly, or drop --root."
-        )
-    if manifest != repository_root / MANIFEST_FILENAME:
-        raise PublishTargetRefused(
-            f"refusing to publish with --manifest {manifest} to the public bucket {DEFAULT_BUCKET}. "
-            "A manifest from outside this repository describes a corpus this bucket must not serve."
-        )
+    for label, actual, expected in (
+        ("--root", root, repository_root),
+        ("--manifest", manifest, repository_root / MANIFEST_FILENAME),
+        ("--patterns", patterns, repository_root / PATTERNS_FILENAME),
+    ):
+        if actual != expected:
+            raise PublishTargetRefused(
+                f"refusing to publish with {label} {actual} to the public bucket {DEFAULT_BUCKET}. "
+                f"That bucket serves {repository_root} anonymously to the whole internet, and "
+                f"{label} selects a different corpus than the one it is meant to serve."
+            )
 
 
-def guard_against_root_outside_the_manifest(root: Path, manifest: Path, *, allow_external: bool) -> None:
-    """Require --root to be the manifest's own directory unless told otherwise.
+def guard_against_root_outside_the_corpus(root: Path, explicit_targets: list[Path], *, allow_external: bool) -> None:
+    """Refuse a --root that sits above where the explicitly-named targets say the corpus is.
 
-    ~keep This is the check that catches the aimed-one-level-too-high mistake. Corpus patterns use
-    gitignore semantics, so a bare `*.zip` matches a basename at ANY depth: pointing --root at a
-    parent directory silently sweeps in whatever else happens to live beside the corpus. Publishing
-    is not reversible, so the default is to refuse and make the caller say they meant it.
+    ~keep This catches aiming one level too high. Corpus patterns use gitignore semantics, so a
+    bare `*.zip` matches a basename at ANY depth: a root above the corpus silently sweeps in
+    whatever else lives beside it, and publishing is not reversible.
+
+    Comparing root against the MANIFEST's directory was a tautology. resolve_targets derives the
+    manifest from the root when --manifest is omitted, so manifest.parent == root by construction
+    and the check could not fire in the very case it existed for. What actually pins down where
+    the corpus lives is whichever paths the caller named explicitly: if they all sit inside one
+    subdirectory of root, that subdirectory is the corpus and root is too high.
     """
-    if allow_external or root == manifest.parent:
+    if allow_external or not explicit_targets:
+        return
+    parents = {target.parent for target in explicit_targets}
+    if len(parents) != 1:
+        return
+    corpus_directory = parents.pop()
+    if corpus_directory == root or root not in corpus_directory.parents:
         return
     raise PublishTargetRefused(
-        f"--root {root} is not the manifest's directory ({manifest.parent}). "
+        f"--root {root} sits above the corpus, which the paths you named put at {corpus_directory}. "
         "Corpus patterns match basenames at any depth, so a root above the corpus can sweep in "
-        "unrelated files. Pass --allow-external-root if this is deliberate."
+        f"unrelated files. Use --root {corpus_directory}, or pass --allow-external-root if this "
+        "is deliberate."
     )
 
 
@@ -449,18 +465,33 @@ def parse_args(argv: list[str] | None) -> argparse.Namespace:
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     root, manifest_path, patterns_path = resolve_targets(args)
-    is_default_root = args.root is None and args.manifest is None and args.patterns is None
+
+    # ~keep Compare RESOLVED targets, not which flags were typed. `--root .` from the repo root is
+    # semantically the default, and keying off `args.root is None` would silently drop both the
+    # tracked-corpus guard and the attribution refresh for a command that means exactly the same
+    # thing as passing no flags at all.
+    try:
+        repository_root: Path | None = git_repo_root()
+    except subprocess.CalledProcessError:
+        repository_root = None
+    is_default_root = (
+        repository_root is not None
+        and root == repository_root
+        and manifest_path == repository_root / MANIFEST_FILENAME
+        and patterns_path == repository_root / PATTERNS_FILENAME
+    )
 
     # ~keep A refusal here is a designed outcome, not a crash. Print the reason and exit 1 rather
     # than showing a traceback, so the message a maintainer needs is the whole output.
     try:
-        guard_against_publishing_private_corpus_publicly(root, manifest_path, args.bucket)
-        guard_against_root_outside_the_manifest(root, manifest_path, allow_external=args.allow_external_root)
+        guard_against_publishing_private_corpus_publicly(root, manifest_path, patterns_path, args.bucket)
+        explicit_targets = [target.resolve() for target in (args.manifest, args.patterns) if target is not None]
+        guard_against_root_outside_the_corpus(root, explicit_targets, allow_external=args.allow_external_root)
     except PublishTargetRefused as refusal:
         print(f"refused: {refusal}", file=sys.stderr)
         return 1
 
-    paths = corpus_paths(root, load_patterns(root, patterns_path))
+    paths = corpus_paths(root, load_patterns(root, patterns_path), patterns_path)
     # ~keep The attribution files are THIS repository's licence notices, and they sit beside its
     # corpus rather than inside it. A corpus root elsewhere has its own provenance kept with its own
     # manifest, so requiring them there would fail a publish after 15 GB was already uploaded.
@@ -494,8 +525,7 @@ def main(argv: list[str] | None = None) -> int:
     # corpus.lock.json is load-bearing (consumers hash it to key their fetch cache).
     if args.dry_run:
         print(
-            f"dry-run: would upload {len(representatives)} unique object(s) "
-            f"and {len(extra_files)} attribution file(s)"
+            f"dry-run: would upload {len(representatives)} unique object(s) and {len(extra_files)} attribution file(s)"
         )
         print(f"dry-run: no bucket contacted, nothing uploaded, {manifest_path.name} untouched")
         return 0

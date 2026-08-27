@@ -62,11 +62,15 @@ class LockRoundTripTest(unittest.TestCase):
         self.assertEqual(list(manifest["objects"]), sorted(manifest["objects"]))
 
     def test_should_serialise_with_two_space_indent_and_a_trailing_newline(self) -> None:
-        # ~keep The two properties that decide the bytes, asserted directly so a reviewer does not
-        # have to infer them from the golden comparison above.
-        raw = LOCK_PATH.read_bytes()
+        # ~keep Must exercise write_manifest, not read LOCK_PATH. Asserting the committed file's
+        # shape passes even when the serialiser is broken — verified: changing indent to 4 and
+        # dropping the newline left the read-only version of this test green.
+        with tempfile.TemporaryDirectory() as name:
+            destination = Path(name) / "corpus.lock.json"
+            write_manifest(build_manifest(committed_objects()), destination)
+            raw = destination.read_bytes()
 
-        self.assertTrue(raw.endswith(b"\n"))
+        self.assertTrue(raw.endswith(b"\n"), "the trailing newline is part of the cache-key bytes")
         self.assertIn(b'\n  "objects": {', raw)
 
     def test_should_pin_the_schema_version_the_consumers_expect(self) -> None:

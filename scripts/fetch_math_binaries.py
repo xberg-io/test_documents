@@ -26,6 +26,7 @@ import functools
 import json
 import sys
 from pathlib import Path
+from typing import Any
 
 from corpus_tools import paths
 from corpus_tools.http import SOURCE_FILE_TIMEOUT_SECONDS, UrllibTransport, get
@@ -39,7 +40,7 @@ MANIFEST = Path(__file__).resolve().parent / "data" / "math-binaries.json"
 TRANSPORT = UrllibTransport()
 
 
-def fetch_one(path: str, entry: dict, force: bool) -> tuple[str, str]:
+def fetch_one(path: str, entry: dict[str, Any], force: bool) -> tuple[str, str]:
     """Return (path, status). Status is ok, skipped, mismatch or an error."""
     status = materialize_one(
         REPO_ROOT / path,

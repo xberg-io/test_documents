@@ -12,6 +12,7 @@ the pair round-trips the committed file byte for byte.
 import json
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 from corpus_tools.hashing import sha256_file
 
@@ -32,12 +33,14 @@ def object_url(bucket: str, sha256: str) -> str:
     return f"https://storage.googleapis.com/{bucket}/{OBJECTS_PREFIX}/{sha256}"
 
 
-def load_lock(manifest_path: Path) -> dict:
-    return json.loads(manifest_path.read_text(encoding="utf-8"))
+def load_lock(manifest_path: Path) -> dict[str, Any]:
+    parsed: dict[str, Any] = json.loads(manifest_path.read_text(encoding="utf-8"))
+    return parsed
 
 
-def lock_objects(manifest_path: Path) -> dict[str, dict]:
-    return load_lock(manifest_path)["objects"]
+def lock_objects(manifest_path: Path) -> dict[str, dict[str, Any]]:
+    objects: dict[str, dict[str, Any]] = load_lock(manifest_path)["objects"]
+    return objects
 
 
 def lock_pins(manifest_path: Path) -> dict[str, int]:
@@ -56,14 +59,14 @@ def resolve_objects(root: Path, paths: list[str]) -> list[CorpusObject]:
     return objects
 
 
-def build_manifest(objects: list[CorpusObject]) -> dict:
+def build_manifest(objects: list[CorpusObject]) -> dict[str, Any]:
     ordered_objects = {
         obj.path: {"sha256": obj.sha256, "size": obj.size} for obj in sorted(objects, key=lambda o: o.path)
     }
     return {"schema": MANIFEST_SCHEMA_VERSION, "objects": ordered_objects}
 
 
-def write_manifest(manifest: dict, destination: Path) -> None:
+def write_manifest(manifest: dict[str, Any], destination: Path) -> None:
     text = json.dumps(manifest, indent=2) + "\n"
     destination.write_text(text, encoding="utf-8")
 
@@ -75,6 +78,7 @@ def unique_objects_by_sha256(objects: list[CorpusObject]) -> dict[str, CorpusObj
     return representatives
 
 
-def load_source_manifest(path: Path) -> dict[str, dict]:
+def load_source_manifest(path: Path) -> dict[str, dict[str, Any]]:
     """The provenance manifests under scripts/data/, which are path -> entry rather than pinned."""
-    return json.loads(path.read_text(encoding="utf-8"))
+    parsed: dict[str, dict[str, Any]] = json.loads(path.read_text(encoding="utf-8"))
+    return parsed

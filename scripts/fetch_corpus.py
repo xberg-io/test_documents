@@ -33,7 +33,6 @@ from corpus_tools.paths import REPO_ROOT
 from corpus_tools.patterns import matches_any
 from corpus_tools.pool import add_jobs_argument, map_parallel
 
-TRANSPORT = CurlTransport()
 MAX_REPORTED_FAILURES = 20
 
 
@@ -56,7 +55,7 @@ def fetch_one(
         payload = get(
             object_url(bucket, sha256),
             timeout=BUCKET_OBJECT_TIMEOUT_SECONDS,
-            transport=transport if transport is not None else TRANSPORT,
+            transport=transport if transport is not None else CurlTransport(),
             retry=retry,
         )
     except HttpError as error:
@@ -69,7 +68,7 @@ def fetch_one(
     return None
 
 
-def main(argv: list[str] | None = None) -> int:
+def parse_args(argv: list[str] | None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--bucket", default=DEFAULT_BUCKET, help="GCS bucket name, without gs://")
     add_jobs_argument(parser)
@@ -96,13 +95,22 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help="authenticate with Application Default Credentials, for a private bucket",
     )
-    args = parser.parse_args(argv)
+    return parser.parse_args(argv)
+
+
+def build_transport(args: argparse.Namespace) -> CurlTransport:
+    """~keep Anonymous unless --auth. Extracted so the choice is testable without a network."""
+    return CurlTransport(credential=AdcCredential()) if args.auth else CurlTransport()
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = parse_args(argv)
 
     # ~keep Both default to this repository, so `python3 scripts/fetch_corpus.py` with no flags is
     # byte-for-byte the command ~14 places in the xberg repo tell people to run.
     root = args.root.resolve() if args.root else REPO_ROOT
     manifest_path = args.manifest.resolve() if args.manifest else REPO_ROOT / MANIFEST_FILENAME
-    transport = CurlTransport(credential=AdcCredential()) if args.auth else TRANSPORT
+    transport = build_transport(args)
     objects = lock_objects(manifest_path)
     wanted = {
         rel_path: entry["sha256"]

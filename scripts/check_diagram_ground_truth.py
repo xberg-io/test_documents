@@ -27,7 +27,9 @@ from __future__ import annotations
 import re
 import shutil
 import subprocess
+from collections.abc import Sequence
 from pathlib import Path
+from typing import TypeVar
 
 from corpus_tools.paths import REPO_ROOT
 
@@ -45,6 +47,8 @@ ENGINES = {
     "graphviz_selfloop": "neato",
     "graphviz_states": "dot",
 }
+
+T = TypeVar("T", bound="str | tuple[str, str]")
 
 ROOT = REPO_ROOT
 SOURCES = ROOT / "diagrams" / "src"
@@ -96,6 +100,11 @@ def recorded_graph(stem: str) -> tuple[list[str], list[tuple[str, str]]]:
     return sorted(GT_NODE.findall(text)), sorted(GT_EDGE.findall(text))
 
 
+def report_difference(name: str, drawn: Sequence[T], recorded: Sequence[T]) -> None:
+    print(f"     {name} drawn but not in ground truth: {sorted(set(drawn) - set(recorded))}")
+    print(f"     {name} in ground truth but not drawn: {sorted(set(recorded) - set(drawn))}")
+
+
 def main() -> int:
     if shutil.which("dot") is None:
         print("graphviz is not installed, skipping the ground-truth cross-check")
@@ -109,12 +118,10 @@ def main() -> int:
             continue
         failures += 1
         print(f"FAIL {stem}")
-        for name, drawn, recorded in (
-            ("nodes", drawn_nodes, recorded_nodes),
-            ("edges", drawn_edges, recorded_edges),
-        ):
-            print(f"     {name} drawn but not in ground truth: {sorted(set(drawn) - set(recorded))}")
-            print(f"     {name} in ground truth but not drawn: {sorted(set(recorded) - set(drawn))}")
+        # ~keep Nodes are strings and edges are pairs, so they cannot share a loop variable
+        # without collapsing to a union that sorted() will not accept.
+        report_difference("nodes", drawn_nodes, recorded_nodes)
+        report_difference("edges", drawn_edges, recorded_edges)
     return 1 if failures else 0
 
 

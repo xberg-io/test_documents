@@ -12,7 +12,7 @@ import sys
 from pathlib import Path
 
 from corpus_tools.diagrams import svg_metadata
-from corpus_tools.diagrams.svg_metadata import strip
+from corpus_tools.diagrams.svg_metadata import strip, with_trailing_newline
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -25,7 +25,16 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("destination", type=Path, help="where to write the geometry-only fixture")
     args = parser.parse_args(argv)
 
-    args.destination.write_text(strip(args.source.read_text(encoding="utf-8")), encoding="utf-8")
+    original = args.source.read_text(encoding="utf-8")
+    stripped = strip(original)
+    # ~keep Refuse to write a geometry fixture identical to its parent. diagrams/README.md
+    # regenerates the whole set in a bare shell loop, so silently writing a byte-identical copy
+    # would produce a Class-A/geometry pair that measures nothing — and nothing downstream would
+    # notice, because a variant that states no metadata trivially passes the manifest checks.
+    if stripped == with_trailing_newline(original):
+        print(f"{args.source}: nothing to strip, it states no graph metadata", file=sys.stderr)
+        return 1
+    args.destination.write_text(stripped, encoding="utf-8")
     return 0
 
 

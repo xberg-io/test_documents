@@ -10,10 +10,14 @@ The backoff assertions matter more than they look. Before this module existed, t
 within milliseconds. Asserting the delays are actually 1s then 2s is what stops that regressing.
 """
 
+import contextlib
 import hashlib
+import io
 import subprocess
 import tempfile
 import unittest
+import unittest.mock
+import urllib.request
 from pathlib import Path
 
 from corpus_tools.http import (
@@ -23,6 +27,7 @@ from corpus_tools.http import (
     CurlTransport,
     HttpError,
     RetryPolicy,
+    UrllibTransport,
     get,
 )
 from corpus_tools.materialize import (
@@ -256,7 +261,33 @@ class MaterializeTest(unittest.TestCase):
 
 
 class UserAgentTest(unittest.TestCase):
-    def test_should_identify_itself_to_third_party_hosts(self) -> None:
-        # ~keep The provenance fetchers pull from eleven third-party hosts, several of which block
-        # unidentified bulk clients. This string is the courtesy that keeps them serving us.
-        self.assertEqual(USER_AGENT, "xberg-test-documents")
+    """~keep Asserting the constant is not enough — removing the header from the request survived.
+
+    The provenance fetchers pull from eleven third-party hosts, several of which block
+    unidentified bulk clients, so what matters is that the header is actually SENT.
+    """
+
+    def test_should_send_the_user_agent_on_a_urllib_request(self) -> None:
+        captured: list[urllib.request.Request] = []
+
+        def fake_urlopen(request, timeout=None):  # noqa: ARG001 - urlopen's signature, unused here
+            captured.append(request)
+            return contextlib.closing(io.BytesIO(PAYLOAD))
+
+        with unittest.mock.patch.object(urllib.request, "urlopen", fake_urlopen):
+            UrllibTransport().fetch("https://example.invalid/x", timeout=10)
+
+        self.assertEqual(captured[0].get_header("User-agent"), USER_AGENT)
+
+    def test_should_send_the_user_agent_on_a_curl_request(self) -> None:
+        recorded: list[list[str]] = []
+
+        def run(command, **_kwargs):
+            recorded.append(command)
+            return subprocess.CompletedProcess(command, 0, b"", b"")
+
+        CurlTransport(run).fetch("https://example.invalid/x", timeout=10)
+
+        # ~keep curl sends its own UA by default, so this documents that the bucket path does NOT
+        # currently identify itself the way the urllib path does. Anonymous GCS does not care.
+        self.assertNotIn("-A", recorded[0])

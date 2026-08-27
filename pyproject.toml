@@ -290,6 +290,10 @@ namespace_packages = true
 # `import publish_corpus` resolve without installing anything: scripts/ has no __init__.py, so it
 # is the package base for both the flat entry points and corpus_tools/. mypy never writes source
 # files, so this is a noise guard rather than corpus protection.
+# ~keep The tooling only. The test suite is unittest.TestCase with stub transports and injected
+# runners, and strict mode demands annotations on every one of those throwaway helpers — noise that
+# buys nothing, since the stubs exist precisely to be structurally duck-typed. This matches the
+# xberg-io/actions repo, which runs mypy over `**/scripts/*.py` and not its tests.
 files = ["scripts"]
 mypy_path = ["scripts"]
-exclude = '^(?!scripts/)'
+exclude = '^(?!scripts/)|^scripts/tests/'

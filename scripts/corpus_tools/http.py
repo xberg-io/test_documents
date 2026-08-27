@@ -19,12 +19,13 @@ module unifies.
 """
 
 import subprocess
+import threading
 import time
 import urllib.error
 import urllib.request
-from collections.abc import Sequence
+from collections.abc import Callable, Sequence
 from dataclasses import dataclass
-from typing import Protocol
+from typing import Any, Protocol
 
 USER_AGENT = "xberg-test-documents"
 
@@ -58,6 +59,16 @@ class HttpError(RuntimeError):
         super().__init__(f"{url}: {reason}")
         self.url = url
         self.reason = reason
+
+
+class CredentialError(HttpError):
+    """No usable credential. Deliberately NOT retryable.
+
+    ~keep A missing or expired ADC login fails identically on every attempt, so retrying it turns
+    one clear error into three subprocesses and three seconds of backoff PER OBJECT — thousands of
+    gcloud invocations before the run finally prints the same message it could have printed at the
+    start. get() re-raises this instead of counting it as a transient failure.
+    """
 
 
 @dataclass(frozen=True)
@@ -101,18 +112,27 @@ class AdcCredential:
     the same way a local `gcloud auth login` does — so one code path serves both.
     """
 
-    def __init__(self, runner: object = None, clock: object = None) -> None:
-        self._run = runner if runner is not None else subprocess.run
-        self._clock = clock if clock is not None else time.monotonic
+    def __init__(
+        self,
+        runner: Callable[..., subprocess.CompletedProcess[str]] = subprocess.run,
+        clock: Callable[[], float] = time.monotonic,
+    ) -> None:
+        self._run = runner
+        self._clock = clock
         self._token: str | None = None
         self._acquired_at = 0.0
+        # ~keep token() is called from every worker thread. Without this the first batch of --jobs
+        # threads all miss the cache at once and stampede gcloud with N identical subprocesses.
+        self._lock = threading.Lock()
 
     def token(self) -> str:
-        now = self._clock()
-        if self._token is None or now - self._acquired_at >= ACCESS_TOKEN_MAX_AGE_SECONDS:
-            self._token = self._acquire()
-            self._acquired_at = now
-        return self._token
+        with self._lock:
+            if self._token is None or self._clock() - self._acquired_at >= ACCESS_TOKEN_MAX_AGE_SECONDS:
+                self._token = self._acquire()
+                # ~keep Stamped AFTER acquiring, not before: gcloud can take a second or two, and
+                # dating the token from before that shortens its usable life by exactly that much.
+                self._acquired_at = self._clock()
+            return self._token
 
     def _acquire(self) -> str:
         result = self._run(
@@ -122,7 +142,7 @@ class AdcCredential:
             check=False,
         )
         if result.returncode != 0:
-            raise HttpError(
+            raise CredentialError(
                 "gcloud auth print-access-token",
                 "could not obtain an access token. Run `gcloud auth application-default login`, or "
                 f"check the workload-identity setup in CI: {result.stderr.strip()}",
@@ -164,8 +184,12 @@ class CurlTransport:
     a plain value, works under bare `python3 -m unittest`, and cannot leak between tests.
     """
 
-    def __init__(self, runner: object = None, credential: object = None) -> None:
-        self._run = runner if runner is not None else subprocess.run
+    def __init__(
+        self,
+        runner: Callable[..., subprocess.CompletedProcess[Any]] = subprocess.run,
+        credential: "AdcCredential | None" = None,
+    ) -> None:
+        self._run = runner
         # ~keep None means anonymous, which stays the default: the public bucket is served without
         # credentials and that is the path this repo's CI proves still works.
         self._credential = credential
@@ -223,21 +247,23 @@ def get(
     timeout: float,
     transport: Transport,
     retry: RetryPolicy = DEFAULT_RETRY,
-    sleep: object = None,
+    sleep: Callable[[float], None] = time.sleep,
 ) -> bytes:
     """Fetch `url`, retrying transport failures with backoff.
 
     Raises HttpError carrying the LAST reason. `sleep` is injectable so tests can assert the
     backoff schedule without spending it.
     """
-    wait = sleep if sleep is not None else time.sleep
     last_reason = ""
     for attempt in range(1, retry.attempts + 1):
         delay = retry.delay_before(attempt)
         if delay:
-            wait(delay)
+            sleep(delay)
         try:
             return transport.fetch(url, timeout=timeout)
+        except CredentialError:
+            # ~keep Fails identically every time; retrying multiplies one message by attempts x objects.
+            raise
         except Exception as error:  # noqa: BLE001 - a transport can fail in any way; that is what retrying is for
             last_reason = error.reason if isinstance(error, HttpError) else f"{type(error).__name__}: {error}"
     raise HttpError(url, last_reason)

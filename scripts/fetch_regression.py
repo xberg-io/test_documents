@@ -29,6 +29,7 @@ import json
 import sys
 import zipfile
 from pathlib import Path
+from typing import Any
 
 from corpus_tools import paths
 from corpus_tools.http import SHARD_TIMEOUT_SECONDS, SOURCE_FILE_TIMEOUT_SECONDS, UrllibTransport, get
@@ -42,17 +43,17 @@ MANIFEST = Path(__file__).resolve().parent / "data" / "regression-objects.json"
 TRANSPORT = UrllibTransport()
 
 
-def fetch_direct(path: str, entry: dict, force: bool) -> tuple[str, str]:
+def fetch_direct(path: str, entry: dict[str, Any], force: bool) -> list[tuple[str, str]]:
     status = materialize_one(
         REPO_ROOT / path,
         entry["sha256"],
         lambda: get(entry["url"], timeout=SOURCE_FILE_TIMEOUT_SECONDS, transport=TRANSPORT),
         force=force,
     )
-    return path, status
+    return [(path, status)]
 
 
-def fetch_shard(url: str, members: list[tuple[str, dict]], force: bool) -> list[tuple[str, str]]:
+def fetch_shard(url: str, members: list[tuple[str, dict[str, Any]]], force: bool) -> list[tuple[str, str]]:
     """Download one archive and take every member wanted from it."""
     wanted = [(p, e) for p, e in members if force or not is_current(REPO_ROOT / p, e["sha256"])]
     if not wanted:
@@ -88,12 +89,12 @@ def main() -> int:
             print(f"nothing matches --include {args.include}", file=sys.stderr)
             return 1
 
-    shards: dict[str, list[tuple[str, dict]]] = collections.defaultdict(list)
-    direct: list[tuple[str, dict]] = []
+    shards: dict[str, list[tuple[str, dict[str, Any]]]] = collections.defaultdict(list)
+    direct: list[tuple[str, dict[str, Any]]] = []
     for path, entry in sorted(manifest.items()):
         (shards[entry["url"]].append((path, entry)) if "member" in entry else direct.append((path, entry)))
 
-    counts: collections.Counter = collections.Counter()
+    counts: collections.Counter[str] = collections.Counter()
     problems: list[str] = []
 
     def record(path: str, status: str) -> None:
@@ -103,8 +104,11 @@ def main() -> int:
 
     calls = [functools.partial(fetch_direct, p, e, args.force) for p, e in direct]
     calls += [functools.partial(fetch_shard, url, members, args.force) for url, members in shards.items()]
+    # ~keep Both fetchers return a list of results: a direct file yields one, a shard yields one
+    # per member taken from it. Same shape means one homogeneous pool and no isinstance at the
+    # call site to tell the two apart.
     for outcome in run_parallel(calls, jobs=args.jobs):
-        for path, status in outcome if isinstance(outcome, list) else [outcome]:
+        for path, status in outcome:
             record(path, status)
 
     print(f"{len(manifest)} objects: " + ", ".join(f"{n} {k}" for k, n in sorted(counts.items())))

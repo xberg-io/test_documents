@@ -27,6 +27,7 @@ import functools
 import json
 import sys
 from pathlib import Path
+from typing import Any
 
 import build_epub_edge_cases
 from corpus_tools import paths
@@ -45,7 +46,7 @@ def fetch(url: str) -> bytes:
     return get(url, timeout=SOURCE_FILE_TIMEOUT_SECONDS, transport=TRANSPORT)
 
 
-def materialize(path: str, entry: dict, generated: dict[str, bytes]) -> bytes:
+def materialize(path: str, entry: dict[str, Any], generated: dict[str, bytes]) -> bytes:
     if "url" in entry:
         return fetch(entry["url"])
     if "members" in entry:
@@ -56,7 +57,7 @@ def materialize(path: str, entry: dict, generated: dict[str, bytes]) -> bytes:
     raise ValueError(f"{path}: entry has no url, members or generated source")
 
 
-def fetch_one(path: str, entry: dict, force: bool, generated: dict[str, bytes]) -> tuple[str, str]:
+def fetch_one(path: str, entry: dict[str, Any], force: bool, generated: dict[str, bytes]) -> tuple[str, str]:
     """Return (path, status). Status is ok, skipped, mismatch or an error."""
     status = materialize_one(
         REPO_ROOT / path,

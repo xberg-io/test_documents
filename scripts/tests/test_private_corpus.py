@@ -16,7 +16,15 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from corpus_tools.http import ACCESS_TOKEN_MAX_AGE_SECONDS, AdcCredential, CurlTransport, HttpError
+import fetch_corpus
+from corpus_tools.http import (
+    ACCESS_TOKEN_MAX_AGE_SECONDS,
+    AdcCredential,
+    CredentialError,
+    CurlTransport,
+    HttpError,
+    get,
+)
 from corpus_tools.manifest import (
     DEFAULT_BUCKET,
     MANIFEST_FILENAME,
@@ -26,12 +34,12 @@ from corpus_tools.manifest import (
     write_manifest,
 )
 from corpus_tools.paths import REPO_ROOT
-from corpus_tools.patterns import load_patterns, matches_corpus_pattern
+from corpus_tools.patterns import PATTERNS_FILENAME, load_patterns, matches_corpus_pattern
 from publish_corpus import (
     PublishTargetRefused,
     corpus_paths,
     guard_against_publishing_private_corpus_publicly,
-    guard_against_root_outside_the_manifest,
+    guard_against_root_outside_the_corpus,
     parse_args,
     resolve_targets,
 )
@@ -78,58 +86,98 @@ class TargetResolutionTest(unittest.TestCase):
         self.assertEqual(patterns, Path("/tmp/other/patterns.txt").resolve())
 
 
+DEFAULT_MANIFEST = REPO_ROOT / MANIFEST_FILENAME
+DEFAULT_PATTERNS = REPO_ROOT / PATTERNS_FILENAME
+FOREIGN_ROOT = Path("/tmp/internal-corpus").resolve()
+FOREIGN_MANIFEST = FOREIGN_ROOT / "corpus.lock.json"
+FOREIGN_PATTERNS = FOREIGN_ROOT / "corpus-patterns.txt"
+
+
 class PublicBucketGuardTest(unittest.TestCase):
+    """Each of the three targets selects the byte set, so each must be checked independently."""
+
     def test_should_refuse_a_foreign_root_aimed_at_the_public_bucket(self) -> None:
         with self.assertRaises(PublishTargetRefused) as caught:
             guard_against_publishing_private_corpus_publicly(
-                Path("/tmp/internal-corpus").resolve(),
-                Path("/tmp/internal-corpus/corpus.lock.json").resolve(),
-                DEFAULT_BUCKET,
+                FOREIGN_ROOT, DEFAULT_MANIFEST, DEFAULT_PATTERNS, DEFAULT_BUCKET
             )
 
         self.assertIn(DEFAULT_BUCKET, str(caught.exception))
+        self.assertIn("--root", str(caught.exception))
 
     def test_should_refuse_a_foreign_manifest_aimed_at_the_public_bucket(self) -> None:
-        with self.assertRaises(PublishTargetRefused):
+        with self.assertRaises(PublishTargetRefused) as caught:
             guard_against_publishing_private_corpus_publicly(
-                REPO_ROOT, Path("/tmp/elsewhere/corpus.lock.json").resolve(), DEFAULT_BUCKET
+                REPO_ROOT, FOREIGN_MANIFEST, DEFAULT_PATTERNS, DEFAULT_BUCKET
             )
+
+        self.assertIn("--manifest", str(caught.exception))
+
+    def test_should_refuse_a_foreign_pattern_file_aimed_at_the_public_bucket(self) -> None:
+        # ~keep The gap this closes: root and manifest both look like the defaults, but a pattern
+        # file containing `*` sweeps the entire working tree into a world-readable bucket.
+        with self.assertRaises(PublishTargetRefused) as caught:
+            guard_against_publishing_private_corpus_publicly(
+                REPO_ROOT, DEFAULT_MANIFEST, Path("/tmp/everything.txt").resolve(), DEFAULT_BUCKET
+            )
+
+        self.assertIn("--patterns", str(caught.exception))
 
     def test_should_allow_a_foreign_root_aimed_at_a_private_bucket(self) -> None:
         guard_against_publishing_private_corpus_publicly(
-            Path("/tmp/internal-corpus").resolve(),
-            Path("/tmp/internal-corpus/corpus.lock.json").resolve(),
-            PRIVATE_BUCKET,
+            FOREIGN_ROOT, FOREIGN_MANIFEST, FOREIGN_PATTERNS, PRIVATE_BUCKET
         )
 
     def test_should_allow_this_repository_to_publish_to_the_public_bucket(self) -> None:
-        guard_against_publishing_private_corpus_publicly(REPO_ROOT, REPO_ROOT / MANIFEST_FILENAME, DEFAULT_BUCKET)
+        guard_against_publishing_private_corpus_publicly(REPO_ROOT, DEFAULT_MANIFEST, DEFAULT_PATTERNS, DEFAULT_BUCKET)
 
 
-class RootOutsideManifestGuardTest(unittest.TestCase):
-    def test_should_refuse_a_root_above_the_manifests_own_directory(self) -> None:
-        # ~keep The mistake this exists for: the corpus sits in a subdirectory, and its parent
-        # holds unrelated archives that `*.zip` would match at any depth.
+class RootAboveCorpusGuardTest(unittest.TestCase):
+    """The check that catches aiming one level too high, where publishing is irreversible."""
+
+    def test_should_refuse_a_root_above_where_the_named_targets_put_the_corpus(self) -> None:
+        # ~keep The real mistake, exactly as it would be typed: the corpus is in a subdirectory and
+        # the parent holds unrelated archives that `*.zip` matches at any depth.
         with self.assertRaises(PublishTargetRefused) as caught:
-            guard_against_root_outside_the_manifest(
+            guard_against_root_outside_the_corpus(
                 Path("/tmp/downloads"),
-                Path("/tmp/downloads/internal-corpus/corpus.lock.json"),
+                [
+                    Path("/tmp/downloads/internal-corpus/corpus.lock.json"),
+                    Path("/tmp/downloads/internal-corpus/corpus-patterns.txt"),
+                ],
                 allow_external=False,
             )
 
         self.assertIn("any depth", str(caught.exception))
+        self.assertIn("/tmp/downloads/internal-corpus", str(caught.exception))
 
-    def test_should_allow_a_root_that_is_the_manifests_directory(self) -> None:
-        guard_against_root_outside_the_manifest(
+    def test_should_refuse_when_only_the_pattern_file_reveals_the_tighter_root(self) -> None:
+        # ~keep With --manifest omitted it is derived FROM the root, so it can never disagree with
+        # it. Only the explicitly-named pattern file shows where the corpus really is.
+        with self.assertRaises(PublishTargetRefused):
+            guard_against_root_outside_the_corpus(
+                Path("/tmp/downloads"),
+                [Path("/tmp/downloads/internal-corpus/corpus-patterns.txt")],
+                allow_external=False,
+            )
+
+    def test_should_allow_targets_that_sit_directly_in_the_root(self) -> None:
+        guard_against_root_outside_the_corpus(
             Path("/tmp/internal-corpus"),
-            Path("/tmp/internal-corpus/corpus.lock.json"),
+            [
+                Path("/tmp/internal-corpus/corpus.lock.json"),
+                Path("/tmp/internal-corpus/corpus-patterns.txt"),
+            ],
             allow_external=False,
         )
 
+    def test_should_allow_the_default_publish_where_nothing_was_named_explicitly(self) -> None:
+        guard_against_root_outside_the_corpus(REPO_ROOT, [], allow_external=False)
+
     def test_should_allow_an_external_root_when_explicitly_permitted(self) -> None:
-        guard_against_root_outside_the_manifest(
+        guard_against_root_outside_the_corpus(
             Path("/tmp/downloads"),
-            Path("/tmp/downloads/internal-corpus/corpus.lock.json"),
+            [Path("/tmp/downloads/internal-corpus/corpus-patterns.txt")],
             allow_external=True,
         )
 
@@ -218,8 +266,8 @@ class AdcCredentialTest(unittest.TestCase):
 
     def test_should_reuse_a_token_within_its_lifetime_rather_than_shelling_out_per_object(self) -> None:
         run, calls = self._runner()
-        clock = iter([0.0, 1.0, 2.0, 3.0])
-        credential = AdcCredential(run, clock=lambda: next(clock))
+        now = 0.0
+        credential = AdcCredential(run, clock=lambda: now)
 
         credential.token()
         credential.token()
@@ -231,13 +279,50 @@ class AdcCredentialTest(unittest.TestCase):
         # the private corpus is 15.26 GB — long enough on a slow runner to 401 mid-fetch if the
         # credential were minted once at startup.
         run, calls = self._runner()
-        times = iter([0.0, ACCESS_TOKEN_MAX_AGE_SECONDS + 1])
-        credential = AdcCredential(run, clock=lambda: next(times))
+        elapsed = [0.0]
+        credential = AdcCredential(run, clock=lambda: elapsed[0])
 
         credential.token()
+        elapsed[0] = ACCESS_TOKEN_MAX_AGE_SECONDS + 1
         credential.token()
 
         self.assertEqual(len([c for c in calls if "print-access-token" in c]), 2)
+
+    def test_should_date_a_token_from_after_acquisition_not_before(self) -> None:
+        # ~keep gcloud can take a second or two. Stamping the age from before the call shortens the
+        # token's usable life by exactly the acquisition time, which is the wrong direction to err
+        # in when the whole point is surviving a 15 GB transfer.
+        now = [0.0]
+        calls: list[list[str]] = []
+
+        def slow_gcloud(command, **_kwargs):
+            calls.append(command)
+            now[0] += 5.0  # acquisition genuinely takes time
+            return subprocess.CompletedProcess(command, 0, "ya29.token\n", "")
+
+        credential = AdcCredential(slow_gcloud, clock=lambda: now[0])
+
+        credential.token()
+
+        self.assertEqual(credential._acquired_at, 5.0, "the token must be dated from after gcloud returned")
+        self.assertEqual(len(calls), 1)
+
+    def test_should_not_retry_a_credential_failure_across_every_object(self) -> None:
+        # ~keep A missing ADC login fails identically every time. Retrying turns one clear message
+        # into attempts x objects subprocesses and seconds of backoff before saying the same thing.
+        run, _ = self._runner(returncode=1, stderr="ERROR: (gcloud.auth) not logged in")
+        transport = CurlTransport(run, credential=AdcCredential(run))
+        attempts: list[float] = []
+
+        with self.assertRaises(CredentialError):
+            get(
+                "https://example.invalid/o",
+                timeout=30,
+                transport=transport,
+                sleep=attempts.append,
+            )
+
+        self.assertEqual(attempts, [], "a credential failure must not sleep for a retry")
 
     def test_should_explain_how_to_authenticate_when_no_credential_is_available(self) -> None:
         run, _ = self._runner(returncode=1, stderr="ERROR: (gcloud.auth) not logged in")
@@ -248,34 +333,15 @@ class AdcCredentialTest(unittest.TestCase):
         self.assertIn("application-default login", str(caught.exception))
 
 
-class FetchFlagsTest(unittest.TestCase):
-    """--auth must be opt-in, or the credential-free proof this repo's CI runs becomes meaningless."""
+class FetchTransportSelectionTest(unittest.TestCase):
+    """--auth must be opt-in, or the credential-free proof this repo's CI runs means nothing."""
 
-    def test_should_fetch_anonymously_unless_auth_is_requested(self) -> None:
-        with tempfile.TemporaryDirectory() as name:
-            root = Path(name)
-            manifest = root / "corpus.lock.json"
-            write_manifest({"schema": 1, "objects": {}}, manifest)
-            calls: list[list[str]] = []
+    def test_should_build_an_anonymous_transport_by_default(self) -> None:
+        transport = fetch_corpus.build_transport(fetch_corpus.parse_args([]))
 
-            def run(command, **_kwargs):
-                calls.append(command)
-                return subprocess.CompletedProcess(command, 0, b"", b"")
+        self.assertIsNone(transport._credential)
 
-            CurlTransport(run).fetch("https://example.invalid/x", timeout=30)
+    def test_should_build_a_credentialed_transport_only_when_auth_is_requested(self) -> None:
+        transport = fetch_corpus.build_transport(fetch_corpus.parse_args(["--auth"]))
 
-            self.assertNotIn("-H", calls[0])
-
-    def test_should_send_credentials_only_on_the_authenticated_path(self) -> None:
-        def run(command, **_kwargs):
-            return subprocess.CompletedProcess(command, 0, "ya29.token\n", "")
-
-        authenticated: list[list[str]] = []
-
-        def authenticated_run(command, **_kwargs):
-            authenticated.append(command)
-            return subprocess.CompletedProcess(command, 0, "ya29.token\n", "")
-
-        CurlTransport(authenticated_run, credential=AdcCredential(run)).fetch("https://x.invalid/o", timeout=30)
-
-        self.assertTrue(any("Authorization: Bearer ya29.token" in part for part in authenticated[-1]))
+        self.assertIsInstance(transport._credential, AdcCredential)
