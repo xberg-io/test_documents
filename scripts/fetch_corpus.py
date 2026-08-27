@@ -14,7 +14,6 @@ Already-correct files are left alone, so re-running costs one hash per file and 
 from __future__ import annotations
 
 import argparse
-import concurrent.futures
 import json
 import subprocess
 import sys
@@ -23,11 +22,11 @@ from pathlib import Path
 
 from corpus_tools.hashing import BYTES_PER_MIB, sha256_bytes, sha256_file
 from corpus_tools.paths import REPO_ROOT
+from corpus_tools.pool import add_jobs_argument, map_parallel
 
 MANIFEST_FILENAME = "corpus.lock.json"
 OBJECTS_PREFIX = "objects"
 DEFAULT_BUCKET = "xberg-test-documents"
-MAX_WORKERS = 8
 REQUEST_TIMEOUT_SECONDS = 120
 MAX_REPORTED_FAILURES = 20
 
@@ -63,6 +62,7 @@ def fetch_one(bucket: str, root: Path, rel_path: str, sha256: str) -> str | None
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--bucket", default=DEFAULT_BUCKET, help="GCS bucket name, without gs://")
+    add_jobs_argument(parser)
     parser.add_argument(
         "--include",
         action="append",
@@ -86,9 +86,8 @@ def main(argv: list[str] | None = None) -> int:
     print(f"fetching {len(wanted)} path(s) / {total_bytes / BYTES_PER_MIB:.1f} MiB into {root}")
 
     failures: list[str] = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
-        results = pool.map(lambda item: fetch_one(args.bucket, root, *item), wanted.items())
-        failures = [failure for failure in results if failure is not None]
+    results = map_parallel(lambda item: fetch_one(args.bucket, root, *item), wanted.items(), jobs=args.jobs)
+    failures = [failure for failure in results if failure is not None]
 
     print(f"{len(wanted) - len(failures)}/{len(wanted)} present")
     for failure in failures[:MAX_REPORTED_FAILURES]:

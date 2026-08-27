@@ -23,7 +23,7 @@ from __future__ import annotations
 
 import argparse
 import collections
-import concurrent.futures
+import functools
 import io
 import json
 import sys
@@ -33,6 +33,7 @@ from pathlib import Path
 
 from corpus_tools import paths
 from corpus_tools.hashing import sha256_bytes, sha256_file
+from corpus_tools.pool import THIRD_PARTY_SOURCE_JOBS, add_jobs_argument, run_parallel
 
 REPO_ROOT = paths.REPO_ROOT
 MANIFEST = Path(__file__).resolve().parent / "data" / "regression-objects.json"
@@ -101,7 +102,7 @@ def fetch_shard(url: str, members: list[tuple[str, dict]], force: bool) -> list[
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--jobs", type=int, default=6, help="parallel downloads (default 6)")
+    add_jobs_argument(parser, default=THIRD_PARTY_SOURCE_JOBS)
     parser.add_argument("--force", action="store_true", help="re-download files that already match")
     parser.add_argument("--include", default="", help="only paths starting with this prefix")
     args = parser.parse_args()
@@ -126,13 +127,11 @@ def main() -> int:
         if status.split()[0] in {"error", "mismatch"}:
             problems.append(f"  {path}: {status}")
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as pool:
-        futures = [pool.submit(fetch_direct, p, e, args.force) for p, e in direct]
-        futures += [pool.submit(fetch_shard, url, members, args.force) for url, members in shards.items()]
-        for future in concurrent.futures.as_completed(futures):
-            outcome = future.result()
-            for path, status in outcome if isinstance(outcome, list) else [outcome]:
-                record(path, status)
+    calls = [functools.partial(fetch_direct, p, e, args.force) for p, e in direct]
+    calls += [functools.partial(fetch_shard, url, members, args.force) for url, members in shards.items()]
+    for outcome in run_parallel(calls, jobs=args.jobs):
+        for path, status in outcome if isinstance(outcome, list) else [outcome]:
+            record(path, status)
 
     print(f"{len(manifest)} objects: " + ", ".join(f"{n} {k}" for k, n in sorted(counts.items())))
     if problems:

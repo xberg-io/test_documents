@@ -23,7 +23,7 @@ way afterwards:
 """
 
 import argparse
-import concurrent.futures
+import functools
 import json
 import sys
 import urllib.request
@@ -32,6 +32,7 @@ from pathlib import Path
 import build_epub_edge_cases
 from corpus_tools import paths
 from corpus_tools.hashing import sha256_bytes, sha256_file
+from corpus_tools.pool import add_jobs_argument, run_parallel
 
 REPO_ROOT = paths.REPO_ROOT
 MANIFEST = Path(__file__).resolve().parent / "data" / "epub-edge-cases.json"
@@ -85,7 +86,7 @@ def fetch_one(path: str, entry: dict, force: bool, generated: dict[str, bytes]) 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--jobs", type=int, default=8, help="parallel downloads (default 8)")
+    add_jobs_argument(parser)
     parser.add_argument("--force", action="store_true", help="rewrite files that already match")
     args = parser.parse_args()
 
@@ -94,16 +95,14 @@ def main() -> int:
     counts: dict[str, int] = {}
     problems: list[str] = []
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as pool:
-        futures = [
-            pool.submit(fetch_one, path, entry, args.force, generated) for path, entry in sorted(manifest.items())
-        ]
-        for future in concurrent.futures.as_completed(futures):
-            path, status = future.result()
-            key = status.split()[0]
-            counts[key] = counts.get(key, 0) + 1
-            if key in {"error", "mismatch"}:
-                problems.append(f"  {path}: {status}")
+    calls = [
+        functools.partial(fetch_one, path, entry, args.force, generated) for path, entry in sorted(manifest.items())
+    ]
+    for path, status in run_parallel(calls, jobs=args.jobs):
+        key = status.split()[0]
+        counts[key] = counts.get(key, 0) + 1
+        if key in {"error", "mismatch"}:
+            problems.append(f"  {path}: {status}")
 
     print(f"{len(manifest)} files: " + ", ".join(f"{n} {k}" for k, n in sorted(counts.items())))
     if problems:

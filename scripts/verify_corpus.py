@@ -16,7 +16,6 @@ over the sorted sha256 list, so it is reproducible yet not always the same handf
 from __future__ import annotations
 
 import argparse
-import concurrent.futures
 import json
 import subprocess
 import sys
@@ -24,10 +23,10 @@ from pathlib import Path
 
 from corpus_tools.hashing import sha256_bytes
 from corpus_tools.paths import REPO_ROOT
+from corpus_tools.pool import DEFAULT_JOBS, add_jobs_argument, map_parallel
 
 MANIFEST_FILENAME = "corpus.lock.json"
 OBJECTS_PREFIX = "objects"
-MAX_WORKERS = 8
 REQUEST_TIMEOUT_SECONDS = 60
 # ~keep One curl process per batch rather than per object: process startup dominates a HEAD
 # request, and curl reuses the connection across URLs given in a single invocation.
@@ -102,28 +101,27 @@ def report(label: str, total: int, failures: list[str]) -> int:
     return len(failures)
 
 
-def verify_metadata(bucket: str, pins: dict[str, int]) -> int:
+def verify_metadata(bucket: str, pins: dict[str, int], *, jobs: int = DEFAULT_JOBS) -> int:
     ordered = sorted(pins)
     batches = [ordered[start : start + HEAD_BATCH_SIZE] for start in range(0, len(ordered), HEAD_BATCH_SIZE)]
     failures: list[str] = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
-        for batch_failures in pool.map(lambda batch: head_batch(bucket, batch, pins), batches):
-            failures += batch_failures
+    for batch_failures in map_parallel(lambda batch: head_batch(bucket, batch, pins), batches, jobs=jobs):
+        failures += batch_failures
     return report("metadata", len(ordered), failures)
 
 
-def verify_content(bucket: str, pins: dict[str, int], sample: int) -> int:
+def verify_content(bucket: str, pins: dict[str, int], sample: int, *, jobs: int = DEFAULT_JOBS) -> int:
     sampled = evenly_spaced(sorted(pins), sample)
     failures: list[str] = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
-        for object_failures in pool.map(lambda sha256: check_content(bucket, sha256), sampled):
-            failures += object_failures
+    for object_failures in map_parallel(lambda sha256: check_content(bucket, sha256), sampled, jobs=jobs):
+        failures += object_failures
     return report("content", len(sampled), failures)
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--bucket", required=True, help="GCS bucket name, without the gs:// prefix")
+    add_jobs_argument(parser)
     parser.add_argument(
         "--sample",
         type=int,
@@ -138,7 +136,11 @@ def main(argv: list[str] | None = None) -> int:
         print(f"{MANIFEST_FILENAME} pins no objects", file=sys.stderr)
         return 1
 
-    failures = verify_content(args.bucket, pins, args.sample) if args.sample else verify_metadata(args.bucket, pins)
+    failures = (
+        verify_content(args.bucket, pins, args.sample, jobs=args.jobs)
+        if args.sample
+        else verify_metadata(args.bucket, pins, jobs=args.jobs)
+    )
     return 1 if failures else 0
 
 
