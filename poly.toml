@@ -71,5 +71,64 @@ exclude = [
 [lint.markdown.rumdl]
 disable = ["MD012", "MD013", "MD024", "MD033", "MD036", "MD041", "MD046", "MD051", "MD076"]
 
+# ~keep poly does NOT read pyproject.toml's [tool.ruff]; it runs ruff with the config below.
+# Verified: a file with `from __future__ import annotations` is clean to `poly lint` and a TID251
+# error to `uv run ruff check`. So the two must be kept in step, and
+# scripts/tests/test_lint_scope.py asserts that they are.
+#
+# ~keep pyproject.toml keeps its own [tool.ruff] rather than deferring entirely to this file,
+# because that is what constrains a HUMAN running `ruff format .` or an editor-on-save — neither of
+# which reads poly.toml. Its force-exclude is the corpus protection; the [discovery] exclude above
+# is the same protection for poly's own runs. Two tools, two configs, one corpus.
+[lint.python.ruff]
+pydocstyle_convention = "google"
+mccabe_max_complexity = 15
+pylint_max_args = 10
+pylint_max_branches = 15
+pylint_max_returns = 10
+select = ["ALL"]
+ignore = [
+  "ANN401",
+  "COM812",
+  "CPY",
+  "D100",
+  "D104",
+  "D107",
+  "D203",
+  "D205",
+  "D212",
+  "E501",
+  "EM",
+  "FBT",
+  "FIX",
+  "ISC001",
+  "N818",
+  "PGH003",
+  "TC003",
+  "PLR2004",
+  "S104",
+  "S110",
+  "S603",
+  "TD",
+  "TRY",
+]
+
+# ~keep The polyrepo type-checks with pyrefly, run through poly rather than installed as a dev
+# dependency — it is a system tool like poly itself. Scoped to the tooling and away from the tests
+# for the reason given beside [tool.pyrefly] in pyproject.toml.
+[hooks.pre-commit.commands.pyrefly]
+run = "pyrefly check"
+files = "scripts/**/*.py"
+exclude = ["scripts/tests/**"]
+workspace = true
+cache = { inputs = ["scripts/**/*.py", "pyproject.toml"] }
+
 [per-file-ignores]
 "LICENSES.md" = ["MD075"]
+
+# ~keep Mirrors [tool.ruff.lint.per-file-ignores] in pyproject.toml, for the reason recorded
+# beside [lint.python.ruff] above: poly does not read that file.
+"scripts/*.py" = ["D101", "D102", "D103", "EXE001", "INP001", "PLW1510", "S607", "T201"]
+"scripts/corpus_tools/**" = ["D101", "D102", "D103", "PLC0415", "PLW1510", "S607", "SIM105", "T201"]
+"scripts/tests/**" = ["ANN", "ARG002", "D", "INP001", "PLC2701", "PLR2004", "PT009", "PT027", "S", "SLF001"]
+"scripts/tests/test_http.py" = ["ANN", "D", "PLR2004", "PT009", "S", "SLF001"]

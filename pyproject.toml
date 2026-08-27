@@ -20,7 +20,7 @@ requires-python = ">=3.10"
 # ~keep tomli is only for 3.10, where tomllib is not yet stdlib. scripts/tests/test_lint_scope.py
 # parses poly.toml and this file to prove the two exclude lists agree, and the 3.10 floor is
 # tested in CI, so the test has to work there too.
-dev = ["mypy>=1.11", "pytest>=8.3", "ruff>=0.14", "tomli>=2.0; python_version<'3.11'"]
+dev = ["pytest>=8.3", "ruff>=0.14", "tomli>=2.0; python_version<'3.11'"]
 
 [tool.uv]
 # ~keep The repo is a fixture corpus, not a package. This stops uv building or installing anything
@@ -276,24 +276,17 @@ norecursedirs = [
 ]
 
 # ─────────────────────────────────────────────────────────────────────────────
-# mypy
+# pyrefly
 # ─────────────────────────────────────────────────────────────────────────────
-[tool.mypy]
-python_version = "3.10"
-strict = true
-disable_error_code = ["import-untyped"]
-explicit_package_bases = true
-implicit_reexport = false
-show_error_codes = true
-namespace_packages = true
-# ~keep `files` scopes a bare `mypy`. `mypy_path` is what makes `import corpus_tools` and
-# `import publish_corpus` resolve without installing anything: scripts/ has no __init__.py, so it
-# is the package base for both the flat entry points and corpus_tools/. mypy never writes source
-# files, so this is a noise guard rather than corpus protection.
-# ~keep The tooling only. The test suite is unittest.TestCase with stub transports and injected
-# runners, and strict mode demands annotations on every one of those throwaway helpers — noise that
-# buys nothing, since the stubs exist precisely to be structurally duck-typed. This matches the
-# xberg-io/actions repo, which runs mypy over `**/scripts/*.py` and not its tests.
-files = ["scripts"]
-mypy_path = ["scripts"]
-exclude = '^(?!scripts/)|^scripts/tests/'
+# ~keep The polyrepo type-checks with pyrefly, run through poly rather than as a dev dependency —
+# it is a system tool like poly itself, which is why it is absent from [dependency-groups]. The
+# config lives here rather than in a pyrefly.toml so there is one file to read for Python settings.
+#
+# ~keep Scoped to the tooling, excluding tests, matching the pyrefly hook in poly.toml and the
+# sibling repos. The suite is built on stub transports and injected runners that exist precisely to
+# be duck-typed; type-checking them demands annotations on every throwaway helper and finds nothing.
+[tool.pyrefly]
+project-includes = ["scripts"]
+project-excludes = ["scripts/tests/**", "**/__pycache__/**"]
+search-path = ["scripts"]
+python-version = "3.10"

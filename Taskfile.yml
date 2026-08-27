@@ -23,7 +23,9 @@ tasks:
     cmds:
       - uv run ruff check .
       - uv run ruff format --check .
-      - uv run mypy
+      # ~keep pyrefly is a system tool run through poly, not a dev dependency. `poly lint .` runs it
+      # in its whole-project phase, so this line is the fast standalone form for a tight loop.
+      - pyrefly check
       - poly lint .
       - poly fmt --check .
 

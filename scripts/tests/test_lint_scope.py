@@ -197,3 +197,52 @@ class ExcludeListsAgreeTest(unittest.TestCase):
             ["scripts"],
             "a top-level directory holding tracked files is neither scripts/ nor excluded as corpus",
         )
+
+
+class RuffConfigsAgreeTest(unittest.TestCase):
+    """poly runs ruff with its own config, so the two must be kept in step by hand.
+
+    ~keep Verified rather than assumed: before poly.toml carried a [lint.python.ruff] block, a file
+    containing `from __future__ import annotations` was clean to `poly lint` and a TID251 error to
+    `uv run ruff check`. Nothing surfaced that disagreement, and the repo's own commit hook and its
+    CI gate were enforcing different rules.
+    """
+
+    def _poly_ruff(self) -> dict:
+        return tomllib.loads(POLY_TOML.read_text(encoding="utf-8"))["lint"]["python"]["ruff"]
+
+    def _pyproject_ruff(self) -> dict:
+        return tomllib.loads(PYPROJECT.read_text(encoding="utf-8"))["tool"]["ruff"]["lint"]
+
+    def test_should_select_the_same_rules_in_both_configs(self) -> None:
+        self.assertEqual(self._poly_ruff()["select"], self._pyproject_ruff()["select"])
+
+    def test_should_ignore_the_same_rules_in_both_configs(self) -> None:
+        self.assertEqual(sorted(self._poly_ruff()["ignore"]), sorted(self._pyproject_ruff()["ignore"]))
+
+    def test_should_apply_the_same_per_file_ignores_in_both_configs(self) -> None:
+        poly_per_file = tomllib.loads(POLY_TOML.read_text(encoding="utf-8"))["per-file-ignores"]
+        for pattern, codes in self._pyproject_ruff()["per-file-ignores"].items():
+            with self.subTest(pattern=pattern):
+                self.assertIn(pattern, poly_per_file)
+                self.assertEqual(sorted(poly_per_file[pattern]), sorted(codes))
+
+    def test_should_agree_on_the_complexity_and_docstring_limits(self) -> None:
+        poly_ruff, pyproject_ruff = self._poly_ruff(), self._pyproject_ruff()
+
+        self.assertEqual(poly_ruff["mccabe_max_complexity"], pyproject_ruff["mccabe"]["max-complexity"])
+        self.assertEqual(poly_ruff["pydocstyle_convention"], pyproject_ruff["pydocstyle"]["convention"])
+        self.assertEqual(poly_ruff["pylint_max_args"], pyproject_ruff["pylint"]["max-args"])
+
+    def test_should_record_that_the_future_import_ban_lives_only_in_pyproject(self) -> None:
+        """~keep poly cannot express it, and silently ignores the key if you try.
+
+        `banned-api` is a ruff *setting*, not a rule code, and poly's [lint.python.ruff] has no key
+        for it — an added `flake8_tidy_imports_banned_api` is accepted without complaint and has no
+        effect. So the ban is enforced by the `uv run ruff check .` step in test-unit.yml and not by
+        `poly lint`. This test exists so that asymmetry is written down rather than rediscovered.
+        """
+        banned = self._pyproject_ruff()["flake8-tidy-imports"]["banned-api"]
+
+        self.assertIn("__future__.annotations", banned)
+        self.assertNotIn("flake8_tidy_imports_banned_api", self._poly_ruff())

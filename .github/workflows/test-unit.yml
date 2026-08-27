@@ -48,7 +48,7 @@ jobs:
         run: python3 -m unittest discover -s scripts/tests -t scripts -v
 
   lint:
-    name: ruff + mypy
+    name: ruff
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -64,8 +64,9 @@ jobs:
       - name: Ruff format check
         run: uv run ruff format --check .
 
-      - name: Mypy
-        run: uv run mypy
+      # ~keep Type-checking is not here. The polyrepo type-checks with pyrefly, which poly runs in
+      # its whole-project phase — so `poly lint .` in validate.yml covers it, and that workflow
+      # already sets setup-python precisely so pyrefly can resolve imports.
 
       # ~keep The belt for the config's braces. `ruff check` without --fix and `ruff format --check`
       # cannot write, so this should never trip — which is exactly why it is cheap to keep. If a
