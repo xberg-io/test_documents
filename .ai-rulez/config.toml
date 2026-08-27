@@ -1,0 +1,47 @@
+version = "4.0"
+name = "test_documents"
+description = "Shared document corpus and ground truth used as test fixtures across the xberg polyrepo. A fixture corpus, not a codebase: the binaries live in a public GCS bucket and are pinned by corpus.lock.json."
+gitignore = true
+
+presets = ["claude", "codex"]
+
+compact = true
+[header]
+style = "minimal"
+
+# ~keep `documentation` is on because most changes here are provenance prose (LICENSES.md,
+# ATTRIBUTIONS.md, *_PROVENANCE.md) rather than code. `python` covers scripts/; there is no other
+# language in this repo.
+builtins = ["python", "cicd", "documentation", "default-commands"]
+
+[[includes]]
+name = "xberg-core"
+source = 'https://github.com/xberg-io/agent-conventions.git'
+path = "modules/core"
+merge_strategy = "local-override"
+
+[[includes]]
+name = "xberg-cicd"
+source = 'https://github.com/xberg-io/agent-conventions.git'
+path = "modules/cicd"
+merge_strategy = "local-override"
+
+[[mcp_servers]]
+name = "ai-rulez"
+description = "Manage AI governance config via MCP."
+command = "npx"
+args = ["-y", "ai-rulez@latest", "mcp"]
+
+[defaults]
+effort = "medium"
+
+[[marketplaces]]
+name = "basemind"
+source = "Goldziher/basemind"
+type = "github"
+
+[[plugins]]
+marketplace = "basemind"
+name = "basemind"
+scope = "project"
+enabled = true

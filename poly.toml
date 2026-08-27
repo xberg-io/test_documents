@@ -66,5 +66,10 @@ exclude = [
   "yaml/**",
 ]
 
+# ~keep Matches the polyrepo root's list. .ai-rulez/ authors agents and rules as front-matter plus
+# prose, so MD041 (first line must be an H1) is wrong for them by construction.
+[lint.markdown.rumdl]
+disable = ["MD012", "MD013", "MD024", "MD033", "MD036", "MD041", "MD046", "MD051", "MD076"]
+
 [per-file-ignores]
 "LICENSES.md" = ["MD075"]
