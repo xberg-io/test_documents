@@ -30,6 +30,7 @@ from typing import Protocol
 
 from corpus_tools.hashing import BYTES_PER_MIB
 from corpus_tools.manifest import (
+    DEFAULT_BUCKET,
     MANIFEST_FILENAME,
     OBJECTS_PREFIX,
     CorpusObject,
@@ -331,13 +332,113 @@ def verify_write_access(backend: StorageBackend) -> str:
     return token
 
 
+class PublishTargetRefused(RuntimeError):
+    """Raised when the requested root/manifest/bucket combination is not safe to publish."""
+
+
+def resolve_targets(args: argparse.Namespace) -> tuple[Path, Path, Path]:
+    """Work out (root, manifest, patterns), defaulting to this repository.
+
+    ~keep All three default to today's values, so `publish_corpus.py --bucket xberg-test-documents`
+    behaves exactly as before. Only a caller that passes one of the flags gets anything new.
+    """
+    root = args.root.resolve() if args.root else git_repo_root()
+    manifest = args.manifest.resolve() if args.manifest else root / MANIFEST_FILENAME
+    patterns = args.patterns.resolve() if args.patterns else root / PATTERNS_FILENAME
+    return root, manifest, patterns
+
+
+def guard_against_publishing_private_corpus_publicly(root: Path, manifest: Path, bucket: str | None) -> None:
+    """Refuse a non-default root or manifest aimed at the public bucket.
+
+    ~keep The public bucket is world-readable and its objects cannot be recalled once served. A
+    private corpus reaching it is not a bug you fix forward, so the combination fails loudly here
+    rather than being caught by review.
+    """
+    if bucket != DEFAULT_BUCKET:
+        return
+    repository_root = git_repo_root()
+    if root != repository_root:
+        raise PublishTargetRefused(
+            f"refusing to publish --root {root} to the public bucket {DEFAULT_BUCKET}. "
+            f"That bucket serves {repository_root} anonymously to the whole internet. "
+            "Name a private bucket explicitly, or drop --root."
+        )
+    if manifest != repository_root / MANIFEST_FILENAME:
+        raise PublishTargetRefused(
+            f"refusing to publish with --manifest {manifest} to the public bucket {DEFAULT_BUCKET}. "
+            "A manifest from outside this repository describes a corpus this bucket must not serve."
+        )
+
+
+def guard_against_root_outside_the_manifest(root: Path, manifest: Path, *, allow_external: bool) -> None:
+    """Require --root to be the manifest's own directory unless told otherwise.
+
+    ~keep This is the check that catches the aimed-one-level-too-high mistake. Corpus patterns use
+    gitignore semantics, so a bare `*.zip` matches a basename at ANY depth: pointing --root at a
+    parent directory silently sweeps in whatever else happens to live beside the corpus. Publishing
+    is not reversible, so the default is to refuse and make the caller say they meant it.
+    """
+    if allow_external or root == manifest.parent:
+        return
+    raise PublishTargetRefused(
+        f"--root {root} is not the manifest's directory ({manifest.parent}). "
+        "Corpus patterns match basenames at any depth, so a root above the corpus can sweep in "
+        "unrelated files. Pass --allow-external-root if this is deliberate."
+    )
+
+
+def describe_publish_set(root: Path, paths: list[str], objects: list[CorpusObject]) -> str:
+    """A summary a human can sanity-check at a glance before anything is uploaded."""
+    extensions: dict[str, int] = {}
+    for rel_path in paths:
+        suffix = Path(rel_path).suffix.lower().lstrip(".") or "(none)"
+        extensions[suffix] = extensions.get(suffix, 0) + 1
+    top = sorted(extensions.items(), key=lambda item: (-item[1], item[0]))[:8]
+    total = sum(obj.size for obj in objects)
+    return (
+        f"  root       {root}\n"
+        f"  files      {len(paths)}\n"
+        f"  bytes      {total} ({format_mib(total)} MiB)\n"
+        f"  extensions {', '.join(f'{name} {count}' for name, count in top)}"
+    )
+
+
 def parse_args(argv: list[str] | None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--bucket", help="GCS bucket name, without the gs:// prefix")
     parser.add_argument(
         "--dry-run",
         action="store_true",
         help="report what would be uploaded; performs no network calls and uploads nothing",
+    )
+    parser.add_argument(
+        "--root",
+        type=Path,
+        default=None,
+        help="corpus root to enumerate (default: this repository)",
+    )
+    parser.add_argument(
+        "--manifest",
+        type=Path,
+        default=None,
+        help=f"where to write the lock file (default: <root>/{MANIFEST_FILENAME})",
+    )
+    parser.add_argument(
+        "--patterns",
+        type=Path,
+        default=None,
+        help=f"pattern file selecting corpus paths (default: <root>/{PATTERNS_FILENAME})",
+    )
+    parser.add_argument(
+        "--allow-external-root",
+        action="store_true",
+        help="permit a --root that is not the manifest's own directory",
+    )
+    parser.add_argument(
+        "--yes",
+        action="store_true",
+        help="skip the confirmation prompt shown before publishing a non-default root",
     )
     args = parser.parse_args(argv)
     if not args.dry_run and not args.bucket:
@@ -347,11 +448,24 @@ def parse_args(argv: list[str] | None) -> argparse.Namespace:
 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
-    root = git_repo_root()
+    root, manifest_path, patterns_path = resolve_targets(args)
+    is_default_root = args.root is None and args.manifest is None and args.patterns is None
 
-    paths = corpus_paths(root, load_patterns(root))
+    # ~keep A refusal here is a designed outcome, not a crash. Print the reason and exit 1 rather
+    # than showing a traceback, so the message a maintainer needs is the whole output.
+    try:
+        guard_against_publishing_private_corpus_publicly(root, manifest_path, args.bucket)
+        guard_against_root_outside_the_manifest(root, manifest_path, allow_external=args.allow_external_root)
+    except PublishTargetRefused as refusal:
+        print(f"refused: {refusal}", file=sys.stderr)
+        return 1
+
+    paths = corpus_paths(root, load_patterns(root, patterns_path))
     guard_against_forbidden_paths(paths + list(EXTRA_ROOT_FILES))
-    guard_against_tracked_corpus_files(root, paths)
+    if is_default_root:
+        # ~keep Only meaningful for this repository, where corpus binaries are deliberately
+        # untracked. A corpus root outside a git working tree has nothing to ask git about.
+        guard_against_tracked_corpus_files(root, paths)
 
     objects = resolve_objects(root, paths)
     representatives = unique_objects_by_sha256(objects)
@@ -360,16 +474,28 @@ def main(argv: list[str] | None = None) -> int:
     total_size = sum(obj.size for obj in objects)
     print(f"{len(objects)} paths / {len(representatives)} unique objects / {format_mib(total_size)} MiB")
 
+    if not is_default_root:
+        # ~keep A count and a byte total are the two numbers that make a wrongly aimed root obvious at
+        # a glance. An exit code does not distinguish 4,412 files from 4,419.
+        print("publishing a non-default corpus root:")
+        print(describe_publish_set(root, paths, objects))
+        print(f"  manifest   {manifest_path}")
+        print(f"  patterns   {patterns_path}")
+        print(f"  bucket     {args.bucket or '(dry run)'}")
+        if not args.dry_run and not args.yes and not _confirmed():
+            print("aborted; nothing was uploaded", file=sys.stderr)
+            return 1
+
     # ~keep The manifest write stays behind this branch: --dry-run promises to change nothing, and
     # corpus.lock.json is load-bearing (consumers hash it to key their fetch cache).
     if args.dry_run:
         print(
             f"dry-run: would upload {len(representatives)} unique object(s) and {len(EXTRA_ROOT_FILES)} attribution file(s)"
         )
-        print("dry-run: no bucket contacted, nothing uploaded, corpus.lock.json untouched")
+        print(f"dry-run: no bucket contacted, nothing uploaded, {manifest_path.name} untouched")
         return 0
 
-    write_manifest(manifest, root / MANIFEST_FILENAME)
+    write_manifest(manifest, manifest_path)
 
     backend = GCloudStorageBackend(args.bucket)
     probe_token = verify_write_access(backend)
@@ -382,6 +508,15 @@ def main(argv: list[str] | None = None) -> int:
     print(f"attribution files: uploaded {len(extra_uploaded)}, unchanged {len(extra_unchanged)}")
 
     return 0
+
+
+def _confirmed() -> bool:
+    """~keep Interactive by design; --yes is the non-interactive path for scripted publishes."""
+    try:
+        answer = input("proceed? [y/N] ").strip().lower()
+    except EOFError:
+        return False
+    return answer in {"y", "yes"}
 
 
 if __name__ == "__main__":

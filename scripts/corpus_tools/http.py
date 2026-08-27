@@ -84,6 +84,55 @@ class RetryPolicy:
 DEFAULT_RETRY = RetryPolicy()
 
 
+# ~keep Access tokens from a workload-identity federation exchange last one hour and cannot be
+# extended without an org policy change. The full private corpus is 15.26 GB, which on a slow
+# runner can outlive a single token, so a credential minted once at startup would turn into a 401
+# somewhere in the middle of a long fetch. Acquiring per batch instead keeps a long transfer
+# working and costs one subprocess per batch, which is noise next to the bytes being moved.
+ACCESS_TOKEN_MAX_AGE_SECONDS = 30 * 60
+
+
+class AdcCredential:
+    """An Application Default Credentials bearer token, refreshed as it ages.
+
+    ~keep Deliberately shells out to `gcloud auth print-access-token` rather than importing
+    google.auth. This package is stdlib-only because consumers run it on a bare checkout with
+    nothing installed, and the CI path (google-github-actions/auth with WIF) populates ADC exactly
+    the same way a local `gcloud auth login` does — so one code path serves both.
+    """
+
+    def __init__(self, runner: object = None, clock: object = None) -> None:
+        self._run = runner if runner is not None else subprocess.run
+        self._clock = clock if clock is not None else time.monotonic
+        self._token: str | None = None
+        self._acquired_at = 0.0
+
+    def token(self) -> str:
+        now = self._clock()
+        if self._token is None or now - self._acquired_at >= ACCESS_TOKEN_MAX_AGE_SECONDS:
+            self._token = self._acquire()
+            self._acquired_at = now
+        return self._token
+
+    def _acquire(self) -> str:
+        result = self._run(
+            ["gcloud", "auth", "print-access-token"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if result.returncode != 0:
+            raise HttpError(
+                "gcloud auth print-access-token",
+                "could not obtain an access token. Run `gcloud auth application-default login`, or "
+                f"check the workload-identity setup in CI: {result.stderr.strip()}",
+            )
+        return result.stdout.strip()
+
+    def headers(self) -> list[str]:
+        return ["-H", f"Authorization: Bearer {self.token()}"]
+
+
 @dataclass(frozen=True)
 class HeadResult:
     url: str
@@ -115,12 +164,18 @@ class CurlTransport:
     a plain value, works under bare `python3 -m unittest`, and cannot leak between tests.
     """
 
-    def __init__(self, runner: object = None) -> None:
+    def __init__(self, runner: object = None, credential: object = None) -> None:
         self._run = runner if runner is not None else subprocess.run
+        # ~keep None means anonymous, which stays the default: the public bucket is served without
+        # credentials and that is the path this repo's CI proves still works.
+        self._credential = credential
+
+    def _auth_headers(self) -> list[str]:
+        return self._credential.headers() if self._credential is not None else []
 
     def fetch(self, url: str, *, timeout: float) -> bytes:
         result = self._run(
-            ["curl", "-sS", "--fail", "--max-time", str(int(timeout)), url],
+            ["curl", "-sS", "--fail", "--max-time", str(int(timeout)), *self._auth_headers(), url],
             capture_output=True,
             check=False,
         )
@@ -137,7 +192,7 @@ class CurlTransport:
         per object because process startup dominates a HEAD request, and curl reuses the
         connection across URLs given in a single invocation.
         """
-        command = ["curl", "-sS", "--head", "--max-time", str(int(timeout))]
+        command = ["curl", "-sS", "--head", "--max-time", str(int(timeout)), *self._auth_headers()]
         command += ["-w", "%{http_code} %header{content-length} %{url_effective}\n"]
         for url in urls:
             # ~keep -o must repeat per URL; curl applies a single -o to the first transfer only and

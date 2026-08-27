@@ -14,7 +14,6 @@ Already-correct files are left alone, so re-running costs one hash per file and 
 from __future__ import annotations
 
 import argparse
-import json
 import sys
 from pathlib import Path
 
@@ -22,13 +21,14 @@ from corpus_tools.hashing import BYTES_PER_MIB, sha256_bytes, sha256_file
 from corpus_tools.http import (
     BUCKET_OBJECT_TIMEOUT_SECONDS,
     DEFAULT_RETRY,
+    AdcCredential,
     CurlTransport,
     HttpError,
     RetryPolicy,
     Transport,
     get,
 )
-from corpus_tools.manifest import DEFAULT_BUCKET, MANIFEST_FILENAME, object_url
+from corpus_tools.manifest import DEFAULT_BUCKET, MANIFEST_FILENAME, lock_objects, object_url
 from corpus_tools.paths import REPO_ROOT
 from corpus_tools.patterns import matches_any
 from corpus_tools.pool import add_jobs_argument, map_parallel
@@ -79,24 +79,49 @@ def main(argv: list[str] | None = None) -> int:
         default=[],
         help="glob matched against manifest paths; repeatable. Defaults to everything.",
     )
+    parser.add_argument(
+        "--manifest",
+        type=Path,
+        default=None,
+        help=f"lock file to read (default: <repo>/{MANIFEST_FILENAME})",
+    )
+    parser.add_argument(
+        "--root",
+        type=Path,
+        default=None,
+        help="where to materialise files (default: this repository)",
+    )
+    parser.add_argument(
+        "--auth",
+        action="store_true",
+        help="authenticate with Application Default Credentials, for a private bucket",
+    )
     args = parser.parse_args(argv)
 
-    root = REPO_ROOT
-    objects = json.loads((root / MANIFEST_FILENAME).read_text(encoding="utf-8"))["objects"]
+    # ~keep Both default to this repository, so `python3 scripts/fetch_corpus.py` with no flags is
+    # byte-for-byte the command ~14 places in the xberg repo tell people to run.
+    root = args.root.resolve() if args.root else REPO_ROOT
+    manifest_path = args.manifest.resolve() if args.manifest else REPO_ROOT / MANIFEST_FILENAME
+    transport = CurlTransport(credential=AdcCredential()) if args.auth else TRANSPORT
+    objects = lock_objects(manifest_path)
     wanted = {
         rel_path: entry["sha256"]
         for rel_path, entry in objects.items()
         if not args.include or matches_any(rel_path, args.include)
     }
     if not wanted:
-        print(f"no manifest path matched {args.include}", file=sys.stderr)
+        print(f"no path in {manifest_path} matched {args.include}", file=sys.stderr)
         return 1
 
     total_bytes = sum(objects[rel_path]["size"] for rel_path in wanted)
     print(f"fetching {len(wanted)} path(s) / {total_bytes / BYTES_PER_MIB:.1f} MiB into {root}")
 
     failures: list[str] = []
-    results = map_parallel(lambda item: fetch_one(args.bucket, root, *item), wanted.items(), jobs=args.jobs)
+    results = map_parallel(
+        lambda item: fetch_one(args.bucket, root, *item, transport=transport),
+        wanted.items(),
+        jobs=args.jobs,
+    )
     failures = [failure for failure in results if failure is not None]
 
     print(f"{len(wanted) - len(failures)}/{len(wanted)} present")
