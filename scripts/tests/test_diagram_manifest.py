@@ -23,8 +23,8 @@ from pathlib import Path
 
 from build_diagram_pdfs import RECIPES
 from corpus_tools import paths
+from corpus_tools.diagrams.svg_metadata import referenced_ids, strip
 from corpus_tools.patterns import load_patterns, matches_corpus_pattern
-from strip_svg_graph_metadata import referenced_ids, strip
 
 ROOT = paths.REPO_ROOT
 MANIFEST = json.loads((ROOT / "diagrams" / "manifest.json").read_text(encoding="utf-8"))

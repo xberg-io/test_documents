@@ -12,7 +12,7 @@ from __future__ import annotations
 
 import unittest
 
-from strip_svg_graph_metadata import strip
+from corpus_tools.diagrams.svg_metadata import strip
 
 GRAPHVIZ_NODE = (
     '<g id="node1" class="node">\n<title>a</title>\n<polygon fill="#a6cee3" stroke="black" points="0,0 1,1"/>\n</g>\n'
