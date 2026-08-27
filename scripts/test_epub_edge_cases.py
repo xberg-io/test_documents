@@ -23,7 +23,7 @@ import build_epub_edge_cases  # noqa: E402
 import publish_corpus  # noqa: E402
 
 REPO_ROOT = SCRIPTS_DIR.parent
-MANIFEST = SCRIPTS_DIR / "epub-edge-cases.json"
+MANIFEST = SCRIPTS_DIR / "data" / "epub-edge-cases.json"
 PROVENANCE = REPO_ROOT / "EPUB_EDGE_CASES.md"
 SOURCE_KINDS = ("url", "members", "generated")
 

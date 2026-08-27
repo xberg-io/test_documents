@@ -9,7 +9,7 @@ it belongs at. Publish them the usual way afterwards:
     python3 scripts/fetch_regression.py
     python3 scripts/publish_corpus.py --bucket xberg-test-documents
 
-Only the vendored documents appear in `scripts/regression-objects.json`. Anything
+Only the vendored documents appear in `scripts/data/regression-objects.json`. Anything
 listed as reference in `REGRESSION_PROVENANCE.md` is deliberately absent: those
 carry ShareAlike, NonCommercial, or publisher-only redistribution terms, so the
 corpus records where they came from and never hosts them.
@@ -33,7 +33,7 @@ import zipfile
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-MANIFEST = Path(__file__).resolve().parent / "regression-objects.json"
+MANIFEST = Path(__file__).resolve().parent / "data" / "regression-objects.json"
 TIMEOUT = 300
 RETRIES = 3
 

@@ -4,7 +4,7 @@ One or more EPUB files for each defect that xberg-io/xberg pull request #1498 fi
 
 ## Where the bytes are
 
-The files live under `epub/edge-cases/<case>/`. They are corpus binaries: published to the bucket, pinned by `corpus.lock.json`, never committed. `scripts/epub-edge-cases.json` records each file with its sha256, size and source, and `scripts/fetch_epub_edge_cases.py` puts every file at its path:
+The files live under `epub/edge-cases/<case>/`. They are corpus binaries: published to the bucket, pinned by `corpus.lock.json`, never committed. `scripts/data/epub-edge-cases.json` records each file with its sha256, size and source, and `scripts/fetch_epub_edge_cases.py` puts every file at its path:
 
 ```sh
 python3 scripts/fetch_epub_edge_cases.py

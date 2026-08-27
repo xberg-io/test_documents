@@ -4,7 +4,7 @@
 `EPUB_EDGE_CASES.md` lists one or more EPUB files for each defect that
 xberg-io/xberg pull request #1498 fixes. The bytes are gitignored like every
 other corpus binary, so this script puts each file at the repository path it
-belongs at, from the source that `scripts/epub-edge-cases.json` records:
+belongs at, from the source that `scripts/data/epub-edge-cases.json` records:
 
 - `url`: a published file, downloaded as is.
 - `members`: an EPUB that the source publishes as an unpacked directory (the
@@ -33,7 +33,7 @@ from pathlib import Path
 import build_epub_edge_cases
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-MANIFEST = Path(__file__).resolve().parent / "epub-edge-cases.json"
+MANIFEST = Path(__file__).resolve().parent / "data" / "epub-edge-cases.json"
 TIMEOUT = 120
 RETRIES = 3
 USER_AGENT = "xberg-test-documents"
@@ -109,7 +109,7 @@ def main() -> int:
         print("\nNeeds attention:", file=sys.stderr)
         print("\n".join(problems), file=sys.stderr)
         print(
-            "\nA source that moved or changed needs its entry in scripts/epub-edge-cases.json updated,"
+            "\nA source that moved or changed needs its entry in scripts/data/epub-edge-cases.json updated,"
             "\nand EPUB_EDGE_CASES.md updated with it.",
             file=sys.stderr,
         )

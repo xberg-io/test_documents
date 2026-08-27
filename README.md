@@ -47,12 +47,12 @@ https://storage.googleapis.com/xberg-test-documents/objects/<sha256>
 The corpus moved off Git LFS. LFS bills bandwidth per clone and makes every consumer authenticate
 against it, including CI jobs that need three files out of six hundred. Content-addressed objects in
 a public bucket are anonymous to read, cache trivially, and let a job fetch exactly the paths it
-uses. `scripts/corpus-patterns.txt` was lifted verbatim from the old `.gitattributes` filter list so
+uses. `scripts/data/corpus-patterns.txt` was lifted verbatim from the old `.gitattributes` filter list so
 the publish set did not change in the move.
 
 ## What is in git and what is in the bucket
 
-`scripts/corpus-patterns.txt` is the authority. It uses gitignore semantics: a pattern with no `/`
+`scripts/data/corpus-patterns.txt` is the authority. It uses gitignore semantics: a pattern with no `/`
 matches a basename at any depth. Every line in it is mirrored in `.gitignore`, and
 `scripts/test_publish_corpus.py` fails if the two drift apart.
 
@@ -91,7 +91,7 @@ git, because that is where review happens.
    maintainer publishes it.
 6. **Publish before you push the refreshed lock file.** CI verifies that every pinned object
    resolves from the bucket; a lock file that names an object nobody uploaded fails the build.
-7. If the fixture uses an extension not yet in `scripts/corpus-patterns.txt` and it should be
+7. If the fixture uses an extension not yet in `scripts/data/corpus-patterns.txt` and it should be
    bucket-managed, add the pattern to **both** that file and `.gitignore`, with identical text.
 
 Never `git add` a corpus binary. `publish_corpus.py` refuses to run if one was committed.

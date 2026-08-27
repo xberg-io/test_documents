@@ -74,7 +74,7 @@ class EnumerationTests(unittest.TestCase):
     """Enumeration walks the real working tree — these files are deliberately untracked."""
 
     def _tree(self, root: Path, relative_paths: list[str]) -> None:
-        (root / "scripts").mkdir(parents=True, exist_ok=True)
+        (root / PATTERNS_FILENAME).parent.mkdir(parents=True, exist_ok=True)
         (root / PATTERNS_FILENAME).write_text("# comment\n\n*.pdf\n*.png\n", encoding="utf-8")
         for rel_path in relative_paths:
             full_path = root / rel_path

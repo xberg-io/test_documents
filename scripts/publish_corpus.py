@@ -2,7 +2,7 @@
 """Publish corpus binaries to the public GCS bucket.
 
 The corpus binaries are not in git: they are working-tree files matched by
-scripts/corpus-patterns.txt and ignored by .gitignore. This script hashes
+scripts/data/corpus-patterns.txt and ignored by .gitignore. This script hashes
 their real content, writes corpus.lock.json, and uploads each unique object
 once to gs://<bucket>/objects/<sha256>. Safe to re-run: existing objects are
 skipped, and the lock file is byte-identical across runs when nothing in the
@@ -33,7 +33,7 @@ from typing import Protocol
 
 MANIFEST_SCHEMA_VERSION = 1
 MANIFEST_FILENAME = "corpus.lock.json"
-PATTERNS_FILENAME = "scripts/corpus-patterns.txt"
+PATTERNS_FILENAME = "scripts/data/corpus-patterns.txt"
 OBJECTS_PREFIX = "objects"
 EXTRA_ROOT_FILES = (
     "ATTRIBUTIONS.md",

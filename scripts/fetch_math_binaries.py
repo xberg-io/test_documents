@@ -30,7 +30,7 @@ import urllib.request
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-MANIFEST = Path(__file__).resolve().parent / "math-binaries.json"
+MANIFEST = Path(__file__).resolve().parent / "data" / "math-binaries.json"
 TIMEOUT = 120
 RETRIES = 3
 
@@ -91,7 +91,7 @@ def main() -> int:
         print("\nNeeds attention:", file=sys.stderr)
         print("\n".join(problems), file=sys.stderr)
         print(
-            "\nA source that moved or changed needs its entry in scripts/math-binaries.json updated,"
+            "\nA source that moved or changed needs its entry in scripts/data/math-binaries.json updated,"
             "\nand MATH_PROVENANCE.md updated with it.",
             file=sys.stderr,
         )
