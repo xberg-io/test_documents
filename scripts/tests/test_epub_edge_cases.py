@@ -11,17 +11,14 @@ import hashlib
 import io
 import json
 import re
-import sys
 import unittest
 import zipfile
 from pathlib import Path
 
-SCRIPTS_DIR = Path(__file__).resolve().parent
-sys.path.insert(0, str(SCRIPTS_DIR))
+import build_epub_edge_cases
+import publish_corpus
 
-import build_epub_edge_cases  # noqa: E402
-import publish_corpus  # noqa: E402
-
+SCRIPTS_DIR = Path(__file__).resolve().parent.parent
 REPO_ROOT = SCRIPTS_DIR.parent
 MANIFEST = SCRIPTS_DIR / "data" / "epub-edge-cases.json"
 PROVENANCE = REPO_ROOT / "EPUB_EDGE_CASES.md"
@@ -117,7 +114,3 @@ class BuilderTests(unittest.TestCase):
         for _slug, label in build_epub_edge_cases.MEDIA_TYPE_LABELS:
             self.assertIn(f'media-type="{label}"', opf)
         self.assertEqual(len(re.findall(r"<itemref ", opf)), len(build_epub_edge_cases.MEDIA_TYPE_LABELS))
-
-
-if __name__ == "__main__":
-    unittest.main()

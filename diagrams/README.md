@@ -296,7 +296,7 @@ graph. The four Graphviz fixtures added before this set regenerate byte-identica
 
 ## Checks
 
-`scripts/test_diagram_manifest.py` runs in CI with no renderer installed. It asserts that every
+`scripts/tests/test_diagram_manifest.py` runs in CI with no renderer installed. It asserts that every
 committed fixture exists and every corpus binary is pinned in `corpus.lock.json` — the right
 question for a file that is deliberately not in git is whether a consumer who fetches the corpus
 gets it. It also asserts that the node and edge counts in the manifest match the ground truth, that

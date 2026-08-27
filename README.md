@@ -54,7 +54,7 @@ the publish set did not change in the move.
 
 `scripts/data/corpus-patterns.txt` is the authority. It uses gitignore semantics: a pattern with no `/`
 matches a basename at any depth. Every line in it is mirrored in `.gitignore`, and
-`scripts/test_publish_corpus.py` fails if the two drift apart.
+`scripts/tests/test_publish_corpus.py` fails if the two drift apart.
 
 **Bucket-managed** (never committed): `.pdf .doc .docx .odt .rtf .msg .pst .xls .xlsx .xlsm .xlsb
 .xlam .xla .ods .ppt .pptx .pptm .ppsx .odp .key .epub .fb2 .pages .numbers .hwp .hwpx .png .jpg
@@ -196,7 +196,7 @@ CI (`.github/workflows/verify-corpus.yaml`) runs exactly these on every push and
 needs no credentials: it proves the manifest is still fetchable rather than trying to publish.
 
 The unittest suite also covers the corpus itself where the corpus can contradict its own answer
-key — `scripts/test_diagram_manifest.py` checks `diagrams/manifest.json` against the files, against
+key — `scripts/tests/test_diagram_manifest.py` checks `diagrams/manifest.json` against the files, against
 `corpus.lock.json` for the fixtures that are corpus binaries, and against the ground truth on disk.
 Two further checks need renderers and so are not part of CI:
 

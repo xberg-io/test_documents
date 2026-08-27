@@ -8,7 +8,7 @@ document fetched by `scripts/fetch_epub_edge_cases.py`.
 
 The output is deterministic: every ZIP member is stored uncompressed with a
 fixed timestamp, so the same source always yields the same sha256, and
-`scripts/data/epub-edge-cases.json` can pin the bytes. `scripts/test_epub_edge_cases.py`
+`scripts/data/epub-edge-cases.json` can pin the bytes. `scripts/tests/test_epub_edge_cases.py`
 checks that pin against a fresh build.
 
     python3 scripts/build_epub_edge_cases.py            # write every file

@@ -25,7 +25,7 @@ from build_diagram_pdfs import RECIPES
 from publish_corpus import load_patterns, matches_corpus_pattern
 from strip_svg_graph_metadata import referenced_ids, strip
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 MANIFEST = json.loads((ROOT / "diagrams" / "manifest.json").read_text(encoding="utf-8"))
 FIXTURES = MANIFEST["fixtures"]
 PATTERNS = load_patterns(ROOT)

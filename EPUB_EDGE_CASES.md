@@ -11,7 +11,7 @@ python3 scripts/fetch_epub_edge_cases.py
 python3 scripts/publish_corpus.py --bucket xberg-test-documents
 ```
 
-Three kinds of source appear in the manifest. A `url` entry is a published file downloaded as is. A `members` entry is an EPUB that its source publishes as an unpacked directory (the epubcheck test suite); each member is fetched from a pinned commit and the container is written deterministically. A `generated` entry is built by `scripts/build_epub_edge_cases.py`, which is deterministic, so the manifest pins its bytes too. `scripts/test_epub_edge_cases.py` checks that pin against a fresh build.
+Three kinds of source appear in the manifest. A `url` entry is a published file downloaded as is. A `members` entry is an EPUB that its source publishes as an unpacked directory (the epubcheck test suite); each member is fetched from a pinned commit and the container is written deterministically. A `generated` entry is built by `scripts/build_epub_edge_cases.py`, which is deterministic, so the manifest pins its bytes too. `scripts/tests/test_epub_edge_cases.py` checks that pin against a fresh build.
 
 ## No ground truth
 
