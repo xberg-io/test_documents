@@ -20,7 +20,7 @@ requires-python = ">=3.10"
 # ~keep tomli is only for 3.10, where tomllib is not yet stdlib. scripts/tests/test_lint_scope.py
 # parses poly.toml and this file to prove the two exclude lists agree, and the 3.10 floor is
 # tested in CI, so the test has to work there too.
-dev = ["pytest>=8.3", "ruff>=0.14", "tomli>=2.0; python_version<'3.11'"]
+dev = ["pyrefly>=1.1.1", "pytest>=8.3", "ruff>=0.14", "tomli>=2.0; python_version<'3.11'"]
 
 [tool.uv]
 # ~keep The repo is a fixture corpus, not a package. This stops uv building or installing anything
@@ -278,9 +278,13 @@ norecursedirs = [
 # ─────────────────────────────────────────────────────────────────────────────
 # pyrefly
 # ─────────────────────────────────────────────────────────────────────────────
-# ~keep The polyrepo type-checks with pyrefly, run through poly rather than as a dev dependency —
-# it is a system tool like poly itself, which is why it is absent from [dependency-groups]. The
-# config lives here rather than in a pyrefly.toml so there is one file to read for Python settings.
+# ~keep pyrefly is in [dependency-groups] dev, as in liter-llm and crawlberg. It has to be: poly
+# runs it in its whole-project phase, and reusable-validate.yml puts the synced .venv/bin on PATH,
+# which is the only reason `poly lint .` can find it on a runner. Without it CI fails with
+# `pyrefly: not found` — which is exactly how this was discovered.
+#
+# The config lives here rather than in a pyrefly.toml so there is one file to read for Python
+# settings, and it matches the scope of the pyrefly hook in poly.toml.
 #
 # ~keep Scoped to the tooling, excluding tests, matching the pyrefly hook in poly.toml and the
 # sibling repos. The suite is built on stub transports and injected runners that exist precisely to

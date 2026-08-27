@@ -10,7 +10,7 @@ resolves deliberately uses the runner's own `python3` with no setup step and no 
 executable proof that a consumer with a stock interpreter can materialise this corpus.
 
 - Nothing under `scripts/` outside `scripts/tests/` may import a third-party package.
-- Dev tooling (pytest, ruff) and the pyrefly type-checker are fine: it is never imported by the tools.
+- Dev tooling (pytest, ruff, pyrefly) is fine: it is never imported by the tools.
 - `import corpus_tools` resolves because CPython puts the `__main__` script's directory on
   `sys.path[0]`. Do not add `__init__.py` to `scripts/`, and do not name a module there after a
   stdlib module — `scripts/` is on the path and would shadow it.
