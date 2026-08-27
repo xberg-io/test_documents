@@ -461,7 +461,11 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 
     paths = corpus_paths(root, load_patterns(root, patterns_path))
-    guard_against_forbidden_paths(paths + list(EXTRA_ROOT_FILES))
+    # ~keep The attribution files are THIS repository's licence notices, and they sit beside its
+    # corpus rather than inside it. A corpus root elsewhere has its own provenance kept with its own
+    # manifest, so requiring them there would fail a publish after 15 GB was already uploaded.
+    extra_files = list(EXTRA_ROOT_FILES) if is_default_root else []
+    guard_against_forbidden_paths(paths + extra_files)
     if is_default_root:
         # ~keep Only meaningful for this repository, where corpus binaries are deliberately
         # untracked. A corpus root outside a git working tree has nothing to ask git about.
@@ -490,7 +494,8 @@ def main(argv: list[str] | None = None) -> int:
     # corpus.lock.json is load-bearing (consumers hash it to key their fetch cache).
     if args.dry_run:
         print(
-            f"dry-run: would upload {len(representatives)} unique object(s) and {len(EXTRA_ROOT_FILES)} attribution file(s)"
+            f"dry-run: would upload {len(representatives)} unique object(s) "
+            f"and {len(extra_files)} attribution file(s)"
         )
         print(f"dry-run: no bucket contacted, nothing uploaded, {manifest_path.name} untouched")
         return 0
@@ -504,8 +509,9 @@ def main(argv: list[str] | None = None) -> int:
     uploaded, skipped = upload_unique_objects(root, backend, representatives, dry_run=False)
     print(f"objects: uploaded {len(uploaded)}, already present {len(skipped)}")
 
-    extra_uploaded, extra_unchanged = upload_extra_files(root, backend, dry_run=False)
-    print(f"attribution files: uploaded {len(extra_uploaded)}, unchanged {len(extra_unchanged)}")
+    if extra_files:
+        extra_uploaded, extra_unchanged = upload_extra_files(root, backend, dry_run=False)
+        print(f"attribution files: uploaded {len(extra_uploaded)}, unchanged {len(extra_unchanged)}")
 
     return 0
 
