@@ -14,18 +14,17 @@ the Graphviz graphs with the renderer, and `scripts/build_diagram_pdfs.py --chec
 PDFs and compares the bytes.
 """
 
-from __future__ import annotations
-
 import json
 import re
 import unittest
 from pathlib import Path
 
-from build_diagram_pdfs import RECIPES
-from publish_corpus import load_patterns, matches_corpus_pattern
-from strip_svg_graph_metadata import referenced_ids, strip
+from corpus_tools import paths
+from corpus_tools.diagrams.recipes import RECIPES
+from corpus_tools.diagrams.svg_metadata import referenced_ids, strip
+from corpus_tools.patterns import load_patterns, matches_corpus_pattern
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = paths.REPO_ROOT
 MANIFEST = json.loads((ROOT / "diagrams" / "manifest.json").read_text(encoding="utf-8"))
 FIXTURES = MANIFEST["fixtures"]
 PATTERNS = load_patterns(ROOT)
@@ -38,7 +37,7 @@ def is_bucket_managed(path: str) -> bool:
 
 
 COMMENT = re.compile(r"//.*")
-GT_NODE = re.compile(r'^\s*"([^"]+)"\s*\[', re.M)
+GT_NODE = re.compile(r'^\s*"([^"]+)"\s*\[', re.MULTILINE)
 GT_EDGE = re.compile(r'"([^"]+)"\s*-[->]\s*"([^"]+)"')
 XML_COMMENT = re.compile(r"<!--.*?-->", re.DOTALL)
 ATTRIBUTE = re.compile(r'[\w:.-]+="([^"]*)"')

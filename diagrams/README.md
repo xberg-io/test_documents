@@ -284,7 +284,7 @@ done
 
 python3 scripts/build_diagram_pdfs.py           # needs qpdf, and Chrome for the skia_* fixtures
 python3 scripts/check_diagram_ground_truth.py   # ground truth still matches what was drawn
-python3 -m unittest discover -s scripts         # manifest still matches the files
+uv run pytest                                  # manifest still matches the files
 ```
 
 Output is stable for a given tool version; a different version may lay a graph out differently,
@@ -296,7 +296,7 @@ graph. The four Graphviz fixtures added before this set regenerate byte-identica
 
 ## Checks
 
-`scripts/test_diagram_manifest.py` runs in CI with no renderer installed. It asserts that every
+`scripts/tests/test_diagram_manifest.py` runs in CI with no renderer installed. It asserts that every
 committed fixture exists and every corpus binary is pinned in `corpus.lock.json` — the right
 question for a file that is deliberately not in git is whether a consumer who fetches the corpus
 gets it. It also asserts that the node and edge counts in the manifest match the ground truth, that

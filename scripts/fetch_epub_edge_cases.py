@@ -4,7 +4,7 @@
 `EPUB_EDGE_CASES.md` lists one or more EPUB files for each defect that
 xberg-io/xberg pull request #1498 fixes. The bytes are gitignored like every
 other corpus binary, so this script puts each file at the repository path it
-belongs at, from the source that `scripts/epub-edge-cases.json` records:
+belongs at, from the source that `scripts/data/epub-edge-cases.json` records:
 
 - `url`: a published file, downloaded as is.
 - `members`: an EPUB that the source publishes as an unpacked directory (the
@@ -23,68 +23,18 @@ way afterwards:
 """
 
 import argparse
-import concurrent.futures
-import hashlib
+import functools
 import json
 import sys
-import urllib.request
-from pathlib import Path
 
-import build_epub_edge_cases
-
-REPO_ROOT = Path(__file__).resolve().parent.parent
-MANIFEST = Path(__file__).resolve().parent / "epub-edge-cases.json"
-TIMEOUT = 120
-RETRIES = 3
-USER_AGENT = "xberg-test-documents"
-
-
-def download(url: str) -> bytes:
-    last_error = ""
-    for _attempt in range(RETRIES):
-        try:
-            request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-            with urllib.request.urlopen(request, timeout=TIMEOUT) as response:
-                return response.read()
-        except Exception as error:  # noqa: BLE001 - any transport failure is worth one more try
-            last_error = f"{type(error).__name__}: {error}"
-    raise RuntimeError(last_error)
-
-
-def materialize(path: str, entry: dict, generated: dict[str, bytes]) -> bytes:
-    if "url" in entry:
-        return download(entry["url"])
-    if "members" in entry:
-        members = [(name, download(url)) for name, url in entry["members"].items() if name != "mimetype"]
-        return build_epub_edge_cases.pack(members)
-    if entry.get("generated"):
-        return generated[path]
-    raise ValueError(f"{path}: entry has no url, members or generated source")
-
-
-def fetch_one(path: str, entry: dict, force: bool, generated: dict[str, bytes]) -> tuple[str, str]:
-    """Return (path, status). Status is ok, skipped, mismatch or an error."""
-    target = REPO_ROOT / path
-    if target.exists() and not force:
-        if hashlib.sha256(target.read_bytes()).hexdigest() == entry["sha256"]:
-            return path, "skipped"
-    try:
-        payload = materialize(path, entry, generated)
-    except Exception as error:  # noqa: BLE001 - reported per file below
-        return path, f"error {type(error).__name__}: {error}"
-
-    digest = hashlib.sha256(payload).hexdigest()
-    target.parent.mkdir(parents=True, exist_ok=True)
-    if digest != entry["sha256"]:
-        target.with_suffix(target.suffix + ".mismatch").write_bytes(payload)
-        return path, f"mismatch got {digest[:12]} want {entry['sha256'][:12]}"
-    target.write_bytes(payload)
-    return path, "ok"
+from corpus_tools.epub import build as build_epub_edge_cases
+from corpus_tools.epub.fetch import MANIFEST, fetch_one
+from corpus_tools.pool import add_jobs_argument, run_parallel
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--jobs", type=int, default=8, help="parallel downloads (default 8)")
+    add_jobs_argument(parser)
     parser.add_argument("--force", action="store_true", help="rewrite files that already match")
     args = parser.parse_args()
 
@@ -93,23 +43,21 @@ def main() -> int:
     counts: dict[str, int] = {}
     problems: list[str] = []
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as pool:
-        futures = [
-            pool.submit(fetch_one, path, entry, args.force, generated) for path, entry in sorted(manifest.items())
-        ]
-        for future in concurrent.futures.as_completed(futures):
-            path, status = future.result()
-            key = status.split()[0]
-            counts[key] = counts.get(key, 0) + 1
-            if key in {"error", "mismatch"}:
-                problems.append(f"  {path}: {status}")
+    calls = [
+        functools.partial(fetch_one, path, entry, args.force, generated) for path, entry in sorted(manifest.items())
+    ]
+    for path, status in run_parallel(calls, jobs=args.jobs):
+        key = status.split()[0]
+        counts[key] = counts.get(key, 0) + 1
+        if key in {"error", "mismatch"}:
+            problems.append(f"  {path}: {status}")
 
     print(f"{len(manifest)} files: " + ", ".join(f"{n} {k}" for k, n in sorted(counts.items())))
     if problems:
         print("\nNeeds attention:", file=sys.stderr)
         print("\n".join(problems), file=sys.stderr)
         print(
-            "\nA source that moved or changed needs its entry in scripts/epub-edge-cases.json updated,"
+            "\nA source that moved or changed needs its entry in scripts/data/epub-edge-cases.json updated,"
             "\nand EPUB_EDGE_CASES.md updated with it.",
             file=sys.stderr,
         )

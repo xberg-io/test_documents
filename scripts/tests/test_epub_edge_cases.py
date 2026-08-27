@@ -11,19 +11,16 @@ import hashlib
 import io
 import json
 import re
-import sys
 import unittest
 import zipfile
-from pathlib import Path
 
-SCRIPTS_DIR = Path(__file__).resolve().parent
-sys.path.insert(0, str(SCRIPTS_DIR))
+from corpus_tools import paths
+from corpus_tools.epub import build as build_epub_edge_cases
+from corpus_tools.patterns import load_patterns, matches_corpus_pattern
 
-import build_epub_edge_cases  # noqa: E402
-import publish_corpus  # noqa: E402
-
-REPO_ROOT = SCRIPTS_DIR.parent
-MANIFEST = SCRIPTS_DIR / "epub-edge-cases.json"
+SCRIPTS_DIR = paths.SCRIPTS_DIR
+REPO_ROOT = paths.REPO_ROOT
+MANIFEST = SCRIPTS_DIR / "data" / "epub-edge-cases.json"
 PROVENANCE = REPO_ROOT / "EPUB_EDGE_CASES.md"
 SOURCE_KINDS = ("url", "members", "generated")
 
@@ -41,10 +38,10 @@ class ManifestTests(unittest.TestCase):
             self.assertGreater(entry["size"], 0, path)
 
     def test_every_path_is_a_corpus_binary_under_the_edge_case_directory(self) -> None:
-        patterns = publish_corpus.load_patterns(REPO_ROOT)
+        patterns = load_patterns(REPO_ROOT)
         for path in load_manifest():
             self.assertTrue(path.startswith(f"{build_epub_edge_cases.CORPUS_DIR}/"), path)
-            self.assertTrue(publish_corpus.matches_corpus_pattern(path, patterns), f"{path} is not a corpus binary")
+            self.assertTrue(matches_corpus_pattern(path, patterns), f"{path} is not a corpus binary")
 
     def test_generated_entries_match_the_manifest_and_builders_agree(self) -> None:
         manifest = load_manifest()
@@ -117,7 +114,3 @@ class BuilderTests(unittest.TestCase):
         for _slug, label in build_epub_edge_cases.MEDIA_TYPE_LABELS:
             self.assertIn(f'media-type="{label}"', opf)
         self.assertEqual(len(re.findall(r"<itemref ", opf)), len(build_epub_edge_cases.MEDIA_TYPE_LABELS))
-
-
-if __name__ == "__main__":
-    unittest.main()

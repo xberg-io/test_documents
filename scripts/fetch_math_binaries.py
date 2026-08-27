@@ -19,57 +19,18 @@ A download whose digest does not match is written to `<path>.mismatch` and
 reported, rather than replacing a good file with a source that has changed.
 """
 
-from __future__ import annotations
-
 import argparse
-import concurrent.futures
-import hashlib
+import functools
 import json
 import sys
-import urllib.request
-from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
-MANIFEST = Path(__file__).resolve().parent / "math-binaries.json"
-TIMEOUT = 120
-RETRIES = 3
-
-
-def fetch_one(path: str, entry: dict, force: bool) -> tuple[str, str]:
-    """Return (path, status). Status is ok, skipped, mismatch or an error."""
-    target = REPO_ROOT / path
-    if target.exists() and not force:
-        digest = hashlib.sha256(target.read_bytes()).hexdigest()
-        if digest == entry["sha256"]:
-            return path, "skipped"
-
-    last_error = ""
-    for attempt in range(1, RETRIES + 1):
-        try:
-            request = urllib.request.Request(entry["url"], headers={"User-Agent": "xberg-test-documents"})
-            with urllib.request.urlopen(request, timeout=TIMEOUT) as response:
-                payload = response.read()
-            break
-        except Exception as error:  # noqa: BLE001 - any failure is worth one more try
-            last_error = f"{type(error).__name__}: {error}"
-            if attempt == RETRIES:
-                return path, f"error {last_error}"
-    else:  # pragma: no cover - the loop always breaks or returns
-        return path, f"error {last_error}"
-
-    digest = hashlib.sha256(payload).hexdigest()
-    target.parent.mkdir(parents=True, exist_ok=True)
-    if digest != entry["sha256"]:
-        (target.with_suffix(target.suffix + ".mismatch")).write_bytes(payload)
-        return path, f"mismatch got {digest[:12]} want {entry['sha256'][:12]}"
-
-    target.write_bytes(payload)
-    return path, "ok"
+from corpus_tools.math_binaries import MANIFEST, fetch_one
+from corpus_tools.pool import add_jobs_argument, run_parallel
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--jobs", type=int, default=8, help="parallel downloads (default 8)")
+    add_jobs_argument(parser)
     parser.add_argument("--force", action="store_true", help="re-download files that already match")
     args = parser.parse_args()
 
@@ -77,21 +38,19 @@ def main() -> int:
     counts: dict[str, int] = {}
     problems: list[str] = []
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as pool:
-        futures = [pool.submit(fetch_one, path, entry, args.force) for path, entry in sorted(manifest.items())]
-        for future in concurrent.futures.as_completed(futures):
-            path, status = future.result()
-            key = status.split()[0]
-            counts[key] = counts.get(key, 0) + 1
-            if key in {"error", "mismatch"}:
-                problems.append(f"  {path}: {status}")
+    calls = [functools.partial(fetch_one, path, entry, args.force) for path, entry in sorted(manifest.items())]
+    for path, status in run_parallel(calls, jobs=args.jobs):
+        key = status.split()[0]
+        counts[key] = counts.get(key, 0) + 1
+        if key in {"error", "mismatch"}:
+            problems.append(f"  {path}: {status}")
 
     print(f"{len(manifest)} binaries: " + ", ".join(f"{n} {k}" for k, n in sorted(counts.items())))
     if problems:
         print("\nNeeds attention:", file=sys.stderr)
         print("\n".join(problems), file=sys.stderr)
         print(
-            "\nA source that moved or changed needs its entry in scripts/math-binaries.json updated,"
+            "\nA source that moved or changed needs its entry in scripts/data/math-binaries.json updated,"
             "\nand MATH_PROVENANCE.md updated with it.",
             file=sys.stderr,
         )

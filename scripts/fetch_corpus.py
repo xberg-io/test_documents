@@ -11,92 +11,85 @@ with include_bytes!/include_str!, so the files must exist on disk before `cargo 
 Already-correct files are left alone, so re-running costs one hash per file and no network.
 """
 
-from __future__ import annotations
-
 import argparse
-import concurrent.futures
-import hashlib
-import json
-import subprocess
 import sys
-from fnmatch import fnmatch
 from pathlib import Path
 
-MANIFEST_FILENAME = "corpus.lock.json"
-OBJECTS_PREFIX = "objects"
-DEFAULT_BUCKET = "xberg-test-documents"
-MAX_WORKERS = 8
-REQUEST_TIMEOUT_SECONDS = 120
-READ_CHUNK_SIZE = 1024 * 1024
-BYTES_PER_MIB = 1024 * 1024
-MAX_REPORTED_FAILURES = 20
+from corpus_tools.corpus.fetch import MAX_REPORTED_FAILURES, fetch_one
+from corpus_tools.hashing import BYTES_PER_MIB
+from corpus_tools.http import (
+    AdcCredential,
+    CurlTransport,
+)
+from corpus_tools.manifest import DEFAULT_BUCKET, MANIFEST_FILENAME, lock_objects
+from corpus_tools.paths import REPO_ROOT
+from corpus_tools.patterns import matches_any
+from corpus_tools.pool import add_jobs_argument, map_parallel
 
 
-def sha256_of(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(READ_CHUNK_SIZE), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
-
-
-def matches_any(rel_path: str, patterns: list[str]) -> bool:
-    # ~keep '**' is not special to fnmatch, whose '*' already crosses '/', so 'pdf/**' and 'pdf/*'
-    # both mean "anything under pdf/". Callers write the glob they'd write for the CI action.
-    return any(fnmatch(rel_path, pattern) for pattern in patterns)
-
-
-def fetch_one(bucket: str, root: Path, rel_path: str, sha256: str) -> str | None:
-    destination = root / rel_path
-    if destination.is_file() and sha256_of(destination) == sha256:
-        return None
-
-    destination.parent.mkdir(parents=True, exist_ok=True)
-    url = f"https://storage.googleapis.com/{bucket}/{OBJECTS_PREFIX}/{sha256}"
-    result = subprocess.run(
-        ["curl", "-sS", "--fail", "--max-time", str(REQUEST_TIMEOUT_SECONDS), url],
-        capture_output=True,
-        check=False,
-    )
-    if result.returncode != 0:
-        return f"{rel_path}: download failed: {result.stderr.decode().strip()}"
-
-    actual = hashlib.sha256(result.stdout).hexdigest()
-    if actual != sha256:
-        return f"{rel_path}: expected {sha256} but bucket served {actual}"
-    destination.write_bytes(result.stdout)
-    return None
-
-
-def main(argv: list[str] | None = None) -> int:
+def parse_args(argv: list[str] | None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--bucket", default=DEFAULT_BUCKET, help="GCS bucket name, without gs://")
+    add_jobs_argument(parser)
     parser.add_argument(
         "--include",
         action="append",
         default=[],
         help="glob matched against manifest paths; repeatable. Defaults to everything.",
     )
-    args = parser.parse_args(argv)
+    parser.add_argument(
+        "--manifest",
+        type=Path,
+        default=None,
+        help=f"lock file to read (default: <repo>/{MANIFEST_FILENAME})",
+    )
+    parser.add_argument(
+        "--root",
+        type=Path,
+        default=None,
+        help="where to materialise files (default: this repository)",
+    )
+    parser.add_argument(
+        "--auth",
+        action="store_true",
+        help="authenticate with Application Default Credentials, for a private bucket",
+    )
+    return parser.parse_args(argv)
 
-    root = Path(__file__).resolve().parent.parent
-    objects = json.loads((root / MANIFEST_FILENAME).read_text(encoding="utf-8"))["objects"]
+
+def build_transport(args: argparse.Namespace) -> CurlTransport:
+    """~keep Anonymous unless --auth. Extracted so the choice is testable without a network."""
+    return CurlTransport(credential=AdcCredential()) if args.auth else CurlTransport()
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = parse_args(argv)
+
+    # ~keep Both default to this repository, so `python3 scripts/fetch_corpus.py` with no flags is
+    # byte-for-byte the command ~14 places in the xberg repo tell people to run.
+    root = args.root.resolve() if args.root else REPO_ROOT
+    manifest_path = args.manifest.resolve() if args.manifest else REPO_ROOT / MANIFEST_FILENAME
+    transport = build_transport(args)
+    objects = lock_objects(manifest_path)
     wanted = {
         rel_path: entry["sha256"]
         for rel_path, entry in objects.items()
         if not args.include or matches_any(rel_path, args.include)
     }
     if not wanted:
-        print(f"no manifest path matched {args.include}", file=sys.stderr)
+        print(f"no path in {manifest_path} matched {args.include}", file=sys.stderr)
         return 1
 
     total_bytes = sum(objects[rel_path]["size"] for rel_path in wanted)
     print(f"fetching {len(wanted)} path(s) / {total_bytes / BYTES_PER_MIB:.1f} MiB into {root}")
 
     failures: list[str] = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
-        results = pool.map(lambda item: fetch_one(args.bucket, root, *item), wanted.items())
-        failures = [failure for failure in results if failure is not None]
+    results = map_parallel(
+        lambda item: fetch_one(args.bucket, root, *item, transport=transport),
+        wanted.items(),
+        jobs=args.jobs,
+    )
+    failures = [failure for failure in results if failure is not None]
 
     print(f"{len(wanted) - len(failures)}/{len(wanted)} present")
     for failure in failures[:MAX_REPORTED_FAILURES]:

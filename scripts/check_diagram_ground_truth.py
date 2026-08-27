@@ -22,84 +22,35 @@ Usage:
     python3 scripts/check_diagram_ground_truth.py
 """
 
-from __future__ import annotations
-
-import re
+import argparse
 import shutil
-import subprocess
-from pathlib import Path
+import sys
 
-# Engine per fixture: the layout Graphviz was invoked with, which has to match how the
-# committed SVG was rendered or the comparison is against a different drawing.
-ENGINES = {
-    "graphviz_bidirectional": "dot",
-    "graphviz_cjk": "dot",
-    "graphviz_clusters": "dot",
-    "graphviz_flow": "dot",
-    "graphviz_large": "dot",
-    "graphviz_network": "neato",
-    "graphviz_ortho": "dot",
-    "graphviz_record": "dot",
-    "graphviz_selfloop": "neato",
-    "graphviz_states": "dot",
-}
-
-ROOT = Path(__file__).resolve().parent.parent
-SOURCES = ROOT / "diagrams" / "src"
-GROUND_TRUTH = ROOT / "ground_truth" / "dot"
-
-PLAIN_TOKEN = re.compile(r'"[^"]*"|\S+')
-PORT = re.compile(r"<\w+>")
-COMMENT = re.compile(r"//.*")
-GT_NODE = re.compile(r'^\s*"([^"]+)"\s*\[', re.M)
-GT_EDGE = re.compile(r'"([^"]+)"\s*-[->]\s*"([^"]+)"')
+from corpus_tools.diagrams.ground_truth import ENGINES, drawn_graph, recorded_graph, report_difference
 
 
-def joined_record_fields(label: str) -> str:
-    """One record is one node, so its key is its field texts as one multi-line label."""
-    if "<" not in label:
-        return label
-    return "\\n".join(PORT.sub("", field).strip() for field in label.split("|"))
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument(
+        "--only",
+        action="append",
+        default=[],
+        metavar="STEM",
+        help="check only this fixture stem; repeatable. Defaults to every fixture.",
+    )
+    args = parser.parse_args(argv)
 
-
-def reversed_edges(source: Path) -> set[tuple[str, str]]:
-    """Edges declared with dir=back, which Graphviz draws pointing the other way."""
-    text = COMMENT.sub("", source.read_text(encoding="utf-8"))
-    declarations = re.findall(r"(\w+)\s*->\s*(\w+)\s*\[([^\]]*)\]", text)
-    return {(tail, head) for tail, head, attrs in declarations if "dir=back" in attrs}
-
-
-def drawn_graph(stem: str, engine: str) -> tuple[list[str], list[tuple[str, str]]]:
-    source = SOURCES / f"{stem}.dot"
-    plain = subprocess.run([engine, "-Tplain", str(source)], capture_output=True, text=True, check=True).stdout
-    flipped = reversed_edges(source)
-    labels: dict[str, str] = {}
-    nodes: list[str] = []
-    edges: list[tuple[str, str]] = []
-    for line in plain.splitlines():
-        fields = [token[1:-1] if token.startswith('"') else token for token in PLAIN_TOKEN.findall(line)]
-        if fields[0] == "node":
-            labels[fields[1]] = joined_record_fields(fields[6])
-            nodes.append(labels[fields[1]])
-        elif fields[0] == "edge":
-            tail, head = fields[1], fields[2]
-            if (tail, head) in flipped:
-                tail, head = head, tail
-            edges.append((labels[tail], labels[head]))
-    return sorted(nodes), sorted(edges)
-
-
-def recorded_graph(stem: str) -> tuple[list[str], list[tuple[str, str]]]:
-    text = COMMENT.sub("", (GROUND_TRUTH / f"{stem}.dot").read_text(encoding="utf-8"))
-    return sorted(GT_NODE.findall(text)), sorted(GT_EDGE.findall(text))
-
-
-def main() -> int:
     if shutil.which("dot") is None:
         print("graphviz is not installed, skipping the ground-truth cross-check")
         return 0
+
+    selected = {stem: engine for stem, engine in ENGINES.items() if not args.only or stem in args.only}
+    if not selected:
+        print(f"no fixture stem matched {args.only}; known stems: {', '.join(sorted(ENGINES))}", file=sys.stderr)
+        return 1
+
     failures = 0
-    for stem, engine in sorted(ENGINES.items()):
+    for stem, engine in sorted(selected.items()):
         drawn_nodes, drawn_edges = drawn_graph(stem, engine)
         recorded_nodes, recorded_edges = recorded_graph(stem)
         if drawn_nodes == recorded_nodes and drawn_edges == recorded_edges:
@@ -107,14 +58,12 @@ def main() -> int:
             continue
         failures += 1
         print(f"FAIL {stem}")
-        for name, drawn, recorded in (
-            ("nodes", drawn_nodes, recorded_nodes),
-            ("edges", drawn_edges, recorded_edges),
-        ):
-            print(f"     {name} drawn but not in ground truth: {sorted(set(drawn) - set(recorded))}")
-            print(f"     {name} in ground truth but not drawn: {sorted(set(recorded) - set(drawn))}")
+        # ~keep Nodes are strings and edges are pairs, so they cannot share a loop variable
+        # without collapsing to a union that sorted() will not accept.
+        report_difference("nodes", drawn_nodes, recorded_nodes)
+        report_difference("edges", drawn_edges, recorded_edges)
     return 1 if failures else 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    sys.exit(main())

@@ -1,47 +1,47 @@
 """Unit tests for the corpus publisher. Run with `python3 -m unittest discover -s scripts`."""
 
-from __future__ import annotations
-
 import subprocess
 import tempfile
 import unittest
 from pathlib import Path
 
-from fetch_corpus import fetch_one, matches_any
-from publish_corpus import (
+from corpus_tools import paths
+from corpus_tools.corpus.backends import LocalDirBackend
+from corpus_tools.corpus.fetch import fetch_one
+from corpus_tools.corpus.publish import (
     EXTRA_ROOT_FILES,
-    OBJECTS_PREFIX,
-    PATTERNS_FILENAME,
     STAGING_DIR_PREFIX,
     WRITE_PROBE_KEY,
     CorpusFileTracked,
-    CorpusObject,
     EmptyCorpus,
     GuardViolation,
-    LocalDirBackend,
     WriteProbeFailed,
-    build_manifest,
     corpus_paths,
     guard_against_forbidden_paths,
     guard_against_tracked_corpus_files,
-    load_patterns,
-    matches_corpus_pattern,
-    sha256_of,
     staged_by_sha256,
-    unique_objects_by_sha256,
     upload_extra_files,
     upload_unique_objects,
     verify_write_access,
 )
+from corpus_tools.hashing import sha256_file
+from corpus_tools.http import RetryPolicy
+from corpus_tools.manifest import (
+    OBJECTS_PREFIX,
+    CorpusObject,
+    build_manifest,
+    unique_objects_by_sha256,
+)
+from corpus_tools.patterns import PATTERNS_FILENAME, load_patterns, matches_any, matches_corpus_pattern
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = paths.REPO_ROOT
 
 
 def corpus_object(root: Path, rel_path: str, content: bytes) -> CorpusObject:
     full_path = root / rel_path
     full_path.parent.mkdir(parents=True, exist_ok=True)
     full_path.write_bytes(content)
-    return CorpusObject(path=rel_path, sha256=sha256_of(full_path), size=len(content))
+    return CorpusObject(path=rel_path, sha256=sha256_file(full_path), size=len(content))
 
 
 class GuardTests(unittest.TestCase):
@@ -74,7 +74,7 @@ class EnumerationTests(unittest.TestCase):
     """Enumeration walks the real working tree — these files are deliberately untracked."""
 
     def _tree(self, root: Path, relative_paths: list[str]) -> None:
-        (root / "scripts").mkdir(parents=True, exist_ok=True)
+        (root / PATTERNS_FILENAME).parent.mkdir(parents=True, exist_ok=True)
         (root / PATTERNS_FILENAME).write_text("# comment\n\n*.pdf\n*.png\n", encoding="utf-8")
         for rel_path in relative_paths:
             full_path = root / rel_path
@@ -112,6 +112,54 @@ class EnumerationTests(unittest.TestCase):
             self._tree(root, ["pdf/ok.pdf"])
 
             self.assertEqual(load_patterns(root), ["*.pdf", "*.png"])
+
+
+class VirtualenvGuardTests(unittest.TestCase):
+    """A dev virtualenv at the repo root is a publish hazard, not just clutter.
+
+    ~keep The patterns are gitignore-shaped: one without '/' matches a basename at ANY depth, and
+    the list contains *.png, *.jpg, *.pdf, *.zip, *.tar and *.gz. Installed packages ship exactly
+    those as bundled assets, and corpus_paths() walks the working tree rather than asking git, so
+    nothing about .venv/ being untracked keeps it out. Adopting uv is what made this reachable.
+    """
+
+    def _tree(self, root: Path, relative_paths: list[str]) -> None:
+        (root / PATTERNS_FILENAME).parent.mkdir(parents=True, exist_ok=True)
+        (root / PATTERNS_FILENAME).write_text("*.pdf\n*.png\n", encoding="utf-8")
+        for rel_path in relative_paths:
+            full_path = root / rel_path
+            full_path.parent.mkdir(parents=True, exist_ok=True)
+            full_path.write_bytes(b"x")
+
+    def test_should_prune_the_virtualenv_from_the_walk_before_the_guard_ever_runs(self) -> None:
+        with tempfile.TemporaryDirectory() as name:
+            root = Path(name)
+            self._tree(root, ["pdf/ok.pdf", ".venv/lib/python3.12/site-packages/pkg/logo.png"])
+
+            self.assertEqual(corpus_paths(root, load_patterns(root)), ["pdf/ok.pdf"])
+
+    def test_should_refuse_to_publish_anything_under_a_virtualenv(self) -> None:
+        # ~keep The pruning above means this can only be reached by a caller passing paths in
+        # directly, which is precisely why the guard exists as a second line rather than a duplicate.
+        with self.assertRaises(GuardViolation) as caught:
+            guard_against_forbidden_paths([".venv/lib/python3.12/site-packages/pkg/logo.png"])
+
+        self.assertIn(".venv/", str(caught.exception))
+
+    def test_should_ignore_every_tool_cache_directory_the_dev_toolchain_creates(self) -> None:
+        with tempfile.TemporaryDirectory() as name:
+            root = Path(name)
+            self._tree(
+                root,
+                [
+                    "pdf/ok.pdf",
+                    ".ruff_cache/0.14/report.png",
+                    ".mypy_cache/3.12/cached.pdf",
+                    ".pytest_cache/v/cache/sample.png",
+                ],
+            )
+
+            self.assertEqual(corpus_paths(root, load_patterns(root)), ["pdf/ok.pdf"])
 
 
 class TrackedCorpusGuardTests(unittest.TestCase):
@@ -197,9 +245,8 @@ class StagingTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as name:
             root = Path(name)
             obj = corpus_object(root, "pdf/memo.pdf", b"memo bytes")
-            with self.assertRaises(RuntimeError):
-                with staged_by_sha256(root, {obj.sha256: obj}):
-                    raise RuntimeError("upload failed")
+            with self.assertRaises(RuntimeError), staged_by_sha256(root, {obj.sha256: obj}):
+                raise RuntimeError("upload failed")
             self.assertEqual([path.name for path in root.glob(f"{STAGING_DIR_PREFIX}*")], [])
 
 
@@ -331,18 +378,16 @@ class WriteProbeTests(unittest.TestCase):
             def upload(self, local_path: Path, key: str) -> None:
                 raise subprocess.CalledProcessError(1, ["gcloud", "storage", "cp"])
 
-        with tempfile.TemporaryDirectory() as bucket_name:
-            with self.assertRaises(WriteProbeFailed):
-                verify_write_access(RejectingBackend(Path(bucket_name)))
+        with tempfile.TemporaryDirectory() as bucket_name, self.assertRaises(WriteProbeFailed):
+            verify_write_access(RejectingBackend(Path(bucket_name)))
 
     def test_should_raise_when_the_write_is_silently_dropped(self) -> None:
         class SilentlyDiscardingBackend(LocalDirBackend):
             def upload(self, local_path: Path, key: str) -> None:
                 return None
 
-        with tempfile.TemporaryDirectory() as bucket_name:
-            with self.assertRaises(WriteProbeFailed) as caught:
-                verify_write_access(SilentlyDiscardingBackend(Path(bucket_name)))
+        with tempfile.TemporaryDirectory() as bucket_name, self.assertRaises(WriteProbeFailed) as caught:
+            verify_write_access(SilentlyDiscardingBackend(Path(bucket_name)))
 
         self.assertIn("could not read it back", str(caught.exception))
 
@@ -351,9 +396,8 @@ class WriteProbeTests(unittest.TestCase):
             def read_text(self, key: str) -> str | None:
                 return "a token from some earlier run\n"
 
-        with tempfile.TemporaryDirectory() as bucket_name:
-            with self.assertRaises(WriteProbeFailed) as caught:
-                verify_write_access(StaleReadBackend(Path(bucket_name)))
+        with tempfile.TemporaryDirectory() as bucket_name, self.assertRaises(WriteProbeFailed) as caught:
+            verify_write_access(StaleReadBackend(Path(bucket_name)))
 
         self.assertIn("read back as", str(caught.exception))
 
@@ -367,7 +411,7 @@ class FetchTests(unittest.TestCase):
             (root / "pdf").mkdir()
             target = root / "pdf/memo.pdf"
             target.write_bytes(b"already here")
-            digest = sha256_of(target)
+            digest = sha256_file(target)
 
             # ~keep A bucket name that cannot resolve: if the skip path is broken this raises
             # rather than silently re-downloading, which is what we actually want to detect.
@@ -378,7 +422,15 @@ class FetchTests(unittest.TestCase):
 
     def test_should_report_a_failure_when_the_object_cannot_be_downloaded(self) -> None:
         with tempfile.TemporaryDirectory() as name:
-            failure = fetch_one("bucket.invalid", Path(name), "pdf/missing.pdf", "0" * 64)
+            # ~keep One attempt, no backoff: this asserts the failure is REPORTED rather than
+            # raised, and paying the real retry schedule to learn that only slows the suite.
+            failure = fetch_one(
+                "bucket.invalid",
+                Path(name),
+                "pdf/missing.pdf",
+                "0" * 64,
+                retry=RetryPolicy(attempts=1),
+            )
 
             self.assertIsNotNone(failure)
             self.assertIn("pdf/missing.pdf", failure)
