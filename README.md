@@ -110,7 +110,41 @@ Never `git add` a corpus binary. `publish_corpus.py` refuses to run if one was c
 | `email/`, `epub/`, `fictionbook/`, `iwork/`, `jupyter/`, `opml/`, `archives/`, `audio/` | everything else |
 | `vendored/` | third-party corpora kept verbatim with their own provenance |
 | `ground_truth/` | expected output, one subdirectory per source extension |
-| `scripts/` | the corpus tooling: fetch, publish, verify |
+| `scripts/` | the corpus tooling: ten entry points over `corpus_tools/`, with `data/` and `tests/` beside them |
+
+## Serving another corpus
+
+The same tooling can serve a corpus whose index lives outside this repository — a private set held
+in a private repo, fetched from a private bucket. Every flag defaults to this repository's value,
+so the commands above are unchanged.
+
+```sh
+python3 scripts/fetch_corpus.py \
+  --manifest ../<private-repo>/internal_test_documents/<namespace>/corpus.lock.json \
+  --root     ../<private-repo>/internal_test_documents/<namespace>/data \
+  --bucket   <private-bucket> --auth
+```
+
+`--auth` uses Application Default Credentials, so a local `gcloud auth application-default login`
+and workload-identity federation in CI both work without configuration. Anonymous access stays the
+default; the credential-free path is what CI proves.
+
+Publishing takes the mirror image — `--manifest`, `--root` and `--patterns` — and refuses two things
+outright, because the public bucket cannot un-serve an object and corpus patterns match basenames at
+any depth:
+
+- a non-default root, manifest or pattern file aimed at `xberg-test-documents`;
+- a `--root` above where those paths say the corpus is, unless `--allow-external-root` says you mean
+  it.
+
+Any non-default publish prints the resolved root, file count, byte total and extension histogram and
+asks before uploading. Objects are content-addressed, so several manifests can describe subsets of
+one bucket at no extra storage cost — a small curated one for CI, a full one for local runs.
+
+A corpus outside this repository should select its files with a single anchored pattern such as
+`data/*` rather than a list of extensions. An extension list silently under-publishes whatever it
+forgot; an anchored pattern cannot, and it keeps that corpus's own README and checksums out of the
+bucket, where they do not belong.
 
 ## Ground truth
 
@@ -181,19 +215,21 @@ Excluded on purpose: **OmniDocBench** (research-only) and **Nougat** (weights CC
 distributed).
 
 Upstream ground truth is not committed verbatim — it is normalized to canonical GFM so it can be
-scored consistently. The transforms are declared once in `scripts/normalize_gt.py` and applied by
-the builder; the per-document `transforms` field in the manifest records what actually ran.
+scored consistently. The transforms are declared once in the builder's own
+`normalize_gt.py` (in the xberg repo, beside `build_corpus.py` above) and applied by it; the per-document `transforms` field in the manifest records what actually ran.
 
 ## Verifying
 
 ```sh
 python3 scripts/verify_corpus.py --bucket xberg-test-documents              # every pin resolves
 python3 scripts/verify_corpus.py --bucket xberg-test-documents --sample 20  # download and re-hash
-python3 -m unittest discover -s scripts -v                                  # tooling tests
+uv run pytest                                                               # tooling tests
 ```
 
-CI (`.github/workflows/verify-corpus.yaml`) runs exactly these on every push and pull request. It
-needs no credentials: it proves the manifest is still fetchable rather than trying to publish.
+CI (`.github/workflows/verify-corpus.yaml`) runs the bucket checks on every push and pull request,
+on the runner's bare `python3` with no setup step and no install. That is deliberate: it is the
+proof that a consumer with a stock interpreter and no credentials can resolve this corpus.
+`.github/workflows/test-unit.yml` runs the tooling tests, where installing things is allowed.
 
 The unittest suite also covers the corpus itself where the corpus can contradict its own answer
 key — `scripts/tests/test_diagram_manifest.py` checks `diagrams/manifest.json` against the files, against

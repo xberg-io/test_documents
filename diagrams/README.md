@@ -284,7 +284,7 @@ done
 
 python3 scripts/build_diagram_pdfs.py           # needs qpdf, and Chrome for the skia_* fixtures
 python3 scripts/check_diagram_ground_truth.py   # ground truth still matches what was drawn
-python3 -m unittest discover -s scripts         # manifest still matches the files
+uv run pytest                                  # manifest still matches the files
 ```
 
 Output is stable for a given tool version; a different version may lay a graph out differently,

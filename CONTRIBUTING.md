@@ -8,12 +8,17 @@ Please begin by reading our AI section below, followed by the getting started gu
 
 ## Getting Started
 
-Make sure to have [Git](https://git-scm.com/) and [Git LFS](https://git-lfs.com/) installed on your machine.
+Make sure to have [Git](https://git-scm.com/), [uv](https://docs.astral.sh/uv/) and
+[Task](https://taskfile.dev/) installed, then:
 
 ```bash
-git lfs install
-git lfs pull
+task setup                          # dev environment and AI conventions
+python3 scripts/fetch_corpus.py     # the corpus binaries, ~580 MiB from the public bucket
 ```
+
+The corpus is **not** in Git LFS and not in git at all. The binaries live in a public GCS bucket
+and are pinned by `corpus.lock.json`; a fresh clone has the manifest and the prose, not the
+documents.
 
 ## What to keep in mind
 
