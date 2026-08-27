@@ -19,8 +19,8 @@ import re
 import unittest
 from pathlib import Path
 
-from build_diagram_pdfs import RECIPES
 from corpus_tools import paths
+from corpus_tools.diagrams.recipes import RECIPES
 from corpus_tools.diagrams.svg_metadata import referenced_ids, strip
 from corpus_tools.patterns import load_patterns, matches_corpus_pattern
 

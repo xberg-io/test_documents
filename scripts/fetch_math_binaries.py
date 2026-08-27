@@ -23,30 +23,9 @@ import argparse
 import functools
 import json
 import sys
-from pathlib import Path
-from typing import Any
 
-from corpus_tools import paths
-from corpus_tools.http import SOURCE_FILE_TIMEOUT_SECONDS, UrllibTransport, get
-from corpus_tools.materialize import materialize_one
+from corpus_tools.math_binaries import MANIFEST, fetch_one
 from corpus_tools.pool import add_jobs_argument, run_parallel
-
-REPO_ROOT = paths.REPO_ROOT
-MANIFEST = Path(__file__).resolve().parent / "data" / "math-binaries.json"
-
-
-TRANSPORT = UrllibTransport()
-
-
-def fetch_one(path: str, entry: dict[str, Any], force: bool) -> tuple[str, str]:
-    """Return (path, status). Status is ok, skipped, mismatch or an error."""
-    status = materialize_one(
-        REPO_ROOT / path,
-        entry["sha256"],
-        lambda: get(entry["url"], timeout=SOURCE_FILE_TIMEOUT_SECONDS, transport=TRANSPORT),
-        force=force,
-    )
-    return path, status
 
 
 def main() -> int:
