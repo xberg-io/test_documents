@@ -1,0 +1,82 @@
+name: Unit tests
+
+# ~keep Deliberately NOT path-filtered, unlike xberg-io/actions' own test-unit.yml. Most pull
+# requests here add corpus documents and touch nothing under scripts/, and a path-filtered workflow
+# that does not run leaves a required status check pending forever — which would block every
+# corpus-addition PR. The suite is ~190 network-free tests that finish in about a second.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: test-unit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pytest:
+    name: pytest (${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # ~keep Floor and ceiling. 3.10 is the declared requires-python and the version at which
+        # PEP 604 unions must evaluate at runtime now that the future import is gone; 3.14 is what
+        # maintainers run locally. The bare `python3` the manifest job uses sits between them.
+        python-version: ["3.10", "3.14"]
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v10.0.1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: uv sync --group dev --locked
+
+      - name: Run tests
+        run: uv run pytest -v
+
+      # ~keep The suite is unittest.TestCase on purpose, so the zero-install runner has to keep
+      # working. This is the same guarantee verify-corpus.yaml defends, one level up.
+      - name: Run the same tests with no installs at all
+        run: python3 -m unittest discover -s scripts/tests -t scripts -v
+
+  lint:
+    name: ruff + mypy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v10.0.1
+
+      - name: Install dependencies
+        run: uv sync --group dev --locked
+
+      - name: Ruff check
+        run: uv run ruff check .
+
+      - name: Ruff format check
+        run: uv run ruff format --check .
+
+      - name: Mypy
+        run: uv run mypy
+
+      # ~keep The belt for the config's braces. `ruff check` without --fix and `ruff format --check`
+      # cannot write, so this should never trip — which is exactly why it is cheap to keep. If a
+      # future edit to this job drops a --check or adds a --fix, this turns a silently corrupted
+      # fixture into a red build instead of a merged one.
+      - name: Nothing was rewritten
+        run: git diff --exit-code
+
+  actionlint:
+    name: actionlint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: rhysd/actionlint@v1.7.12
