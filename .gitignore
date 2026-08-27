@@ -1,7 +1,10 @@
 .basemind/
 .corpus-cache/
 .corpus-publish-staging-*/
+.mypy_cache/
 .pytest_cache/
+.ruff_cache/
+.venv/
 __pycache__/
 .DS_Store
 

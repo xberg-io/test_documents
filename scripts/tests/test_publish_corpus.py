@@ -114,6 +114,54 @@ class EnumerationTests(unittest.TestCase):
             self.assertEqual(load_patterns(root), ["*.pdf", "*.png"])
 
 
+class VirtualenvGuardTests(unittest.TestCase):
+    """A dev virtualenv at the repo root is a publish hazard, not just clutter.
+
+    ~keep The patterns are gitignore-shaped: one without '/' matches a basename at ANY depth, and
+    the list contains *.png, *.jpg, *.pdf, *.zip, *.tar and *.gz. Installed packages ship exactly
+    those as bundled assets, and corpus_paths() walks the working tree rather than asking git, so
+    nothing about .venv/ being untracked keeps it out. Adopting uv is what made this reachable.
+    """
+
+    def _tree(self, root: Path, relative_paths: list[str]) -> None:
+        (root / PATTERNS_FILENAME).parent.mkdir(parents=True, exist_ok=True)
+        (root / PATTERNS_FILENAME).write_text("*.pdf\n*.png\n", encoding="utf-8")
+        for rel_path in relative_paths:
+            full_path = root / rel_path
+            full_path.parent.mkdir(parents=True, exist_ok=True)
+            full_path.write_bytes(b"x")
+
+    def test_should_prune_the_virtualenv_from_the_walk_before_the_guard_ever_runs(self) -> None:
+        with tempfile.TemporaryDirectory() as name:
+            root = Path(name)
+            self._tree(root, ["pdf/ok.pdf", ".venv/lib/python3.12/site-packages/pkg/logo.png"])
+
+            self.assertEqual(corpus_paths(root, load_patterns(root)), ["pdf/ok.pdf"])
+
+    def test_should_refuse_to_publish_anything_under_a_virtualenv(self) -> None:
+        # ~keep The pruning above means this can only be reached by a caller passing paths in
+        # directly, which is precisely why the guard exists as a second line rather than a duplicate.
+        with self.assertRaises(GuardViolation) as caught:
+            guard_against_forbidden_paths([".venv/lib/python3.12/site-packages/pkg/logo.png"])
+
+        self.assertIn(".venv/", str(caught.exception))
+
+    def test_should_ignore_every_tool_cache_directory_the_dev_toolchain_creates(self) -> None:
+        with tempfile.TemporaryDirectory() as name:
+            root = Path(name)
+            self._tree(
+                root,
+                [
+                    "pdf/ok.pdf",
+                    ".ruff_cache/0.14/report.png",
+                    ".mypy_cache/3.12/cached.pdf",
+                    ".pytest_cache/v/cache/sample.png",
+                ],
+            )
+
+            self.assertEqual(corpus_paths(root, load_patterns(root)), ["pdf/ok.pdf"])
+
+
 class TrackedCorpusGuardTests(unittest.TestCase):
     """A corpus binary committed to git would silently re-grow the repo it was just purged from."""
 

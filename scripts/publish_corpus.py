@@ -40,11 +40,16 @@ EXTRA_ROOT_FILES = (
     "LICENSES.md",
     "ground_truth/corpus_manifest.json",
 )
-# ~keep: license-restricted corpus cache and local agent state must never reach the public bucket
-FORBIDDEN_PREFIXES = (".corpus-cache/", ".basemind/")
+# ~keep: license-restricted corpus cache, local agent state and the dev virtualenv must never
+# reach the public bucket. .venv/ is here because the patterns are gitignore-shaped: a pattern
+# without '/' matches a basename at any depth, and a virtualenv ships .png/.pdf/.zip assets inside
+# installed packages. Pruning it below is the first line; this is the check that fails the publish.
+FORBIDDEN_PREFIXES = (".corpus-cache/", ".basemind/", ".venv/")
 # ~keep Pruned from the walk so a forbidden or irrelevant tree is never even considered; the
 # FORBIDDEN_PREFIXES guard still runs afterwards as the check that actually fails the publish.
-SKIPPED_DIRECTORIES = frozenset({".corpus-cache", ".basemind", ".github", "__pycache__", ".pytest_cache"})
+SKIPPED_DIRECTORIES = frozenset(
+    {".corpus-cache", ".basemind", ".github", "__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache", ".venv"}
+)
 READ_CHUNK_SIZE = 1024 * 1024
 BYTES_PER_MIB = 1024 * 1024
 STAGING_DIR_PREFIX = ".corpus-publish-staging-"

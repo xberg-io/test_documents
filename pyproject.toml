@@ -1,0 +1,273 @@
+# ~keep This file configures dev tooling only. It is deliberately not a distributable and not a uv
+# workspace root. `data_formats/pyproject.toml` is a CORPUS FIXTURE, not a project: declaring
+# [tool.uv.workspace] here — even with an explicit member list — creates a discovery surface that
+# could pull it in. There is no [build-system] and no [tool.hatch] for the same reason. The scripts
+# stay stdlib-only at runtime; nothing in [dependency-groups] is ever imported by them.
+#
+# ~keep The force-exclude / extend-exclude / include triple under [tool.ruff] is load-bearing corpus
+# protection, not style. Read the comment there before touching any of the three.
+
+[project]
+name = "xberg-test-documents-tooling"
+version = "0.0.0"
+description = "Dev-tooling configuration for the xberg test document corpus. Not published."
+# ~keep 3.10 is the exact floor, not a round number. Nothing in scripts/ uses a 3.11+ feature, and
+# once `from __future__ import annotations` is gone, `def main(argv: list[str] | None = None)`
+# evaluates a PEP 604 union at runtime — which is 3.10. `dict[str, int]` alone would allow 3.9.
+requires-python = ">=3.10"
+
+[dependency-groups]
+# ~keep tomli is only for 3.10, where tomllib is not yet stdlib. scripts/tests/test_lint_scope.py
+# parses poly.toml and this file to prove the two exclude lists agree, and the 3.10 floor is
+# tested in CI, so the test has to work there too.
+dev = ["mypy>=1.11", "pytest>=8.3", "ruff>=0.14", "tomli>=2.0; python_version<'3.11'"]
+
+[tool.uv]
+# ~keep The repo is a fixture corpus, not a package. This stops uv building or installing anything
+# from this manifest; `uv sync` then only materialises the dev group.
+package = false
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ruff
+# ─────────────────────────────────────────────────────────────────────────────
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+
+# ~keep THREE INDEPENDENT LAYERS, all required. Verified against ruff 0.14 on this tree:
+#
+#  1. `extend-exclude` names every corpus directory (mirroring poly.toml's [discovery] exclude) plus
+#     "*.ipynb". Without the notebook glob, `ruff format` formats Jupyter notebooks NATIVELY — on
+#     this tree it would rewrite 4 fixtures under jupyter/math/ and fail to parse 3 more. Note
+#     poly's leading-slash anchoring ("/office/**") is SILENTLY IGNORED by ruff's globset, so
+#     entries here are written unanchored.
+#
+#  2. `force-exclude = true` is the most important line in this file. Without it, exclusions apply
+#     only while walking directories; a path passed EXPLICITLY on the command line bypasses them.
+#     Verified both ways: with force-exclude off, `ruff format --check jupyter/mime.ipynb` reports
+#     "1 file already formatted" — it processed the fixture. With it on, "No Python files found
+#     under the given path(s)". An editor-on-save, a pre-commit hook, or `ruff format jupyter/` all
+#     pass explicit paths. The upstream xberg-io/actions template does not set this; deviating here
+#     is deliberate.
+#
+#  3. `include` narrows the file set to scripts/ so an unscoped `ruff .` cannot reach a stray .py
+#     elsewhere — code/hello.py is a fixture whose two unused imports are the point of the fixture,
+#     and F401 is a SAFE fix, so `ruff check --fix .` would silently delete them.
+#
+# "We never invoke ruff unscoped" is not a defence: the failure mode being guarded is a contributor
+# typing `ruff format .` at the repo root. scripts/tests/test_lint_scope.py asserts all of this
+# behaviourally, against the real binary.
+force-exclude = true
+include = ["scripts/**/*.py", "scripts/**/*.pyi"]
+extend-exclude = [
+  "*.ipynb",
+  "archives",
+  "audio",
+  "bibtex",
+  "charts",
+  "code",
+  "csv",
+  "data_formats",
+  "dbf",
+  "diagrams",
+  "doc",
+  "docbook",
+  "docx",
+  "email",
+  "epub",
+  "fictionbook",
+  "ground_truth",
+  "html",
+  "hwp",
+  "hwpx",
+  "images",
+  "images_extra",
+  "iwork",
+  "jats",
+  "json",
+  "jsonl",
+  "jupyter",
+  "latex",
+  "markdown",
+  "markup",
+  "odp",
+  "odt",
+  "office",
+  "opml",
+  "org",
+  "pdf",
+  "pdf_scanned",
+  "ppt",
+  "pptx",
+  "rst",
+  "rtf",
+  "semantic",
+  "test_fixtures",
+  "text",
+  "text_splitter",
+  "typst",
+  "user_reports",
+  "vendored",
+  "wordperfect",
+  "xls",
+  "xlsx",
+  "xml",
+  "yaml",
+]
+
+format.docstring-code-format = true
+format.docstring-code-line-length = 120
+
+lint.select = ["ALL"]
+# ~keep BLE001 (blind-except) is deliberately NOT ignored globally, unlike in the xberg-io/actions
+# template. The fetchers catch bare Exception on purpose — any transport failure is worth another
+# attempt — and each site already carries a `# noqa: BLE001 - <reason>` explaining why. Ignoring the
+# rule globally makes every one of those noqa comments "unused", and RUF100 then deletes the
+# rationale along with the directive. Keeping the rule on means the reason has to stay written down.
+lint.ignore = [
+  "ANN401",
+  "COM812",
+  "CPY",
+  "D100",
+  "D104",
+  "D107",
+  "D203",
+  "D205",
+  "D212",
+  "E501",
+  "EM",
+  "FBT",
+  "FIX",
+  "ISC001",
+  "PGH003",
+  "PLR2004",
+  "S104",
+  "S110",
+  "S603",
+  "TD",
+  "TRY",
+]
+
+# ~keep This is what enforces issue #11's "no `from __future__ import annotations`" convention.
+# FA100/FA102 are the OPPOSITE rule — they demand the import — so they must stay off; they are
+# already quiet under target-version = "py310". Verified: this reports exactly one hit per file
+# that carries the import, with no false positives. TID251 has no autofix, which is correct —
+# removing the import can change semantics in a file with a genuine forward reference.
+lint.flake8-tidy-imports.banned-api."__future__.annotations".msg = "Unnecessary: the tooling targets Python 3.10+, where PEP 604 unions and PEP 585 generics evaluate natively. See issue #11."
+
+lint.per-file-ignores."scripts/*.py" = ["INP001", "T201"]
+lint.per-file-ignores."scripts/corpus_tools/**" = ["PLC0415", "S607", "SIM105", "T201"]
+lint.per-file-ignores."scripts/tests/**" = [
+  "ANN",
+  "ARG002",
+  "D",
+  "INP001",
+  "PLC2701",
+  "PLR2004",
+  # ~keep PT009/PT027 (prefer bare `assert` over unittest assertions) are ignored, unlike in the
+  # xberg-io/actions template. The suite is unittest.TestCase on purpose: pytest collects it
+  # natively AND `python3 -m unittest discover -s scripts/tests -t scripts` still runs it with zero
+  # installs. That zero-dependency escape hatch is the same property verify_corpus.py's ~keep
+  # defends. Enabling these two rules means 163 mechanical rewrites that buy nothing and cost the
+  # fallback runner.
+  "PT009",
+  "PT027",
+  "S",
+  "SLF001",
+]
+lint.mccabe.max-complexity = 15
+lint.pydocstyle.convention = "google"
+lint.pylint.max-args = 10
+lint.pylint.max-branches = 15
+lint.pylint.max-returns = 10
+
+# ─────────────────────────────────────────────────────────────────────────────
+# pytest
+# ─────────────────────────────────────────────────────────────────────────────
+# ~keep Must be [tool.pytest.ini_options]. pytest does NOT read a [tool.pytest] table with dotted
+# ini_options keys — config written that way is silently inert.
+[tool.pytest.ini_options]
+# ~keep `testpaths` governs a bare `pytest`; `norecursedirs` governs `pytest .`. Both are needed.
+# No test*.py exists outside scripts/ today, so this is defence in depth — but it is also what
+# stops collection from walking ~580 MiB of documents.
+testpaths = ["scripts/tests"]
+python_files = ["test_*.py"]
+addopts = "-ra --strict-markers --strict-config"
+norecursedirs = [
+  ".*",
+  "build",
+  "dist",
+  "*.egg",
+  "node_modules",
+  "archives",
+  "audio",
+  "bibtex",
+  "charts",
+  "code",
+  "csv",
+  "data_formats",
+  "dbf",
+  "diagrams",
+  "doc",
+  "docbook",
+  "docx",
+  "email",
+  "epub",
+  "fictionbook",
+  "ground_truth",
+  "html",
+  "hwp",
+  "hwpx",
+  "images",
+  "images_extra",
+  "iwork",
+  "jats",
+  "json",
+  "jsonl",
+  "jupyter",
+  "latex",
+  "markdown",
+  "markup",
+  "odp",
+  "odt",
+  "office",
+  "opml",
+  "org",
+  "pdf",
+  "pdf_scanned",
+  "ppt",
+  "pptx",
+  "rst",
+  "rtf",
+  "semantic",
+  "test_fixtures",
+  "text",
+  "text_splitter",
+  "typst",
+  "user_reports",
+  "vendored",
+  "wordperfect",
+  "xls",
+  "xlsx",
+  "xml",
+  "yaml",
+]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# mypy
+# ─────────────────────────────────────────────────────────────────────────────
+[tool.mypy]
+python_version = "3.10"
+strict = true
+disable_error_code = ["import-untyped"]
+explicit_package_bases = true
+implicit_reexport = false
+show_error_codes = true
+namespace_packages = true
+# ~keep `files` scopes a bare `mypy`. `mypy_path` is what makes `import corpus_tools` and
+# `import publish_corpus` resolve without installing anything: scripts/ has no __init__.py, so it
+# is the package base for both the flat entry points and corpus_tools/. mypy never writes source
+# files, so this is a noise guard rather than corpus protection.
+files = ["scripts"]
+mypy_path = ["scripts"]
+exclude = '^(?!scripts/)'
