@@ -98,8 +98,14 @@ def corpus_directories_from_poly() -> set[str]:
 
 
 def ruff_excluded_directories() -> set[str]:
+    """~keep Anchoring differs per tool, so normalise before comparing.
+
+    ruff needs "./name" — a bare `name` matches a directory of that name at ANY depth, which is how
+    scripts/corpus_tools/diagrams silently stopped being linted, and a leading "/" it ignores
+    outright. poly wants the leading "/" instead. Verified all five forms against real trees.
+    """
     config = tomllib.loads(PYPROJECT.read_text(encoding="utf-8"))
-    return {entry for entry in config["tool"]["ruff"]["extend-exclude"] if not entry.startswith("*")}
+    return {entry.removeprefix("./") for entry in config["tool"]["ruff"]["extend-exclude"] if not entry.startswith("*")}
 
 
 class RuffRefusesCorpusFilesTest(unittest.TestCase):
@@ -153,6 +159,36 @@ class RuffRefusesCorpusFilesTest(unittest.TestCase):
         # and `ruff format` reads .ipynb natively.
         config = tomllib.loads(PYPROJECT.read_text(encoding="utf-8"))
         self.assertIn("*.ipynb", config["tool"]["ruff"]["extend-exclude"])
+
+
+class ExcludeAnchoringTest(unittest.TestCase):
+    """Both exclude lists must be anchored, or they hide first-party source as well as corpus.
+
+    ~keep This is not hypothetical. Unanchored `diagrams` and `epub` entries hid
+    scripts/corpus_tools/diagrams and scripts/corpus_tools/epub from BOTH tools, so eight files
+    this repo owns went unlinted and unformatted, and four dead imports sat there undetected.
+    `poly doctor` reports the poly half; nothing reported the ruff half.
+    """
+
+    def test_should_anchor_every_ruff_directory_exclude_to_the_project_root(self) -> None:
+        config = tomllib.loads(PYPROJECT.read_text(encoding="utf-8"))
+        unanchored = [entry for entry in config["tool"]["ruff"]["extend-exclude"] if not entry.startswith(("./", "*"))]
+
+        self.assertEqual(unanchored, [], "a bare name excludes that directory at any depth")
+
+    def test_should_anchor_every_poly_directory_exclude_to_the_config_directory(self) -> None:
+        config = tomllib.loads(POLY_TOML.read_text(encoding="utf-8"))
+        unanchored = [entry for entry in config["discovery"]["exclude"] if not entry.startswith("/")]
+
+        self.assertEqual(unanchored, [], "poly reports these with `poly doctor`")
+
+    def test_should_still_lint_the_first_party_subpackages_whose_names_collide(self) -> None:
+        # ~keep diagrams/ and epub/ exist both as corpus directories and as source subpackages.
+        for relative in ("scripts/corpus_tools/diagrams/render.py", "scripts/corpus_tools/epub/build.py"):
+            with self.subTest(path=relative):
+                self.assertTrue((REPO_ROOT / relative).is_file())
+                result = ruff("check", "--no-fix", "--output-format", "concise", relative)
+                self.assertNotIn(REFUSAL, result.stdout + result.stderr, f"{relative} is not being linted")
 
 
 class ExcludeListsAgreeTest(unittest.TestCase):

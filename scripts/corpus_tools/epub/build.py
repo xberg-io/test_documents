@@ -14,15 +14,12 @@ checks that pin against a fresh build.
     python3 scripts/build_epub_edge_cases.py --list     # print path and sha256
 """
 
-import argparse
 import io
 import struct
-import sys
 import zipfile
 import zlib
 
 from corpus_tools import paths
-from corpus_tools.hashing import sha256_bytes
 
 REPO_ROOT = paths.REPO_ROOT
 CORPUS_DIR = "epub/edge-cases"

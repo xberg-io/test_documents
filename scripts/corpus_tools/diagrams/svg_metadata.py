@@ -79,7 +79,6 @@ Usage:
 """
 
 import re
-from pathlib import Path
 
 TITLE = re.compile(r"[ \t]*<title>.*?</title>\n?", re.DOTALL)
 ELEMENT_GROUP = re.compile(r'(<g id="[^"]*" class="(?:node|edge|cluster)">)(.*?)(</g>)', re.DOTALL)
