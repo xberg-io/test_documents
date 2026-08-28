@@ -14,20 +14,14 @@ license.
 
 ## Government edicts
 
-Documents published by a US local government in the course of its official duties — ordinances,
-resolutions, agendas, minutes, staff reports — are **edicts of government** and carry no copyright
-at all. They are `vendor` class: freely usable and redistributable, with no licence to track. See
-`ATTRIBUTIONS.md` → *City of Sugar Land, Texas — Ordinance No. 2197*.
+The corpus contains one municipal ordinance: City of Sugar Land, Texas, Ordinance No. 2197. The
+ordinance's enacted legal text is classified as a US public-domain edict of government and is
+therefore in the `vendor` class. Its citation, source, scope, and modifications are recorded in
+`ATTRIBUTIONS.md` under *City of Sugar Land, Texas — Ordinance No. 2197*.
 
-Two limits are worth stating, because "published on a `.gov` site" is not by itself the whole
-answer:
-
-- The doctrine covers the **authority's own** official works. Third-party material merely *filed
-  with* an authority and republished by it — a contractor's bid, a consultant's report, a
-  campaign-finance form completed by an individual — can retain its author's copyright.
-- Personal details appearing in such records are lawfully published by the authority, which settles
-  our **use** of them. Bulk republication is a separate question and is decided per corpus, not by
-  this file.
+This classification is specific to that ordinance. Publication by a state or local government does
+not by itself place a work in the public domain; agendas, minutes, staff reports, attachments, and
+third-party submissions require their own copyright and redistribution review before inclusion.
 
 ## Redistribution policy
 
@@ -67,6 +61,6 @@ Vendored sources: 7. Reference-only sources: 2. WordPerfect corpus provenance: `
 | math corpus (136 documents, ~70 upstream projects) | MIT / Apache-2.0 / CC-BY / CC0 / US-PD / MPL-2.0 | vendor |
 | math corpus, copyleft subset (12 documents) | CC-BY-SA / GPL / GFDL | reference (not committed) |
 | EPUB edge-case corpus (36 documents): Project Gutenberg, Standard Ebooks, IDPF, W3C epub-tests, epubcheck, epub.js, epublib, Internet Archive, synthesized | US-PD / CC0 / W3C / BSD-3 / Apache-2.0 / MIT, per document | vendor |
-| municipal public records (US local government) | US-PD, edicts of government | vendor |
+| City of Sugar Land, Texas, Ordinance No. 2197 | US-PD, edict of government | vendor |
 
 Vendored sources: 7. Reference-only sources: 2. WordPerfect corpus provenance: `wordperfect/PROVENANCE.md`.
