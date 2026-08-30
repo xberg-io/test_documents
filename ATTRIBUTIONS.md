@@ -290,3 +290,16 @@ Per-file provenance, licence evidence and the measured before and after for each
 - **License:** MIT, as our own work.
 - **Used here:** fourteen small EPUBs for the cases no public file exhibits: named entities beside a stylesheet link, a byte order mark, a chapter that does not parse, 30,000 nested elements, a remote spine href, Dublin Core roles and dates, a cover reference to an XHTML page, six legacy or UTF-16 encodings, and six spine media-type labels.
 - **Modifications:** not applicable.
+
+## Executable Books Project — MyST-NB fixtures
+
+- **Source:** <https://github.com/executablebooks/MyST-NB>, `tests/notebooks`, at commit
+  `23b1747ff9b7e408244c62dd3981238ea193b25a`.
+- **License:** BSD-3-Clause; the upstream license is retained at
+  `vendored/executablebooks-myst-nb/LICENSE`.
+- **Used here:** `basic_unrun.md`, a MyST/Jupytext text notebook with notebook front matter and a
+  code-cell directive; `with_eval.md`, which covers inline and block evaluation plus an evaluated
+  figure; and `hide_cell_content.ipynb`, a Jupyter notebook whose cells carry `hide-input`,
+  `hide-output`, and `hide-cell` tags.
+- **Modifications:** none to the fixture bytes; files were relocated under
+  `vendored/executablebooks-myst-nb/`.
