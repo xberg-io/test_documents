@@ -15,10 +15,11 @@ import tempfile
 from collections.abc import Iterator
 from contextlib import contextmanager
 from pathlib import Path
+from typing import Any
 
 from corpus_tools.corpus.backends import StorageBackend
 from corpus_tools.hashing import BYTES_PER_MIB
-from corpus_tools.manifest import DEFAULT_BUCKET, MANIFEST_FILENAME, OBJECTS_PREFIX, CorpusObject
+from corpus_tools.manifest import DEFAULT_BUCKET, MANIFEST_FILENAME, OBJECTS_PREFIX, CorpusObject, lock_objects
 from corpus_tools.paths import git_repo_root
 from corpus_tools.patterns import PATTERNS_FILENAME, matches_corpus_pattern
 
@@ -41,6 +42,9 @@ STAGING_DIR_PREFIX = ".corpus-publish-staging-"
 # ~keep Bounds the argv of a single `gcloud storage cp`; gcloud parallelises within one invocation.
 # ~keep Outside OBJECTS_PREFIX and EXTRA_ROOT_FILES, so the probe can never shadow a corpus key.
 WRITE_PROBE_KEY = "_write-probe/last-publish.txt"
+# ~keep Enough dropped paths to recognise which fixture family went missing without burying the
+# remedy at the end of a thousand-line refusal.
+DROPPED_PATHS_SHOWN = 10
 
 
 class GuardViolation(RuntimeError):
@@ -272,6 +276,41 @@ def guard_against_root_outside_the_corpus(root: Path, explicit_targets: list[Pat
         "Corpus patterns match basenames at any depth, so a root above the corpus can sweep in "
         f"unrelated files. Use --root {corpus_directory}, or pass --allow-external-root if this "
         "is deliberate."
+    )
+
+
+def guard_against_dropping_manifest_paths(
+    manifest_path: Path, manifest: dict[str, Any], *, allow_removals: bool
+) -> None:
+    """Refuse a publish that would unpin paths the existing lock file still holds.
+
+    ~keep The manifest is rebuilt from whatever the working tree happens to hold, and a corpus
+    checkout is routinely partial -- several fixture families are materialised by their own fetch
+    script, so publishing before they are present silently deletes their entries and every consumer
+    stops seeing those fixtures. Nothing else catches it: the objects stay in the bucket, the run
+    reports success, and the loss is a deletion buried in a thousand-line JSON diff. Re-run
+    `python3 scripts/fetch_corpus.py` first, or pass --allow-removals for a deliberate removal.
+    """
+    if allow_removals or not manifest_path.exists():
+        return
+    try:
+        existing = set(lock_objects(manifest_path))
+    except (OSError, ValueError, KeyError):
+        # ~keep An unreadable or malformed lock file is not something this guard can reason about,
+        # and refusing here would block the very publish that repairs it.
+        return
+    dropped = sorted(existing - set(manifest["objects"]))
+    if not dropped:
+        return
+    shown = "\n".join(f"  {rel_path}" for rel_path in dropped[:DROPPED_PATHS_SHOWN])
+    remainder = len(dropped) - DROPPED_PATHS_SHOWN
+    if remainder > 0:
+        shown += f"\n  ... and {remainder} more"
+    raise PublishTargetRefused(
+        f"refusing to publish: {len(dropped)} path(s) in {manifest_path.name} are missing from the "
+        f"working tree, so this run would unpin them for every consumer:\n{shown}\n"
+        "Run `python3 scripts/fetch_corpus.py` to materialise them, or pass --allow-removals if "
+        "the removal is deliberate."
     )
 
 

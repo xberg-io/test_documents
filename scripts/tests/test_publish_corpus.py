@@ -15,8 +15,10 @@ from corpus_tools.corpus.publish import (
     CorpusFileTracked,
     EmptyCorpus,
     GuardViolation,
+    PublishTargetRefused,
     WriteProbeFailed,
     corpus_paths,
+    guard_against_dropping_manifest_paths,
     guard_against_forbidden_paths,
     guard_against_tracked_corpus_files,
     staged_by_sha256,
@@ -31,6 +33,7 @@ from corpus_tools.manifest import (
     CorpusObject,
     build_manifest,
     unique_objects_by_sha256,
+    write_manifest,
 )
 from corpus_tools.patterns import PATTERNS_FILENAME, load_patterns, matches_any, matches_corpus_pattern
 
@@ -52,6 +55,52 @@ class GuardTests(unittest.TestCase):
 
     def test_should_accept_paths_outside_the_forbidden_prefixes(self) -> None:
         guard_against_forbidden_paths(["pdf/ok.pdf", "images/ok.png"])
+
+
+class ManifestDropGuardTests(unittest.TestCase):
+    """A partial working tree must not silently unpin the fixtures it is missing."""
+
+    @staticmethod
+    def _lock(directory: Path, *rel_paths: str) -> Path:
+        manifest_path = directory / "corpus.lock.json"
+        write_manifest(
+            build_manifest([CorpusObject(path=rel_path, sha256="0" * 64, size=1) for rel_path in rel_paths]),
+            manifest_path,
+        )
+        return manifest_path
+
+    def test_should_refuse_when_the_rebuilt_manifest_drops_a_pinned_path(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            manifest_path = self._lock(Path(raw), "pdf/kept.pdf", "epub/edge-cases/gone.epub")
+            rebuilt = build_manifest([CorpusObject(path="pdf/kept.pdf", sha256="0" * 64, size=1)])
+            with self.assertRaises(PublishTargetRefused) as caught:
+                guard_against_dropping_manifest_paths(manifest_path, rebuilt, allow_removals=False)
+        message = str(caught.exception)
+        self.assertIn("epub/edge-cases/gone.epub", message)
+        self.assertIn("fetch_corpus.py", message)
+        self.assertNotIn("pdf/kept.pdf", message)
+
+    def test_should_allow_a_deliberate_removal(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            manifest_path = self._lock(Path(raw), "pdf/kept.pdf", "pdf/gone.pdf")
+            rebuilt = build_manifest([CorpusObject(path="pdf/kept.pdf", sha256="0" * 64, size=1)])
+            guard_against_dropping_manifest_paths(manifest_path, rebuilt, allow_removals=True)
+
+    def test_should_allow_an_addition_that_drops_nothing(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            manifest_path = self._lock(Path(raw), "pdf/kept.pdf")
+            rebuilt = build_manifest(
+                [
+                    CorpusObject(path="pdf/kept.pdf", sha256="0" * 64, size=1),
+                    CorpusObject(path="pdf/added.pdf", sha256="1" * 64, size=1),
+                ]
+            )
+            guard_against_dropping_manifest_paths(manifest_path, rebuilt, allow_removals=False)
+
+    def test_should_allow_the_first_publish_when_no_lock_file_exists_yet(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            rebuilt = build_manifest([CorpusObject(path="pdf/added.pdf", sha256="0" * 64, size=1)])
+            guard_against_dropping_manifest_paths(Path(raw) / "corpus.lock.json", rebuilt, allow_removals=False)
 
 
 class PatternMatchingTests(unittest.TestCase):

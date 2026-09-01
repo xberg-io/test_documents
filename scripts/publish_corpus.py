@@ -15,6 +15,7 @@ corpus.lock.json. CI cannot do this: a checkout contains no binaries at all.
 import argparse
 import subprocess
 import sys
+from collections.abc import Callable
 from pathlib import Path
 
 from corpus_tools.corpus.backends import GCloudStorageBackend
@@ -25,6 +26,7 @@ from corpus_tools.corpus.publish import (
     corpus_paths,
     describe_publish_set,
     format_mib,
+    guard_against_dropping_manifest_paths,
     guard_against_forbidden_paths,
     guard_against_publishing_private_corpus_publicly,
     guard_against_root_outside_the_corpus,
@@ -36,6 +38,7 @@ from corpus_tools.corpus.publish import (
 )
 from corpus_tools.manifest import (
     MANIFEST_FILENAME,
+    CorpusObject,
     build_manifest,
     resolve_objects,
     unique_objects_by_sha256,
@@ -72,6 +75,11 @@ def parse_args(argv: list[str] | None) -> argparse.Namespace:
         help=f"pattern file selecting corpus paths (default: <root>/{PATTERNS_FILENAME})",
     )
     parser.add_argument(
+        "--allow-removals",
+        action="store_true",
+        help="permit a publish that unpins corpus paths the existing lock file still holds",
+    )
+    parser.add_argument(
         "--allow-external-root",
         action="store_true",
         help="permit a --root that is not the manifest's own directory",
@@ -85,6 +93,45 @@ def parse_args(argv: list[str] | None) -> argparse.Namespace:
     if not args.dry_run and not args.bucket:
         parser.error("--bucket is required unless --dry-run is given")
     return args
+
+
+def _passes(guard: Callable[[], None]) -> bool:
+    """Run a publish guard, reporting a refusal as the whole output rather than a traceback.
+
+    ~keep A refusal is a designed outcome, not a crash: the message names the flag or the paths a
+    maintainer has to act on, and a stack trace buries it.
+    """
+    try:
+        guard()
+    except PublishTargetRefused as refusal:
+        print(f"refused: {refusal}", file=sys.stderr)
+        return False
+    return True
+
+
+def _confirm_non_default_root(
+    args: argparse.Namespace,
+    root: Path,
+    manifest_path: Path,
+    patterns_path: Path,
+    *,
+    paths: list[str],
+    objects: list[CorpusObject],
+) -> bool:
+    """Describe a non-default publish set and, unless waved through, ask before uploading it.
+
+    ~keep A count and a byte total are the two numbers that make a wrongly aimed root obvious at a
+    glance. An exit code does not distinguish 4,412 files from 4,419.
+    """
+    print("publishing a non-default corpus root:")
+    print(describe_publish_set(root, paths, objects))
+    print(f"  manifest   {manifest_path}")
+    print(f"  patterns   {patterns_path}")
+    print(f"  bucket     {args.bucket or '(dry run)'}")
+    if not args.dry_run and not args.yes and not _confirmed():
+        print("aborted; nothing was uploaded", file=sys.stderr)
+        return False
+    return True
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -106,14 +153,12 @@ def main(argv: list[str] | None = None) -> int:
         and patterns_path == repository_root / PATTERNS_FILENAME
     )
 
-    # ~keep A refusal here is a designed outcome, not a crash. Print the reason and exit 1 rather
-    # than showing a traceback, so the message a maintainer needs is the whole output.
-    try:
-        guard_against_publishing_private_corpus_publicly(root, manifest_path, patterns_path, args.bucket)
-        explicit_targets = [target.resolve() for target in (args.manifest, args.patterns) if target is not None]
-        guard_against_root_outside_the_corpus(root, explicit_targets, allow_external=args.allow_external_root)
-    except PublishTargetRefused as refusal:
-        print(f"refused: {refusal}", file=sys.stderr)
+    explicit_targets = [target.resolve() for target in (args.manifest, args.patterns) if target is not None]
+    if not _passes(
+        lambda: guard_against_publishing_private_corpus_publicly(root, manifest_path, patterns_path, args.bucket)
+    ) or not _passes(
+        lambda: guard_against_root_outside_the_corpus(root, explicit_targets, allow_external=args.allow_external_root)
+    ):
         return 1
 
     paths = corpus_paths(root, load_patterns(root, patterns_path), patterns_path)
@@ -134,17 +179,17 @@ def main(argv: list[str] | None = None) -> int:
     total_size = sum(obj.size for obj in objects)
     print(f"{len(objects)} paths / {len(representatives)} unique objects / {format_mib(total_size)} MiB")
 
-    if not is_default_root:
-        # ~keep A count and a byte total are the two numbers that make a wrongly aimed root obvious at
-        # a glance. An exit code does not distinguish 4,412 files from 4,419.
-        print("publishing a non-default corpus root:")
-        print(describe_publish_set(root, paths, objects))
-        print(f"  manifest   {manifest_path}")
-        print(f"  patterns   {patterns_path}")
-        print(f"  bucket     {args.bucket or '(dry run)'}")
-        if not args.dry_run and not args.yes and not _confirmed():
-            print("aborted; nothing was uploaded", file=sys.stderr)
-            return 1
+    # ~keep Runs before the --dry-run branch so a dry run reports the loss too; a dry run that says
+    # "nothing to do" on a partial working tree is exactly how the deletion gets committed.
+    if not _passes(
+        lambda: guard_against_dropping_manifest_paths(manifest_path, manifest, allow_removals=args.allow_removals)
+    ):
+        return 1
+
+    if not is_default_root and not _confirm_non_default_root(
+        args, root, manifest_path, patterns_path, paths=paths, objects=objects
+    ):
+        return 1
 
     # ~keep The manifest write stays behind this branch: --dry-run promises to change nothing, and
     # corpus.lock.json is load-bearing (consumers hash it to key their fetch cache).
