@@ -216,6 +216,17 @@ Vendored WordPerfect-family test files. Per-file provenance (upstream path, revi
   first page uses hanging clause numbers and whose unnumbered second page is the control.
 - **Modifications:** renamed for stable corpus addressing; document bytes are otherwise unchanged.
 
+## Xberg issue #1542 prose-paragraph-as-table reproduction
+
+- **Source:** authored by Eric Evers (`@erichevers`) and attached to
+  <https://github.com/xberg-io/xberg/issues/1542> as a minimal reproduction.
+- **License:** MIT, as a contribution to the Xberg test corpus.
+- **Used here:** `pdf/issue-1542-prose-paragraph-shredded-into-table.pdf`, a single unruled A4 page
+  carrying three three-line body paragraphs. Paragraphs two and three share their first two lines
+  verbatim and differ only in the last line, numeric in one and alphabetic in the other, so the page
+  is a self-contained A/B for the table heuristic.
+- **Modifications:** renamed for stable corpus addressing; document bytes are otherwise unchanged.
+
 ## City of Sugar Land, Texas — Ordinance No. 2197
 
 - **Citation:** City of Sugar Land, Texas, Ordinance No. 2197 (adopted 4 August 2020), a zoning change for approximately 0.7906 acres at Lake Pointe Parkway and Creek Bend Drive.

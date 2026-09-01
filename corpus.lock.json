@@ -1241,6 +1241,10 @@
       "sha256": "918494c7dffcf8f2c2fb2d560581f8e5de195957271c8114e0fe7923b2f48b92",
       "size": 4823
     },
+    "pdf/issue-1542-prose-paragraph-shredded-into-table.pdf": {
+      "sha256": "afeee069d71b17f630601f1387122a3e9677caa32f7422b744b0e0ee6ca96b7e",
+      "size": 1828
+    },
     "pdf/issue-636-chunk-pages.pdf": {
       "sha256": "a2050f1095efcccda02327ca56bc5cf0fcf74763265dd3ad99da06d1a4790bc2",
       "size": 195020
