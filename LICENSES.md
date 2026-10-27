@@ -57,6 +57,7 @@ non-commercial benchmark use non-commercial data.
 | [google-research-datasets/hiertext](https://github.com/google-research-datasets/hiertext) | CC-BY-SA-4.0 | reference (ShareAlike — not committed) |
 | regression corpus: [PubMed Central OA](https://europepmc.org), [Project Gutenberg](https://www.gutenberg.org), [govdocs1](https://digitalcorpora.org), [arXiv](https://arxiv.org) | CC-BY-4.0 / CC0 / US-PD, per document | vendor (1,816) |
 | regression corpus, restricted subset | CC-BY-SA, CC-BY-NC*, arXiv nonexclusive-distrib | reference (1,459, not committed) |
+| PDF regression pages: single pages from arXiv, PLOS, OpenStax, Project Gutenberg and US federal publications (GovInfo, Federal Register, IRS, NASA, NIST, USGS, FAA, SBA, Treasury) | CC-BY-4.0 / CC0 / US-PD, per page | vendor (322) |
 | math corpus (136 documents, ~70 upstream projects) | MIT / Apache-2.0 / CC-BY / CC0 / US-PD / MPL-2.0 | vendor |
 | math corpus, copyleft subset (12 documents) | CC-BY-SA / GPL / GFDL | reference (not committed) |
 | EPUB edge-case corpus (36 documents): Project Gutenberg, Standard Ebooks, IDPF, W3C epub-tests, epubcheck, epub.js, epublib, Internet Archive, synthesized | US-PD / CC0 / W3C / BSD-3 / Apache-2.0 / MIT, per document | vendor |
@@ -64,4 +65,5 @@ non-commercial benchmark use non-commercial data.
 
 Source-specific provenance is recorded in `ATTRIBUTIONS.md`. WordPerfect corpus provenance is in
 `wordperfect/PROVENANCE.md`; math corpus provenance is in `MATH_PROVENANCE.md`; and EPUB edge-case
-corpus provenance is in `EPUB_EDGE_CASES.md`.
+corpus provenance is in `EPUB_EDGE_CASES.md`; PDF regression page provenance is in
+`REGRESSION_PAGES_PROVENANCE.md`.
