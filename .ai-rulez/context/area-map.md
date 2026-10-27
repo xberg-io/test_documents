@@ -8,8 +8,6 @@ x-ai-rulez:
     priority: high
 ---
 
-## Area Map
-
 A fixture corpus, not a codebase, and a git submodule of several xberg-io repositories. Every top-level
 directory except `scripts/` holds documents whose exact bytes are the assertion. The ~610 MiB of binaries are not in
 git: they live content-addressed at `objects/<sha256>` in the public bucket `gs://xberg-test-documents`, and
@@ -22,6 +20,9 @@ git: they live content-addressed at `objects/<sha256>` in the public bucket `gs:
 - `scripts/` — the stdlib-only fetch/publish/verify tools (`corpus-tooling` skill; private corpora: `private-corpus`)
 - `*.md` at the root — licensing, attribution and provenance records
 
+Tasks: `task validate` (everything CI runs except the bucket check), `task format` (`scripts/` only; fails on any
+unstaged change outside `scripts/`, `.ai-rulez/` and the lint config), `task verify` (bucket check, network).
+
 CI cannot publish: publishing is a local maintainer action that commits a refreshed `corpus.lock.json`. CI proves every
-pinned object is still fetchable anonymously; consumers fetch through `xberg-io/actions/fetch-test-documents@v1`,
-which never runs Python from here.
+pinned object is still fetchable anonymously. Consumer CI fetches through `xberg-io/actions/fetch-test-documents@v1`,
+which runs no Python from here; developers in consumer repos run `python3 test_documents/scripts/fetch_corpus.py`.
