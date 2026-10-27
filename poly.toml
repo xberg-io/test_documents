@@ -77,6 +77,11 @@ exclude = [
 [lint.markdown.rumdl]
 disable = ["MD012", "MD013", "MD024", "MD033", "MD036", "MD041", "MD046", "MD051", "MD076"]
 
+# ~keep MD025 off for fmt only, as in xberg and sceptre: a skill's front-matter title counts as an H1, and
+# rumdl's autofix then demotes every heading in the body.
+[fmt.markdown.rumdl]
+disable = ["MD012", "MD013", "MD024", "MD033", "MD036", "MD041", "MD046", "MD051", "MD076", "MD025"]
+
 # ~keep poly does NOT read pyproject.toml's [tool.ruff]; it runs ruff with the config below.
 # Verified: a file with `from __future__ import annotations` is clean to `poly lint` and a TID251
 # error to `uv run ruff check`. So the two must be kept in step, and
