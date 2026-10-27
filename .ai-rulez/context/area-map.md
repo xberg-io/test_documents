@@ -8,7 +8,7 @@ x-ai-rulez:
     priority: high
 ---
 
-# Area Map
+## Area Map
 
 A fixture corpus, not a codebase, and a git submodule of several xberg-io repositories. Every top-level
 directory except `scripts/` holds documents whose exact bytes are the assertion. The ~580 MiB of binaries are not in
