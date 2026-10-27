@@ -8,10 +8,11 @@ presets = ["claude", "codex", "opencode"]
 compact = true
 
 # ~keep `documentation` is on because most changes here are provenance prose (LICENSES.md,
-# ATTRIBUTIONS.md, *_PROVENANCE.md) rather than code; there are no ADRs. Python conventions for
-# scripts/ are the local `python` rule, not the `python` builtin (which prescribes mypy/pyright). That rule
-# is a scoped copy of agent-conventions modules/languages/rules/python.md (not included here): re-sync it
-# when the org rule changes, keeping the unittest and stdlib-only deviations.
+# ATTRIBUTIONS.md, *_PROVENANCE.md) rather than code; there are no ADRs, the README exists, and ruff's
+# `D` rules enforce docstrings. Python conventions for scripts/ are the local `python` rule, not the
+# `python` builtin (which prescribes mypy/pyright). That rule is a scoped copy of agent-conventions
+# modules/languages/rules/python.md (not included here): re-sync it when the org rule changes, keeping
+# the unittest and stdlib-only deviations.
 # CI/CD guidance comes from the xberg-cicd include.
 builtins = [
   "!agent-delegation",
@@ -19,6 +20,9 @@ builtins = [
   "!git-workflow",
   "!testing/test-alongside-code",
   "!documentation/adr-immutability",
+  "!documentation/adr-workflow",
+  "!documentation/inline-documentation",
+  "!documentation/readme-standards",
   "documentation",
   "default-commands",
 ]
