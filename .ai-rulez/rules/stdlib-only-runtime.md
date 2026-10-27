@@ -1,14 +1,15 @@
 ---
 type: Decision
 title: Stdlib Only Runtime
+paths:
+  - "scripts/**"
+  - "pyproject.toml"
 x-ai-rulez:
   kind: rule
   id: stdlib-only-runtime
   metadata:
     priority: critical
 ---
-
-## The tools import nothing but the standard library
 
 Consumers run `python3 scripts/fetch_corpus.py` against a bare checkout with nothing installed,
 often from a sibling repository where this is a submodule. The CI job that proves the manifest still

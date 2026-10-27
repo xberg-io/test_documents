@@ -1,14 +1,17 @@
 ---
 type: Decision
 title: Manifest Byte Stability
+paths:
+  - "corpus.lock.json"
+  - "scripts/publish_corpus.py"
+  - "scripts/corpus_tools/**"
+  - "scripts/tests/test_manifest.py"
 x-ai-rulez:
   kind: rule
   id: manifest-byte-stability
   metadata:
     priority: critical
 ---
-
-## corpus.lock.json's bytes are the contract
 
 `xberg-io/actions/fetch-test-documents` hashes this file to key its object cache. Two lines decide
 its bytes: the `sorted(..., key=lambda o: o.path)` in `build_manifest` and the
