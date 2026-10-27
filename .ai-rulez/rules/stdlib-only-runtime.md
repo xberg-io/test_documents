@@ -16,8 +16,9 @@ often from a sibling repository where this is a submodule. The CI job that prove
 resolves deliberately uses the runner's own `python3` with no setup step and no install — it is the
 executable proof that a consumer with a stock interpreter can materialise this corpus.
 
-- Nothing under `scripts/` outside `scripts/tests/` may import a third-party package.
-- Dev tooling (pytest, ruff, pyrefly) is fine: it is never imported by the tools.
+- Nothing under `scripts/`, tests included, imports a third-party package at module level: the
+  stdlib runner imports every test module. The one exception is the guarded `tomli` fallback for
+  3.10 in `test_lint_scope.py`. Dev tools (pytest, ruff, pyrefly) are invoked, never imported.
 - `import corpus_tools` resolves because CPython puts the `__main__` script's directory on
   `sys.path[0]`. Do not add `__init__.py` to `scripts/`, and do not name a module there after a
   stdlib module — `scripts/` is on the path and would shadow it.
