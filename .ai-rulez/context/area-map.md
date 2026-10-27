@@ -10,7 +10,7 @@ x-ai-rulez:
 
 # Area Map
 
-A fixture corpus, not a codebase, and a git submodule of `xberg`, `xberg-enterprise` and `sceptre`. Every top-level
+A fixture corpus, not a codebase, and a git submodule of several xberg-io repositories. Every top-level
 directory except `scripts/` holds documents whose exact bytes are the assertion. The ~580 MiB of binaries are not in
 git: they live content-addressed at `objects/<sha256>` in the public bucket `gs://xberg-test-documents`, and
 `corpus.lock.json` pins every working-tree path to its sha256 and size. Fetch with
