@@ -12,6 +12,7 @@ compact = true
 # there is no other language in this repo. CI/CD guidance comes from the xberg-cicd include.
 builtins = [
   "!agent-delegation",
+  "!ai-governance/agent-workflow",
   "!git-workflow",
   "!testing/test-alongside-code",
   "!documentation/adr-immutability",
