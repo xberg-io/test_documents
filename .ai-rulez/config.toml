@@ -8,15 +8,15 @@ presets = ["claude", "codex", "opencode"]
 compact = true
 
 # ~keep `documentation` is on because most changes here are provenance prose (LICENSES.md,
-# ATTRIBUTIONS.md, *_PROVENANCE.md) rather than code; there are no ADRs. `python` covers scripts/;
-# there is no other language in this repo. CI/CD guidance comes from the xberg-cicd include.
+# ATTRIBUTIONS.md, *_PROVENANCE.md) rather than code; there are no ADRs. Python conventions for
+# scripts/ are the local `python` rule, not the `python` builtin (which prescribes mypy/pyright).
+# CI/CD guidance comes from the xberg-cicd include.
 builtins = [
   "!agent-delegation",
   "!ai-governance/agent-workflow",
   "!git-workflow",
   "!testing/test-alongside-code",
   "!documentation/adr-immutability",
-  "python",
   "documentation",
   "default-commands",
 ]
@@ -63,9 +63,6 @@ project_doc_max_bytes = 65536
 
 [lock]
 include_outputs = false
-
-[lint]
-allow_overrides = ["python-conventions"]
 
 [rules]
 # ~keep Glob-scoped rules stay out of AGENTS.md: rule files for Claude, path-gated skills for Codex.

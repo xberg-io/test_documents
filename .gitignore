@@ -84,6 +84,7 @@ jats/regression/
 .claude/rules/frozen-entry-points.md
 .claude/rules/logging-tracing.md
 .claude/rules/manifest-byte-stability.md
+.claude/rules/python.md
 .claude/rules/stdlib-only-runtime.md
 .claude/skills/
 .codex/agents/
