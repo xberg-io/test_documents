@@ -17,4 +17,4 @@ messages, PR descriptions, or documentation. Use neutral placeholders throughout
 this repository supplies only the mechanism.
 
 Before committing work that touched the private path, grep for the partner's identifiers and confirm the result is
-empty. Provenance, opaque document ids and sharing by sha256: the shared `partner-corpus-handling` guidance.
+empty. Provenance, opaque document ids and sharing by sha256: the shared `document-corpus-handling` skill.
