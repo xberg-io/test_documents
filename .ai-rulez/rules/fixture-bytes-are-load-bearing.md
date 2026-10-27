@@ -11,7 +11,7 @@ x-ai-rulez:
 Never reformat, "fix" or normalise anything outside `scripts/`: a corpus document's exact bytes are what it
 tests, and the damage is silent (the file still parses, the corpus now disagrees with its ground truth).
 
-- Run formatters scoped (`uv run ruff format scripts`), never a bare `.` with `--fix`.
+- Format with `task format` (scoped to `scripts/`, tripwired), never a bare `.` with `--fix`.
 - A new top-level corpus directory goes into the excludes of **both** `poly.toml` and `pyproject.toml`;
   `scripts/tests/test_lint_scope.py` checks they agree.
-- After any formatting run, `git status --porcelain -- . ':!scripts'` must be empty.
+- When formatting by hand, compare `git status` before and after: nothing outside `scripts/` may change.
