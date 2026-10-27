@@ -23,6 +23,5 @@ files in `xberg` plus its agent skill docs, telling developers what to run when 
   `verify_corpus.py --bucket <name>` (xberg's `test-corpus` skill). Never rename or remove them,
   change how `--include` matches, or change a default. Adding an optional flag is safe.
 - Each entry point keeps its own module docstring, because that docstring *is* its `--help`.
-- Verify with a smoke test from a foreign directory on a bare interpreter:
-  `cd /tmp && python3 <abs>/scripts/<tool>.py --help`. This repo's CI runs only `verify_corpus.py`,
-  so nothing else catches an import that breaks the other nine.
+- `scripts/tests/test_entry_points.py` runs every entry point's `--help` from a temp directory and
+  pins `EXPECTED_ENTRY_POINT_COUNT = 10`; a new entry point updates that constant deliberately.

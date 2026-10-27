@@ -33,7 +33,7 @@ Working rules:
   `sleep`, `AdcCredential`'s `clock` — rather than patching globals. Pass values in; do not mock.
 - A new test must be able to fail. Break the code, watch the test go red, restore it. A test that
   passes against its own mutant is not a test.
-- Smoke-test every entry point from a foreign directory after structural changes:
-  `cd /tmp && python3 <abs>/scripts/<tool>.py --help`. CI runs only one of the ten.
+- `scripts/tests/test_entry_points.py` runs every entry point's `--help` from a temp directory and
+  pins their count; a new entry point updates `EXPECTED_ENTRY_POINT_COUNT`.
 - Record the reason for a magic number next to it. The timeouts in `http.py` are the model: each is
   derived from the largest object its source actually serves.
