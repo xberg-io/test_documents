@@ -32,7 +32,7 @@ one for local runs. Nothing may assume one manifest per bucket.
 
 `--auth` is opt-in; anonymous is the default and must stay that way, because the credential-free
 fetch is exactly what this repo's CI proves. `AdcCredential` shells out to
-`gcloud auth print-access-token` rather than importing `google.auth`, since the package is
+`gcloud auth application-default print-access-token` rather than importing `google.auth`, since the package is
 stdlib-only and workload-identity federation in CI populates ADC the same way a local login does.
 It re-acquires as the token ages: WIF tokens last an hour and cannot be extended, and a large fetch
 on a slow runner can outlive one.
