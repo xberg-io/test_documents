@@ -13,8 +13,9 @@ tasks:
       - task --list
 
   setup:
-    desc: Install the dev environment and generate the AI conventions
+    desc: Install the mise toolchain and the dev environment, and generate the AI conventions
     cmds:
+      - mise install
       - uv sync --group dev
       - ai-rulez generate --no-local --strict-config --gitignore
 
