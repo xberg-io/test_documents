@@ -62,9 +62,10 @@ jobs:
         run: uv run pytest -v
 
       # ~keep The suite is unittest.TestCase on purpose, so the zero-install runner has to keep
-      # working. This is the same guarantee verify-corpus.yaml defends, one level up.
+      # working. This is the same guarantee verify-corpus.yaml defends, one level up. It runs the
+      # runner's own /usr/bin/python3, not the mise leg on PATH: the 3.10 leg has no tomllib.
       - name: Run the same tests with no installs at all
-        run: python3 -m unittest discover -s scripts/tests -t scripts -v
+        run: /usr/bin/python3 -m unittest discover -s scripts/tests -t scripts -v
 
   lint:
     name: ruff
