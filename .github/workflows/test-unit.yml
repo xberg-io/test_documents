@@ -28,13 +28,32 @@ jobs:
         # ~keep Floor and ceiling. 3.10 is the declared requires-python and the version at which
         # PEP 604 unions must evaluate at runtime now that the future import is gone; 3.14 is what
         # maintainers run locally. The bare `python3` the manifest job uses sits between them.
+        # The label stays the minor line so the check names do not change; mise.ci.toml locks each
+        # leg's exact version. ~keep
         python-version: ["3.10", "3.14"]
+        include:
+          - python-version: "3.10"
+            mise-python: "3.10.22"
+          - python-version: "3.14"
+            mise-python: "3.14.10"
+    env:
+      MISE_ENV: ci
+      MISE_PYTHON_VERSION: ${{ matrix.mise-python }}
+      # uv must use the interpreter mise installed, not download its own. ~keep
+      UV_PYTHON_PREFERENCE: only-system
     steps:
       - uses: actions/checkout@v7
 
-      - uses: astral-sh/setup-uv@v10.3.2
+      - uses: xberg-io/actions/setup-mise@v1
         with:
-          python-version: ${{ matrix.python-version }}
+          install-args: python uv
+
+      - name: Cache uv downloads
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/uv
+          key: uv-${{ runner.os }}-${{ matrix.mise-python }}-${{ hashFiles('uv.lock') }}
+          restore-keys: uv-${{ runner.os }}-${{ matrix.mise-python }}-
 
       - name: Install dependencies
         run: uv sync --group dev --locked
@@ -50,10 +69,26 @@ jobs:
   lint:
     name: ruff
     runs-on: ubuntu-latest
+    env:
+      # uv must use the interpreter mise installed, not download its own. ~keep
+      UV_PYTHON_PREFERENCE: only-system
     steps:
       - uses: actions/checkout@v7
 
-      - uses: astral-sh/setup-uv@v10.3.2
+      - uses: xberg-io/actions/setup-mise@v1
+        with:
+          install-args: python uv
+
+      - name: Resolve the mise Python version
+        id: python
+        run: echo "version=$(python3 -c 'import platform; print(platform.python_version())')" >> "$GITHUB_OUTPUT"
+
+      - name: Cache uv downloads
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/uv
+          key: uv-${{ runner.os }}-${{ steps.python.outputs.version }}-${{ hashFiles('uv.lock') }}
+          restore-keys: uv-${{ runner.os }}-${{ steps.python.outputs.version }}-
 
       - name: Install dependencies
         run: uv sync --group dev --locked
@@ -80,4 +115,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: rhysd/actionlint@v1.7.12
+      - uses: xberg-io/actions/setup-mise@v1
+        with:
+          install-args: actionlint
+      - run: actionlint
