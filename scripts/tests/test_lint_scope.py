@@ -210,7 +210,7 @@ class ExcludeListsAgreeTest(unittest.TestCase):
             f"pyproject.toml excludes these from ruff but poly.toml would still format them: {missing}",
         )
 
-    def test_should_leave_only_scripts_unexcluded(self) -> None:
+    def test_should_leave_only_scripts_and_mise_tasks_unexcluded(self) -> None:
         """~keep Derived from git, not os.listdir.
 
         Only ~30 of the 53 top-level directories contain tracked files; the rest hold bucket-managed
@@ -230,8 +230,8 @@ class ExcludeListsAgreeTest(unittest.TestCase):
         }
         self.assertEqual(
             sorted(top_level - corpus_directories_from_poly()),
-            ["scripts"],
-            "a top-level directory holding tracked files is neither scripts/ nor excluded as corpus",
+            ["mise-tasks", "scripts"],
+            "a top-level directory holding tracked files is neither tooling nor excluded as corpus",
         )
 
 
