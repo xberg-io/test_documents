@@ -9,3 +9,60 @@ uv = "0.13.6"
 "github:Goldziher/poly" = "0.31.2"
 "github:Goldziher/ai-rulez" = "5.9.2"
 actionlint = "1.7.12"
+
+# ~keep Every command here is SCOPED. This repo is a fixture corpus: `ruff format .` or
+# `ruff check --fix .` at the root would rewrite Jupyter fixtures under jupyter/ and delete the
+# deliberately unused imports in code/hello.py. pyproject.toml's force-exclude is what actually
+# stops that; these tasks just remove any reason to reach past it. If you add a task that invokes a
+# formatter, give it an explicit scope and never `--fix` a bare dot.
+
+[tasks.default]
+description = "Show available tasks"
+run = "mise tasks ls"
+
+[tasks.setup]
+description = "Install the mise toolchain and the dev environment, and generate the AI conventions"
+run = ["mise install", "uv sync --group dev", "ai-rulez generate --no-local --strict-config --gitignore"]
+
+[tasks."setup:hooks"]
+description = "Install development hooks"
+run = [{ task = "governance:hooks:install" }]
+
+[tasks.lint]
+description = "Run every linter — read-only, writes nothing"
+run = [
+  "uv run ruff check .",
+  "uv run ruff format --check .",
+  # ~keep `poly lint .` below also runs pyrefly in its whole-project phase; this is the fast
+  # standalone form for a tight loop, and `uv run` is what makes it work without a system install.
+  "uv run pyrefly check",
+  "poly lint .",
+  "poly fmt --check .",
+]
+
+[tasks.test]
+description = "Run the unit tests (network-free)"
+run = "uv run pytest -v"
+
+[tasks."test:stdlib"]
+description = "Run the same tests with zero installs, the way a consumer's interpreter would"
+run = "python3 -m unittest discover -s scripts/tests -t scripts -v"
+
+[tasks.verify]
+description = "Prove every object corpus.lock.json pins is still fetchable (network, no credentials)"
+run = [
+  "python3 scripts/verify_corpus.py --bucket xberg-test-documents",
+  "python3 scripts/verify_corpus.py --bucket xberg-test-documents --sample 20",
+]
+
+[tasks.validate]
+description = "Everything CI runs except the bucket check"
+run = [{ task = "lint" }, { task = "test" }, { task = "test:stdlib" }]
+
+[tasks."governance:check"]
+description = "Check materialized local governance outputs against shared sources"
+run = "ai-rulez generate --check --no-local --strict-config"
+
+[tasks."governance:hooks:install"]
+description = "Provision machine preferences and install reviewed AI governance hooks"
+file = "https://raw.githubusercontent.com/xberg-io/toolchains/v1.4.0/tasks/governance/hooks-install.sh"
