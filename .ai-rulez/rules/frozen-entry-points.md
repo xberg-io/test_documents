@@ -18,7 +18,7 @@ files in `xberg` plus its agent skill docs, telling developers what to run when 
 - Never rename or move an entry point. Move implementation into `scripts/corpus_tools/` instead and
   leave a thin `main()` behind.
 - Consumers pass flags, and those are frozen: `fetch_corpus.py --include '<glob>'` (sceptre's
-  `task setup` and `rasterize.py`, xberg's docs; the `fetch-test-documents` action's `include` input
+  `setup` task and `rasterize.py`, xberg's docs; the `fetch-test-documents` action's `include` input
   mirrors its matching), `publish_corpus.py --bucket <name> [--dry-run]` and
   `verify_corpus.py --bucket <name>` (xberg's `test-corpus` skill). Never rename or remove them,
   change how `--include` matches, or change a default. Adding an optional flag is safe.

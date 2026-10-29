@@ -25,8 +25,8 @@ Before changing anything, know which of these your change touches:
 
 Working rules:
 
-- Never run a formatter unscoped: `task format`, never a bare `.` with `--fix`. When formatting by
-  hand, compare `git status` before and after: nothing outside `scripts/` may change.
+- Never run a formatter unscoped: `mise run format`, never a bare `.` with `--fix`. When formatting
+  by hand, compare `git status` before and after: nothing outside `scripts/` may change.
 - Keep both test runners green: `uv run pytest` and
   `python3 -m unittest discover -s scripts/tests -t scripts`.
 - The suite is network-free. Use the injected seams — the curl transport's `runner`, `get()`'s

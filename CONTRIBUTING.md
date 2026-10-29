@@ -8,11 +8,11 @@ Please begin by reading our AI section below, followed by the getting started gu
 
 ## Getting Started
 
-Make sure to have [Git](https://git-scm.com/), [uv](https://docs.astral.sh/uv/) and
-[Task](https://taskfile.dev/) installed, then:
+Make sure to have [Git](https://git-scm.com/) and [mise](https://mise.jdx.dev/) installed (mise installs
+uv and the rest of the toolchain), then:
 
 ```bash
-task setup                          # dev environment and AI conventions
+mise run setup                      # dev environment and AI conventions
 python3 scripts/fetch_corpus.py     # the corpus binaries, ~580 MiB from the public bucket
 ```
 
@@ -62,12 +62,11 @@ plugin settings live separately in `config.plugins.toml`.
 ```sh
 ai-rulez validate --no-local
 ai-rulez generate --no-local --strict-config
-task governance:check
+mise run governance:check
 ```
 
 The final command checks the materialized local governance files, including ignored harness
-outputs. Run `task governance:hooks:install` to install the repository's reviewed Poly hooks.
-Installing governance hooks requires Python 3.11 or newer.
+outputs. Run `mise run governance:hooks:install` to install the repository's reviewed Poly hooks.
 The hooks validate staged sources and verify shipped plugin artifacts where present; CI also
 validates the authored content. Shared convention modules come from `xberg-io/agent-conventions`;
 Git credentials are needed when an included repository requires access.

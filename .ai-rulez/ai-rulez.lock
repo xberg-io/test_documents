@@ -4,7 +4,7 @@
 version = 1
 ai_rulez_version = '5.9.2'
 scope = 'all'
-tree = 'sha256:e822884e423e900c301e528271f78246710d9957b9e11c9ab1094a045d33848d'
+tree = 'sha256:e942abcbbcafe64a06ae72baa0a4d8e8aebf9a73442bfca5ccce9c9322058c73'
 
 [[include]]
 name = 'xberg-cicd'
@@ -151,12 +151,6 @@ commit = ''
 digest = 'sha256:7ab2b543dc6608f204c957fedfc55ae902d22fda9dc8a52252330ff9b1406ff1'
 
 [[served]]
-name = 'task-runner'
-source = 'builtin://universal/token-efficiency/skills/task-runner/SKILL.md'
-commit = ''
-digest = 'sha256:c57056e3a74a261b3a9d47638726c7d1f64c76b255838b6aaa3e635f3ffa8618'
-
-[[served]]
 name = 'taskfile-structure'
 source = 'include:xberg-core/skills/taskfile-structure/SKILL.md'
 commit = '157c7fc83b88b48395de6351f8ac63e4cdb50348'
@@ -190,25 +184,25 @@ digest = 'sha256:4c91521ac0516928a845dc524b8793f6d70623955dc2b61c544e822aaf81b4f
 kind = 'agent'
 id = 'corpus-tooling-engineer'
 path = 'agents/corpus-tooling-engineer.md'
-digest = 'sha256:0aaf18e8075ae2797fabe54314ca00e3f8d859d5ae2ccd2e2a83868b0aa4f8ca'
+digest = 'sha256:9a71c952a88abb229cfd36a1bdb0634ce6f0caa91668415f203ed63dc2f3fe55'
 
 [[item]]
 kind = 'context'
 id = 'area-map'
 path = 'context/area-map.md'
-digest = 'sha256:dc7325f68c0931a4c93aa1be7a42d424e37b967a916d594dcc9c731a8c985ed7'
+digest = 'sha256:fbbbcebc82b6c50773e817585823872e810a339e9646cfe4255f11197b251816'
 
 [[item]]
 kind = 'rule'
 id = 'fixture-bytes-are-load-bearing'
 path = 'rules/fixture-bytes-are-load-bearing.md'
-digest = 'sha256:87d4c1bdcc19e42d98531d3c1ad5ebe98b2cd0f2714ad67a4cce3c1de5e9b435'
+digest = 'sha256:885eceb84d417fe833b1be377ff509488645274dbb108aaa3515b34c654ee168'
 
 [[item]]
 kind = 'rule'
 id = 'frozen-entry-points'
 path = 'rules/frozen-entry-points.md'
-digest = 'sha256:0f91d5421a3094ad97775a3026a70998a18f7a6a7f4789d4f1cb27e5c1483f99'
+digest = 'sha256:99944eff95f7866952807bc63c2df932081b433ead4509a5f19500ab62fc891c'
 
 [[item]]
 kind = 'rule'
