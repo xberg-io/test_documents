@@ -27,4 +27,4 @@ jobs:
       # ~keep Pinned. Left empty this resolves "latest" through the GitHub API on every run, and one
       # rate-limited request kills the job before it lints anything. It also stops a poly release
       # changing what this gate enforces without a commit here.
-      poly-version: "v0.31.0"
+      poly-version: "v0.31.2"
