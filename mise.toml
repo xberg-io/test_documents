@@ -24,10 +24,6 @@ run = "mise tasks ls"
 description = "Install the mise toolchain and the dev environment, and generate the AI conventions"
 run = ["mise install", "uv sync --group dev", "ai-rulez generate --no-local --strict-config --gitignore"]
 
-[tasks."setup:hooks"]
-description = "Install development hooks"
-run = [{ task = "governance:hooks:install" }]
-
 [tasks.lint]
 description = "Run every linter — read-only, writes nothing"
 run = [
