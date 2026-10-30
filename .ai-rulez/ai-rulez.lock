@@ -4,7 +4,7 @@
 version = 1
 ai_rulez_version = '5.9.2'
 scope = 'all'
-tree = 'sha256:6a9489cc79e4c9ea7c77e0c42bf361c6009a89d6236092f776cfba177afd9400'
+tree = 'sha256:2e602c0a92a4c113a929077f2e57c512639e835f6b1c2d74a360cb6203204d94'
 
 [[include]]
 name = 'xberg-cicd'
@@ -196,7 +196,7 @@ digest = 'sha256:9a71c952a88abb229cfd36a1bdb0634ce6f0caa91668415f203ed63dc2f3fe5
 kind = 'context'
 id = 'area-map'
 path = 'context/area-map.md'
-digest = 'sha256:fbbbcebc82b6c50773e817585823872e810a339e9646cfe4255f11197b251816'
+digest = 'sha256:f89bf94396b9d60a1240d6436146252a2081a9a484887745be552a08190ea55e'
 
 [[item]]
 kind = 'rule'

@@ -20,9 +20,9 @@ git: they live content-addressed at `objects/<sha256>` in the public bucket `gs:
 - `scripts/` — the stdlib-only fetch/publish/verify tools (`corpus-tooling` skill; private corpora: `private-corpus`)
 - `*.md` at the root — licensing, attribution and provenance records
 
-Tasks: `mise run validate` (everything CI runs except the bucket check), `mise run format` (`scripts/` only;
-fails on any unstaged change outside `scripts/`, `.ai-rulez/` and the lint config), `mise run verify` (bucket
-check, network).
+Tasks: `mise run check` (everything CI runs except the bucket check), `mise run format` (`scripts/` only;
+fails on any unstaged change outside `scripts/`, `.ai-rulez/` and the lint config). The bucket check is
+`python3 scripts/verify_corpus.py --bucket xberg-test-documents` (network), as verify-corpus.yaml runs it.
 
 CI cannot publish: publishing is a local maintainer action that commits a refreshed `corpus.lock.json`. CI proves every
 pinned object is still fetchable anonymously. Consumer CI fetches through `xberg-io/actions/fetch-test-documents@v1`,

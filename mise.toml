@@ -44,14 +44,7 @@ run = "uv run pytest -v"
 description = "Run the same tests with zero installs, the way a consumer's interpreter would"
 run = "python3 -m unittest discover -s scripts/tests -t scripts -v"
 
-[tasks.verify]
-description = "Prove every object corpus.lock.json pins is still fetchable (network, no credentials)"
-run = [
-  "python3 scripts/verify_corpus.py --bucket xberg-test-documents",
-  "python3 scripts/verify_corpus.py --bucket xberg-test-documents --sample 20",
-]
-
-[tasks.validate]
+[tasks.check]
 description = "Everything CI runs except the bucket check"
 run = [{ task = "lint" }, { task = "test" }, { task = "test:stdlib" }]
 
