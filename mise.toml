@@ -7,7 +7,6 @@ lockfile_platforms = ["linux-x64", "linux-arm64", "macos-arm64", "windows-x64"]
 python = "3.13.18"
 uv = "0.13.6"
 "github:Goldziher/poly" = "0.31.2"
-"github:Goldziher/ai-rulez" = "5.9.3"
 actionlint = "1.7.12"
 
 # ~keep Every command here is SCOPED. This repo is a fixture corpus: `ruff format .` or
@@ -22,7 +21,8 @@ run = "mise tasks ls"
 
 [tasks.setup]
 description = "Install the mise toolchain and the dev environment, and generate the AI conventions"
-run = ["mise install", "uv sync --group dev", "ai-rulez generate --no-local --strict-config --gitignore"]
+tools = { node = "26.12.1" }
+run = ["mise install", "uv sync --group dev", "npx -y ai-rulez@latest generate --no-local --strict-config --gitignore"]
 
 [tasks.lint]
 description = "Run every linter — read-only, writes nothing"
