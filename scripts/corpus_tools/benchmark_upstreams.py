@@ -25,6 +25,11 @@ SOURCES: dict[str, dict[str, object]] = {
         "jsonl_count": 1,
         "groups": {"table": {"pdf_count": 503, "test_rows": 503}},
         "annotations_license": "Apache-2.0",
+        "annotations_license_url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "attribution": (
+            "Boyang Zhang, Sebastián G. Acosta, Preston Carlson, Sacha Bron, Pierre-Loïc Doulcet, "
+            "Daniel B. Ospina, and Simon Suo / ParseBench"
+        ),
         "database_license": "not separately specified",
         "content_rights": CONTENT_RIGHTS,
         "redistribution": "reference-only",
@@ -45,6 +50,8 @@ SOURCES: dict[str, dict[str, object]] = {
         },
         "annotations_license": "not separately specified",
         "database_license": "ODC-BY-1.0",
+        "database_license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "attribution": "Allen Institute for AI / olmOCR-bench",
         "content_rights": CONTENT_RIGHTS,
         "redistribution": "reference-only",
     },
