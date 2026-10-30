@@ -4,36 +4,36 @@
 version = 1
 ai_rulez_version = '5.9.2'
 scope = 'all'
-tree = 'sha256:2e602c0a92a4c113a929077f2e57c512639e835f6b1c2d74a360cb6203204d94'
+tree = 'sha256:e7f37826aa935a17f6758b20722d0917fce91ac719a18e2311399e13f1434950'
 
 [[include]]
 name = 'xberg-cicd'
 source = 'https://github.com/xberg-io/agent-conventions.git'
 path = 'modules/cicd'
 ref = '^1'
-tag = 'v1.2.1'
-tag_object = 'a457a8f6e6e7e10260ba248ea7c6aeca8b5268a9'
-commit = '56651c7e8ade090a5cd2693d04ef3a0168a6903a'
-digest = 'sha256:38d54dc260b5da71bc0887d877dcc1f41de4a0b688cf805491458abdf7b01ffb'
+tag = 'v1.3.1'
+tag_object = 'ddf05f44d55b752f763795e843ecf0c6e7e08394'
+commit = 'a8ed32b44b161605dbc8b934a417ff136178a980'
+digest = 'sha256:781d7485b00c32c03a25470981d0e09d36d02973618ae073236865ba1269447a'
 
 [[include]]
 name = 'xberg-core'
 source = 'https://github.com/xberg-io/agent-conventions.git'
 path = 'modules/core'
 ref = '^1'
-tag = 'v1.2.1'
-tag_object = 'a457a8f6e6e7e10260ba248ea7c6aeca8b5268a9'
-commit = '56651c7e8ade090a5cd2693d04ef3a0168a6903a'
-digest = 'sha256:57bf3dd641c4a11ff6b702cbba60bba1083df643a517d567c1970bcb69004f99'
+tag = 'v1.3.1'
+tag_object = 'ddf05f44d55b752f763795e843ecf0c6e7e08394'
+commit = 'a8ed32b44b161605dbc8b934a417ff136178a980'
+digest = 'sha256:e812c49d68cfcb08b24a483d051947b27c9e111529a5e54e7a46051f3c1b0f9e'
 
 [[include]]
 name = 'xberg-document-corpora'
 source = 'https://github.com/xberg-io/agent-conventions.git'
 path = 'modules/document-corpora'
 ref = '^1'
-tag = 'v1.2.1'
-tag_object = 'a457a8f6e6e7e10260ba248ea7c6aeca8b5268a9'
-commit = '56651c7e8ade090a5cd2693d04ef3a0168a6903a'
+tag = 'v1.3.1'
+tag_object = 'ddf05f44d55b752f763795e843ecf0c6e7e08394'
+commit = 'a8ed32b44b161605dbc8b934a417ff136178a980'
 digest = 'sha256:752a7df4d60db37ecc961235764561504f4a0c72aeacef2a39e9ff239c6e2cf7'
 
 [[served]]
