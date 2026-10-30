@@ -34,6 +34,12 @@ Datasets are handled by license class:
   used only for **non-commercial benchmarking** of this open-source library and are **never
   redistributed** here. Their manifest entries carry the source URL + license for provenance.
 
+The isolated benchmark acquisition index also uses **reference-only** for files whose individual
+content rights are unreviewed. A dataset or database license is not treated as a grant over every
+included PDF. The acquisition tool writes original PDFs and raw annotations only to an external
+cache, never to this repository or its public bucket; local use remains subject to the applicable
+upstream terms. See `BENCHMARK_UPSTREAMS.md`.
+
 This keeps the public MIT repo free of content it cannot redistribute, while still letting the
 non-commercial benchmark use non-commercial data.
 
@@ -42,7 +48,8 @@ non-commercial benchmark use non-commercial data.
 | dataset | license | policy |
 |---|---|---|
 | [lazyc/READoc](https://huggingface.co/datasets/lazyc/READoc) | MIT | per-doc |
-| [llamaindex/ParseBench](https://huggingface.co/datasets/llamaindex/ParseBench) | Apache-2.0 | reference |
+| [llamaindex/ParseBench](https://huggingface.co/datasets/llamaindex/ParseBench) | Apache-2.0 annotations; individual PDF rights unreviewed | reference |
+| [allenai/olmOCR-bench](https://huggingface.co/datasets/allenai/olmOCR-bench) | ODC-BY-1.0 database; individual content rights unreviewed | reference |
 | [bsmock/FinTabNet.c](https://huggingface.co/datasets/bsmock/FinTabNet.c) | CDLA-Permissive-2.0 | vendor |
 | [federalregister.gov](https://www.federalregister.gov) | US-PD (17 U.S.C. §105) | vendor |
 | [apache/tika](https://github.com/apache/tika) (WordPerfect) | Apache-2.0 | vendor |

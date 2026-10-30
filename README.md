@@ -42,6 +42,14 @@ Anything else can read `corpus.lock.json` and fetch over plain HTTPS directly:
 https://storage.googleapis.com/xberg-test-documents/objects/<sha256>
 ```
 
+### Reference-only upstream benchmarks
+
+The full ParseBench table set and five olmOCR-bench groups have a separate, pinned acquisition
+index. Their PDFs and raw annotations stay outside Git and outside the public bucket. Fetch or
+verify them with `scripts/fetch_benchmark_upstreams.py`; see
+[BENCHMARK_UPSTREAMS.md](BENCHMARK_UPSTREAMS.md) for revisions, counts, rights, and cache layout.
+This index does not change the curated corpus or `corpus.lock.json`.
+
 ### Why a bucket and not Git LFS
 
 The corpus moved off Git LFS. LFS bills bandwidth per clone and makes every consumer authenticate
@@ -110,7 +118,7 @@ Never `git add` a corpus binary. `publish_corpus.py` refuses to run if one was c
 | `email/`, `epub/`, `fictionbook/`, `iwork/`, `jupyter/`, `opml/`, `archives/`, `audio/` | everything else |
 | `vendored/` | third-party corpora kept verbatim with their own provenance |
 | `ground_truth/` | expected output, one subdirectory per source extension |
-| `scripts/` | the corpus tooling: ten entry points over `corpus_tools/`, with `data/` and `tests/` beside them |
+| `scripts/` | the corpus tooling: eleven entry points over `corpus_tools/`, with `data/` and `tests/` beside them |
 
 ## Serving another corpus
 

@@ -20,6 +20,20 @@ by its license. Per-document provenance (upstream id, source revision, license) 
 - **Used here:** 304 accepted documents (reference).
 - **Modifications:** ground truth normalized to canonical GFM (see README → How the data was modified). Derived GT is a derivative work under the upstream license.
 
+The separate `scripts/data/benchmark-upstreams.json` also pins all 503 table PDFs and the
+original table JSONL at revision `2805a1d940f95a203e0ae4b88be9934f7765b3fc`. It contains metadata
+only. Apache-2.0 applies to the annotations; individual third-party PDF rights remain unreviewed
+and reference-only. These acquisition pins do not change the 304-document curated subset.
+
+## allenai/olmOCR-bench — reference-only acquisition
+
+- **Citation:** olmOCR: Unlocking Trillions of Tokens in PDFs with Vision Language Models (arXiv:2502.18443).
+- **Source:** <https://huggingface.co/datasets/allenai/olmOCR-bench/tree/54a96a6fb6a2bd3b297e59869491db4d3625b711>.
+- **Database license:** ODC-BY-1.0, separately from the copyright of individual PDFs or annotations.
+- **Used here:** metadata pins for 984 PDFs and five original JSONL files; no source or ground-truth contents are redistributed.
+- **Modifications:** none to acquired bytes. This subset has 5,113 raw tests, including seven explicit baseline rows. See `BENCHMARK_UPSTREAMS.md`.
+- **Content rights:** reference/unreviewed. Source categories include arXiv, Internet Archive, Library of Congress, and an internal repository; these labels are not per-file redistribution grants.
+
 ## bsmock/FinTabNet.c
 
 - **Citation:** Smock et al., "Aligning benchmark datasets for table structure recognition", ICDAR 2023 (arXiv:2303.00716)

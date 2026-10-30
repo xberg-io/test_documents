@@ -24,7 +24,7 @@ from corpus_tools import paths
 
 ENTRY_POINTS = sorted(path.name for path in paths.SCRIPTS_DIR.glob("*.py") if path.name != "conftest.py")
 
-EXPECTED_ENTRY_POINT_COUNT = 10
+EXPECTED_ENTRY_POINT_COUNT = 11
 
 
 class EntryPointTest(unittest.TestCase):
