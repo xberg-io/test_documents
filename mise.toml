@@ -27,14 +27,22 @@ run = ["mise install", "uv sync --group dev", "npx -y ai-rulez@latest generate -
 [tasks.lint]
 description = "Run every linter — read-only, writes nothing"
 run = [
-  "uv run ruff check .",
-  "uv run ruff format --check .",
+  { task = "python:lint" },
+  { task = "python:format:check" },
   # ~keep `poly lint .` below also runs pyrefly in its whole-project phase; this is the fast
   # standalone form for a tight loop, and `uv run` is what makes it work without a system install.
   "uv run pyrefly check",
   "poly lint .",
   "poly fmt --check .",
 ]
+
+[tasks."python:lint"]
+description = "Lint Python with ruff, read-only"
+run = "uv run ruff check ."
+
+[tasks."python:format:check"]
+description = "Check Python formatting with ruff, read-only"
+run = "uv run ruff format --check ."
 
 [tasks.test]
 description = "Run the unit tests (network-free)"

@@ -275,8 +275,9 @@ class RuffConfigsAgreeTest(unittest.TestCase):
 
         `banned-api` is a ruff *setting*, not a rule code, and poly's [lint.python.ruff] has no key
         for it — an added `flake8_tidy_imports_banned_api` is accepted without complaint and has no
-        effect. So the ban is enforced by the `uv run ruff check .` step in test-unit.yml and not by
-        `poly lint`. This test exists so that asymmetry is written down rather than rediscovered.
+        effect. So the ban is enforced by the `mise run python:lint` step (`uv run ruff check .`)
+        in test-unit.yml and not by `poly lint`. This test exists so that asymmetry is written down
+        rather than rediscovered.
         """
         banned = self._pyproject_ruff()["flake8-tidy-imports"]["banned-api"]
 

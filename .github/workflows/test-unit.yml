@@ -59,7 +59,7 @@ jobs:
         run: uv sync --group dev --locked
 
       - name: Run tests
-        run: uv run pytest -v
+        run: mise run test
 
       # ~keep The suite is unittest.TestCase on purpose, so the zero-install runner has to keep
       # working. This is the same guarantee verify-corpus.yaml defends, one level up. It runs the
@@ -95,10 +95,10 @@ jobs:
         run: uv sync --group dev --locked
 
       - name: Ruff check
-        run: uv run ruff check .
+        run: mise run python:lint
 
       - name: Ruff format check
-        run: uv run ruff format --check .
+        run: mise run python:format:check
 
       # ~keep Type-checking is not here. The polyrepo type-checks with pyrefly, which poly runs in
       # its whole-project phase — so `poly lint .` in validate.yml covers it, and that workflow
