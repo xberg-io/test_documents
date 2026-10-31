@@ -35,13 +35,8 @@ permissions:
   contents: read
 jobs:
   validate:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: xberg-io/actions/setup-ai-rulez@v1
-      - uses: xberg-io/actions/validate-ai-rulez@v1
-      - uses: xberg-io/agent-conventions/actions/context-exposure@v1
-        with:
-          budgets: |
-            claude=6150
-            codex=6700
+    uses: xberg-io/actions/.github/workflows/reusable-ai-rulez-validation.yml@v1
+    with:
+      budgets: |
+        claude=6150
+        codex=6700
