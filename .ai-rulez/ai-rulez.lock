@@ -2,9 +2,9 @@
 # Refresh it with `ai-rulez lock`; `ai-rulez generate --locked` fails when it is stale.
 
 version = 1
-ai_rulez_version = '5.9.8'
+ai_rulez_version = '5.10.0'
 scope = 'all'
-tree = 'sha256:0fbbc835919d5775983de006a8a607caf7dfbc38fb67ca667978ef1e0fee9635'
+tree = 'sha256:d7012bb0bf4148da0deed3897e16417c0fb81e65a5cead6dbc1e62596b930f64'
 
 [[include]]
 name = 'xberg-cicd'
@@ -232,13 +232,13 @@ digest = 'sha256:caa5b4454f7ccd8b23b71d8c5c5f12fed5bd93951cfd3127e9499092f05d3ed
 kind = 'rule'
 id = 'python'
 path = 'rules/python.md'
-digest = 'sha256:e49f9bc12cda386301c5bf76d90b1692c9988cb5b7f1403d199f2ff67f774bac'
+digest = 'sha256:5e1654ac5571bc295a687d937fcc94e63dd916d5f4d9f47adbda33c7e4be3360'
 
 [[item]]
 kind = 'rule'
 id = 'stdlib-only-runtime'
 path = 'rules/stdlib-only-runtime.md'
-digest = 'sha256:1d63a10f2684941cd38d70e9366a745e555f279f11c8f35ad249468df5ceaae0'
+digest = 'sha256:500b459492fd551fefe4aa1b2cc2ed79d41a93c3deb755c9b0f2d00d9f2616e9'
 
 [[item]]
 kind = 'skill'

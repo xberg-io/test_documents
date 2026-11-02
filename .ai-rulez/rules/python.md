@@ -11,7 +11,7 @@ x-ai-rulez:
     priority: high
 ---
 
-- Python 3.10+, type hints on public APIs, no `Any` where a precise type, generic or `Protocol` fits.
+- Python 3.11+, type hints on public APIs, no `Any` where a precise type, generic or `Protocol` fits.
 - Ruff for lint and format; Pyrefly (`pyrefly check`) is the only type checker. Do not add mypy, pyright or their config.
 - Tests are `unittest.TestCase` classes under `scripts/tests/`, run by `uv run pytest` and the zero-install
   `python3 -m unittest discover -s scripts/tests -t scripts`; never convert them to function-based tests.

@@ -32,7 +32,7 @@ ParseBench authors, with source links above. See [ATTRIBUTIONS.md](ATTRIBUTIONS.
 
 ## Acquisition
 
-Python 3.10+ and the standard library suffice. All URLs contain the immutable dataset revision;
+Python 3.11+ and the standard library suffice. All URLs contain the immutable dataset revision;
 the existing corpus HTTP transport, retries, hashing, safe relative paths, and materialization
 helpers are reused. Existing correct files are verified and skipped without network access.
 Mismatched upstream bytes never replace a local file; the existing `.mismatch` evidence behavior

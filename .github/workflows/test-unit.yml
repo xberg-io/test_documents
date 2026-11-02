@@ -25,15 +25,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # ~keep Floor and ceiling. 3.10 is the declared requires-python and the version at which
+        # ~keep Floor and ceiling. 3.11 is the declared requires-python and the version at which
         # PEP 604 unions must evaluate at runtime now that the future import is gone; 3.14 is what
         # maintainers run locally. The bare `python3` the manifest job uses sits between them.
         # The label stays the minor line so the check names do not change; mise.ci.toml locks each
         # leg's exact version. ~keep
-        python-version: ["3.10", "3.14"]
+        python-version: ["3.11", "3.14"]
         include:
-          - python-version: "3.10"
-            mise-python: "3.10.22"
+          - python-version: "3.11"
+            mise-python: "3.11.18"
           - python-version: "3.14"
             mise-python: "3.14.10"
     env:
@@ -63,7 +63,7 @@ jobs:
 
       # ~keep The suite is unittest.TestCase on purpose, so the zero-install runner has to keep
       # working. This is the same guarantee verify-corpus.yaml defends, one level up. It runs the
-      # runner's own /usr/bin/python3, not the mise leg on PATH: the 3.10 leg has no tomllib.
+      # runner's own /usr/bin/python3, not the mise leg on PATH.
       - name: Run the same tests with no installs at all
         run: /usr/bin/python3 -m unittest discover -s scripts/tests -t scripts -v
 

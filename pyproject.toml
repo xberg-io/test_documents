@@ -14,7 +14,7 @@ description = "Dev-tooling configuration for the xberg test document corpus. Not
 # ~keep 3.10 is the exact floor, not a round number. Nothing in scripts/ uses a 3.11+ feature, and
 # once `from __future__ import annotations` is gone, `def main(argv: list[str] | None = None)`
 # evaluates a PEP 604 union at runtime — which is 3.10. `dict[str, int]` alone would allow 3.9.
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 
 [dependency-groups]
 # ~keep tomli is only for 3.10, where tomllib is not yet stdlib. scripts/tests/test_lint_scope.py
@@ -31,7 +31,7 @@ package = false
 # ruff
 # ─────────────────────────────────────────────────────────────────────────────
 [tool.ruff]
-target-version = "py310"
+target-version = "py311"
 line-length = 120
 
 # ~keep THREE INDEPENDENT LAYERS, all required. Verified against ruff 0.14 on this tree:
@@ -160,10 +160,10 @@ lint.ignore = [
 
 # ~keep This is what enforces issue #11's "no `from __future__ import annotations`" convention.
 # FA100/FA102 are the OPPOSITE rule — they demand the import — so they must stay off; they are
-# already quiet under target-version = "py310". Verified: this reports exactly one hit per file
+# already quiet under target-version = "py311". Verified: this reports exactly one hit per file
 # that carries the import, with no false positives. TID251 has no autofix, which is correct —
 # removing the import can change semantics in a file with a genuine forward reference.
-lint.flake8-tidy-imports.banned-api."__future__.annotations".msg = "Unnecessary: the tooling targets Python 3.10+, where PEP 604 unions and PEP 585 generics evaluate natively. See issue #11."
+lint.flake8-tidy-imports.banned-api."__future__.annotations".msg = "Unnecessary: the tooling targets Python 3.11+, where PEP 604 unions and PEP 585 generics evaluate natively. See issue #11."
 
 # ~keep D101/D102/D103 are off for the tooling, matching the xberg-io/actions template. Every
 # module, and every function whose behaviour is not obvious from its name, carries a docstring or a
@@ -296,4 +296,4 @@ norecursedirs = [
 project-includes = ["scripts"]
 project-excludes = ["scripts/tests/**", "**/__pycache__/**"]
 search-path = ["scripts"]
-python-version = "3.10"
+python-version = "3.11"

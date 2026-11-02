@@ -22,4 +22,4 @@ executable proof that a consumer with a stock interpreter can materialise this c
 - `import corpus_tools` resolves because CPython puts the `__main__` script's directory on
   `sys.path[0]`. Do not add `__init__.py` to `scripts/`, and do not name a module there after a
   stdlib module — `scripts/` is on the path and would shadow it.
-- The floor is Python 3.10, declared in `pyproject.toml` and exercised in CI.
+- The floor is Python 3.11, declared in `pyproject.toml` and exercised in CI.
