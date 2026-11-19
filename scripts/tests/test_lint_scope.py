@@ -238,14 +238,14 @@ class ExcludeListsAgreeTest(unittest.TestCase):
 class RuffConfigsAgreeTest(unittest.TestCase):
     """poly runs ruff with its own config, so the two must be kept in step by hand.
 
-    ~keep Verified rather than assumed: before poly.toml carried a [lint.python.ruff] block, a file
+    ~keep Verified rather than assumed: before poly.toml carried a ruff lint block, a file
     containing `from __future__ import annotations` was clean to `poly lint` and a TID251 error to
     `uv run ruff check`. Nothing surfaced that disagreement, and the repo's own commit hook and its
     CI gate were enforcing different rules.
     """
 
     def _poly_ruff(self) -> dict:
-        return tomllib.loads(POLY_TOML.read_text(encoding="utf-8"))["lint"]["python"]["ruff"]
+        return tomllib.loads(POLY_TOML.read_text(encoding="utf-8"))["engines"]["ruff"]["lint"]
 
     def _pyproject_ruff(self) -> dict:
         return tomllib.loads(PYPROJECT.read_text(encoding="utf-8"))["tool"]["ruff"]["lint"]
@@ -257,7 +257,7 @@ class RuffConfigsAgreeTest(unittest.TestCase):
         self.assertEqual(sorted(self._poly_ruff()["ignore"]), sorted(self._pyproject_ruff()["ignore"]))
 
     def test_should_apply_the_same_per_file_ignores_in_both_configs(self) -> None:
-        poly_per_file = tomllib.loads(POLY_TOML.read_text(encoding="utf-8"))["per-file-ignores"]
+        poly_per_file = tomllib.loads(POLY_TOML.read_text(encoding="utf-8"))["per_file_ignores"]
         for pattern, codes in self._pyproject_ruff()["per-file-ignores"].items():
             with self.subTest(pattern=pattern):
                 self.assertIn(pattern, poly_per_file)
@@ -273,7 +273,7 @@ class RuffConfigsAgreeTest(unittest.TestCase):
     def test_should_record_that_the_future_import_ban_lives_only_in_pyproject(self) -> None:
         """~keep poly cannot express it, and silently ignores the key if you try.
 
-        `banned-api` is a ruff *setting*, not a rule code, and poly's [lint.python.ruff] has no key
+        `banned-api` is a ruff *setting*, not a rule code, and poly's [engines.ruff.lint] has no key
         for it — an added `flake8_tidy_imports_banned_api` is accepted without complaint and has no
         effect. So the ban is enforced by the `mise run python:lint` step (`uv run ruff check .`)
         in test-unit.yml and not by `poly lint`. This test exists so that asymmetry is written down

@@ -1,3 +1,4 @@
+required_version = ">=0.36.0"
 # ~keep Every exclude below is ANCHORED with a leading slash. An unanchored glob matches a
 # directory of that name at ANY depth, so a bare `diagrams/**` also hid scripts/corpus_tools/diagrams
 # and poly silently stopped linting it. `poly doctor` reports this; it is worth running after adding
@@ -72,16 +73,7 @@ exclude = [
   "/.ai-rulez/.generated-manifest.json",
 ]
 
-# ~keep Matches the polyrepo root's list. .ai-rulez/ authors agents and rules as front-matter plus
-# prose, so MD041 (first line must be an H1) is wrong for them by construction.
-[lint.markdown.rumdl]
-disable = ["MD012", "MD013", "MD024", "MD033", "MD036", "MD041", "MD046", "MD051", "MD076"]
-
-# ~keep MD025 off for fmt only, as in xberg and sceptre: a skill's front-matter title counts as an H1, and
-# rumdl's autofix then demotes every heading in the body.
-[fmt.markdown.rumdl]
-disable = ["MD012", "MD013", "MD024", "MD033", "MD036", "MD041", "MD046", "MD051", "MD076", "MD025"]
-
+[engines.ruff.lint]
 # ~keep poly does NOT read pyproject.toml's [tool.ruff]; it runs ruff with the config below.
 # Verified: a file with `from __future__ import annotations` is clean to `poly lint` and a TID251
 # error to `uv run ruff check`. So the two must be kept in step, and
@@ -91,7 +83,6 @@ disable = ["MD012", "MD013", "MD024", "MD033", "MD036", "MD041", "MD046", "MD051
 # because that is what constrains a HUMAN running `ruff format .` or an editor-on-save — neither of
 # which reads poly.toml. Its force-exclude is the corpus protection; the [discovery] exclude above
 # is the same protection for poly's own runs. Two tools, two configs, one corpus.
-[lint.python.ruff]
 pydocstyle_convention = "google"
 mccabe_max_complexity = 15
 pylint_max_args = 10
@@ -124,6 +115,20 @@ ignore = [
   "TRY",
 ]
 
+[engines.rumdl.lang.markdown.lint]
+# ~keep Matches the polyrepo root's list. .ai-rulez/ authors agents and rules as front-matter plus
+# prose, so MD041 (first line must be an H1) is wrong for them by construction.
+disable = ["MD012", "MD013", "MD024", "MD033", "MD036", "MD041", "MD046", "MD051", "MD076"]
+
+[engines.rumdl.lang.markdown.format]
+# ~keep MD025 off for fmt only, as in xberg and sceptre: a skill's front-matter title counts as an H1, and
+# rumdl's autofix then demotes every heading in the body.
+disable = ["MD012", "MD013", "MD024", "MD033", "MD036", "MD041", "MD046", "MD051", "MD076", "MD025"]
+
+[engines.typos]
+# typos is opt-in in poly v2; this keeps the v1 default (on).
+enabled = true
+
 # ~keep The polyrepo type-checks with pyrefly, run through poly rather than installed as a dev
 # dependency — it is a system tool like poly itself. Scoped to the tooling and away from the tests
 # for the reason given beside [tool.pyrefly] in pyproject.toml.
@@ -134,11 +139,21 @@ exclude = ["scripts/tests/**"]
 workspace = true
 cache = { inputs = ["scripts/**/*.py", "pyproject.toml"] }
 
-[per-file-ignores]
+[per_file_ignores]
 "LICENSES.md" = ["MD075"]
+# ~keep A provenance table of third-party titles, authors and page ranges, not prose: harper misreads
+# the quoted titles and ranges.
+"REGRESSION_PAGES_PROVENANCE.md" = [
+  "DisjointPrefixes",
+  "FillerWords",
+  "MissingDeterminer",
+  "NumericRangeEnDash",
+  "SentenceCapitalization",
+  "WrongNegative",
+]
 
 # ~keep Mirrors [tool.ruff.lint.per-file-ignores] in pyproject.toml, for the reason recorded
-# beside [lint.python.ruff] above: poly does not read that file.
+# beside [engines.ruff.lint] above: poly does not read that file.
 "scripts/*.py" = ["D101", "D102", "D103", "EXE001", "INP001", "PLW1510", "S607", "T201"]
 "scripts/corpus_tools/**" = ["D101", "D102", "D103", "PLC0415", "PLW1510", "S607", "SIM105", "T201"]
 "scripts/tests/**" = ["ANN", "ARG002", "D", "INP001", "PLC2701", "PLR2004", "PT009", "PT027", "S", "SLF001"]
@@ -149,3 +164,18 @@ id = "ai-rulez"
 git = "https://github.com/Goldziher/ai-rulez.git"
 revision = "v5"
 hooks = ["ai-rulez-validate"]
+
+[engines.harper]
+enabled = true
+# Off: rules that contradict the org's sentence-case headings and no-Oxford-comma style, or misread technical prose
+# (denylist, MB, stdin). ~keep
+ignore = [
+  "UseTitleCase",
+  "OxfordComma",
+  "SplitWords",
+  "OrthographicConsistency",
+  "ExpandMemoryShorthands",
+  "ExpandStandardInputAndOutput",
+  "ExpandConfiguration",
+  "ExpandMinimum",
+]
