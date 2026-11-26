@@ -24,19 +24,26 @@ ABN
 
 # DASHBOARD
 
-![img-0.jpeg](img-0.jpeg)
+GETTING STARTED
 
-![img-1.jpeg](img-1.jpeg)
+GOOD PROGRESS
 
-![img-2.jpeg](img-2.jpeg)
+ADVANCED
 
-![img-3.jpeg](img-3.jpeg)
+LEADING
+
+BEYOND BEST PRACTICE
+
+CORE
+
+RECOMMENDED
+
+TOTAL
+
 LEADERSHIP
 
-![img-4.jpeg](img-4.jpeg)
 OUTCOMES
 
-![img-5.jpeg](img-5.jpeg)
 OPERATIONS
 
 # SUMMARY
@@ -71,6 +78,8 @@ ORGANISATION
 
 APCO Annual Reporting Tool © 2017-2021
 
+Page 1 of 5
+
 APCO
 Myer Holdings Limited
 2021 Annual Report & Action Plan
@@ -81,15 +90,37 @@ Myer Holdings Limited
 
 ### 1. LEADERSHIP
 
-![img-6.jpeg](img-6.jpeg)
+1.1 Packaging sustainability strategy
+
+1.2 Closed loop collaboration
+
+1.3 Consumer engagement
+
+1.4 Industry leadership
 
 ### 2. OUTCOMES
 
-![img-7.jpeg](img-7.jpeg)
+2.1 Packaging design & procurement
+
+2.2 Packaging materials efficiency
+
+2.3 Recycled & renewable materials
+
+2.6 Product packaging innovation
+
+2.5 Consumer labelling
+
+2.4 Post-consumer recovery
 
 ### 3. OPERATIONS
 
-![img-8.jpeg](img-8.jpeg)
+3.1 Business to business packaging
+
+3.2 On-site waste diversion
+
+3.3 Supply chain influence
+
+X.X Core criteria X.X Recommended criteria
 
 ## LEVEL DESCRIPTION
 
@@ -184,6 +215,7 @@ PACKAGING
 COVENANT
 ORGANISATION
 APCO Annual Reporting Tool © 2017-2021
+Page 3 of 5
 
 APCO
 2021 Annual Report & Action Plan
@@ -271,3 +303,4 @@ PACKAGING
 COVENANT
 ORGANISATION
 APCO Annual Reporting Tool © 2017-2021
+Page 5 of 5
