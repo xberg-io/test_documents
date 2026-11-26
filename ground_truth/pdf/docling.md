@@ -42,6 +42,8 @@ print(result.render_as_markdown()) # output: "## DocLayNet: A Large Human-Annota
 
 Optionally, you can configure custom pipeline features and runtime options, such as turning on or off features (e.g. OCR, table structure recognition), enforcing limits on the input document size, and defining the budget of CPU threads. Advanced usage examples and options are documented in the README file. Docling also provides a _Dockerfile_ to demonstrate how to install and run it inside a container.
 
+1 see huggingface.co/ds4sd/docling-models/
+
 ## 3 Processing pipeline
 
 Docling implements a linear pipeline of operations, which execute sequentially on each given document (see Fig. 1). Each document is first parsed by a PDF backend, which retrieves the programmatic text tokens, consisting of string content and its coordinates on the page, and also renders a bitmap image of each page to support downstream operations. Then, the standard model pipeline applies a sequence of AI models independently on every page in the document to extract features and content, such as layout and table structures. Finally, the results from all pages are aggregated and passed through a post-processing stage, which augments metadata, detects the document language, infers reading-order and eventually assembles a typed document object which can be serialized to JSON or Markdown.
@@ -50,7 +52,6 @@ Docling implements a linear pipeline of operations, which execute sequentially o
 
 Two basic requirements to process PDF documents in our pipeline are a) to retrieve all text content and their geometric coordinates on each page and b) to render the visual representation of each page as it would appear in a PDF viewer. Both these requirements are encapsulated in Docling’s PDF backend interface. While there are several open-source PDF parsing libraries available for python, we faced major obstacles with all of them for different reasons, among which were restrictive
 
-![img-0.jpeg](img-0.jpeg)
 Figure 1: Sketch of Docling's default processing pipeline. The inner part of the model pipeline is easily customizable and extensible.
 
 licensing (e.g. pymupdf [7]), poor speed or unrecoverable quality issues, such as merged text cells across far-apart text tokens or table columns (pypdfium, PyPDF) [15, 14].
@@ -143,81 +144,10 @@ machine learning through dynamic python bytecode transformation and graph compil
 
 # Appendix
 
-In this section, we illustrate a few examples of Docling's output in Markdown and JSON.
+In this section, we illustrate a few examples of Docling’s output in Markdown and JSON.
 
-![img-1.jpeg](img-1.jpeg)
 Figure 2: Title page of the DocLayNet paper (arxiv.org/pdf/2206.01062) - left PDF, right rendered Markdown. If recognized, metadata such as authors are appearing first under the title. Text content inside figures is currently dropped, the caption is retained and linked to the figure in the JSON representation (not shown).
 
-# DocLayNet: A Large Human-Annotated Dataset for Document-Layout Analysis
+Figure 3: Page 6 of the DocLayNet paper. If recognized, metadata such as authors are appearing first under the title. Elements recognized as page headers or footers are suppressed in Markdown to deliver uninterrupted content in reading order. Tables are inserted in reading order. The paragraph in ”5. Experiments” wrapping over the column end is broken up in two and interrupted by the table.
 
-Bright Plitemann IBM Research Plantation, Switzerland (qir5) (arxiv.bm.com
-
-Christoph Auer IBM Research Plantation, Switzerland (sai.fi) (arxiv.bm.com
-
-Michèle Doll IBM Research Plantation, Switzerland (wif) (arxiv.bm.com
-
-Ahmed S. Naszar IBM Research Plantation, Switzerland (wif) (arxiv.bm.com
-
-Peter Staar IBM Research Plantation, Switzerland (sai.fi) (arxiv.bm.com
-
-# ABSTRACT
-
-Accurate document layout analysis is a key requirement for high-quality PDF document conversion. With the recent availability of public large groups both datasets such as PubLayNet and DocBank, deep learning models have proven to be very effective at layout detection and segmentation. While these datasets are in adequate size to train such models, they severely lack a layout variability since they are sourced from scientific article repositories such as PubMed and arXiv only. Consequently, the accuracy of the layout segmentation steps significantly other these models are applied on more challenging and diverse layouts. In this paper, we present DocLayNet, a new, publicly available, document-layout annotation dataset of COVID format. It contains 80865 manually annotated pages from diverse data sources to represent a wide variability in layouts. For each PDF page, the layout annotations provide labelled bounding boxes with a choice of 11 distinct classes. DocLayNet also provides a subset of double- and triple-annotated pages to determine the inter-annotated agreement. In multiple experiments, we provide baseline accuracy scores for both $5\%$ and of popular object detection models. We also demonstrate that fewer models fall approximately $10\%$ behind the inter-annotated agreement. Furthermore, we provide evidence that DocLayNet is of sufficient size. Lastly, we compare models trained on PubLayNet, DocBank and DocLayNet, showing that layout predictions of the DocLayNet trained models are more robust and thus the preferred choice for general-purpose document layout analysis.
-
-# CCS CONCEPTS
-
-- Information systems - Document structure; - Applied computing - Document analysis; - Computing methodologies
-- Machine learning Computer vision, Object detection
-
-# KEYWORDS
-
-PDF document conversion, layout segmentation, object detection, data set, Machine Learning
-
-# ACM Reference Format:
-
-Bright Plitemann, Christoph Auer, Michèle Doll, Ahmed S. Naszar, and Peter Staar. 2022. DocLayNet: A Large Human-Annotated Dataset for Document-Layout Analysis. In Proceedings of the 28th ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD '22), August 14-16, 2022, Washington, DC, USA. ACM, New York, NY, USA. 8 pages. https://doi.org/10.1145/3324978.3328624
-
-KDD '22, August 14-16, 2022, Washington, DC, USA. Singh Peltarsson, Christoph Auer, Michele Doll, Ahmed S. Nasser, and Peter Staur
-
-Table 1: Prediction performance (mAP@0.1-0.91) of object detection networks on DocLayNet test set. The MRC500 (Mark R-CNN) and PBCNN (Foster R-CNN) models with ResNet 30 or ResNet 401 backbone are trained based on the network architecture from the detected model into (Mark R-CNN RM, R101-PIN 1a, Faster R-CNN R101-PIN 1a), with default configurations. The NISO implementation utilized was NISOv1est [11]. All models were initialized using pre-trained weights from the COCO 2017 dataset.
-
-|                 | Instruct | MRC500 |      | PRC500 |       | NISO-1 test |
-| --------------- | -------- | ------ | ---- | ------ | ----- | ----------- |
-|                 |          | RM     | R101 | R101   | v1est |             |
-| Cognitive       | 64-69    | 68.4   | 71.3 | 70.1   | 77.7  |             |
-| Festivals       | 63-91    | 70.9   | 71.8 | 73.7   | 77.2  |             |
-| Festivals       | 63-91    | 68.1   | 63.4 | 63.3   | 64.2  |             |
-| List-time       | 67-88    | 81.2   | 84.8 | 81.0   | 86.2  |             |
-| Page-Notes      | 59-98    | 61.0   | 59.5 | 58.9   | 61.1  |             |
-| Page-healthy    | 62-88    | 71.0   | 74.8 | 72.0   | 67.9  |             |
-| Picture         | 44-71    | 71.7   | 72.7 | 72.0   | 77.1  |             |
-| Section-healthy | 63-86    | 67.6   | 65.5 | 68.4   | 74.6  |             |
-| Table           | 77-81    | 82.2   | 82.9 | 82.2   | 86.3  |             |
-| Text            | 64-86    | 84.6   | 85.8 | 84.6   | 88.3  |             |
-| Title           | 60-75    | 76.7   | 80.4 | 79.0   | 82.7  |             |
-| All             | 61-91    | 72.4   | 73.3 | 73.4   | 75.4  |             |
-
-![img-2.jpeg](img-2.jpeg)
-Figure 2: Prediction performance (mAP@0.1-0.91) of a Mark R-CNN network with ResNet30 backbone trained on increasing fractions of the DocLayNet dataset. The learning curve: Bottom around the $40\%$ mark, indicating that increasing the size of the DocLayNet dataset with similar data will not yield significantly better predictions.
-Figure 3: Prediction performance (mAP@0.1-0.85) of a Model R-CNN network with ResNet30 backbone trained on a re-
-
-| class label    | Causal  | % of Total |       |       | triple inter-annotator mAP@0.5-0.95(%) |       |       |        |       |       |       |     |
-| -------------- | ------- | ---------- | ----- | ----- | -------------------------------------- | ----- | ----- | ------ | ----- | ----- | ----- | --- |
-|                |         | Trans      | Test  | Val   | All                                    | Par.  | Man   | Sci    | Low   | Par   | Ten   |     |
-| Caption        | 22324   | 2.04       | 1.77  | 2.32  | 84.99                                  | 40.61 | 86.92 | 94.99  | 93.99 | 69.78 | n/a   |     |
-| Footnote       | 6318    | 0.60       | 0.31  | 0.58  | 83.91                                  | n/a   | 100   | 62.88  | 83.94 | n/a   | 82.97 |     |
-| Formula        | 25027   | 2.25       | 1.90  | 2.96  | 83.05                                  | n/a   | n/a   | 84.87  | 86.96 | n/a   | n/a   |     |
-| List-Item      | 185660  | 17.19      | 13.34 | 15.82 | 67.00                                  | 74.43 | 90.92 | 97.97  | 81.05 | 75.08 | 93.93 |     |
-| Page-footer    | 76878   | 6.31       | 3.38  | 6.80  | 93.94                                  | 88.90 | 95.96 | 100    | 92.97 | 100   | 96.98 |     |
-| Page-header    | 38022   | 5.10       | 6.70  | 5.86  | 85.09                                  | 66.76 | 90.94 | 90.100 | 91.92 | 97.99 | 81.86 |     |
-| Picture        | 45976   | 4.21       | 2.78  | 5.31  | 69.71                                  | 56.59 | 82.86 | 69.82  | 88.95 | 66.71 | 59.76 |     |
-| Section-header | 142884  | 12.60      | 15.77 | 12.85 | 83.04                                  | 76.01 | 90.92 | 94.95  | 87.94 | 69.73 | 78.86 |     |
-| Table          | 34733   | 3.20       | 2.27  | 3.60  | 77.01                                  | 73.00 | 83.86 | 98.99  | 58.00 | 79.84 | 70.83 |     |
-| Text           | 510377  | 45.82      | 49.28 | 43.00 | 84.06                                  | 81.06 | 80.93 | 89.93  | 87.92 | 71.79 | 87.93 |     |
-| Title          | 5071    | 0.47       | 0.30  | 0.50  | 68.72                                  | 24.63 | 50.63 | 96.100 | 82.96 | 68.79 | 24.54 |     |
-| Total          | 1187470 | 941125     | 99016 | 66531 | 82.03                                  | 71.74 | 79.81 | 89.94  | 86.91 | 71.76 | 68.85 |     |
-
-![img-3.jpeg](img-3.jpeg)
-Figure 4: Table 1 from the DocLayNet paper in the original PDF (A), as rendered Markdown (B) and in JSON representation (C). Spanning table cells, such as the multi-column header "triple inter-annotator mAP@0.5-0.95 (\%)," is repeated for each column in the Markdown representation (B), which guarantees that every data point can be traced back to row and column headings only by its grid coordinates in the table. In the JSON representation, the span information is reflected in the fields of each table cell (C).
-
-![img-4.jpeg](img-4.jpeg)
+Figure 4: Table 1 from the DocLayNet paper in the original PDF (A), as rendered Markdown (B) and in JSON representation (C). Spanning table cells, such as the multi-column header ”triple inter-annotator mAP@0.5-0.95 (%)”, is repeated for each column in the Markdown representation (B), which guarantees that every data point can be traced back to row and column headings only by its grid coordinates in the table. In the JSON representation, the span information is reflected in the fields of each table cell (C).
