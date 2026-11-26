@@ -31,7 +31,7 @@ May, 2025
 |                                                |                   |                      |                |
 | **Total Assets**                               |    **38,676,827** |       **37,000,075** |  **1,676,752** |
 |                                                |                   |                      |                |
-| **LIABILITIES AND STOCKHOLDERS' EQUITY**       |                   |                      |                |
+| **LIABILITIES AND STOCKHILDERS' EQUITY**       |                   |                      |                |
 |                                                |                   |                      |                |
 | **Current Liabilities**                        |                 0 |                    0 |              0 |
 | Current portion of long-term debt              |           230,000 |            3,957,807 |     -3,727,807 |
@@ -56,6 +56,6 @@ May, 2025
 | Common Stock                                   |               100 |                  100 |              0 |
 | Surplus                                        |                 0 |                    0 |              0 |
 | Retained earnings                              |           101,505 |             -513,448 |        614,953 |
-| **Total Stockholders' Equity**                 |       **101,605** |         **-513,348** |    **614,953** |
+| **Total Stocholders' Equity**                 |       **101,605** |         **-513,348** |    **614,953** |
 |                                                |                   |                      |              0 |
 | **Total Liabilities and Stockholders' Equity** |    **38,676,827** |       **37,000,075** |  **1,676,752** |
