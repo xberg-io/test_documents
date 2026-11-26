@@ -26,7 +26,7 @@
       "url": "https://www.federalregister.gov"
     }
   },
-  "manifest_sha256": "5082c9ddec3acefc1231afe478b4fbbcc78685e19c7afaa01b0b71194122a630",
+  "manifest_sha256": "0e560e5f5cd2f20ed60d4d4258a5a64486ff4b6f22ce6b92d49f610639f4db1d",
   "counts": {
     "ACCEPT": 2632,
     "REVIEW": 199,
@@ -60007,7 +60007,7 @@
       },
       "redistribute": "vendor",
       "pdf_sha256": "3e03f3efa84ae57c4f73f50e6e31c8d9e56a88913ab34c7bf010c756a2d05a41",
-      "gt_txt_sha256": "c1e3ed0b011bfec4bcf099083b7424b69a0dd9cc14c28e317c8b4a2f5ba70729"
+      "gt_txt_sha256": "5ed604d273a1df553180723e7407e26c76ae32e6639e4f04eaed80884ccf24e2"
     },
     {
       "id": "36112282",
