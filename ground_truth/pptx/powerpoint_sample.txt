@@ -33,17 +33,17 @@ List item5
 
 List item6
 
-- I 1
+- I1
 - I2
 - I3
 - I4
 
-S ome info:
+Some info:
 
-- I tem A
+- Item A
 - Item B
 
-M aybe a list?
+Maybe a list?
 
 List1
 

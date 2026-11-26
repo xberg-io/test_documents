@@ -32,17 +32,17 @@ And baz things
 - l1
 - l2
 - l3
-- I 1
+- I1
 - I2
 - I3
 - I4
 
-S ome info:
+Some info:
 
-- I tem A
+- Item A
 - Item B
 
-M aybe a list?
+Maybe a list?
 
 1. List1
 2. List2
