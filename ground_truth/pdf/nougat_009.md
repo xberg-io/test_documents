@@ -30,30 +30,6 @@ BlackRock designed its content to achieve two primary objectives: raise awarenes
 
 To promote this content, BlackRock used a combination of Sponsored Content, Video, Conversation Ads, and Lead Gen Forms. This multi-format approach proved a key component of the campaign's success, with audience members exposed to several touchpoints driving higher CTRs and lead form completion rates.
 
-BlackRock 900,951 followers Promoted
-
-Credit markets, now 3X their prior size significant restructuring. Read our whi why we expect a different kind of distr cycle.
-
-BlackRock Growth in sub-investment grade and
-
-US$2.1 2007
-
-Global HY Global Loans Emerging Markets
-
-Learn more in our Distressed Credit Whitepaper blackrock.com
-
-Download 144 Like Comment Share Reactions
-
-BlackRock 900,951 followers Promoted
-
-We believe ESG is arguably more important for private markets than public markets given the long term and illiquid nature of the asset class. Learn more: https://lnkd.in/dNvheJ7
-
-BlackRock Is sustainability accelerating in alternative investing?
-
-BlackRock Alternatives Learn more blackrock.com
-
-430 12 comments Like Comment Share Send Reactions Comments Most relevant
-
 **Members exposed to both Sponsored Content and Conversation Ads had higher engagement than those that weren't:**
 
 **31%** higher CTR
@@ -64,20 +40,6 @@ BlackRock Alternatives Learn more blackrock.com
 >
 > Jackie Teller
 > Global Head of Social Media at BlackRock
-
-BlackRock Promoted WATCH: James Keenan, CIO and Global Co-Head of Credit, BlackRock, discusses private credit and the opportunity sets in stressed and distressed credit at the BlackRock Global Credit Forum. Learn more: https://lnkd.in/eFYN5h5
-
-BlackRock View full profile
-
-James Keenan CIO and Global Co-Head of Credit, BlackRock
-
-BlackRock alternatives. See how we pursue outperformance. Learn more
-
-Reactions
-
-Ad Raise brand awareness, drive website traffic, or generate leads Get started
-
-Similar pages Blackstone Financial Services Follow Goldman Sachs Financial Services Follow J.P. Morgan Financial Services Follow 3 school alumni Show more
 
 ## Campaign results:
 
