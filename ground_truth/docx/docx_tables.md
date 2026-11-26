@@ -6,14 +6,14 @@ Simple uniform table
 
 Nested Table
 
-| a   | b        | c   |
+| a   | \>b\<    | c   |
 | --- | -------- | --- |
-| d   | e f gt h | i   |
+| d   | e f g&t h | i   |
 | j   | k        | l   |
 
 Table with merged cells
 
-| a   | b   | b   |
+| a   | b   |     |
 | --- | --- | --- |
-| a   | c   | d   |
-| e   | e   | d   |
+|     | c   | d   |
+| e   |     |     |
