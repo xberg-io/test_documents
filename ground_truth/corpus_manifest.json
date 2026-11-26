@@ -26,7 +26,7 @@
       "url": "https://www.federalregister.gov"
     }
   },
-  "manifest_sha256": "29de6f667f57a94c11a010ef517168d4a8f0f1de097345291a45ec7317da125b",
+  "manifest_sha256": "878ad83e4e4ed3fe5ff2b1c0736d869818fa983b691adb5970e1f6cb88d1c402",
   "counts": {
     "ACCEPT": 2632,
     "REVIEW": 199,
@@ -47840,7 +47840,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "59416d531281425d3d2b93baa8446022cfbcfead563e2e98fce461e3ae8d3f1b",
-      "gt_txt_sha256": "3463284cd825ce7b8abbb27608626d930245b2c5a5bb504d7b4b8a734d603cde"
+      "gt_txt_sha256": "94790de81584c0bc81da8ee50181be4b6b940c9f778cc8b96a11713e5298ca7d"
     },
     {
       "id": "2305.09884",
@@ -69525,7 +69525,7 @@
       },
       "redistribute": "vendor",
       "pdf_sha256": "133592c082044b981bb96947ccf8141c66d279375023a823fa3e681c3c8b17e5",
-      "gt_txt_sha256": "14d139955600fc9be5342c76758babf33b94965edf44df9f9655663073c27e01"
+      "gt_txt_sha256": "0a2c1ceaa9420940bf7f896d3b2d9ddde719aa40822698406e284dfa3dc9d097"
     },
     {
       "id": "68243930",
