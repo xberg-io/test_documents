@@ -26,7 +26,7 @@
       "url": "https://www.federalregister.gov"
     }
   },
-  "manifest_sha256": "70e84136aec0abfc76334b1f36b445548d507a8aa711772ffa74b18555162b25",
+  "manifest_sha256": "505bef45a3cb3b49ab61b381df1d2d5c6ec2f6ccaeb05160bd60d7fbc5d6ffba",
   "counts": {
     "ACCEPT": 2632,
     "REVIEW": 199,
@@ -93736,7 +93736,7 @@
       "license": "Apache-2.0",
       "source_revision": "2805a1d940f95a203e0ae4b88be9934f7765b3fc",
       "src_gt_sha256": "5aee41ba9fba36178c3678357a47f830867402e1bd833c3851da42ba821b1802",
-      "out_gt_md_sha256": "7f6fe864e6baa4181520de1295b03edaf03bbbc33466e3a7b3041c4757dddb11",
+      "out_gt_md_sha256": "c0a12f7f61a44ea7a522be69cde704a1f54a9762c980731f57406e540231cbde",
       "transforms": {
         "html_to_gfm": 1
       },
@@ -93761,7 +93761,8 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "5038f51707bc943ef2ab149cbe997cbd72c96c8bec5eac01d26166dc54a4cdd8",
-      "gt_txt_sha256": "e2e9b8087af7fe8e0fd8d660708271717a95857f8516ba8a0cd557c2d44c8a89"
+      "gt_txt_sha256": "976a1d03df53fba81690593e7f00fe628af852e56ac32ec72227ded9e9e25ddb",
+      "gt_override": "manual"
     },
     {
       "id": "pb_gallagherre-reinsurance-market-report-2024_page20",
