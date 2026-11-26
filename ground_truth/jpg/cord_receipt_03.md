@@ -6,7 +6,9 @@
 |  |  |
 | --- | ---: |
 | SUB TOTAL | 28,000 |
-| TOTAL SAI S | 28,000 |
+| TOTAL SALES | 28,000 |
 | TOTAL ITEMS | 1 |
 | CASH | 100,000 |
 | CHANGE | 72,000 |
+
+Queue No: 102
