@@ -1,5 +1,5 @@
 tiny-diffusion
-A minimal PyTorch implementation of probabilistic diffusion models for 2D datasets. Get started by running to explore the available options for training.
+A minimal PyTorch implementation of probabilistic diffusion models for 2D datasets. Get started by running python ddpm.py -h to explore the available options for training.
 Forward process
 A visualization of the forward diffusion process being applied to a dataset of one thousand 2D points. Note that the dinosaur is not a single training example, it represents each 2D point in the dataset.
 Reverse process
@@ -9,7 +9,7 @@ I have run a series of ablations experiments on hyperparameters, such as learnin
 learning rate
 The learning process is sensitive to the learning rate. At first, the model's output was poor, causing me to suspect a bug. However, simply changing the learning rate value resolved the problem.
 dataset
-The current model configuration doesn't work well on the dataset, which I consider the most basic among them. The corners should be clear and sharp, but they are fuzzy.
+The current model configuration doesn't work well on the line dataset, which I consider the most basic among them. The corners should be clear and sharp, but they are fuzzy.
 num timesteps
 A longer diffusion process results in a better output. With fewer timesteps, the dinosaur is incomplete, missing points from the top and bottom.
 variance schedule
