@@ -104,7 +104,30 @@ Building a source tarball
 To build a complete source tarball with everything needed to build from
 source and/or build a (deb or rpm) package, run
 ./make-dist
-This will create a tarball like ceph- (nproc)
+This will create a tarball like ceph-$version.tar.bz2 from git.
+(Ensure that any changes you want to include in your working directory
+are committed to git.)
+Running a test cluster
+From the directory, run the following commands to launch a test Ceph
+cluster:
+cd build
+ninja vstart builds just enough to run vstart
+../src/vstart.sh --debug --new -x --localhost --bluestore
+./bin/ceph -s
+Most Ceph commands are available in the directory. For example:
+./bin/rbd create foo --size 1000
+./bin/rados -p foo bench 30 write
+To shut down the test cluster, run the following command from the
+directory:
+../src/stop.sh
+Use the sysvinit script to start or stop individual daemons:
+./bin/init-ceph restart osd.0
+./bin/init-ceph stop
+Running unit tests
+To build and run all tests (in parallel using all processors), use :
+cd build
+ninja
+ctest -j$(nproc)
 (Note: Many targets built from src/test are not run using .
 Targets starting with "unittest" are run in and thus can
 be run with . Targets starting with "cephtest" can not, and should
