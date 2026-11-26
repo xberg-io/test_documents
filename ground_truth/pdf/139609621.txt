@@ -26,12 +26,49 @@ Begin to train
 All the models (BIX2/3/4/8, BDX3) can be downloaded from Dropbox, BaiduYun, or GoogleDrive.
 2. Cd to 'RCANTrainCode/code', run the following scripts to train models.
 You can use scripts in file 'TrainRCANscripts' to train models for our paper.
+# BI, scale 2, 3, 4, 8
+# RCAN_BIX2_G10R20P48, input=48x48, output=96x96
+python main.py --model RCAN --save RCAN_BIX2_G10R20P48 --scale 2 --n_resgroups 10 --n_resblocks 20 --n_feats 64 --reset --chop --save_results --print_model --patch_size 96
+# RCAN_BIX3_G10R20P48, input=48x48, output=144x144
+python main.py --model RCAN --save RCAN_BIX3_G10R20P48 --scale 3 --n_resgroups 10 --n_resblocks 20 --n_feats 64 --reset --chop --save_results --print_model --patch_size 144 --pre_train ../experiment/model/RCAN_BIX2.pt
+# RCAN_BIX4_G10R20P48, input=48x48, output=192x192
+python main.py --model RCAN --save RCAN_BIX4_G10R20P48 --scale 4 --n_resgroups 10 --n_resblocks 20 --n_feats 64 --reset --chop --save_results --print_model --patch_size 192 --pre_train ../experiment/model/RCAN_BIX2.pt
+# RCAN_BIX8_G10R20P48, input=48x48, output=384x384
+python main.py --model RCAN --save RCAN_BIX8_G10R20P48 --scale 8 --n_resgroups 10 --n_resblocks 20 --n_feats 64 --reset --chop --save_results --print_model --patch_size 384 --pre_train ../experiment/model/RCAN_BIX2.pt
+# RCAN_BDX3_G10R20P48, input=48x48, output=144x144
+# specify '--dir_data' to the path of BD training data
+python main.py --model RCAN --save RCAN_BIX3_G10R20P48 --scale 3 --n_resgroups 10 --n_resblocks 20 --n_feats 64 --reset --chop --save_results --print_model --patch_size 144 --pre_train ../experiment/model/RCAN_BIX2.pt
 Test
 Quick start
 1. Download models for our paper and place them in '/RCANTestCode/model'.
 All the models (BIX2/3/4/8, BDX3) can be downloaded from Dropbox, BaiduYun, or GoogleDrive.
 2. Cd to '/RCANTestCode/code', run the following scripts.
 You can use scripts in file 'TestRCANscripts' to produce results for our paper.
+# No self-ensemble: RCAN
+# BI degradation model, X2, X3, X4, X8
+# RCAN_BIX2
+python main.py --data_test MyImage --scale 2 --model RCAN --n_resgroups 10 --n_resblocks 20 --n_feats 64 --pre_train ../model/RCAN_BIX2.pt --test_only --save_results --chop --save 'RCAN' --testpath ../LR/LRBI --testset Set5
+# RCAN_BIX3
+python main.py --data_test MyImage --scale 3 --model RCAN --n_resgroups 10 --n_resblocks 20 --n_feats 64 --pre_train ../model/RCAN_BIX3.pt --test_only --save_results --chop --save 'RCAN' --testpath ../LR/LRBI --testset Set5
+# RCAN_BIX4
+python main.py --data_test MyImage --scale 4 --model RCAN --n_resgroups 10 --n_resblocks 20 --n_feats 64 --pre_train ../model/RCAN_BIX4.pt --test_only --save_results --chop --save 'RCAN' --testpath ../LR/LRBI --testset Set5
+# RCAN_BIX8
+python main.py --data_test MyImage --scale 8 --model RCAN --n_resgroups 10 --n_resblocks 20 --n_feats 64 --pre_train ../model/RCAN_BIX8.pt --test_only --save_results --chop --save 'RCAN' --testpath ../LR/LRBI --testset Set5
+# BD degradation model, X3
+# RCAN_BDX3
+python main.py --data_test MyImage --scale 3 --model RCAN --n_resgroups 10 --n_resblocks 20 --n_feats 64 --pre_train ../model/RCAN_BDX3.pt --test_only --save_results --chop --save 'RCAN' --testpath ../LR/LRBD --degradation BD --testset Set5
+# With self-ensemble: RCAN+
+# RCANplus_BIX2
+python main.py --data_test MyImage --scale 2 --model RCAN --n_resgroups 10 --n_resblocks 20 --n_feats 64 --pre_train ../model/RCAN_BIX2.pt --test_only --save_results --chop --self_ensemble --save 'RCANplus' --testpath ../LR/LRBI --testset Set5
+# RCANplus_BIX3
+python main.py --data_test MyImage --scale 3 --model RCAN --n_resgroups 10 --n_resblocks 20 --n_feats 64 --pre_train ../model/RCAN_BIX3.pt --test_only --save_results --chop --self_ensemble --save 'RCANplus' --testpath ../LR/LRBI --testset Set5
+# RCANplus_BIX4
+python main.py --data_test MyImage --scale 4 --model RCAN --n_resgroups 10 --n_resblocks 20 --n_feats 64 --pre_train ../model/RCAN_BIX4.pt --test_only --save_results --chop --self_ensemble --save 'RCANplus' --testpath ../LR/LRBI --testset Set5
+# RCANplus_BIX8
+python main.py --data_test MyImage --scale 8 --model RCAN --n_resgroups 10 --n_resblocks 20 --n_feats 64 --pre_train ../model/RCAN_BIX8.pt --test_only --save_results --chop --self_ensemble --save 'RCANplus' --testpath ../LR/LRBI --testset Set5
+# BD degradation model, X3
+# RCANplus_BDX3
+python main.py --data_test MyImage --scale 3 --model RCAN --n_resgroups 10 --n_resblocks 20 --n_feats 64 --pre_train ../model/RCAN_BDX3.pt --test_only --save_results --chop --self_ensemble --save 'RCANplus' --testpath ../LR/LRBD --degradation BD --testset Set5
 The whole test pipeline
 1. Prepare test data.
 Place the original test sets (e.g., Set5, other test sets are available from GoogleDrive or Baidu) in 'OriginalTestData'.
@@ -56,5 +93,18 @@ proposed in [ICCV2017EnhanceNet]. These comparisons mainly show the eﬀectivene
 RCAN against GAN based methods
 Citation
 If you find the code helpful in your resarch or work, please cite the following papers.
+@InProceedings{Lim_2017_CVPR_Workshops,
+author = {Lim, Bee and Son, Sanghyun and Kim, Heewon and Nah, Seungjun and Lee, Kyoung Mu},
+title = {Enhanced Deep Residual Networks for Single Image Super-Resolution},
+booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+month = {July},
+year = {2017}
+}
+@inproceedings{zhang2018rcan,
+title={Image Super-Resolution Using Very Deep Residual Channel Attention Networks},
+author={Zhang, Yulun and Li, Kunpeng and Li, Kai and Wang, Lichen and Zhong, Bineng and Fu, Yun},
+booktitle={ECCV},
+year={2018}
+}
 Acknowledgements
 This code is built on EDSR (PyTorch). We thank the authors for sharing their codes of EDSR Torch version and PyTorch version.
