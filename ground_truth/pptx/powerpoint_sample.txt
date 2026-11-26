@@ -1,7 +1,5 @@
 Test Table Slide
 
-With footnote
-
        Class1                            Class2           
   ---- ----------------- ------- ------- -------- ------- -------
        A merged with B           C       A        B       C
@@ -12,6 +10,7 @@ With footnote
   R4                             False            False   
                          True            True     False   False
        True              False   True    False    True    False
+With footnote
 
 Second slide title
 
@@ -24,8 +23,6 @@ Bar
 And  baz  things
 
 A rectangle shape with this text inside.
-
-Slide 3
 
 List item4
 

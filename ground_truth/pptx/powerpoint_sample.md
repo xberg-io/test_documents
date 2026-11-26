@@ -15,8 +15,6 @@ With footnote
 
 ## Second slide title
 
-A rectangle shape with this text inside.
-
 Let's introduce a list
 
 With foo
@@ -25,13 +23,12 @@ Bar
 
 And baz things
 
+A rectangle shape with this text inside.
+
 1. List item4
 2. List item5
 3. List item6
 
-- l1
-- l2
-- l3
 - I1
 - I2
 - I3
@@ -47,3 +44,7 @@ Maybe a list?
 1. List1
 2. List2
 3. List3
+
+- l1
+- l2
+- l3
