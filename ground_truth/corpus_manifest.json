@@ -26,7 +26,7 @@
       "url": "https://www.federalregister.gov"
     }
   },
-  "manifest_sha256": "856f419235cacd12ff3edc5bf7cf3d7ebd5e7325d9b1b3f9bf54de2224e56f69",
+  "manifest_sha256": "3587170bdae712547e9ffa4e70c9684f14548a8def19dbabc42e20b4ff0d3e98",
   "counts": {
     "ACCEPT": 2632,
     "REVIEW": 199,
@@ -17364,7 +17364,7 @@
       "license": "MIT",
       "source_revision": "782bf954e4d9a31ae2bcfe14ff59f1f4b2467592",
       "src_gt_sha256": "a2d100bcb1253551fde16f17e887b2ff88a6a8f3ea7aa4b5118abbe26252364e",
-      "out_gt_md_sha256": "a97dd3260c5f730d7a4f21bede5c64e5daf6ddf93e27bd77a52cd36dd6546e6d",
+      "out_gt_md_sha256": "33de3691aad2e9c673b7b33afb45adff61122e0e12949bc3702ec5f582d79f58",
       "transforms": {
         "math_display": 148,
         "math_inline": 392
@@ -17391,7 +17391,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "200731b99ded4510e9534967ca72ff236089e6b486701687084fff9c0594820e",
-      "gt_txt_sha256": "154a80dc56e4035e76506619cce4e3d0303582d7c599dfa9b79f7701f80755df"
+      "gt_txt_sha256": "2a8ac5649519150b76a040551fee6daf2f8ac8d5305bc9f09c8192af4c334479"
     },
     {
       "id": "1510.02609",
