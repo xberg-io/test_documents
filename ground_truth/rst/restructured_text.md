@@ -27,12 +27,8 @@ You can also use:
 - Bullet lists
 - With multiple items
 
-<!-- end list -->
-
 - And nested items
 - Like this
-
-<!-- end list -->
 
 1. Numbered lists
 2. Also work well
