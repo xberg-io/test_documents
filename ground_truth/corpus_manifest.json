@@ -26,7 +26,7 @@
       "url": "https://www.federalregister.gov"
     }
   },
-  "manifest_sha256": "b59af4dc3e975f34d4ea69d173f3347cebc4e6f20f64fd4c0aa0d5109e767ee1",
+  "manifest_sha256": "7c197bfe089a74dcd60e98751850991ef6377d86fe2ab8845c250c498d3bac36",
   "counts": {
     "ACCEPT": 2632,
     "REVIEW": 199,
@@ -1591,7 +1591,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "691dc0721b2ffeac1f9f3f3dc6fc26cee06908d7e42e991b1ad3118b89e9231c",
-      "gt_txt_sha256": "b12ccdddad0137eaa122fb1322eff79177779e21ee81fc8e59a2618462e1b761"
+      "gt_txt_sha256": "a5bc5e5948c8782a85a05f9cd9d1c67bcab22b4481447788a0eb17b09c2807b3"
     },
     {
       "id": "0910.1576",
@@ -6065,7 +6065,7 @@
       },
       "redistribute": "vendor",
       "pdf_sha256": "55f90740b67036d4634e51aefc35ab97d53f17dbade4e96647dfd9d7514f0691",
-      "gt_txt_sha256": "535a82a18402a4bb2148b2cefc19b84f6a7454628b034acd2e53f68fd5c24098"
+      "gt_txt_sha256": "87df09d2d96af0ac332ea5721ed77ab42951f91e3279d933fe8e9ee6a24fa0ff"
     },
     {
       "id": "115650424",
@@ -8208,7 +8208,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "2962294e03ad04edfa4155bb2912e6d7aaa880bd9473dcfd61f2818f1d9b746c",
-      "gt_txt_sha256": "76585295a1fb179303c11776d147cf9bed92c3626832ab2d9b357a2fabdf524e"
+      "gt_txt_sha256": "27d268e5eaea2c999a33982adffcc44f06443018284c01bd2ecc9e05ba775dc9"
     },
     {
       "id": "1211.3989",
@@ -10490,7 +10490,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "b26bffab2752b8426916ebdaac20e60ec20d433b008c629397fa9301abe1aa8a",
-      "gt_txt_sha256": "e8dc94361434f213d13fbd150306ad287e1016b9fc9c4597d833f3eaa1f7b11e"
+      "gt_txt_sha256": "599e09489985cc76dec1d978476049036080f62f6d0a2fd5ea14c847639dac70"
     },
     {
       "id": "1305.3091",
@@ -16673,7 +16673,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "de18480d935152467208a8a4d50b9323776e429237995bf54ae27e46a8824360",
-      "gt_txt_sha256": "5ded5bd366c9be8a896ec24abb28fd749dd6ef56541d3fe20b0cf7e9870117ad"
+      "gt_txt_sha256": "dca169fb4821e5ad019a1b629118d3df01054d33ec57d023b16f9a6141b5f918"
     },
     {
       "id": "1503.06448",
@@ -19204,7 +19204,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "0cf66a9e3e2cc5ecb45d70060dc2130abbfc3fe9c9ffb3746beba35d2af6a0a9",
-      "gt_txt_sha256": "f5523bccdcebf1c124ed17e3c08d5b9d2859dbd68c66372d5250108df592e74e"
+      "gt_txt_sha256": "a27bf04618fe6dcbb3326710fcce792892c868f5f79d79601c1d9042fcce0c6b"
     },
     {
       "id": "1602.03402",
@@ -30072,7 +30072,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "815e0d4c5865c1867911cdbbc6e4577cb485e2cad459f46500b5290932c94c70",
-      "gt_txt_sha256": "e76c79fe234c13b2dea4fd691b5f11168092bd2ccc28bf1a5e501ed8ba0446e2"
+      "gt_txt_sha256": "3c757c7791c5463fe2b96a525eac33bc6db3a1fecf43cfb1d225e1b7c4d6144e"
     },
     {
       "id": "1904.08580",
@@ -38664,7 +38664,7 @@
       },
       "redistribute": "vendor",
       "pdf_sha256": "e32de17658362f84b44a776882e13754d7fb18e8c464d71f46e066b6dbfdfcbf",
-      "gt_txt_sha256": "0d22a1e62205d75d6bf56a45c3f302cec3db333d32b94de81dcdf462fda5f955"
+      "gt_txt_sha256": "5911e3c5969524f8238b1055db87755723ecefa504e156e3a21abe718b596df2"
     },
     {
       "id": "2026-14580",
@@ -40032,7 +40032,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "aadc5896271e22164a1ff45228b47ba41f819af098e82880fba946683a29d39a",
-      "gt_txt_sha256": "f7c97d96bbb57fa92f7d5274250d0473059a7b2c49054a58830b7d1f6a078d5f"
+      "gt_txt_sha256": "360cd01f1f0ec0be99ff7741d59ffa135550e5bb6b509a92bbb61fae9d333d29"
     },
     {
       "id": "210390968",
@@ -40381,7 +40381,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "690c45d37d9e48bd200f0b2675e70660b9fe4fcbe7507815fdcf7f35cbf7ea6d",
-      "gt_txt_sha256": "19640698f4de8f5560b51f4b271aa329480b8b8e7ce35706967e7926de722382"
+      "gt_txt_sha256": "59c3df5d3521a09ca2ab96828738c99888c428cc357224ec8fb6265861825121"
     },
     {
       "id": "2105.04639",
@@ -45779,7 +45779,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "4e4449c884f2fcf5e1b0aff326d9e27928512b0bb7beabf8633110d8ab0cdbcd",
-      "gt_txt_sha256": "7ebfc01a07c08844bec6ce3ddbfef0d27180c286617aa2831be43b66900dfd08"
+      "gt_txt_sha256": "b2a419762d28e87c36fe0ba5b577717964819e9cd25d39813b705dca591e1f2f"
     },
     {
       "id": "2212.01572",
@@ -47022,7 +47022,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "86d09a8d1b0fe2c73eef9ae73efd256459011763564556ffaafb36a2e9433028",
-      "gt_txt_sha256": "5dadfcdc3f9e505fd7ed3cc2a2e74828ef8e6a54514b92b8b5072f52edd65e68"
+      "gt_txt_sha256": "34a49a82fd7493fa462cd85941504c76969be7f0f75f0a483437e0ef4b498dad"
     },
     {
       "id": "2301.12530",
@@ -47448,7 +47448,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "96989af33efa14c509c96f998dadaaf3f661f68d38dde12554688ba86809236c",
-      "gt_txt_sha256": "20e253da931df3bff668202b3aedd35fb2fea2c84c9c2b5059f76aaa23c5c636"
+      "gt_txt_sha256": "28423ca66911bf65788eee6ebfc798b750cb7cd95bea75c2a1495956dd80d841"
     },
     {
       "id": "2303.12677",
@@ -47659,7 +47659,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "7684b454efe4a1a0fc6cf250dc03cef11435655da5eaf3022a0b504376e1092a",
-      "gt_txt_sha256": "61ffca875a0b9e570ff7be1ce53606e2ef689f9e36ae2ee749f0712d8eac8b4d"
+      "gt_txt_sha256": "ecbba54b4af4fe52cfaabed278e7b2a8cfee6d184852c7ab11f9577076fd4617"
     },
     {
       "id": "2305.02481",
@@ -49730,7 +49730,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "e0b4244bb141d11fe752ec93cdc4a970a7109d4853a1b95cc3f01bab31ae8794",
-      "gt_txt_sha256": "8436a38713dec838976d1f7568cf8593319546015a6879c7cffae998748b7148"
+      "gt_txt_sha256": "2766658a345e4a6a04c03dd09a85d919afbccb9992763369dbd15a2e64aeefff"
     },
     {
       "id": "2310.05572",
@@ -50117,7 +50117,7 @@
       },
       "redistribute": "vendor",
       "pdf_sha256": "d60a5a151f06152d0436f69161485ae97c2ca1cbe0b5ebba7c5ef339fc796ec1",
-      "gt_txt_sha256": "b68fde60c9192da6326559d1cb537bedfed0089553856cd0b83753dc702b3eee"
+      "gt_txt_sha256": "e57829e3fe9e8f721c23492ee6df3faff15b902939a8f3c1acdf9ecb02377f34"
     },
     {
       "id": "2311.00235",
@@ -55112,7 +55112,7 @@
       },
       "redistribute": "vendor",
       "pdf_sha256": "6c77eb6d9100ef9bfd364d8d146732975088244967be88bf031d23518db0fbe9",
-      "gt_txt_sha256": "ad98043348e9492aa2e419c4e53bd3be31048ee09aca82ce0928dbd29654bd06"
+      "gt_txt_sha256": "f1f762ec007d8baf72770b64d43350d327f138dad85c301447c2d6b070970f19"
     },
     {
       "id": "2719126",
@@ -74541,7 +74541,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "5d89283cb0253298c2a824df8cf8e3da368b5c2aa9c2df4320d4a8253a92d160",
-      "gt_txt_sha256": "bb9e27c96a51c6198035c5088d247eedc3d76793b1f8d2f474284d575500b65c"
+      "gt_txt_sha256": "e854cc67a8a10a9fc37577bd826227a39e374bb6b2ff68ede7bb2898a70c274c"
     },
     {
       "id": "cond-mat0211260",
@@ -75542,7 +75542,7 @@
       },
       "redistribute": "vendor",
       "pdf_sha256": "f8af9cee9feb9c6fb3ab0860b3ad9189dfb776111f95c3506feb4e1f69e87123",
-      "gt_txt_sha256": "cebd263973b5fb5aff212509a18ba54eed6531edfe406c9b0c27b585ac99fe05"
+      "gt_txt_sha256": "78dbcbd1b544918b4f0f0df1d626deed960a5a479afd96d3511a4b32995b4af4"
     },
     {
       "id": "ft_ADBE_1999_page_15_t0",
@@ -77268,7 +77268,7 @@
       },
       "redistribute": "vendor",
       "pdf_sha256": "2805296d1997a0357ea198e416135b9ed9931af324d694680489c3f337479259",
-      "gt_txt_sha256": "f87f352261e06a4a0d9f359dbd552d6b3867cc3ceaaab613f57e59e651c7e456"
+      "gt_txt_sha256": "260459da92967a65dff05c2ab7d25648f57fd019c3683604d5b5959de8a24a64"
     },
     {
       "id": "ft_BA_2002_page_49_t0",
@@ -77391,7 +77391,7 @@
       },
       "redistribute": "vendor",
       "pdf_sha256": "00aadd05170e5e2adc2f9a4de6d11b6ca7cd0c70173ab23788e00eec525bf138",
-      "gt_txt_sha256": "0277bd50dfc2193f5e3caaa0ffb1833bebd8ad9e20fc623437550ce220feff0a"
+      "gt_txt_sha256": "abefd428f730dd5c592ae36780b591601774ba644f8bb9be49b0a4cd4e07133e"
     },
     {
       "id": "ft_BIIB_2008_page_102_t0",
@@ -77454,7 +77454,7 @@
       },
       "redistribute": "vendor",
       "pdf_sha256": "f9f74bbc55af6cb481a6c83e72c952282e04b6840e884335bf380e6874d7d69a",
-      "gt_txt_sha256": "dcd7c712829cd65d10089670e42dc68d9fe4f6da2c35e03348bfdb175ea2c55e"
+      "gt_txt_sha256": "e276ab3a09a9bc73031098228649bb763b7fd39fe1d74bfcd574f9d501f26eed"
     },
     {
       "id": "ft_BKR_2017_page_100_t0",
@@ -77855,7 +77855,7 @@
       },
       "redistribute": "vendor",
       "pdf_sha256": "875f3eabf90d2a71b8c9cb97a20464be327ee907cf077649be849844e341f250",
-      "gt_txt_sha256": "5cbe1be1e0d0e4118d4da569c421a031c1541c4748ba6111c5b9320b7116af29"
+      "gt_txt_sha256": "f8d59dea5cb0fd06a896cc536bdd14f02d3da820166cf8158bd33a8aca2d7de4"
     },
     {
       "id": "ft_CBOE_2015_page_100_t0",
@@ -78453,7 +78453,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "ed08b33ab935c9606371d629ea9ae00a8b6550689c7df7450c61ed3f73a9eb5d",
-      "gt_txt_sha256": "1926406e029103ce8c94f2a12dd594bcaf54ac5ec98431cf3e00323b64673ce1"
+      "gt_txt_sha256": "64fab6ffa52fec175b0499e8233dc7f031d0949bfd4b0acc31ecb938b29aa46e"
     },
     {
       "id": "math0603048",
@@ -79516,7 +79516,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "b9dc5b2818568d3f890df7ca056cfaf01c83d98f959ba0350c4b428ac5f78729",
-      "gt_txt_sha256": "beef14205cdb5bd72adc3c09ab7dbd3b06daf41ae5f291d96bd6d180bd46c962"
+      "gt_txt_sha256": "146280ee4ac50f329fefd3f49f52c22f17479553d909bc80aeb124f6170874ae"
     },
     {
       "id": "pb_1H-2025-Global-Catastrophe-Recap_page7",
@@ -83304,7 +83304,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "1e87698b6d64bbcb8c51fcef4a554d78b15290e98d331aff918aeb4056e0c168",
-      "gt_txt_sha256": "fdddfc250c5239755ddec5b62e1ab6fa14ca81d72adf1cfe904aa88a7663698a"
+      "gt_txt_sha256": "488bcc8abf6cda4868174bef6aef63544679704aab56f417d96a6d51875c4ac0"
     },
     {
       "id": "pb_DS5795A-06_page13",
@@ -88635,7 +88635,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "079e38823f1682cba09fe250d72b6531369dd3021ad6a6e599ee8decf076814e",
-      "gt_txt_sha256": "50c694c3d3ef425817e526b126f989dda60876cb1e0f642cdcab99ec21f1fd0e"
+      "gt_txt_sha256": "0a12c36fd9b8b8671416a505517d1aa82c52b13759b9009476aa6fa29dd67368"
     },
     {
       "id": "pb_SERFF_CA_random_pages_1_page41",
@@ -89160,7 +89160,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "2bfdff01bec89ed9e4313083c09b4199a574557e809c7600428825a2c47847d1",
-      "gt_txt_sha256": "032367c892b9f7d354b32ae7f736ad158df793c14cc6f41036755dc98e0af37e"
+      "gt_txt_sha256": "e6167cbb9c754166d76f9170aa7862cf6e43ff7e29c529ecb8401534bd906a4a"
     },
     {
       "id": "pb_SERFF_CA_random_pages_1_page822",
@@ -91657,7 +91657,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "71b54864dd270665bea9fb86b555fa77158379af8b7e9d522dfeaa886de69dfa",
-      "gt_txt_sha256": "ee86046932239073b0b239a7dfa50c7d32793d5045b7be07b399029279f8b627"
+      "gt_txt_sha256": "3364aeda38b7b879c906679bb162bb33d22cfed75c4f2fa80e4eba7fcc3c9f27"
     },
     {
       "id": "pb_SERFF_TX_random_pages_1_page754",
@@ -92894,7 +92894,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "333f5ab13b28592e94e7da2b9efcbfcc2d0ea3228edaab72abbbfad7b39bde73",
-      "gt_txt_sha256": "7b479a11ea3cf1343e12315523255a2ff5e2209073934c96f5c083953e5ec01e"
+      "gt_txt_sha256": "0b1a91aba1820af1cfe895b52a646d9e8e713626dc5db30e2689f42695b7b081"
     },
     {
       "id": "pb_USPS_10-k_page50",
@@ -93725,7 +93725,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "f38625341b3bc0d57c5d355ddd0d23e45439223dcdfc17bc84b9bb5f9d61d5dd",
-      "gt_txt_sha256": "ef7d80b4c7e83ff5c0fc1f245ffcfa3583691a65f4c67790ec7813315a15e6ac"
+      "gt_txt_sha256": "0783669d4b4790ae815bf3181cea04af9386794748db7c5ee29d3dc4a950c4d1"
     },
     {
       "id": "pb_fqr-retail-blackrock-global-allocation-fund-inc_page8",
@@ -93760,7 +93760,7 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "5038f51707bc943ef2ab149cbe997cbd72c96c8bec5eac01d26166dc54a4cdd8",
-      "gt_txt_sha256": "3499c23c9cd1a3dadec38cac487a0797507ab763c36098c446f7e48a60cd45e1"
+      "gt_txt_sha256": "e2e9b8087af7fe8e0fd8d660708271717a95857f8516ba8a0cd557c2d44c8a89"
     },
     {
       "id": "pb_gallagherre-reinsurance-market-report-2024_page20",

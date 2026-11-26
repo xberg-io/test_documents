@@ -27,7 +27,8 @@ deb http://repos.solemnwarning.net/debian/ CODENAME main
 deb-src http://repos.solemnwarning.net/debian/ CODENAME main
 NOTE: Replace with the version you're running (e.g. or ).
 Finally, you can install the package:
-sudo apt-get install rehex
+$ sudo apt-get update
+$ sudo apt-get install rehex
 Ubuntu
 First, you will need to add my APT signing key to your system:
 sudo wget -O /etc/apt/trusted.gpg.d/solemnwarning-archive-keyring.gpg \
@@ -37,14 +38,20 @@ deb [arch=amd64] http://repos.solemnwarning.net/ubuntu/ CODENAME main
 deb-src [arch=amd64] http://repos.solemnwarning.net/ubuntu/ CODENAME main
 NOTE: Replace with the version you're running (e.g. for 20.04 or for 23.04).
 Finally, you can install the package:
-sudo apt-get install rehex
+$ sudo apt-get update
+$ sudo apt-get install rehex
 NOTE: Ubuntu users must have the "universe" package repository enabled to install some of the dependencies.
 Fedora
-sudo dnf install rehex
+$ sudo dnf copr enable solemnwarning/rehex
+$ sudo dnf install rehex
 CentOS
-sudo dnf copr enable solemnwarning/rehex
-sudo zypper ar obs://editors editors
-sudo zypper in rehex
+$ sudo dnf install epel-release
+$ sudo dnf copr enable solemnwarning/rehex
+$ sudo dnf install rehex
+openSUSE
+$ sudo zypper ar obs://editors editors
+$ sudo zypper ref
+$ sudo zypper in rehex
 FreeBSD
 $ pkg install rehex
 Building

@@ -22,8 +22,11 @@ source files; elaborating the design; and running the
 simulation. This is analogous to compiling, linking, and executing a
 software program. With NVC these steps are accomplished using the ,
 , and commands:
-nvc -e mytb
-nvc -a mydesign.vhd mytb.vhd -e mytb -r
+$ nvc -a mydesign.vhd mytb.vhd
+$ nvc -e mytb
+$ nvc -r mytb
+Or more succinctly, as a single command:
+$ nvc -a mydesign.vhd mytb.vhd -e mytb -r
 Where is the name of the top-level test-bench entity.
 The full manual can be read after installation using or
 online.
