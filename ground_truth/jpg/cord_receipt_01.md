@@ -7,8 +7,6 @@
 | TOTAL DISC $ | -60.000 |
 | TAX | 5.455 |
 | Subtotal | 60.000 |
-| TOTAL | 60.000 |
-
-(Qty 2.00
+| TOTAL (Qty 2.00 | 60.000 |
 
 EDC CIMB NIAGA No: xx7730 60.000
