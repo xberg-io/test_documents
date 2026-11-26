@@ -26,6 +26,6 @@ Ordered list:
 
 `code.`
 
-~~Strikeout~~ is Pandoc’s extension. Superscript and subscripts too: H 2 O is a liquid \[1\] . 2 10 is 1024.
+~~Strikeout~~ is Pandoc’s extension. Superscript and subscripts too: H₂O is a liquid\[1\]. 2¹⁰ is 1024.
 
 Math is another Pandoc extension: `E = m c^2` .
