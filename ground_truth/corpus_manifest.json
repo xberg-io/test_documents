@@ -26,7 +26,7 @@
       "url": "https://www.federalregister.gov"
     }
   },
-  "manifest_sha256": "7c197bfe089a74dcd60e98751850991ef6377d86fe2ab8845c250c498d3bac36",
+  "manifest_sha256": "3cdaf9d4d294e3a1e512826ba60efbb7a6fb3b3b0ebe8d93fd5c25685f57a57b",
   "counts": {
     "ACCEPT": 2632,
     "REVIEW": 199,
@@ -37836,7 +37836,7 @@
       "license": "US-PD (17 U.S.C. \u00a7105)",
       "source_revision": "2026-07-20",
       "src_gt_sha256": "bd5776407af26e6f8f23cea5fca3e0e12ed78bd89a8347b35856087adf5b40a6",
-      "out_gt_md_sha256": "bd5776407af26e6f8f23cea5fca3e0e12ed78bd89a8347b35856087adf5b40a6",
+      "out_gt_md_sha256": "92479a8796196d6ed312207d359a9073f5d3bde1326b14ce88a8251a3c61800f",
       "transforms": {},
       "gate_verdict": "ACCEPT",
       "exclusion_reason": "",
@@ -37859,7 +37859,7 @@
       },
       "redistribute": "vendor",
       "pdf_sha256": "34df5e526716bd994552319cc63c4a3dcb30eadf795ceca9445b9b4d21968957",
-      "gt_txt_sha256": "07e3f1b481c8cdce1ca7ac289300b5970566860d8c7c12fe9908ffdc560ad817"
+      "gt_txt_sha256": "2ca088caa6c6b66dad1e1d5684a55cd9dd3e05879974d686f6cd5e49fd5ef5d6"
     },
     {
       "id": "2026-13919",
