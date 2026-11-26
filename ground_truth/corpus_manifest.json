@@ -26,7 +26,7 @@
       "url": "https://www.federalregister.gov"
     }
   },
-  "manifest_sha256": "dbbf5cf40b0786e1ca2d37cb66462310978c1aaba48c5d915a8215128f0990ba",
+  "manifest_sha256": "70e84136aec0abfc76334b1f36b445548d507a8aa711772ffa74b18555162b25",
   "counts": {
     "ACCEPT": 2632,
     "REVIEW": 199,
@@ -93700,7 +93700,7 @@
       "license": "Apache-2.0",
       "source_revision": "2805a1d940f95a203e0ae4b88be9934f7765b3fc",
       "src_gt_sha256": "f89d4f4caa81e9d47be7686c54269e9a248a3c83fb5a084562ecb910fa923608",
-      "out_gt_md_sha256": "d772bddc3005b0a34661475a65f5cb5f896668b7e40a84e7becdc51a2ec1fbec",
+      "out_gt_md_sha256": "8ff4c7504082dac67b123073e6942414098c41596c5fafccdca4be98b5c5f6d9",
       "transforms": {
         "html_to_gfm": 1
       },
@@ -93725,7 +93725,8 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "f38625341b3bc0d57c5d355ddd0d23e45439223dcdfc17bc84b9bb5f9d61d5dd",
-      "gt_txt_sha256": "0783669d4b4790ae815bf3181cea04af9386794748db7c5ee29d3dc4a950c4d1"
+      "gt_txt_sha256": "9fe872b6e628592b0eb5e9f3104d934ae2e7cdb957a0bb2fad2a7ec051ec0e40",
+      "gt_override": "manual"
     },
     {
       "id": "pb_fqr-retail-blackrock-global-allocation-fund-inc_page8",
