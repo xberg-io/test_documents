@@ -26,7 +26,7 @@
       "url": "https://www.federalregister.gov"
     }
   },
-  "manifest_sha256": "88832e0cd93ad6f6ea98ad9f6871979f1858c89aabef5c8c2ca78eb34cec9235",
+  "manifest_sha256": "9d35d24b8ebbaeab834ebad2c93944cd782847500af093b1dbe327c3e6e71726",
   "counts": {
     "ACCEPT": 2632,
     "REVIEW": 199,
@@ -83657,7 +83657,7 @@
       "license": "Apache-2.0",
       "source_revision": "2805a1d940f95a203e0ae4b88be9934f7765b3fc",
       "src_gt_sha256": "dab4ed3acfc8eaaf1af07d671f1ee11c1a66afa593db04aa7094b79124bcdd7b",
-      "out_gt_md_sha256": "2252e20f07c7d70bd10dc34ef683490459bf546968d202eefbbb0cf2da47bd78",
+      "out_gt_md_sha256": "89ed39c6413cf84a1fcafd0866077e2785d19f6a1cf5d0c22de79f0e956ccc46",
       "transforms": {
         "html_to_gfm": 1
       },
@@ -83682,7 +83682,8 @@
       },
       "redistribute": "reference",
       "pdf_sha256": "1fc74a89d54b2e3dc584da6c635b40cde140b950fc3c47acbf6893f456f3a0e3",
-      "gt_txt_sha256": "07d8d94852b4298e45eb41db1ca3ef141ed339e443aee9f0bdc0175dc98884e3"
+      "gt_txt_sha256": "efacd0febadcaf582a1ba257dd3395cbba1dea92c636a42098efe0e6c3b67428",
+      "gt_override": "manual"
     },
     {
       "id": "pb_FBLB-134215544_page113",
