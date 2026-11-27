@@ -120,17 +120,36 @@ Vendored WordPerfect-family test files. Per-file provenance (upstream path, revi
 
 - **Citation:** National Diet Library (Japan), "NDL古典籍OCR / PDM OCR Dataset (tosho_all)", 2022.
 - **Source:** <https://github.com/ndl-lab/pdmocrdataset-part1> (data: <https://lab.ndl.go.jp/dataset/pdm_ocr_dataset/line/tosho_all_linejson.zip>)
-- **License:** Public Domain Mark 1.0 (source works are copyright-expired; NDL releases openly).
-- **Used here:** 5 page images (`images/ndl_meiji_vertical_01..05.jpg`) — historical Japanese printed pages (Meiji–Shōwa, 1870–1930), predominantly vertical text.
-- **Modifications:** each page's line-level `text` boxes (NDL human transcription) concatenated in vertical reading order (right-to-left columns, top-to-bottom within a column) into canonical GT. Word strings are verbatim NDL annotations; no fabrication.
+- **License:** Public Domain Mark 1.0 (source works are copyright-expired; NDL releases openly). The NDL
+  repository README, retrieved 2026-11-27: "データセットの権利 「PDM（パブリック・ドメイン・マーク）」 ...
+  ※著作権保護期間満了資料のみを利用しています。 このデータセットは、自由な二次利用が可能です。" NDL asks (not as a
+  legal condition) that edits be stated and the free-reuse notice kept.
+- **Used here:** 20 vertical page images (`images/ndl_meiji_vertical_01..20.jpg`) — historical Japanese printed
+  pages; 01..05 span 1870–1930, 06..20 are Meiji-era (1870s–1900s) prose pages. 5 horizontal page images
+  (`images/ndl_horizontal_01..05.jpg`), 1920s science texts. Images are the dataset's JPEG bytes, unmodified.
+  Source member, annotation and sha256 per file: `OCR_IMAGES_PROVENANCE.md`.
+- **Modifications:** each page's line-level `text` boxes (NDL human transcription) concatenated in vertical reading order (right-to-left columns, top-to-bottom within a column) into canonical GT; horizontal pages are read per page block, rows top to bottom, boxes left to right. Word strings are verbatim NDL annotations; no fabrication.
 
 ## naver-clova-ix/cord-v2 (CORD)
 
 - **Citation:** Park et al., "CORD: A Consolidated Receipt Dataset for Post-OCR Parsing", NeurIPS 2019 Workshop on Document Intelligence.
 - **Source:** <https://huggingface.co/datasets/naver-clova-ix/cord-v2>
 - **License:** CC-BY-4.0
-- **Used here:** 4 receipt images (`images/cord_receipt_01..04.jpg`) from the `test` split.
-- **Modifications:** `valid_line` word `text` (human annotation) joined in reading order (lines top-to-bottom, words left-to-right) into GT. Verbatim.
+- **Used here:** 20 receipt images (`images/cord_receipt_01..20.jpg`), `test` split image_id 0..19 of revision
+  `7f0115a4b758a71d6473b8d085751692da2fef98`, re-encoded from the dataset's PNG to JPEG (Pillow, quality 92).
+- **Modifications:** `valid_line` word `text` (human annotation) joined in reading order (lines top-to-bottom, words left-to-right) into GT. Verbatim, except annotation typos checked against the image: 03 `SAI S` -> `SALES`, 07 `CUS ARD` -> `CUSTARD`, 17 `IVANGGO`/`IVINERAL` -> `MANGGO`/`MINERAL`, 19 `Tofal` -> `Total`. CORD annotates only the parse fields (menu, subtotal, total), so store headers and footers are not in the GT.
+
+## EUR-Lex (European Union legal acts)
+
+- **Source:** EUR-Lex / Publications Office of the European Union, <https://eur-lex.europa.eu>; files from the
+  Cellar repository behind it.
+- **License:** reuse under Commission Decision 2011/833/EU. EUR-Lex legal notice, retrieved 2026-11-27:
+  "Unless otherwise specified, you can re-use the legal documents published in EUR-Lex for commercial or
+  non-commercial purposes." Attribution: © European Union, <https://eur-lex.europa.eu>, 1998-2026.
+- **Used here:** 72 born-digital PDFs in `pdf/eurlex/`: Directive (EU) 2024/1306, Commission Implementing
+  Regulation (EU) 2024/737 and OJ C notice C/2024/3243, each in all 24 official EU languages. Native sources for
+  the synthetic-scan OCR corpus. Per-file URL and sha256: `pdf/eurlex/PROVENANCE.md`.
+- **Modifications:** none.
 
 ## TextOCR (Meta)
 
