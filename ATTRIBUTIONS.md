@@ -151,6 +151,17 @@ Vendored WordPerfect-family test files. Per-file provenance (upstream path, revi
   the synthetic-scan OCR corpus. Per-file URL and sha256: `pdf/eurlex/PROVENANCE.md`.
 - **Modifications:** none.
 
+## doc-analysis/XFUND — reference only
+
+- **Citation:** Xu et al., "XFUND: A Benchmark Dataset for Multilingual Visually Rich Form Understanding",
+  Findings of ACL 2022.
+- **Source:** <https://github.com/doc-analysis/XFUND> (release `v1.0`).
+- **License:** CC BY-NC-SA 4.0 ("The content of this project itself is licensed under the Attribution-
+  NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)", repository README, retrieved 2026-11-27).
+- **Used here:** not in this repository or the public bucket. 140 form images (20 per language: zh, ja, es, fr,
+  it, de, pt) and GT derived from their annotations are held in the private benchmark bucket and pinned by
+  `reference_ocr/corpus.lock.json`; see `reference_ocr/PROVENANCE.md`.
+
 ## TextOCR (Meta)
 
 - **Citation:** Singh et al., "TextOCR: Towards large-scale end-to-end reasoning for arbitrary-shaped scene text", CVPR 2021.

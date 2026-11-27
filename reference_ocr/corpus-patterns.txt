@@ -1,0 +1,6 @@
+# Licence-restricted OCR fixtures materialised in .reference-ocr-cache/ and served from the private
+# gs://xberg-benchmark-corpus bucket. Anchored to that root; the ground truth is derived from
+# CC BY-NC-SA annotations, so it is bucket-managed too, never committed.
+images/*.jpg
+ground_truth/jpg/*.txt
+ground_truth/jpg/*.md

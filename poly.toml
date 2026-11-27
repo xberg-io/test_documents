@@ -54,6 +54,7 @@ exclude = [
   "/pdf_scanned/**",
   "/ppt/**",
   "/pptx/**",
+  "/reference_ocr/**",
   "/MATH_PROVENANCE.md",
   "/REGRESSION_PROVENANCE.md",
   "/rst/**",

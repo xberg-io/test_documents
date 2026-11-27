@@ -59,6 +59,7 @@ non-commercial benchmark use non-commercial data.
 | [ndl-lab/pdmocrdataset-part1](https://github.com/ndl-lab/pdmocrdataset-part1) | Public Domain Mark 1.0 | vendor |
 | [naver-clova-ix/cord-v2](https://huggingface.co/datasets/naver-clova-ix/cord-v2) | CC-BY-4.0 | vendor |
 | [EUR-Lex](https://eur-lex.europa.eu) (72 PDFs, `pdf/eurlex/`) | reuse under Commission Decision 2011/833/EU, attribution | vendor |
+| [doc-analysis/XFUND](https://github.com/doc-analysis/XFUND) | CC-BY-NC-SA-4.0 | reference (private bucket, `reference_ocr/`) |
 | [TextOCR](https://textvqa.org/textocr/) | CC-BY-4.0 | vendor |
 | [ds4sd/DocLayNet](https://huggingface.co/datasets/ds4sd/DocLayNet-v1.1) | CDLA-Permissive-1.0 | vendor |
 | [executablebooks/MyST-NB](https://github.com/executablebooks/MyST-NB) | BSD-3-Clause | vendor |
