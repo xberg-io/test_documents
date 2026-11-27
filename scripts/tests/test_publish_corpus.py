@@ -53,6 +53,11 @@ class GuardTests(unittest.TestCase):
             guard_against_forbidden_paths(["pdf/ok.pdf", ".corpus-cache/restricted.pdf"])
         self.assertIn(".corpus-cache/restricted.pdf", str(caught.exception))
 
+    def test_should_reject_reference_ocr_cache_paths(self) -> None:
+        with self.assertRaises(GuardViolation) as caught:
+            guard_against_forbidden_paths(["pdf/ok.pdf", ".reference-ocr-cache/images/restricted.jpg"])
+        self.assertIn(".reference-ocr-cache/images/restricted.jpg", str(caught.exception))
+
     def test_should_accept_paths_outside_the_forbidden_prefixes(self) -> None:
         guard_against_forbidden_paths(["pdf/ok.pdf", "images/ok.png"])
 
@@ -152,6 +157,13 @@ class EnumerationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as name:
             root = Path(name)
             self._tree(root, ["pdf/ok.pdf", ".corpus-cache/restricted.pdf"])
+
+            self.assertEqual(corpus_paths(root, load_patterns(root)), ["pdf/ok.pdf"])
+
+    def test_should_never_enumerate_the_reference_ocr_cache(self) -> None:
+        with tempfile.TemporaryDirectory() as name:
+            root = Path(name)
+            self._tree(root, ["pdf/ok.pdf", ".reference-ocr-cache/pdf/restricted.pdf"])
 
             self.assertEqual(corpus_paths(root, load_patterns(root)), ["pdf/ok.pdf"])
 

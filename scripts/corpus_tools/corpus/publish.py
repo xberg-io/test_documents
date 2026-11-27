@@ -32,11 +32,20 @@ EXTRA_ROOT_FILES = (
 # reach the public bucket. .venv/ is here because the patterns are gitignore-shaped: a pattern
 # without '/' matches a basename at any depth, and a virtualenv ships .png/.pdf/.zip assets inside
 # installed packages. Pruning it below is the first line; this is the check that fails the publish.
-FORBIDDEN_PREFIXES = (".corpus-cache/", ".basemind/", ".venv/")
+FORBIDDEN_PREFIXES = (".corpus-cache/", ".reference-ocr-cache/", ".basemind/", ".venv/")
 # ~keep Pruned from the walk so a forbidden or irrelevant tree is never even considered; the
 # FORBIDDEN_PREFIXES guard still runs afterwards as the check that actually fails the publish.
 SKIPPED_DIRECTORIES = frozenset(
-    {".corpus-cache", ".basemind", ".github", "__pycache__", ".pytest_cache", ".ruff_cache", ".venv"}
+    {
+        ".corpus-cache",
+        ".reference-ocr-cache",
+        ".basemind",
+        ".github",
+        "__pycache__",
+        ".pytest_cache",
+        ".ruff_cache",
+        ".venv",
+    }
 )
 STAGING_DIR_PREFIX = ".corpus-publish-staging-"
 # ~keep Bounds the argv of a single `gcloud storage cp`; gcloud parallelises within one invocation.
